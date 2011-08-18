@@ -68,7 +68,7 @@ qplot(gx, gy, data = day_preds, geom = "path", group = gid) + map
 # Rescale predictions to individual scales
 day_preds2 <- ddply(day_preds, c("lat", "long"), mutate, 
   pred_s = rescale01(pred))
-day_preds2 <- glyphs(day_preds, "long", "day", "lat", "pred_s") 
+day_preds2 <- glyphs(day_preds2, "long", "day", "lat", "pred_s") 
 qplot(gx, gy, data = day_preds2, geom = "path", group = gid) + map 
 
 

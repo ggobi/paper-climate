@@ -41,20 +41,18 @@
 
 \section{Introduction}
 
-Climate data is usually composed of measurements on variables such as temperature, precipitation, and winds that have been collected from a spatial and temporal context. The classic display for spatial data is to use color or grey scale overlaid on geographic location, typically including a map. When measurements are made a different time periods also a common way to display the data is in small multiples, such as in Figure \ref{fig:facetted-map}. In this plot, a separate map is drawn for each month and year, over a 6 year period of remotely sensed temperature data above Central America. Color is used to display the de-seasonalized temperature measurements, with red being high values and blue being low values. The data  comes from \cite{NASA-Data-Expo}.
+Climate data is composed of measurements on variables such as temperature, precipitation, and winds that have been collected from a spatial and temporal context. The classic display for spatial data is to use color or grey scale overlaid on geographic location, typically including a map. When measurements are made a different time periods also a common way to display the data is in small multiples, such as in Figure \ref{fig:facetted-map}. In this plot, a separate map is drawn for each month (columns) and year (rows), over a 6 year period of remotely sensed temperature data above Central America. Color is used to display the de-seasonalized temperature measurements, with red being high values and blue being low values. The data  comes from \cite{NASA-Data-Expo}. The most noticeable feature in this display is the strong red in the equatorial region beginning in mid-1997 and tapering out during 1998. This is the pattern of an El Ni\~no event, a major temperature anomaly. With some work other smaller more localized patterns can be perceived, for example, cooler over the land mass in the early year, but warmer in the latter years.
 
 
 \begin{figure*}[htp]
-\includegraphics[width=6in]{nasa-colored-map.png}
+\centerline{\includegraphics[width=6in]{nasa-colored-map.png}}
 \caption{Facetted map of de-seasonalized temperature.}
 \label{fig:facetted-map}
 \end{figure*}
 
+In this paper we explore the use of a different type of display, that uses icons on the map. Icon plots date back to the star glyphs of  \citep{kleiner}, made infamous by \citep{Chernoff}. They are used, infrequently to examine multivariate data.
 
-Need a colorful map, facetted by year \& month
-
-
-\subsection{Glyph plots}
+%\subsection{Glyph plots}
 
 Simple, but effective, technique that combines aspects of glyphs, facetted plots and map-charts. Particularly well suited for the type of temporal-spatial data, commonly seen in climate.
 
@@ -115,8 +113,8 @@ Figure~\ref{fig:ref-adv} shows two applications of these ideas, adding the month
 
 \begin{figure}[htbp]
   \centering
-    %\includegraphics[width=0.5\linewidth]{ref-max-1}%
-    %\includegraphics[width=0.5\linewidth]{ref-max-2}
+    \includegraphics[width=0.5\linewidth]{ref-max-1}%
+    \includegraphics[width=0.5\linewidth]{ref-max-2}
   \caption{caption}
   \label{fig:ref-adv}
 \end{figure}
@@ -132,8 +130,8 @@ The alteration to the data transformation is quite simple. Without loss of gener
 
 \begin{figure}[htbp]
   \centering
-  %\includegraphics[width=2in]{month-cartesian}
-  %\includegraphics[width=2in]{month-polar}
+  \includegraphics[width=2in]{month-cartesian}
+  \includegraphics[width=2in]{month-polar}
     
   \caption{Monthly averages in (left) Cartesian coordinates and (right) polar coordinates.}
   
@@ -146,15 +144,15 @@ So far we have limited ourselves to always mapping some aspect of time on the x-
 
 \begin{figure}[htbp]
   \centering
-   % \includegraphics[width=0.5\linewidth]{clouds}%
-    %\includegraphics[width=0.5\linewidth]{clouds-smooth}
+   \includegraphics[width=0.5\linewidth]{clouds}%
+   \includegraphics[width=0.5\linewidth]{clouds-smooth}
   \caption{caption}
   \label{fig:cloud}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-    %\includegraphics[width=0.5\linewidth]{clouds-heike}%
+    \includegraphics[width=0.5\linewidth]{clouds-heike}%
   \caption{Just as an alternative: shaded map instead of the outlines. }
   \label{fig:cloud-alt}
 \end{figure}
@@ -165,8 +163,8 @@ Partitioning is a extremely useful technique: product plots, ANOVA, ...  For gly
 
 \begin{figure}[htbp]
   \centering
-  %\includegraphics[width=0.5\linewidth]{month-rescale-max}%
-  %\includegraphics[width=0.5\linewidth]{month-rescale01}
+  \includegraphics[width=0.5\linewidth]{month-rescale-max}%
+  \includegraphics[width=0.5\linewidth]{month-rescale01}
   \caption{caption}
   \label{fig:label}
 \end{figure}

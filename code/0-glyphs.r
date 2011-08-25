@@ -11,8 +11,17 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height =
     width <- resolution(data[[x_major]]) * 0.9    
     message("Using width ", format(width, digits = 3))
   }
+  else {
+    width <- resolution(data[[x_major]]) * width    
+    message("Using width ", format(width, digits = 3))
+  }
+    
   if (is.null(height)) {
     height <- resolution(data[[y_major]]) * 0.9    
+    message("Using height ", format(height, digits = 3))
+  }
+  else {
+    height <- resolution(data[[y_major]]) * height    
     message("Using height ", format(height, digits = 3))
   }
   

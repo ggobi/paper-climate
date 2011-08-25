@@ -15,7 +15,7 @@
 \begin{document}
 
 \title{Glyph-maps for visualizing climate data and models}
-\author{Cook, Hofmann, Wickham, Wickham, Cheng}
+\author{Cook, Hofmann, Wickham, Wickham}
 
 % Drawing trend lines on map
 %   - How to
@@ -41,7 +41,20 @@
 
 \section{Introduction}
 
+Climate data is usually composed of measurements on variables such as temperature, precipitation, and winds that have been collected from a spatial and temporal context. The classic display for spatial data is to use color or grey scale overlaid on geographic location, typically including a map. When measurements are made a different time periods also a common way to display the data is in small multiples, such as in Figure \ref{fig:facetted-map}. In this plot, a separate map is drawn for each month and year, over a 6 year period of remotely sensed temperature data above Central America. Color is used to display the de-seasonalized temperature measurements, with red being high values and blue being low values. The data  comes from \cite{NASA-Data-Expo}.
+
+
+\begin{figure*}[htp]
+\includegraphics[width=6in]{nasa-colored-map.png}
+\caption{Facetted map of de-seasonalized temperature.}
+\label{fig:facetted-map}
+\end{figure*}
+
+
 Need a colorful map, facetted by year \& month
+
+
+\subsection{Glyph plots}
 
 Simple, but effective, technique that combines aspects of glyphs, facetted plots and map-charts. Particularly well suited for the type of temporal-spatial data, commonly seen in climate.
 
@@ -54,16 +67,10 @@ Avoids one problem that plagues glyph displays: the ordering of the variables. A
 These displays tend to be particularly effective when printed in large format, as the much higher resolution of print (600 dpi) compared to computer  screen (72-120 dpi) allows for much finer reading. These are high-density data displays in the best tradition of Tufte. Wall size maps are not usually practical during analysis, but are very engaging.
 
 Will first explore for regularly gridded data, a simple starting point and a common output of climate models, and then show a few simple extensions to deal with non-rectangular grids and irregular locations, as exemplified by raw climate data which is typically collect at irregular locations.
-
-\begin{figure*}[htp]
-\includegraphics[width=6in]{images/nasa-colored-map.png}
-\caption{Facetted map of de-seasonalized temperature.}
-\end{figure*}
-
 \section{Generating a time series at each location}
 
 \begin{figure*}[htp]
-\centerline{\includegraphics[width=4in]{images/nasa-deseas-trend.pdf}}
+\centerline{\includegraphics[width=4in]{nasa-deseas-trend.pdf}}
 \caption{Time series icon at each location, showing de-seasonalized trend.}
 \end{figure*}
 
@@ -81,8 +88,8 @@ Figure~\ref{fig:ref-basic} shows two variants of a reference, a line drawn at th
 
 \begin{figure}[htbp]
   \centering
-  %\includegraphics[width=0.5\linewidth]{ref-line}%
-  %\includegraphics[width=0.5\linewidth]{ref-box}
+  \includegraphics[width=0.5\linewidth]{ref-line}%
+  \includegraphics[width=0.5\linewidth]{ref-box}
   \caption{caption}
   \label{fig:ref-basic}
 \end{figure}

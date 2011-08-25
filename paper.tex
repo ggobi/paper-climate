@@ -14,7 +14,7 @@
 
 \begin{document}
 
-\title{Glyph-maps for visualising climate data and models}
+\title{Glyph-maps for visualizing climate data and models}
 \author{Cook, Hofmann, Wickham, Wickham, Cheng}
 
 % Drawing trend lines on map
@@ -41,7 +41,7 @@
 
 \section{Introduction}
 
-Need a colourful map, facetted by year \& month
+Need a colorful map, facetted by year \& month
 
 Simple, but effective, technique that combines aspects of glyphs, facetted plots and map-charts. Particularly well suited for the type of temporal-spatial data, commonly seen in climate.
 
@@ -81,8 +81,8 @@ Figure~\ref{fig:ref-basic} shows two variants of a reference, a line drawn at th
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.5\linewidth]{ref-line}%
-  \includegraphics[width=0.5\linewidth]{ref-box}
+  %\includegraphics[width=0.5\linewidth]{ref-line}%
+  %\includegraphics[width=0.5\linewidth]{ref-box}
   \caption{caption}
   \label{fig:ref-basic}
 \end{figure}
@@ -108,8 +108,8 @@ Figure~\ref{fig:ref-adv} shows two applications of these ideas, adding the month
 
 \begin{figure}[htbp]
   \centering
-    \includegraphics[width=0.5\linewidth]{ref-max-1}%
-    \includegraphics[width=0.5\linewidth]{ref-max-2}
+    %\includegraphics[width=0.5\linewidth]{ref-max-1}%
+    %\includegraphics[width=0.5\linewidth]{ref-max-2}
   \caption{caption}
   \label{fig:ref-adv}
 \end{figure}
@@ -125,8 +125,8 @@ The alteration to the data transformation is quite simple. Without loss of gener
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=2in]{month-cartesian}
-  \includegraphics[width=2in]{month-polar}
+  %\includegraphics[width=2in]{month-cartesian}
+  %\includegraphics[width=2in]{month-polar}
     
   \caption{Monthly averages in (left) Cartesian coordinates and (right) polar coordinates.}
   
@@ -135,19 +135,19 @@ The alteration to the data transformation is quite simple. Without loss of gener
 
 \section{Scatterplots}
 
-So far we have limited ourselves to always mapping some aspect of time on the x-axis. But the method is much more general. Figure~\ref{fig:cloud} shows how by mapping another variable to the x-axis, in this case low-cloud level on x and high-cloud level on y, we can explore how this 2d distribution varies over space. Again, summarising the data with models is very useful: the second plot displays a loess curve fit to the data instead of the individual points.  
+So far we have limited ourselves to always mapping some aspect of time on the x-axis. But the method is much more general. Figure~\ref{fig:cloud} shows how by mapping another variable to the x-axis, in this case low-cloud level on x and high-cloud level on y, we can explore how this 2d distribution varies over space. Again, summarizing the data with models is very useful: the second plot displays a loess curve fit to the data instead of the individual points.  
 
 \begin{figure}[htbp]
   \centering
-    \includegraphics[width=0.5\linewidth]{clouds}%
-    \includegraphics[width=0.5\linewidth]{clouds-smooth}
+   % \includegraphics[width=0.5\linewidth]{clouds}%
+    %\includegraphics[width=0.5\linewidth]{clouds-smooth}
   \caption{caption}
   \label{fig:cloud}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-    \includegraphics[width=0.5\linewidth]{clouds-heike}%
+    %\includegraphics[width=0.5\linewidth]{clouds-heike}%
   \caption{Just as an alternative: shaded map instead of the outlines. }
   \label{fig:cloud-alt}
 \end{figure}
@@ -158,13 +158,13 @@ Partitioning is a extremely useful technique: product plots, ANOVA, ...  For gly
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.5\linewidth]{month-rescale-max}%
-  \includegraphics[width=0.5\linewidth]{month-rescale01}
+  %\includegraphics[width=0.5\linewidth]{month-rescale-max}%
+  %\includegraphics[width=0.5\linewidth]{month-rescale01}
   \caption{caption}
   \label{fig:label}
 \end{figure}
 
-Other types of scaling: scale range to 0-1 (subtract min and divide by range), standardise mean and standard deviation (or robust variants). 
+Other types of scaling: scale range to 0-1 (subtract min and divide by range), standardize mean and standard deviation (or robust variants). 
 
 Equivalent to using individual scales in facetted graphics.
 

@@ -49,12 +49,12 @@ theme_nothing <- function (base_size = 12) {
 	axis.line=theme_blank(), 
 	axis.ticks=theme_blank(), 
 	axis.text.y = theme_blank(), 
-	axis.text.x = theme_blank(),
-	legend.position = "none"
+	axis.text.x = theme_blank()#,
+	#legend.position = "none"
   ), class = "options")
 }
 
-qplot(long, lat, data=resids, geom="tile", fill=temp_resid, facets=year~month) + scale_fill_gradient2(midpoint=0, mid="white", high="red", low="blue") + map + theme_nothing()
+qplot(long, lat, data=resids, geom="tile", fill=temp_resid, facets=year~month) + scale_fill_gradient2(midpoint=0, mid="white", high="red", low="blue") + map + theme_nothing() + coord_map()
 ggsave("nasa-colored-map.png", height=10, width=18)
        
 resids <- glyphs(resids, "long", "day", "lat", "temp_resid") 

@@ -145,19 +145,20 @@ So far we have limited ourselves to always mapping some aspect of time on the x-
   \label{fig:cloud}
 \end{figure}
 
-\section{Effect of scale}
+\section{Partitioning patterns into shape and size}
 
 Partitioning is a extremely useful technique: product plots, ANOVA, ...  For glyph plots, it's often useful to partition the glyphs into shape and scale components, decomposing the values into a product of maximum and scaled values. This is revealing for smooth models of surface temperature.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.5\linewidth]{month-rescale-max}%
-  \includegraphics[width=0.5\linewidth]{month-rescale01}
-  \caption{caption}
+  \includegraphics[width=0.33\linewidth]{month-rescale-none}%
+  \includegraphics[width=0.33\linewidth]{month-rescale-max}%
+  \includegraphics[width=0.33\linewidth]{month-rescale01}
+  \caption{Smoothed de-seasonalized daily temperature glyph-map. (Left) unscaled, (center) scaled to have maximum 1, (right) scaled to have maximum 1 and minimum 0.}
   \label{fig:label}
 \end{figure}
 
-Other types of scaling: scale range to 0-1 (subtract min and divide by range), standardize mean and standard deviation (or robust variants). 
+Of course other types of scaling are possible. Another classical scaling method is to standardize mean and standard deviation to 0 and 1 (or robust variants).
 
 Equivalent to using individual scales in facetted graphics.
 

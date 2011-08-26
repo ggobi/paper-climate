@@ -131,6 +131,16 @@ ggplot(month_preds, aes(gx, gy, group = gid)) +
 ggsave("../images/month-polar.pdf", width = 4, height = 4)
 
 # Rescale predictions to individual scales -----------------------------------
+
+day_preds <- glyphs(day_preds, "long", "day", "lat", "pred") 
+ggplot(day_preds, aes(gx, gy, group = gid)) + 
+  map + 
+  geom_path() +
+  ref_boxes +
+  theme_fullframe()
+ggsave("../images/month-rescale-none.pdf", width = 4, height = 4)
+
+
 day_preds2 <- ddply(day_preds, c("lat", "long"), mutate, 
   pred_s = rescale01(pred),
   pred_m = pred / max(pred))
@@ -139,14 +149,16 @@ day_preds2 <- glyphs(day_preds2, "long", "day", "lat", "pred_s")
 ggplot(day_preds2, aes(gx, gy, group = gid)) + 
   map + 
   geom_path() +
-  geom_tile(aes(long, lat), colour = "white", fill = NA)
+  ref_boxes +
+  theme_fullframe()
 ggsave("../images/month-rescale01.pdf", width = 4, height = 4)
 
 day_preds2 <- glyphs(day_preds2, "long", "day", "lat", "pred_m") 
 ggplot(day_preds2, aes(gx, gy, group = gid)) + 
   map + 
   geom_path() +
-  geom_tile(aes(long, lat), colour = "white", fill = NA)
+  ref_boxes +
+  theme_fullframe()
 ggsave("../images/month-rescale-max.pdf", width = 4, height = 4)
 
 # Linear trend is not a good fit!

@@ -9,11 +9,14 @@ source("0-cache.r")
 # Scatteplots ----------------------------------------------------------------
 
 temp <- glyphs(nasa, "long", "temperature", "lat", "surftemp") 
-qplot(gx, gy, data = temp, shape = I(".")) + map 
+ggplot(temp, aes(gx, gy, group = gid)) + 
+  map +
+  geom_point(shape = ".")
 
 cloud <- glyphs(nasa, "long", "cloudlow", "lat", "cloudhigh") 
-qplot(gx, gy, data = cloud, shape = I(".")) + 
-  geom_tile(aes(long, lat), colour = "white", fill = NA) + map 
+ggplot(cloud, aes(gx, gy, group = gid)) + 
+  map +
+  geom_point(shape = ".")
 ggsave("../images/clouds.png", width = 6, height = 6)
 
 grid_along <- function(x, n = 20) {
@@ -27,8 +30,11 @@ cloud_mod <- ddply(nasa, c("lat", "long"), function(df) {
   mutate(grid_low, cloudhigh = predict(mod, newdata = grid_low))
 })
 cloud_mod <- glyphs(cloud_mod, "long", "cloudlow", "lat", "cloudhigh") 
-qplot(gx, gy, data = cloud_mod, geom = "line", group = gid) + 
-  geom_tile(aes(long, lat), colour = "white", fill = NA) + map 
+
+ggplot(cloud_mod, aes(gx, gy, group = gid)) + 
+  map +
+  geom_line() +
+  geom_tile(aes(long, lat), colour = "white", fill = NA) 
 ggsave("../images/clouds-smooth.png", width = 6, height = 6)
 
 
@@ -96,17 +102,18 @@ ggplot(month_preds, aes(gx, gy, group = gid)) +
   geom_tile(aes(long, lat), colour = "white", fill = NA)
 ggsave("../images/ref-box.pdf", width = 6, height = 6)
 
-maxes <- ddply(month_preds, "gid", subset, gy == max(gy))
+maxes <- ddply(month_preds, "gid", subset, order(-gy) == 1)
 ggplot(month_preds, aes(gx, gy, group = gid)) +
-  geom_tile(aes(long, lat), colour = "white", fill = NA) +
   map +
+  geom_tile(aes(long, lat), colour = "white", fill = NA) +
   geom_line() +
   geom_point(aes(colour = month), data = maxes, size = 1.5)
 ggsave("../images/ref-max-1.pdf", width = 6, height = 6)
 
 ggplot(month_preds, aes(gx, gy, group = gid)) +
-  geom_tile(aes(long, lat, fill = month), data = maxes, colour = "white") +
   map +
+  geom_tile(aes(long, lat, fill = month), data = maxes, colour = "white",
+    alpha = 0.5) +
   geom_line()
 ggsave("../images/ref-max-2.pdf", width = 6, height = 6)
 
@@ -114,13 +121,17 @@ ggsave("../images/ref-max-2.pdf", width = 6, height = 6)
 # Cartesian vs. polar --------------------------------------------------------
 
 month_preds <- glyphs(month_preds, "long", "month", "lat", "pred") 
-qplot(gx, gy, data = month_preds, geom = "path", group = gid) + map_mini + 
+ggplot(month_preds, aes(gx, gy, group = gid)) + 
+  map_mini + 
+  geom_path() +
   geom_tile(aes(long, lat), colour = "white", fill = NA)
 ggsave("../images/month-cartesian.pdf", width = 4, height = 4)
 
 month_preds <- glyphs(month_preds, "long", "month", "lat", "pred", polar = T) 
-qplot(gx, gy, data = month_preds, geom = "path", group = gid) + map_mini + 
- geom_tile(aes(long, lat), colour = "white", fill = NA)
+ggplot(month_preds, aes(gx, gy, group = gid)) + 
+  map_mini + 
+  geom_path() +
+  geom_tile(aes(long, lat), colour = "white", fill = NA)
 ggsave("../images/month-polar.pdf", width = 4, height = 4)
 
 # Rescale predictions to individual scales -----------------------------------
@@ -128,12 +139,17 @@ day_preds2 <- ddply(day_preds, c("lat", "long"), mutate,
   pred_s = rescale01(pred),
   pred_m = pred / max(pred))
 day_preds2 <- glyphs(day_preds2, "long", "day", "lat", "pred_s") 
-qplot(gx, gy, data = day_preds2, geom = "path", group = gid) + map + 
+
+ggplot(day_preds2, aes(gx, gy, group = gid)) + 
+  map + 
+  geom_path() +
   geom_tile(aes(long, lat), colour = "white", fill = NA)
 ggsave("../images/month-rescale01.pdf", width = 4, height = 4)
 
 day_preds2 <- glyphs(day_preds2, "long", "day", "lat", "pred_m") 
-qplot(gx, gy, data = day_preds2, geom = "path", group = gid) + map + 
+ggplot(day_preds2, aes(gx, gy, group = gid)) + 
+  map + 
+  geom_path() +
   geom_tile(aes(long, lat), colour = "white", fill = NA)
 ggsave("../images/month-rescale-max.pdf", width = 4, height = 4)
 

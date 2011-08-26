@@ -42,7 +42,7 @@ world <- ddply(world, "group", function(df) {
 
 map <- list(
   geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = world, legend = FALSE, fill = "grey80", colour = "white"),
+    data = world, legend = FALSE, fill = "grey80", colour = "grey90"),
   scale_x_continuous(breaks = NA, expand = c(0.02, 0)),
   scale_y_continuous(breaks = NA, expand = c(0.02, 0)), 
   xlab(NULL),

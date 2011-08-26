@@ -27,9 +27,9 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height =
   
   if (polar) {
     data$gx <- data[[x_major]] + width / 2 * rescale01(data[[y_minor]]) * 
-      cos(2 * pi * rescale01(data[[x_minor]]))
-    data$gy <- data[[y_major]] + height / 2 * rescale01(data[[y_minor]]) * 
       sin(2 * pi * rescale01(data[[x_minor]]))
+    data$gy <- data[[y_major]] + height / 2 * rescale01(data[[y_minor]]) * 
+      cos(2 * pi * rescale01(data[[x_minor]]))
     data <- data[order(data[[x_major]], data[[x_minor]]), ]
   } else {
     data$gx <- data[[x_major]] + rescale11(data[[x_minor]]) * width / 2

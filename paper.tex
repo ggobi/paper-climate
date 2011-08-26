@@ -49,9 +49,7 @@ Climate data is composed of measurements on variables such as temperature, preci
 \label{fig:facetted-map}
 \end{figure*}
 
-In this paper we explore the use of a different type of display, that uses icons on the map, for climate data. Icon plots date back to the star glyphs of  \citep{kleiner}, and were made infamous by \citep{Chernoff}. They are used, infrequently, to examine multivariate data. An icon is produced by mapping each variable to some feature of the icon. One icon is generated for every case in the data set. For large data sets it is infeasible to digest the quantity of icons, and for multivariate data there is no natural order so it can be like having a mountain of little stamps to rearrange and organize, in order to understand the structures present in the data. For spatiotemporal data ordering icons is naturally done by spatial location. There is also usually some spatial trend, or continuity, which will make digesting patterns among the icons simpler.
-
-Figure \ref{fig:glyphs} illustrates the idea of icon plots, with emphasis on temporal data. The time measurements are treated as variables in a multivariate data set. Here we have six years of monthly data, giving 72 time values which are considered to be 72 variables. Three different locations are selected, for demontration purposes. The top plot shows the time series of these three locations. Location ``1.1'' (red) has medium values of temperature, with strong seasonality, the six years corresponding to the six eaks. Location ``2.1'' (green) has generally high temperature values, with weaker seasonality in most years and a lack of low temperatures in the middle of the time period when lows would be expected. Location ``3.1'' (blue) has strong seasonality but generally low temperatures. The bottom plot shows these same cases as star glyphs. A separate glyph is created for each location. The 72 time variables form axes organized radially. Each temperature value is plotted relative to the overall range of temperature values. The seasonal patterns are clearly visible in this type of display, forming six ``petals'' in the icon. Location ``2.1'' has a different pattern than the other two, with only four petals, and location ``3.1'' is a much smaller ico indicating overall lower values. 
+In this paper we explore the use of a different type of display, that uses icons on the map, for climate data. Icon plots date back to the star glyphs of  \citep{kleiner:1981}, and were made infamous by \citep{Chernoff}. An icon is produced by mapping each variable to some feature of the icon. One icon is generated for every case in the data set. Figure \ref{fig:glyphs} illustrates the idea of icon plots, with emphasis on temporal data. The time measurements are treated as variables in a multivariate data set. Here we have six years of monthly data, giving 72 time values which are considered to be 72 variables. Three different locations are selected, for demontration purposes. The top plot shows the time series of these three locations. Location ``1.1'' (red) has medium values of temperature, with strong seasonality, the six years corresponding to the six eaks. Location ``2.1'' (green) has generally high temperature values, with weaker seasonality in most years and a lack of low temperatures in the middle of the time period when lows would be expected. Location ``3.1'' (blue) has strong seasonality but generally low temperatures. The bottom plot shows these same cases as star glyphs. A separate glyph is created for each location. The 72 time variables form axes organized radially. Each temperature value is plotted relative to the overall range of temperature values. The seasonal patterns are clearly visible in this type of display, forming six ``petals'' in the icon. Location ``2.1'' has a different pattern than the other two, with only four petals, and location ``3.1'' is a much smaller ico indicating overall lower values. 
 
 \begin{figure*}[htp]
 \centerline{\includegraphics[width=6in]{nasa-glyph-ts.pdf}}
@@ -60,20 +58,29 @@ Figure \ref{fig:glyphs} illustrates the idea of icon plots, with emphasis on tem
 \label{fig:glyphs}
 \end{figure*}
 
+Icon plots are used, infrequently, to examine multivariate data. For large data sets it is infeasible to digest the quantity of icons, and for multivariate data there is no natural order so it can be like having a mountain of little stamps to rearrange and organize, in order to understand the structures present in the data. The initial paper on star glyphs \citep{kleiner:1981} and a recent paper \citep{hurley:2010} propose some approaches for organizing the icons. With spatiotemporal data ordering of icons is naturally done by spatial location. There is also usually some spatial trend, or continuity, which will make digesting patterns among the icons simpler.
+
+Figure \ref{fig:glyph-map} shows the glyphs drawn for each spatial location of the raw temperature data.
+
+\begin{figure*}[htp]
+\centerline{\includegraphics[width=5in]{nasa-glyph-all.pdf}}
+\caption{Glyph-map of raw data.}
+\label{fig:glyph-map}
+\end{figure*}
 
 %\subsection{Glyph plots}
 
-Simple, but effective, technique that combines aspects of glyphs, facetted plots and map-charts. Particularly well suited for the type of temporal-spatial data, commonly seen in climate.
+%Simple, but effective, technique that combines aspects of glyphs, facetted plots and map-charts. Particularly well suited for the type of temporal-spatial data, commonly seen in climate.
 
-Glyph-maps have attributes of both glyphs (stars, faces, profiles, ...), inviting exploration at the global level, and small-multiple time series, allowing local exploration of individual series. Allow to see both geographic context and individual locations simultaneously.
+%Glyph-maps have attributes of both glyphs (stars, faces, profiles, ...), inviting exploration at the global level, and small-multiple time series, allowing local exploration of individual series. Allow to see both geographic context and individual locations simultaneously.
 
-An interesting attribute of these glyph plots is that the position of graphical elements is determined by major and minor axes. For maps, the major axes are latitude and longitude, and the minor axes are typically time on the x-axis and some measurement or model prediction on the y-axis.
+%An interesting attribute of these glyph plots is that the position of graphical elements is determined by major and minor axes. For maps, the major axes are latitude and longitude, and the minor axes are typically time on the x-axis and some measurement or model prediction on the y-axis.
 
-Avoids one problem that plagues glyph displays: the ordering of the variables. Although some techniques exist to ameliorate this problem \citep{kleiner:1981,hurley:2010}, they are not necessary with time data because it is intrinsically ordered.
+%Avoids one problem that plagues glyph displays: the ordering of the variables. Although some techniques exist to ameliorate this problem \citep{kleiner:1981,hurley:2010}, they are not necessary with time data because it is intrinsically ordered.
 
-These displays tend to be particularly effective when printed in large format, as the much higher resolution of print (600 dpi) compared to computer  screen (72-120 dpi) allows for much finer reading. These are high-density data displays in the best tradition of Tufte. Wall size maps are not usually practical during analysis, but are very engaging.
+%These displays tend to be particularly effective when printed in large format, as the much higher resolution of print (600 dpi) compared to computer  screen (72-120 dpi) allows for much finer reading. These are high-density data displays in the best tradition of Tufte. Wall size maps are not usually practical during analysis, but are very engaging.
 
-Will first explore for regularly gridded data, a simple starting point and a common output of climate models, and then show a few simple extensions to deal with non-rectangular grids and irregular locations, as exemplified by raw climate data which is typically collect at irregular locations.
+%Will first explore for regularly gridded data, a simple starting point and a common output of climate models, and then show a few simple extensions to deal with non-rectangular grids and irregular locations, as exemplified by raw climate data which is typically collect at irregular locations.
 \section{Generating a time series at each location}
 
 \begin{figure*}[htp]

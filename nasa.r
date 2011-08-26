@@ -108,6 +108,12 @@ nasa.sub$lat<-rep(1,216)
 
 nasa.sub<-glyphs(nasa.sub, "lon", "time", "lat", "surftemp", width=0.5, height=3, polar=TRUE)
 
+nasa.sub$gid<-as.character(nasa.sub$gid)
+nasa.sub$gid[nasa.sub$gid=="2.1"]<-"1.1"
+nasa.sub$gid[nasa.sub$gid=="4.1"]<-"2.1"
+nasa.sub$gid[nasa.sub$gid=="6.1"]<-"3.1"
+nasa.sub$gid<-factor(nasa.sub$gid)
+
 qplot(time, surftemp, data=nasa.sub, geom="path", xlab="Time", ylab="Temperature (Kelvin)", group=id, colour=gid)
 ggsave("nasa-glyph-ts.pdf", height=2, width=8)
 

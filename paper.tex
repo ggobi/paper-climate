@@ -156,7 +156,9 @@ So far we have limited ourselves to always mapping some aspect of time on the x-
 
 \section{Partitioning patterns into shape and size}
 
-Partitioning is a extremely useful technique: product plots, ANOVA, ...  For glyph plots, it's often useful to partition the glyphs into shape and scale components, decomposing the values into a product of maximum and scaled values. This is revealing for smooth models of surface temperature.
+Another impact of varying averages is that it tends to diminish the perceptibility of shape: if some series have uniformly high values and some have uniformly low, then it is difficult to see if the shape is the same independent of the average. Partitioning is a extremely useful technique: product plots, ANOVA, ...  For glyph plots, it's often useful to partition the glyphs into shape and scale components, decomposing the values into a product of maximum and scaled values.  In this section we explore how decomposing each series into scale and shape components can be useful.
+
+This is revealing for smooth models of surface temperature, shown in Figure~\ref{fig:scaling}. Each location is modelled using a generalised additive model \citep{wood:2006} with a seasonal term and a long-term smooth term. The three plots in the figure show the long-term smooth term. Because some locations are uniformly warmer than others, the impact of changes across time are diminished. In the centre plot, each location is scaled by dividing out the maximum, and on the right, each location is scaled to range $[0, 1]$. These emphasise individual changes but lose the ability to make global comparisons, and need caution when interpreting - a small absolute change gets blown up into a large relative change.
 
 \begin{figure}[htbp]
   \centering
@@ -164,13 +166,21 @@ Partitioning is a extremely useful technique: product plots, ANOVA, ...  For gly
   \includegraphics[width=0.33\linewidth]{month-rescale-max}%
   \includegraphics[width=0.33\linewidth]{month-rescale01}
   \caption{Smoothed de-seasonalized daily temperature glyph-map. (Left) unscaled, (center) scaled to have maximum 1, (right) scaled to have maximum 1 and minimum 0.}
-  \label{fig:label}
+  \label{fig:scaling}
+\end{figure}
+
+A possible compromise is to use line colour to display the standardising variable, as shown in Figure~\ref{fig:scaling-col}.  This makes it possible to see the individual patterns while still retaining some ability to see which shapes represent small absolute changes.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.33\linewidth]{month-rescale01-col}
+  \caption{Adding colour to scaled plots. Here each location has been scaled to range $[0, 1]$ and colour mapped to the range of the original predictions.}
+  \label{fig:scaling-col}
 \end{figure}
 
 Of course other types of scaling are possible. Another classical scaling method is to standardize mean and standard deviation to 0 and 1 (or robust variants).
 
-Equivalent to using individual scales in facetted graphics.
-
+Equivalent to using individual scales in facetted graphics. 
 
 \section{Regular vs irregular locations}
 

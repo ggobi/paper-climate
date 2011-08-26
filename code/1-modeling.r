@@ -138,12 +138,15 @@ ggplot(day_preds, aes(gx, gy, group = gid)) +
   geom_path() +
   ref_boxes +
   theme_fullframe()
-ggsave("../images/month-rescale-none.pdf", width = 4, height = 4)
+ggsave("../images/month-rescale-none.png", width = 4, height = 4)
 
 
 day_preds2 <- ddply(day_preds, c("lat", "long"), mutate, 
   pred_s = rescale01(pred),
-  pred_m = pred / max(pred))
+  pred_m = pred / max(pred),
+  max = max(pred),
+  range = diff(range(pred))
+)
 day_preds2 <- glyphs(day_preds2, "long", "day", "lat", "pred_s") 
 
 ggplot(day_preds2, aes(gx, gy, group = gid)) + 
@@ -151,7 +154,7 @@ ggplot(day_preds2, aes(gx, gy, group = gid)) +
   geom_path() +
   ref_boxes +
   theme_fullframe()
-ggsave("../images/month-rescale01.pdf", width = 4, height = 4)
+ggsave("../images/month-rescale01.png", width = 4, height = 4)
 
 day_preds2 <- glyphs(day_preds2, "long", "day", "lat", "pred_m") 
 ggplot(day_preds2, aes(gx, gy, group = gid)) + 
@@ -159,9 +162,18 @@ ggplot(day_preds2, aes(gx, gy, group = gid)) +
   geom_path() +
   ref_boxes +
   theme_fullframe()
-ggsave("../images/month-rescale-max.pdf", width = 4, height = 4)
+ggsave("../images/month-rescale-max.png", width = 4, height = 4)
 
-# Linear trend is not a good fit!
+
+day_preds2 <- glyphs(day_preds2, "long", "day", "lat", "pred_s") 
+ggplot(day_preds2, aes(gx, gy, group = gid)) + 
+  map + 
+  geom_path(aes(colour = range)) +
+  ref_boxes +
+  theme_fullframe() + 
+  scale_colour_gradient(high = "black", low = "grey60")
+ggsave("../images/month-rescale01-col.png", width = 4, height = 4)
+
 
 # Residuals ------------------------------------------------------------------
 

@@ -121,5 +121,5 @@ qplot(gx, gy, data=nasa.sub, geom="polygon", colour=gid, fill=I(NA)) + theme_not
 ggsave("nasa-glyph.pdf", height=2, width=6)
 
 nasa.gly<-glyphs(nasa, "long", "time", "lat", "surftemp", height=3, polar=TRUE)
-ggplot() +  map + geom_polygon(data=nasa.gly, mapping=aes(x=gx, y=gy, group=id), colour=I("black"), fill=I(NA)) + theme_nothing() + coord_map()
+ggplot() +  map + geom_polygon(data=nasa.gly, mapping=aes(x=gx, y=gy, group=id), colour=I("black"), fill=I(NA)) + theme_fullframe() + coord_map()
 ggsave("nasa-glyph-all.pdf", height=6, width=6)

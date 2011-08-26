@@ -79,25 +79,35 @@ This paper describes how to make glyph-maps.
 
 %Glyph-maps have attributes of both glyphs (stars, faces, profiles, ...), inviting exploration at the global level, and small-multiple time series, allowing local exploration of individual series. Allow to see both geographic context and individual locations simultaneously.
 
-%An interesting attribute of these glyph plots is that the position of graphical elements is determined by major and minor axes. For maps, the major axes are latitude and longitude, and the minor axes are typically time on the x-axis and some measurement or model prediction on the y-axis.
-
 %Avoids one problem that plagues glyph displays: the ordering of the variables. Although some techniques exist to ameliorate this problem \citep{kleiner:1981,hurley:2010}, they are not necessary with time data because it is intrinsically ordered.
 
 %These displays tend to be particularly effective when printed in large format, as the much higher resolution of print (600 dpi) compared to computer  screen (72-120 dpi) allows for much finer reading. These are high-density data displays in the best tradition of Tufte. Wall size maps are not usually practical during analysis, but are very engaging.
 
 %Will first explore for regularly gridded data, a simple starting point and a common output of climate models, and then show a few simple extensions to deal with non-rectangular grids and irregular locations, as exemplified by raw climate data which is typically collect at irregular locations.
-\section{Exploring trend}
 
-\begin{figure*}[htp]
-\centerline{\includegraphics[width=4in]{nasa-deseas-trend.pdf}}
-\caption{Time series icon at each location, showing de-seasonalized trend.}
-\end{figure*}
+Code and data is available in the online supplementary materials.
 
-\section{Showing seasonal effect, radially oriented icon}
+\section{Computation}
 
-A big advantage of glyph-maps is that they can be generated with existing graphics software, after a simple pre-processing step. This makes them immediately accessible to a wide audience. The graphics in this paper were created in R \citep{R} using ggplot2 \citep{me:ggplot2,wickham:2007d} and \citep{me:plyr}, but are readily implemented in any statistical programming environment.  Code and data is available in the online supplementary materials.
+A big advantage of glyph-maps is that they can be generated with existing graphics software after performing a simple pre-processing step described in this section. This makes them immediately accessible to a wide audience. The graphics in this paper were created in R \citep{R} using ggplot2 \citep{me:ggplot2,wickham:2007d} and \citep{me:plyr}, but glyph-maps are readily implemented in any statistical programming environment. 
 
-Because the x and y locations are linear combinations of two variables, these types of displays can also be built interactively by software that supports tours, such as DataViewer, XGobi or GGobi.  This technique is used to good effect in \citet{buja:1996a}.
+The pre-processing step is simple, once you notice that the position of graphical elements is determined by a major and minor axis in each direction (x and y). For maps, the major axes are latitude and longitude, and the minor axes are typically time on the x-axis and some measurement or model prediction on the y-axis. The final locations are a simple linear combination.  After rescaling the minor axis to have range $[0, 1]$, the $x$ coordinate is given by $x_{major} + w \cdot x_{minor}$ and $y$ by $y_{major} + h \cdot y_{minor}$, where $w$ and $h$ are width and height respectively
+
+Because the x and y locations are linear combinations of two variables, these types of displays can also be built interactively by software that supports tours \citep{cook:2006}, such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}.  This technique is used to good effect in \citet{buja:1996a}.
+
+Computing the coordinates for star glyphs is equally easy. Without loss of generality, we assume that $y_{minor}$ becomes $r$, the radius, and $x_{minor}$ becomes $\theta$, the angle, both rescaled to lie between 0 and 1. Then the glyph $x$ coordinate is given by $x_{major} + \frac{w \cdot r}{2} \cos(2 \pi \theta)$, and the $y$ coordinate by $y_{major} + \frac{h \cdot r}{2} \sin(2 \pi \theta)$. 
+
+Figure~\ref{fig:cycle} shows monthly temperature effects as time (Cartesian coordinates) and star (polar coordinates) glyphs. In this case, the star glyphs are not as effective as the linear glyphs: perhaps because of the absence of cyclical pattern.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=2in]{month-cartesian}
+  \includegraphics[width=2in]{month-polar}
+    
+  \caption{Monthly averages in (left) Cartesian coordinates and (right) polar coordinates.}
+  
+  \label{fig:cycle}
+\end{figure}
 
 \section{Reference lines}
 
@@ -125,24 +135,6 @@ It's also often useful to display other types of reference information. You are 
 \end{figure}
 
 A particularly useful summary when to add when displaying model predictions, is some measure of model fit. This makes it easier to avoid over-interpreting predictions from poorly-fitting models.
-
-\section{Radial icons/star glyphs}
-
-These time series glyphs can be readily altered to support circular variables, by projecting each line into polar coordinates and joining the ends. This type of display is best suited for variables that are truly circular, such as seasonal patterns or angles (such as for wind direction).
-
-Cite star glyphs.
-
-The alteration to the data transformation is quite simple. Without loss of generality, we assume that $y_{minor}$ becomes $r$, the radius, and $x_{minor}$ becomes $theta$ the angle, both rescaled to lie between 0 and 1. Then the glyph $x$ coordinate is given by $x_{major} + \frac{w \cdot r}{2} \cos(2 \pi \theta)$, and the $y$ coordinate by $y_{major} + \frac{h \cdot r}{2} \sin(2 \pi \theta)$.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=2in]{month-cartesian}
-  \includegraphics[width=2in]{month-polar}
-    
-  \caption{Monthly averages in (left) Cartesian coordinates and (right) polar coordinates.}
-  
-  \label{fig:cycle}
-\end{figure}
 
 \section{Generalization: scatterplots}
 

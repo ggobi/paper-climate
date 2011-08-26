@@ -80,45 +80,30 @@ Because the x and y locations are linear combinations of two variables, these ty
 
 \section{Reference lines}
 
-Space-time-glyphs often require reference lines: it is difficult to compare the relative location of glyphs in different regions. As noted by \citet{cleveland:1993a}, a \emph{visual reference grid} is important for accurate perception of values, particularly of important properties of lines like slope and minima. This is illustrated well by the previous plot of monthly coefficients. When we add a reference to each location, Figure~\ref{fig:ref-basic}, it becomes much more clear that not only is there a difference in shape between the Northern and Southern hemispheres, but there is also a location shift: values in the North are much higher than values in the South. It is difficult to see this without reference lines.
+Space-time-glyphs usually require a \emph{visual reference grid} \citet{cleveland:1993a} to make it easier to compare locations. This is important for accurate perception of important line properties like slope and minima. This need is well illustrated by Figure~\ref{}. When we add a reference to each location, as in Figure~\ref{fig:ref-basic}, we see not only a difference in shape between Northern and Southern hemispheres, but also average value. Without reference lines, it is difficult to see that average seasonal coefficients are much higher in the North than in the South.
 
-Figure~\ref{fig:ref-basic} shows two variants of a reference, a line drawn at the overall mid-range, and a box drawn around each grid cell. We prefer using white for such references because it is minimally perceptible: you can see it easily if you concentrate on it, but it does not otherwise distract from the perception of the graphic. Note the careful choice of layering: the map is drawn under mid-range lines, but over boxes.
+Figure~\ref{fig:ref-basic} shows two reference grid variants: a line drawn at the overall mid-range, and a box drawn around each grid cell. We prefer using white for these references because it is minimally perceptible: you can see the grid easily when looking for it, but it does not otherwise distract from the perception of the graphic \citep{carr:1994}.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.5\linewidth]{ref-line}%
   \includegraphics[width=0.5\linewidth]{ref-box}
-  \caption{caption}
+
+  \caption{Glyph-maps of seasonal temperature patterns. Adding reference lines, (left) mid-range lines and (right) grid-cell boxes, makes it easier to see differences in glyph position, not just shape.}
   \label{fig:ref-basic}
 \end{figure}
 
-Other types of reference information can also be usefully added. 
-Other ways of display additional data:
-
-\begin{itemize}
-
-  \item Map variable to colour or transparency of line. 
-  
-  \item Colour of reference lines/boxes.
-  
-  \item Highlight special points in an additional layer.
-
-  \item Fill colour of reference boxes. 
-  
-\end{itemize}
-
-A particularly useful application of this technique is when display model predictions to also display some measure of model fit, so that appropriate care can be taken to avoid over-interpreting predictions from models that did not fit well.
-
-Figure~\ref{fig:ref-adv} shows two applications of these ideas, adding the month with the highest average temperature in either the foreground or background. Careful colour choice is necessary so that this information is perceptible, but not distracting.
+It's also often useful to display other types of reference information. You are only limited by your imagination (and the capabilities of your graphics software), but two simple ideas are to (1) vary the colour or transparency of glyphs or references, or (2) use an additional layer to highlight special points. Figure~\ref{fig:ref-adv} illustrates these ideas to display the month with the highest temperature at each locations. Careful colour choice is necessary so that this information is perceptible, but not distracting.
 
 \begin{figure}[htbp]
   \centering
-    \includegraphics[width=0.5\linewidth]{ref-max-1}%
-    \includegraphics[width=0.5\linewidth]{ref-max-2}
-  \caption{caption}
+  \includegraphics[width=0.5\linewidth]{ref-max-1}%
+  \includegraphics[width=0.5\linewidth]{ref-max-2}
+  \caption{Glyph-maps of seasonal temperature patterns also showing the month with the highest temperature using (left) an additional layer of points and (right) changing the background colour of the reference grid.}
   \label{fig:ref-adv}
 \end{figure}
 
+A particularly useful summary when to add when displaying model predictions, is some measure of model fit. This makes it easier to avoid over-interpreting predictions from poorly-fitting models.
 
 \section{Radial icons/star glyphs}
 

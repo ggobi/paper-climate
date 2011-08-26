@@ -31,10 +31,10 @@ getbox <- function (map, xlim, ylim) {
 }
 
 world <- map_data("world")
-nasa <- getbox(world, xlim = c(-114.93, -55.07), ylim = c(-21.53, 36.64))
+world <- getbox(world, xlim = c(-114.93, -55.07), ylim = c(-21.53, 36.64))
 # Remove slivvers
 
-nasa <- ddply(nasa, "group", function(df) {
+world <- ddply(world, "group", function(df) {
   if (diff(range(df$long)) < 1e-6) return(NULL)
   if (diff(range(df$lat)) < 1e-6) return(NULL)
   df
@@ -42,7 +42,7 @@ nasa <- ddply(nasa, "group", function(df) {
 
 map <- list(
   geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = nasa, legend = FALSE, fill = "grey80", colour = "white"),
+    data = world, legend = FALSE, fill = "grey80", colour = "white"),
   scale_x_continuous(breaks = NA, expand = c(0.02, 0)),
   scale_y_continuous(breaks = NA, expand = c(0.02, 0)), 
   xlab(NULL),

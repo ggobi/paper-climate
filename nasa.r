@@ -87,3 +87,29 @@ ggsave("nasa-deseas-trend.pdf", height=8, width=8)
 year_resids <- glyphs(year_preds, "long", "year", "lat", "pred", height=3) 
 qplot(gx, gy, data = year_preds, geom = "path", group = gid, xlab="", ylab="") + map + coord_map()
 ggsave("nasa-deseas-trend.pdf", height=8, width=8)
+
+# Explain icons
+nasa.temp<-data.frame(time=nasa$time, temp=nasa$surftemp)
+nasa.temp<-cast(nasa.temp, formula=temp~time)
+nasa.oneloc <- subset(nasa, x == 22 & y == 21, select=c("id","time","surftemp"))
+nasa.twoloc <- subset(nasa, x == 7 & y == 12, select=c("id","time","surftemp"))
+nasa.threeloc <- subset(nasa, x == 12 & y == 3, select=c("id","time","surftemp"))
+nasa.sub<-rbind(nasa.oneloc, nasa.twoloc, nasa.threeloc)
+#nasa.oneloc<-t(as.matrix(nasa.oneloc$surftemp))
+#colnames(nasa.oneloc)<-paste("t", 1:72, sep="")
+nasa.oneloc$gx<-cos(2*pi*(nasa.oneloc$time/72)) * ((nasa.oneloc$surftemp-293)/(302-293))
+nasa.oneloc$gy<-sin(2*pi*(nasa.oneloc$time/72)) * ((nasa.oneloc$surftemp-293)/(302-293))
+qplot(time, surftemp, data=nasa.oneloc, geom="path", xlab="Time", ylab="Temperature (Kelvin)")
+ggsave("nasa-oneloc-ts.pdf", height=2, width=8)
+qplot(gx, gy, data=nasa.oneloc, geom="path") + theme_nothing()
+
+nasa.sub$lon<-rep(c(2,4,6), rep(72,3))
+nasa.sub$lat<-rep(1,216)
+
+nasa.sub<-glyphs(nasa.sub, "lon", "time", "lat", "surftemp", width=0.5, height=3, polar=TRUE)
+
+qplot(time, surftemp, data=nasa.sub, geom="path", xlab="Time", ylab="Temperature (Kelvin)", group=id, colour=gid)
+ggsave("nasa-glyph-ts.pdf", height=2, width=8)
+
+qplot(gx, gy, data=nasa.sub, geom="polygon", colour=gid, fill=I(NA)) + theme_nothing()
+ggsave("nasa-glyph.pdf", height=2, width=6)

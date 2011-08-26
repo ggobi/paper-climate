@@ -123,23 +123,17 @@ The alteration to the data transformation is quite simple. Without loss of gener
   \label{fig:cycle}
 \end{figure}
 
-\section{Scatterplots}
+\section{Generalization: scatterplots}
 
-So far we have limited ourselves to always mapping some aspect of time on the x-axis. But the method is much more general. Figure~\ref{fig:cloud} shows how by mapping another variable to the x-axis, in this case low-cloud level on x and high-cloud level on y, we can explore how this 2d distribution varies over space. Again, summarizing the data with models is very useful: the second plot displays a loess curve fit to the data instead of the individual points.  
+So far we have limited ourselves to always mapping some aspect of time on the x-axis. But glyph-maps are not limited to only this type of data and can  be easily generalized to create many other types of display. Figure~\ref{fig:cloud} shows a generalisation to scatterplots: by mapping another variable to the x-axis, in this case low-cloud level on x and high-cloud level on y, we can explore how a bivariate relationship varies spatially. It is again useful to use a model to extract the essence of the relationship, summarizing the data with models is very useful: the second plot displays a loess curve fit to the data instead of the individual points.  
 
 \begin{figure}[htbp]
   \centering
-   \includegraphics[width=0.5\linewidth]{clouds}%
-   \includegraphics[width=0.5\linewidth]{clouds-smooth}
-  \caption{caption}
+  \includegraphics[width=0.5\linewidth]{clouds}%
+  \includegraphics[width=0.5\linewidth]{clouds-smooth}
+
+  \caption{Glyph-map showing (left) scatterplot of high-cloud vs. low-cloud and (right) smoothed (loess) curve fit to each location. The relationship between these two variables varies considerably over the spatial domain (particularly between land and ocean), but neighbouring locations tend to similar. }
   \label{fig:cloud}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-    \includegraphics[width=0.5\linewidth]{clouds-heike}%
-  \caption{Just as an alternative: shaded map instead of the outlines. }
-  \label{fig:cloud-alt}
 \end{figure}
 
 \section{Effect of scale}

@@ -8,15 +8,11 @@ source("0-cache.r")
 
 # Scatteplots ----------------------------------------------------------------
 
-temp <- glyphs(nasa, "long", "temperature", "lat", "surftemp") 
-ggplot(temp, aes(gx, gy, group = gid)) + 
-  map +
-  geom_point(shape = ".")
-
 cloud <- glyphs(nasa, "long", "cloudlow", "lat", "cloudhigh") 
 ggplot(cloud, aes(gx, gy, group = gid)) + 
   map +
-  geom_point(shape = ".")
+  geom_point(shape = ".") +
+  geom_tile(aes(long, lat), colour = "white", fill = NA)
 ggsave("../images/clouds.png", width = 6, height = 6)
 
 grid_along <- function(x, n = 20) {

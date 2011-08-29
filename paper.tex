@@ -113,9 +113,19 @@ Figure~\ref{fig:cycle} shows monthly temperature effects as time (Cartesian coor
 
 \section{Reference lines}~\label{sec:reference}
 
-Space-time-glyphs usually require a \emph{visual reference grid} \citet{cleveland:1993a} to make it easier to compare locations. This is important for accurate perception of important line properties like slope and minima. This need is well illustrated by Figure~\ref{}. When we add a reference to each location, as in Figure~\ref{fig:ref-basic}, we see not only a difference in shape between Northern and Southern hemispheres, but also average value. Without reference lines, it is difficult to see that average seasonal coefficients are much higher in the North than in the South.
+Graphical displays benefit from a \emph{visual reference grid} \citep{cleveland:1993a} to compare values mapped to position along a line. The same is true for glyph-maps, but it is not feasible to make a full set of axies for each icon. A complete axis would dominate the picture, and draw the eye away from the pattern of the data. The types of comparisons that are needed across icons are:
 
-Figure~\ref{fig:ref-basic} shows two reference grid variants: a line drawn at the overall mid-range, and a box drawn around each grid cell. We prefer using white for these references because it is minimally perceptible: you can see the grid easily when looking for it, but it does not otherwise distract from the perception of the graphic \citep{carr:1994}.
+\begin{itemize} \itemsep 0in
+\item Slope, or trend
+\item Intercept, or average value
+\item Variance, or size
+\end{itemize}
+
+Space-time-glyphs usually require a  to make it easier to compare locations. This is important for accurate perception of important line properties like slope and minima. This need is evident in Figure~\ref{fig:glyph-map}. There is a hint that the average value is not the same from right time series to the next in the map (right), or if the center of the icons is the same in the polar time series (left). We have no frame of reference on which to judge this. The regular grid provides a very rudimentary frame of reference, but it is not sufficient. 
+
+Figure~\ref{fig:ref-basic} shows two reference grid variants: a line drawn at the overall mid-range, and a box drawn around each grid cell. We prefer using white for these references because it is minimally perceptible: you can see the grid easily when looking for it, but it does not otherwise distract from the perception of the graphic \citep{carr:1994}. When we add a reference to each location, as in Figure~\ref{fig:ref-basic}, we see not only a difference in shape between Northern and Southern hemispheres, but also average value. Without reference lines, it is difficult to see that average seasonal coefficients are much higher in the North than in the South.
+
+% Think we might need to show the original figures of data with reference lines
 
 \begin{figure}[htbp]
   \centering
@@ -166,6 +176,8 @@ Of course other types of scaling are possible. Another classical scaling method 
 
 Equivalent to using individual scales in facetted graphics. 
 
+\section{What to plot: raw data, trend lines, residuals,  seasonal}
+
 \section{Generalization: scatterplots}~\label{sec:scatter}
 
 So far we have limited ourselves to always mapping some aspect of time on the x-axis. But glyph-maps are not limited to only this type of data and can  be easily generalized to create many other types of display. Figure~\ref{fig:cloud} shows a generalisation to scatterplots: by mapping another variable to the x-axis, in this case low-cloud level on x and high-cloud level on y, we can explore how a bivariate relationship varies spatially. It is again useful to use a model to extract the essence of the relationship, summarizing the data with models is very useful: the second plot displays a loess curve fit to the data instead of the individual points.  
@@ -187,6 +199,8 @@ So far we have limited ourselves to always mapping some aspect of time on the x-
 Rectangular, but not in this projection.  Other types of regular grids.
 
 \subsection{Irregular locations}
+
+\section{Long time series}
 
 \section{Conclusions}
 

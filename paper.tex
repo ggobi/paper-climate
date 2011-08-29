@@ -53,7 +53,9 @@ Climate data is composed of measurements on variables such as temperature, preci
 \label{fig:facetted-map}
 \end{figure*}
 
-In this paper we explore the use of a different type of display, that uses icons on the map, for climate data.  For weather maps, icon plots go back as far as \citet{galton:weathermap}, available in \citet{friendlydenis:2001}. Modern icon plots date back to the semi-graphic display of \citet{anderson:1960} and star glyphs of  \citep{kleiner:1981}, and were made infamous by \citep{chernoff:1973}. An icon is produced by mapping each variable to some feature of the icon. One icon is generated for every case in the data set. Figure \ref{fig:glyphs} illustrates the idea of icon plots, with emphasis on temporal data. The time measurements are treated as variables in a multivariate data set. Here we have six years of monthly data, giving 72 time values which are considered to be 72 variables. Three different locations are selected, for demonstration purposes. The top plot shows the time series of these three locations. Location ``1.1'' (red) has medium values of temperature, with strong seasonality, the six years corresponding to the six peaks. Location ``2.1'' (green) has generally high temperature values, with weaker seasonality in most years and a lack of low temperatures in the middle of the time period when lows would be expected. Location ``3.1'' (blue) has strong seasonality but generally low temperatures. The bottom plot shows these same cases as star glyphs. A separate glyph is created for each location. The 72 time variables form axes organized radially. Each temperature value is plotted relative to the overall range of temperature values. The seasonal patterns are clearly visible in this type of display, forming six ``petals'' in the icon. Location ``2.1'' has a different pattern than the other two, with only four petals, and location ``3.1'' is a much smaller icon indicating overall lower values. 
+%% Reproduce all of the icon displays using the fixed glyph code
+
+In this paper we explore the use of a different type of display, that uses icons on the map, for climate data.  Icon plot associated with weather maps date back as far as \citet{galton:weathermap}, described in \citet{friendlydenis:2001}. Icon plots date back to the star plot introduced by \citet{mayr:1877}, and resurged in the modern era with the semi-graphic displays of \citet{anderson:1960}, and were made infamous by \citep{chernoff:1973}. An icon is produced by mapping each variable to some feature of the icon. One icon is generated for every case in the data set. Figure \ref{fig:glyphs} illustrates the construction of star plot, with emphasis on temporal data. The time measurements are treated as variables in a multivariate data set. Variables are Here we have six years of monthly data, giving 72 time values which are considered to be 72 variables. The star plot is formed by considering the 72 axes radiating from a common midpoint, and the data values for the row are plotted on each axis relative to the locations of the minimum and maximum of the variable. For the temporal data, all variables are considered to be on a common scale so the global minimum and maximum of temperature are used to scale each data value. Three different locations are selected, for demonstration purposes. The top plot shows the time series of these three locations. Location ``1.1'' (red) has medium values of temperature, with strong seasonality, the six years corresponding to the six peaks. Location ``2.1'' (green) has generally high temperature values, with weaker seasonality in most years and a lack of low temperatures in the middle of the time period when lows would be expected. Location ``3.1'' (blue) has strong seasonality but generally low temperatures. The bottom plot shows these same cases as star glyphs. A separate glyph is created for each location. The 72 time variables form axes organized radially. Each temperature value is plotted relative to the overall range of temperature values. The seasonal patterns are clearly visible in this type of display, forming six ``petals'' in the icon. Location ``2.1'' has a different pattern than the other two, with only four petals, and location ``3.1'' is a much smaller icon indicating overall lower values. 
 
 \begin{figure*}[htp]
 \centerline{\includegraphics[width=6in]{nasa-glyph-ts.pdf}}
@@ -62,7 +64,7 @@ In this paper we explore the use of a different type of display, that uses icons
 \label{fig:glyphs}
 \end{figure*}
 
-Icon plots are used, infrequently, to examine multivariate data. For large data sets it is infeasible to digest the quantity of icons, and for multivariate data there is no natural order so it can be like having a mountain of little stamps to rearrange and organize, in order to understand the structures present in the data. The initial paper on star glyphs \citep{kleiner:1981} and a recent paper \citep{hurley:2010} propose some approaches for organizing the icons. With spatiotemporal data ordering of icons is naturally done by spatial location. There is also usually some spatial trend, or continuity, which will make digesting patterns among the icons simpler.
+Icon plots are used, infrequently, to examine multivariate data. For large data sets it is infeasible to digest the quantity of icons, and for multivariate data there is no natural order so it can be like having a mountain of little stamps to rearrange and organize, in order to understand the structures present in the data. An early paper on multivariate graphics \citep{kleiner:1981} and a recent paper \citep{hurley:2010} propose some approaches for organizing the icons. Ordering of icons is not an issue with spatiotemporal data, because it is naturally handled by spatial location. The spatial trend, or continuity, usually gices the plot an appearance of texturing on a landscape, make it easier to digest patterns among the icons.
 
 Figure \ref{fig:glyph-map} (left) shows the star glyphs drawn for each spatial location of the raw temperature data. The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. 
 
@@ -73,10 +75,8 @@ Figure \ref{fig:glyph-map} (left) shows the star glyphs drawn for each spatial l
 \label{fig:glyph-map}
 \end{figure*}
 
-Glyph-maps have been used in 
-
-This paper describes how to make glyph-maps. 
-
+The next section (\ref{sec:construction}) describes how to construct glyph-maps. Section \ref{sec:reference} discusses the use of reference lines and boxes, and Section \ref{sec:scale} visits issues of scaling values for different information purposes. Generalizations to different types of icons are described in Section \ref{sec:scatter}. Glyph-maps work nicely with gridded data, but may be less effective with irregular spatial locations. Possible adjustments are discussed in Section \ref{sec:irregular}. Code and data is available in the online supplementary materials.
+ 
 %\subsection{Glyph plots}
 
 %Simple, but effective, technique that combines aspects of glyphs, facetted plots and map-charts. Particularly well suited for the type of temporal-spatial data, commonly seen in climate.
@@ -89,9 +89,7 @@ This paper describes how to make glyph-maps.
 
 %Will first explore for regularly gridded data, a simple starting point and a common output of climate models, and then show a few simple extensions to deal with non-rectangular grids and irregular locations, as exemplified by raw climate data which is typically collect at irregular locations.
 
-Code and data is available in the online supplementary materials.
-
-\section{Computation}
+\section{Computation}~\label{sec:construction}
 
 A big advantage of glyph-maps is that they can be generated with existing graphics software after performing a simple pre-processing step described in this section. This makes them immediately accessible to a wide audience. The graphics in this paper were created in R \citep{R} using ggplot2 \citep{me:ggplot2,wickham:2007d} and \citep{me:plyr}, but glyph-maps are readily implemented in any statistical programming environment. 
 
@@ -113,7 +111,7 @@ Figure~\ref{fig:cycle} shows monthly temperature effects as time (Cartesian coor
   \label{fig:cycle}
 \end{figure}
 
-\section{Reference lines}
+\section{Reference lines}~\label{sec:reference}
 
 Space-time-glyphs usually require a \emph{visual reference grid} \citet{cleveland:1993a} to make it easier to compare locations. This is important for accurate perception of important line properties like slope and minima. This need is well illustrated by Figure~\ref{}. When we add a reference to each location, as in Figure~\ref{fig:ref-basic}, we see not only a difference in shape between Northern and Southern hemispheres, but also average value. Without reference lines, it is difficult to see that average seasonal coefficients are much higher in the North than in the South.
 
@@ -140,20 +138,7 @@ It's also often useful to display other types of reference information. You are 
 
 A particularly useful summary when to add when displaying model predictions, is some measure of model fit. This makes it easier to avoid over-interpreting predictions from poorly-fitting models.
 
-\section{Generalization: scatterplots}
-
-So far we have limited ourselves to always mapping some aspect of time on the x-axis. But glyph-maps are not limited to only this type of data and can  be easily generalized to create many other types of display. Figure~\ref{fig:cloud} shows a generalisation to scatterplots: by mapping another variable to the x-axis, in this case low-cloud level on x and high-cloud level on y, we can explore how a bivariate relationship varies spatially. It is again useful to use a model to extract the essence of the relationship, summarizing the data with models is very useful: the second plot displays a loess curve fit to the data instead of the individual points.  
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.5\linewidth]{clouds}%
-  \includegraphics[width=0.5\linewidth]{clouds-smooth}
-
-  \caption{Glyph-map showing (left) scatterplot of high-cloud vs. low-cloud and (right) smoothed (loess) curve fit to each location. The relationship between these two variables varies considerably over the spatial domain (particularly between land and ocean), but neighbouring locations tend to similar. }
-  \label{fig:cloud}
-\end{figure}
-
-\section{Partitioning patterns into shape and size}
+\section{Partitioning patterns into shape and size}~\label{sec:scale}
 
 Another impact of varying averages is that it tends to diminish the perceptibility of shape: if some series have uniformly high values and some have uniformly low, then it is difficult to see if the shape is the same independent of the average. Partitioning is a extremely useful technique: product plots, ANOVA, ...  For glyph plots, it's often useful to partition the glyphs into shape and scale components, decomposing the values into a product of maximum and scaled values.  In this section we explore how decomposing each series into scale and shape components can be useful.
 
@@ -181,7 +166,21 @@ Of course other types of scaling are possible. Another classical scaling method 
 
 Equivalent to using individual scales in facetted graphics. 
 
-\section{Regular vs irregular locations}
+\section{Generalization: scatterplots}~\label{sec:scatter}
+
+So far we have limited ourselves to always mapping some aspect of time on the x-axis. But glyph-maps are not limited to only this type of data and can  be easily generalized to create many other types of display. Figure~\ref{fig:cloud} shows a generalisation to scatterplots: by mapping another variable to the x-axis, in this case low-cloud level on x and high-cloud level on y, we can explore how a bivariate relationship varies spatially. It is again useful to use a model to extract the essence of the relationship, summarizing the data with models is very useful: the second plot displays a loess curve fit to the data instead of the individual points.  
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\linewidth]{clouds}%
+  \includegraphics[width=0.5\linewidth]{clouds-smooth}
+
+  \caption{Glyph-map showing (left) scatterplot of high-cloud vs. low-cloud and (right) smoothed (loess) curve fit to each location. The relationship between these two variables varies considerably over the spatial domain (particularly between land and ocean), but neighbouring locations tend to similar. }
+  \label{fig:cloud}
+\end{figure}
+
+
+\section{Regular vs irregular locations}~\label{sec:irregular}
 
 \subsection{Non-rectangular grids}
 

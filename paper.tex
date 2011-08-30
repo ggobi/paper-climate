@@ -93,11 +93,20 @@ The next section (\ref{sec:construction}) describes how to construct glyph-maps.
 
 A big advantage of glyph-maps is that they can be generated with existing graphics software after performing a simple pre-processing step described in this section. This makes them immediately accessible to a wide audience. The graphics in this paper were created in R \citep{R} using ggplot2 \citep{me:ggplot2,wickham:2007d} and \citep{me:plyr}, but glyph-maps are readily implemented in any statistical programming environment. 
 
-The pre-processing step is simple, once you notice that the position of graphical elements is determined by a major and minor axis in each direction ($x$ and $y$). For maps, the major axes are latitude and longitude, and the minor axes are typically time on the $x$-axis and some measurement or model prediction on the $y$-axis. The final locations are a simple linear combination.  After rescaling the minor axis to have range $[0, 1]$, the $x$ coordinate is given by $x_{\amaj} + w \cdot x_{\amin}$ and $y$ by $y_{\amaj} + h \cdot y_{\amin}$, where $w$ and $h$ are width and height respectively
+The pre-processing step is simple, once you notice that the position of graphical elements is determined by a major and minor axis in each direction ($x$ and $y$). For maps, the major axes are latitude and longitude, and the minor axes are typically time on the $x$-axis and some measurement or model prediction on the $y$-axis. The final locations are a simple linear combination.  After rescaling the minor axis to have range $[0, 1]$, the coordinates are given by 
+\begin{eqnarray}\label{coords.eqn}
+x_\text{ coordinate}&=& x_{\amaj} + w \cdot x_{\amin}\\
+y_\text{ coordinate}&=& y_{\amaj} + h \cdot y_{\amin},
+\end{eqnarray)
+where $w$ and $h$ are width and height respectively.
 
-Because the $x$ and $y$ locations are linear combinations of two variables, these types of displays can also be built interactively by software that supports tours \citep{cook:2006}, such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}.  This technique is used to good effect in \citet{buja:1996a}.
+Since the $x$ and $y$ locations are linear combinations of two variables, these types of displays can also be built interactively by software that supports tours \citep{cook:2006}, such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}.  This technique is used to good effect in \citet{buja:1996a}.
 
-Computing the coordinates for star glyphs is equally easy. Without loss of generality, we assume that $y_{\amin}$ becomes $r$, the radius, and $x_{\amin}$ becomes $\theta$, the angle, both rescaled to lie between 0 and 1. Then the glyph $x$ coordinate is given by $x_{\amaj} + \frac{w \cdot r}{2} \sin(2 \pi \theta)$, and the $y$ coordinate by $y_{\amaj} + \frac{h \cdot r}{2} \cos(2 \pi \theta)$. 
+Computing the coordinates for star glyphs is equally easy. Without loss of generality, we assume that $y_{\amin}$ becomes $r$, the radius, and $x_{\amin}$ becomes $\theta$, the angle, both rescaled to lie between 0 and 1. Then the glyph coordinates are given by 
+\begin{eqnarray}\label{coords.polar.eqn}
+x_\text{ coordinate}&=& x_{\amaj} + \frac{w \cdot r}{2} \sin(2 \pi \theta)\\
+y_\text{ coordinate}&=& y_{\amaj} + \frac{h \cdot r}{2} \cos(2 \pi \theta).
+\end{eqnarray)
 
 Figure~\ref{fig:cycle} shows monthly temperature effects as time (Cartesian coordinates) and star (polar coordinates) glyphs. In this case, the star glyphs are not as effective as the linear glyphs: perhaps because of the absence of cyclical pattern.
 

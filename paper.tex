@@ -93,13 +93,6 @@ In this paper we describe the algorithm for creating glyphs of temporal data on 
 
 A big advantage of glyph-maps is that they can be generated with existing graphics software after performing a simple pre-processing step, making them easily accessible to a wide audience. The pre-processing step is simple, once you notice that the position of graphical elements is determined by a major and minor axis in each direction ($x$ and $y$). For maps, the major axes are latitude and longitude, and the minor axes are typically time and some measurement or model prediction. In addition, the minor axes are rescaled to have range $[0, 1]$. The final data values are a simple linear combination, as given by 
 
-<<<<<<< HEAD
-\begin{eqnarray*}\label{coords.eqn}
-x_\text{ coordinate}&=& x_{\amaj} + w \cdot x_{\amin}\\
-y_\text{ coordinate}&=& y_{\amaj} + h \cdot y_{\amin}
-\end{eqnarray*}
-where $w$ and $h$ are width and height respectively. =======
-The pre-processing step is simple, once you notice that the position of graphical elements is determined by a major and minor axis in each direction ($x$ and $y$). For maps, the major axes are latitude and longitude, and the minor axes are typically time on the $x$-axis and some measurement or model prediction on the $y$-axis. The final locations are a simple linear combination.  After rescaling the minor axis to have range $[0, 1]$, the coordinates are given by 
 \begin{equation}
 \begin{array}{lll}
 x_\text{ coordinate}&=& x_{\amaj} + w \cdot x_{\amin}\\
@@ -115,6 +108,7 @@ x_\text{ coordinate}&=& x_{\amaj} + \frac{w \cdot r}{2} \sin(2 \pi \theta) \\
 y_\text{ coordinate}&=& y_{\amaj} + \frac{h \cdot r}{2} \cos(2 \pi \theta).
 \end{array}\label{coords.polar.eqn}
 \end{equation}
+Note that this is is a non-standard conversion to polar coordinates, but this conversion provides us with a time line that starts at 12 o'clock and wraps around the origin in a clockwise fashion.
 
 Figure~\ref{fig:cycle} shows average monthly temperature as time (Cartesian coordinates) and star (polar coordinates) glyphs, for a subset of the spatial region. In this case, the star glyphs are not as effective as the linear glyphs: perhaps because of the absence of cyclical pattern.
 

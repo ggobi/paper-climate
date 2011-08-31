@@ -93,18 +93,28 @@ In this paper we describe the algorithm for creating glyphs of temporal data on 
 
 A big advantage of glyph-maps is that they can be generated with existing graphics software after performing a simple pre-processing step, making them easily accessible to a wide audience. The pre-processing step is simple, once you notice that the position of graphical elements is determined by a major and minor axis in each direction ($x$ and $y$). For maps, the major axes are latitude and longitude, and the minor axes are typically time and some measurement or model prediction. In addition, the minor axes are rescaled to have range $[0, 1]$. The final data values are a simple linear combination, as given by 
 
+<<<<<<< HEAD
 \begin{eqnarray*}\label{coords.eqn}
 x_\text{ coordinate}&=& x_{\amaj} + w \cdot x_{\amin}\\
 y_\text{ coordinate}&=& y_{\amaj} + h \cdot y_{\amin}
 \end{eqnarray*}
+where $w$ and $h$ are width and height respectively. =======
+The pre-processing step is simple, once you notice that the position of graphical elements is determined by a major and minor axis in each direction ($x$ and $y$). For maps, the major axes are latitude and longitude, and the minor axes are typically time on the $x$-axis and some measurement or model prediction on the $y$-axis. The final locations are a simple linear combination.  After rescaling the minor axis to have range $[0, 1]$, the coordinates are given by 
+\begin{equation}
+\begin{array}{lll}
+x_\text{ coordinate}&=& x_{\amaj} + w \cdot x_{\amin}\\
+y_\text{ coordinate}&=& y_{\amaj} + h \cdot y_{\amin}, 
+\end{array}\label{coords.eqn}
+\end{equation}
 where $w$ and $h$ are width and height respectively. The width and height will typically take into account the resolution of the major and minor axes, that is the minimum difference between consecutive locations.
 
 Computing the coordinates for star glyphs is achieved by using polar coordinates,  $r=y_{\amin}$, and $\theta=x_{\amin}$, both scaled to be between 0 and 1. Then the glyph coordinates are given by 
-
-\begin{eqnarray*}\label{coords.polar.eqn}
-x_\text{ coordinate}&=& x_{\amaj} + \frac{w \cdot r}{2} \sin(2 \pi \theta)\\
-y_\text{ coordinate}&=& y_{\amaj} + \frac{h \cdot r}{2} \cos(2 \pi \theta)
-\end{eqnarray*}
+\begin{equation}
+\begin{array}{lll}
+x_\text{ coordinate}&=& x_{\amaj} + \frac{w \cdot r}{2} \sin(2 \pi \theta) \\
+y_\text{ coordinate}&=& y_{\amaj} + \frac{h \cdot r}{2} \cos(2 \pi \theta).
+\end{array}\label{coords.polar.eqn}
+\end{equation}
 
 Figure~\ref{fig:cycle} shows average monthly temperature as time (Cartesian coordinates) and star (polar coordinates) glyphs, for a subset of the spatial region. In this case, the star glyphs are not as effective as the linear glyphs: perhaps because of the absence of cyclical pattern.
 

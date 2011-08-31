@@ -4,11 +4,11 @@ rescale01 <- function(x) {
 }
 rescale11 <- function(x) 2 * rescale01(x) - 1
   
-glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height = NULL, width = NULL) {
+glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height = NULL, width = NULL, x=2) {
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
   
   if (is.null(width)) {
-    width <- resolution(data[[x_major]]) * 0.9    
+    width <- resolution(data[[x_major]]) * 0.95    
     message("Using width ", format(width, digits = 3))
   }
   else {
@@ -17,7 +17,7 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height =
   }
     
   if (is.null(height)) {
-    height <- resolution(data[[y_major]]) * 0.9    
+    height <- resolution(data[[y_major]]) * 0.95    
     message("Using height ", format(height, digits = 3))
   }
   else {
@@ -26,8 +26,8 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height =
   }
   
   if (polar) {
-    theta <- 2 * pi * rescale01(data[[x_minor]]
-    r <- rescale01(data[[y_minor]])
+    theta <- 2 * pi * rescale01(data[[x_minor]])
+    r <- rescale01(data[[y_minor]])^x
     
     data$gx <- data[[x_major]] + width  / 2 * r * sin(theta) 
     data$gy <- data[[y_major]] + height / 2 * r * cos(theta)

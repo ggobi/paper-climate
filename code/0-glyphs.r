@@ -1,10 +1,14 @@
-rescale01 <- function(x) {
-  rng <- range(x, na.rm = TRUE)
-  (x - rng[1]) / (rng[2] - rng[1])
+rescale01 <- function(x, xlim=NULL) {
+  if (is.null(xlim)) {
+	  rng <- range(x, na.rm = TRUE)
+   } else {
+   	  rng <- xlim
+   }
+   (x - rng[1]) / (rng[2] - rng[1])
 }
-rescale11 <- function(x) 2 * rescale01(x) - 1
+rescale11 <- function(x, xlim=NULL) 2 * rescale01(x, xlim) - 1
   
-glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height = NULL, width = NULL, x=2) {
+glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height = NULL, width = NULL, ylim=NULL) {
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
   
   if (is.null(width)) {
@@ -27,14 +31,14 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height =
   
   if (polar) {
     theta <- 2 * pi * rescale01(data[[x_minor]])
-    r <- rescale01(data[[y_minor]])^x
+    r <- rescale01(data[[y_minor]], ylim)
     
     data$gx <- data[[x_major]] + width  / 2 * r * sin(theta) 
     data$gy <- data[[y_major]] + height / 2 * r * cos(theta)
     data <- data[order(data[[x_major]], data[[x_minor]]), ] 
   } else {
     data$gx <- data[[x_major]] + rescale11(data[[x_minor]]) * width / 2
-    data$gy <- data[[y_major]] + rescale11(data[[y_minor]]) * height / 2
+    data$gy <- data[[y_major]] + rescale11(data[[y_minor]], ylim) * height / 2
   }
   
   data

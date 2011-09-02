@@ -30,7 +30,8 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height =
   }
   
   if (polar) {
-    theta <- 2 * pi * rescale01(data[[x_minor]])
+  	xlim <- range(data[[x_minor]]) + c(-0.5, 0.5)*resolution(data[[x_minor]])
+    theta <- 2 * pi * rescale01(data[[x_minor]], xlim)
     r <- rescale01(data[[y_minor]], ylim)
     
     data$gx <- data[[x_major]] + width  / 2 * r * sin(theta) 

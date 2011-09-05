@@ -143,7 +143,7 @@ The graphics in this paper were created in R \citep{R} using {\tt ggplot2} \cite
 
 \section{Reference lines}~\label{sec:reference}
 
-Graphical displays benefit from a \emph{visual reference grid} \citep{cleveland:1993a} to compare values mapped to position along a line. The same is true for glyph-maps, but it is not feasible to make a full set of axies for each icon. A complete axis would dominate the picture, and draw the eye away from the pattern of the data. The types of comparisons that are needed across icons are:
+Graphical displays benefit from a \emph{visual reference grid} \citep{cleveland:1993a} to compare values mapped to position along a line. The same is true for glyph-maps, but it is not feasible to make a full set of axes for each icon. A complete axis would dominate the picture, and draw the eye away from the pattern of the data. The types of comparisons that are needed across icons are:
 
 \begin{itemize} \itemsep 0in
 \item Slope, or trend
@@ -182,9 +182,44 @@ A particularly useful summary when to add when displaying model predictions, is 
 
 Compare the facetted map Fig 1 with the glyph-map of de-seasonalized data
 
-\section{Partitioning patterns into shape and size}~\label{sec:scale}
+Glyph-maps using trend lines enable the reading of trends across
+spatial locations directly from the plot. In comparison, to read trend
+from facetted colored maps one needs to spot the difference between
+the different maps. A more direct comparison would be to make a single
+map with the slope of the trend coded as color. Cleveland's
+\citep{cleveland:1993a} perceptual tests suggests that the reader can
+perceive the positional difference of the lines better than the color
+differences. Accurate perception of color differences is difficult.
+
+\section{Effect of scale}~\label{sec:scale}
 
 *** This section might benefit from some equations also.
+
+*** Global/local min/max, remove intercept/average, data vs model scale
+
+Scaling of the data can produce dramatically different emphases on
+structure. For spatiotemporal data the most natural scale is to use
+the global minumum and maximum. The resulting icons will have size
+relative to the magnitude of the full range of the data. Locations
+with overall large or small temperature will be the focus. Figure
+\ref{fig:glyph-map} shows data scaled to -1 to 1 based on the global
+minimum and maximum, using:
+
+\begin{equation}
+y_{\amaj} = \frac{y_{\amaj}-y_{min}}{y_{max}-y_{min}} \times 2 - 1
+\end{equation}
+
+\noindent where $y_{min} = \mbox{minimum}\{y_{st}; s=1, \dots S, t=1, ..., T \}, y_{max} = \mbox{maximum}\{y_{st}; s=1, \dots S, t=1, ..., T\}$, $S=$ is the number of spatial locations and $T=$ is the number of time points. *** Reference other plots that use global scale too.
+
+Alternatively, scaling locally at each spatial location enables
+exploring the seasonal scale, or shape differences, from one location
+to another. Fig \ref{***} uses local scaling using:
+
+\begin{equation}
+y_{\amaj} = \frac{y_{\amaj}-y_{s,min}}{y_{s,max}-y_{s,min}} \times 2 - 1
+\end{equation}
+
+\noindent where $y_{s, min} = \mbox{minimum}\{y_{st}; t=1, ..., T \}, y_{s,max} = \mbox{maximum}\{y_{st}; t=1, ..., T\}$.
 
 Another impact of varying averages is that it tends to diminish the perceptibility of shape: if some series have uniformly high values and some have uniformly low, then it is difficult to see if the shape is the same independent of the average. Partitioning is a extremely useful technique: product plots, ANOVA, ...  For glyph plots, it's often useful to partition the glyphs into shape and scale components, decomposing the values into a product of maximum and scaled values.  In this section we explore how decomposing each series into scale and shape components can be useful.
 
@@ -227,6 +262,10 @@ So far we have limited ourselves to always mapping some aspect of time on the x-
   \label{fig:cloud}
 \end{figure}
 
+
+*** Connection to small multiples
+
+*** Scale of icons relative to data or model range
 
 \section{Regular vs irregular locations}~\label{sec:irregular}
 

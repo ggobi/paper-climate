@@ -123,7 +123,7 @@ ggplot(month_preds, aes(gx, gy, group = gid)) +
   geom_tile(aes(long, lat), colour = "white", fill = NA)
 ggsave("../images/month-cartesian.pdf", width = 4, height = 4)
 
-month_preds <- glyphs(month_preds, "long", "month", "lat", "pred", polar = T) 
+month_preds <- glyphs(month_preds, "long", "month", "lat", "pred", polar = T, height=2, width=1) 
 ggplot(month_preds, aes(gx, gy, group = gid)) + 
   map_mini + 
   geom_path() +

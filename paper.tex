@@ -141,7 +141,7 @@ Since the $x$ and $y$ locations are linear combinations of two variables, these 
 
 The graphics in this paper were created in R \citep{R} using {\tt ggplot2} \citep{me:ggplot2} and {\tt plyr} \citep{me:plyr}. 
 
-\section{Reference lines}~\label{sec:reference}
+\section{Reference frames}~\label{sec:reference}
 
 Graphical displays benefit from a \emph{visual reference grid} \citep{cleveland:1993a} to compare values mapped to position along a line. The same is true for glyph-maps, but it is not feasible to make a full set of axes for each icon. A complete axis would dominate the picture, and draw the eye away from the pattern of the data. The types of comparisons that are needed across icons are:
 
@@ -206,24 +206,30 @@ with overall large or small temperature will be the focus. Figure
 minimum and maximum, using:
 
 \begin{equation}
-y_{\amaj} = \frac{y_{\amaj}-y_{min}}{y_{max}-y_{min}} \times 2 - 1
+y_{st} = \frac{y_{st}-y_{min}}{y_{max}-y_{min}} \times 2 - 1
+\label{scale1}
 \end{equation}
 
-\noindent where $y_{min} = \mbox{minimum}\{y_{st}; s=1, \dots S, t=1, ..., T \}, y_{max} = \mbox{maximum}\{y_{st}; s=1, \dots S, t=1, ..., T\}$, $S=$ is the number of spatial locations and $T=$ is the number of time points. *** Reference other plots that use global scale too.
+\noindent where $y$ is the variable used on the minor axis in equations \ref{coords.eqn}, \ref{coords.polar.eqn}, $y_{min} = \mbox{minimum}\{y_{st}; s=1, \dots S, t=1, ..., T \}, y_{max} = \mbox{maximum}\{y_{st}; s=1, \dots S, t=1, ..., T\}$, $S=$ is the number of spatial locations and $T=$ is the number of time points. *** Reference other plots that use global scale too.
 
 Alternatively, scaling locally at each spatial location enables
 exploring the seasonal scale, or shape differences, from one location
 to another. Fig \ref{***} uses local scaling using:
 
 \begin{equation}
-y_{\amaj} = \frac{y_{\amaj}-y_{s,min}}{y_{s,max}-y_{s,min}} \times 2 - 1
+y_{st} = \frac{y_{st}-y_{s,min}}{y_{s,max}-y_{s,min}} \times 2 - 1
+\label{scale2}
 \end{equation}
 
-\noindent where $y_{s, min} = \mbox{minimum}\{y_{st}; t=1, ..., T \}, y_{s,max} = \mbox{maximum}\{y_{st}; t=1, ..., T\}$.
+\noindent where $y_{s, min} = \mbox{minimum}\{y_{st}; t=1, ..., T \}, y_{s,max} = \mbox{maximum}\{y_{st}; t=1, ..., T\}$. With the local scaling, the shape of the icon, for example, differences in the seasonal patterns over spatial locations, are emphasized.
+Figure \ref{***} shows data that has been locally scaled. We can see *** The local scale is equivalent to using individual scales in the facetted graphics of \texttt{ggplot2}.
 
-Another impact of varying averages is that it tends to diminish the perceptibility of shape: if some series have uniformly high values and some have uniformly low, then it is difficult to see if the shape is the same independent of the average. Partitioning is a extremely useful technique: product plots, ANOVA, ...  For glyph plots, it's often useful to partition the glyphs into shape and scale components, decomposing the values into a product of maximum and scaled values.  In this section we explore how decomposing each series into scale and shape components can be useful.
+It can also be advantageous to relocate the data uniformly, by extracting the average at each location. Particularly for polar glyphs the average value can lead to some unintuitive patterns in the glyphs. In this situation we would use $y_{st}-\bar{y}_s$ instead of $y_{st}$ in equations \ref{scale1}, \ref{scale2}, with minima and maxima calculated on the mean-shifted data.
 
-This is revealing for smooth models of surface temperature, shown in Figure~\ref{fig:scaling}. Each location is modelled using a generalised additive model \citep{wood:2006} with a seasonal term and a long-term smooth term. The three plots in the figure show the long-term smooth term. Because some locations are uniformly warmer than others, the impact of changes across time are diminished. In the centre plot, each location is scaled by dividing out the maximum, and on the right, each location is scaled to range $[0, 1]$. These emphasise individual changes but lose the ability to make global comparisons, and need caution when interpreting - a small absolute change gets blown up into a large relative change.
+Another way to think about these scale options is partitioning the data structure into shape, magnitude and shift components. The different ways to scale emphasize these different components. The shift component can be extracted from the data in different ways, using the intercept from a linear model, for example, instead of the average. 
+
+
+**** This is different - I thnk it just confuses the topic of scaling. Because the GAM is not used to rescale the data, you still have to do that using the local or global scling equations above. Moving the discussion to ``What to plot''. 
 
 \begin{figure}[htbp]
   \centering
@@ -243,13 +249,21 @@ A possible compromise is to use line colour to display the standardising variabl
   \label{fig:scaling-col}
 \end{figure}
 
-Of course other types of scaling are possible. Another classical scaling method is to standardize mean and standard deviation to 0 and 1 (or robust variants).
+Other types of scaling may be interesting to explore, such as a classical scaling using the mean and standard deviation.
 
 Equivalent to using individual scales in facetted graphics. 
 
 \section{What to plot: raw data, trend lines, residuals,  seasonal}
 
-\section{Generalization: scatterplots}~\label{sec:scatter}
+Structure in temporal data decomposed into different parts, global trend, seasonality and error. Extracting each of these for visualization improves the focus on different aspects of the time series. A generalised additive model \citep{wood:2006} with a seasonal term and a long-term smooth term. The three plots in the figure show the long-term smooth term. Because some locations are uniformly warmer than others, the impact of changes across time are diminished.
+
+ is a extremely useful technique: product plots, ANOVA, ...  For glyph plots, it's often useful to partition the glyphs into shape and scale components, decomposing the values into a product of maximum and scaled values.  In this section we explore how decomposing each series into scale and shape components can be useful.
+
+This is revealing for smooth models of surface temperature, shown in Figure~\ref{fig:scaling}. Each location is modelled using a generalised additive model \citep{wood:2006} with a seasonal term and a long-term smooth term. The three plots in the figure show the long-term smooth term. Because some locations are uniformly warmer than others, the impact of changes across time are diminished. In the centre plot, each location is scaled by dividing out the maximum, and on the right, each location is scaled to range $[0, 1]$. These emphasise individual changes but lose the ability to make global comparisons, and need caution when interpreting - a small absolute change gets blown up into a large relative change.
+
+Issues of scale relative to modeling. Switching from the data to model summaries bringsnew scaling issues. Often the scale of the raw data is ignored when the model is plotted, one usually shows just the line showing the trend, in the range of the trend. This has the effect of exaggerating the signficance of the model. Scaling the trend lines rlative to the range of the data may be useful sometimes.
+
+\section{Generalization}~\label{sec:scatter}
 
 So far we have limited ourselves to always mapping some aspect of time on the x-axis. But glyph-maps are not limited to only this type of data and can  be easily generalized to create many other types of display. Figure~\ref{fig:cloud} shows a generalisation to scatterplots: by mapping another variable to the x-axis, in this case low-cloud level on x and high-cloud level on y, we can explore how a bivariate relationship varies spatially. It is again useful to use a model to extract the essence of the relationship, summarizing the data with models is very useful: the second plot displays a loess curve fit to the data instead of the individual points.  
 
@@ -262,12 +276,13 @@ So far we have limited ourselves to always mapping some aspect of time on the x-
   \label{fig:cloud}
 \end{figure}
 
+In the Gauguin software one alternative was an icon based on a histogram. 
 
-*** Connection to small multiples
-
-*** Scale of icons relative to data or model range
+*** Connection to small multiples, facetted plots
 
 \section{Regular vs irregular locations}~\label{sec:irregular}
+
+Regularly gridded spatial data helps with the perception of structure, because it helps to provide the reference frames upon which to make comparisons among the icons. When spatial locations are not on a regular grid, some difficulties arise. In this situation it is not clear what the scale of icons should be, there is no regular spacing. Some locations may be close to each other which would generate icons that overlap. 
 
 \subsection{Non-rectangular grids}
 

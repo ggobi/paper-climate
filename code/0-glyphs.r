@@ -7,7 +7,12 @@ rescale01 <- function(x, xlim=NULL) {
    (x - rng[1]) / (rng[2] - rng[1])
 }
 rescale11 <- function(x, xlim=NULL) 2 * rescale01(x, xlim) - 1
-  
+
+# Wish list
+# remove intercept/average, default
+# scale individually, globally
+# Absolute ylims, for use when plotting model predictions on the data
+#    scale - got it with the ylim argument
 glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height = NULL, width = NULL, ylim=NULL) {
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
   
@@ -21,7 +26,7 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height =
   }
     
   if (is.null(height)) {
-    height <- resolution(data[[y_major]]) * 0.95    
+    height <- resolution(data[[y_major]]) * 0.95     
     message("Using height ", format(height, digits = 3))
   }
   else {
@@ -39,8 +44,12 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height =
     data <- data[order(data[[x_major]], data[[x_minor]]), ] 
   } else {
     data$gx <- data[[x_major]] + rescale11(data[[x_minor]]) * width / 2
-    data$gy <- data[[y_major]] + rescale11(data[[y_minor]], ylim) * height / 2
+    data$gy <- data[[y_major]] + rescale11(data[[y_minor]], ylim) * height / 2 
   }
   
   data
 }
+
+# Plot function, wish list
+# Add ref lines, ref boxes, both, ref circle
+# 

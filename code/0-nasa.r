@@ -69,7 +69,7 @@ theme_fullframe <- function (base_size = 12){
 }
 
 ref_boxes <- list(
-  geom_tile(aes(long, lat), colour = "white", fill = NA, inherit.aes = FALSE),
+  geom_tile(aes(lon, lat), colour = "white", fill = NA, inherit.aes = FALSE),
   scale_x_continuous(breaks = NA, expand = c(0, 0)),
   scale_y_continuous(breaks = NA, expand = c(0, 0))
 )

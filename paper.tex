@@ -146,6 +146,29 @@ Since the $x$ and $y$ locations are linear combinations of two variables, these 
 
 The graphics in this paper were created in R \citep{R} using {\tt ggplot2} \citep{me:ggplot2} and {\tt plyr} \citep{me:plyr}. 
 
+*** These figures need to be placed yet, but are here as a start on better climate data examples:
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1\linewidth]{gistemp-raw}%
+
+  \includegraphics[width=1\linewidth]{gistemp-polar-raw}
+
+  \caption{Glyph-maps of gridded raw temperature anomaly data}
+  \label{fig:ref-gistemp}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1\linewidth]{gistemp-pred}%
+
+  \includegraphics[width=1\linewidth]{gistemp-polar-pred}
+
+  \caption{Glyph-maps of gridded predicted temperature anomaly data}
+  \label{fig:ref-gistemp}
+\end{figure}
+
+
 \section{Reference frames}~\label{sec:reference}
 
 Graphical displays benefit from a \emph{visual reference grid} \citep{cleveland:1993a} to compare values mapped to position along a line. The same is true for glyph-maps, but it is not feasible to make a full set of axes for each icon. A complete axis would dominate the picture, and draw the eye away from the pattern of the data. The types of comparisons that are needed across icons are:
@@ -234,7 +257,7 @@ It can also be advantageous to relocate the data uniformly, by extracting the av
 Another way to think about these scale options is partitioning the data structure into shape, magnitude and shift components. The different ways to scale emphasize these different components. The shift component can be extracted from the data in different ways, using the intercept from a linear model, for example, instead of the average. 
 
 
-**** This is different - I thnk it just confuses the topic of scaling. Because the GAM is not used to rescale the data, you still have to do that using the local or global scling equations above. Moving the discussion to ``What to plot''. 
+**** This is different - I think it just confuses the topic of scaling. Because the GAM is not used to rescale the data, you still have to do that using the local or global scling equations above. Moving the discussion to ``What to plot''. 
 
 \begin{figure}[htbp]
   \centering
@@ -298,6 +321,11 @@ Rectangular, but not in this projection.  Other types of regular grids.
 \section{Long time series}
 
 \section{Conclusions}
+
+\section*{Acknowledgements}
+
+GISTEMP data provided by the NOAA/OAR/ESRL PSD, Boulder, Colorado,
+USA, from their Web site at \url{http://www.esrl.noaa.gov/psd/}.
 
 \bibliography{references}
 

@@ -6,7 +6,7 @@ source("0-glyphs.r")
 source("0-nasa.r")
 source("0-cache.r")
 
-# Scatteplots ----------------------------------------------------------------
+# Scatterplots ----------------------------------------------------------------
 
 cloud <- glyphs(nasa, "long", "cloudlow", "lat", "cloudhigh") 
 ggplot(cloud, aes(gx, gy, group = gid)) + 

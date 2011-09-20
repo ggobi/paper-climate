@@ -60,25 +60,49 @@ Climate data is composed of measurements on variables such as temperature, preci
 
 %% Reproduce all of the icon displays using the fixed glyph code
 
-In this paper we explore the use of a different type of display, that uses icons on the map, for climate data.  Icon plot associated with weather maps date back as far as \citet{galton:weathermap}, described in \citet{friendlydenis:2001}. Icon plots date back to the star plot introduced by \citet{mayr:1877}, and resurged in the modern era with the semi-graphic displays of \citet{anderson:1960}, and were made infamous by \citep{chernoff:1973}. An icon is produced by mapping each variable to some feature of the icon. One icon is generated for every case in the data set. Figure \ref{fig:glyphs} illustrates the construction of star plot, with emphasis on temporal data. The time measurements are treated as variables in a multivariate data set. Variables are Here we have six years of monthly data, giving 72 time values which are considered to be 72 variables. The star plot is formed by considering the 72 axes radiating from a common midpoint, and the data values for the row are plotted on each axis relative to the locations of the minimum and maximum of the variable. For the temporal data, all variables are considered to be on a common scale so the global minimum and maximum of temperature are used to scale each data value. Three different locations are selected, for demonstration purposes. The top plot shows the time series of these three locations. Location ``1.1'' (red) has medium values of temperature, with strong seasonality, the six years corresponding to the six peaks. Location ``2.1'' (green) has generally high temperature values, with weaker seasonality in most years and a lack of low temperatures in the middle of the time period when lows would be expected. Location ``3.1'' (blue) has strong seasonality but generally low temperatures. The bottom plot shows these same cases as star glyphs. A separate glyph is created for each location. The 72 time variables form axes organized radially. Each temperature value is plotted relative to the overall range of temperature values. The seasonal patterns are clearly visible in this type of display, forming six ``petals'' in the icon. Location ``2.1'' has a different pattern than the other two, with only four petals, and location ``3.1'' is a much smaller icon indicating overall lower values. 
+In this paper we explore the use of a different type of display, that uses icons on the map, for climate data.  Icon plot associated with weather maps date back as far as \citet{galton:weathermap}, described in \citet{friendlydenis:2001}. Icon plots date back to the star plot introduced by \citet{mayr:1877}, and resurged in the modern era with the semi-graphic displays of \citet{anderson:1960}, and were made infamous by \citep{chernoff:1973}. An icon is produced by mapping each variable to some feature of the icon. One icon is generated for every case in the data set. %Figure \ref{fig:glyphs} illustrates the construction of star plot, with emphasis on temporal data. 
+For temporal data, time measurements can be treated as variables in a multivariate data set, fitting this into the icon plot framework. Figure \ref{templates} displays 12 iconic time series shapes, and how they would look if the icon was a time series, or displayed as a star glyph. The data underlying each glyph has 36 time variables. The star glyphs is formed by considering the 36 axes radiating from a common midpoint, and the data values for the row are plotted on each axis relative to the locations of the minimum and maximum of the variable. For the temporal data, all variables are considered to be on a common scale so the global minimum and maximum of temperature are used to scale each data value. 
+%Three different locations are selected, for demonstration purposes. The top plot shows the time series of these three locations. Location ``1.1'' (red) has medium values of temperature, with strong seasonality, the six years corresponding to the six peaks. Location ``2.1'' (green) has generally high temperature values, with weaker seasonality in most years and a lack of low temperatures in the middle of the time period when lows would be expected. Location ``3.1'' (blue) has strong seasonality but generally low temperatures. The bottom plot shows these same cases as star glyphs. A separate glyph is created for each location. The 72 time variables form axes organized radially. Each temperature value is plotted relative to the overall range of temperature values. The seasonal patterns are clearly visible in this type of display, forming six ``petals'' in the icon. Location ``2.1'' has a different pattern than the other two, with only four petals, and location ``3.1'' is a much smaller icon indicating overall lower values. 
 
-\begin{figure*}[htp]
-\centerline{\includegraphics[width=6in]{nasa-glyph-ts.pdf}}
-\centerline{\includegraphics[width=6in]{nasa-glyph.pdf}}
-\caption{Icons of raw temperature for three different locations.}
-\label{fig:glyphs}
-\end{figure*}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\linewidth]{euclid-to-polar-1}%
+  \includegraphics[width=0.5\linewidth]{euclid-to-polar-2}
 
-Icon plots are used, infrequently, to examine multivariate data. For large data sets it is infeasible to digest the quantity of icons, and for multivariate data there is no natural order so it can be like having a mountain of little stamps to rearrange and organize, in order to understand the structures present in the data. An early paper on multivariate graphics \citep{kleiner:1981} and a recent paper \citep{hurley:2010} propose some approaches for organizing the icons. Ordering of icons is not an issue with spatiotemporal data, because it is naturally handled by spatial location. The spatial trend, or continuity, usually gices the plot an appearance of texturing on a landscape, make it easier to digest patterns among the icons.
+  \caption{Icon plots for 12 iconic time series shapes (linear increasing, decreasing, shifted, single peak, single dip, combined linear and nonlinear, seasonal trends with different scales, and a combined linear and seasonal trend) in Euclidean coordinates, time series icons (left) and polar coordinates, star plots (right).}
+  \label{fig:templates}
+\end{figure}
 
-Figure \ref{fig:glyph-map} (left) shows the star glyphs drawn for each spatial location of the raw temperature data, we call it a \emph{glyph-map}. The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. \citet{pickett:1988} introduced the idea of using icons on maps to display multivariate spatial data. This area of work has morphed into the field of metaphorical data displays, which creates abstract landscapes of spatial data, a digression from glyph-maps. \citet{gribov:2006} describes the use ogf glyph-maps for multivariate data also, with emphasis on the graphics software Gauguin. 
+
+%\begin{figure*}[htp]
+%\centerline{\includegraphics[width=6in]{nasa-glyph-ts.pdf}}
+%\centerline{\includegraphics[width=6in]{nasa-glyph.pdf}}
+%\caption{Icons of raw temperature for three different locations.}
+%\label{fig:glyphs}
+%\end{figure*}
+
+Icon plots are used, infrequently, to examine multivariate data. For large data sets it is infeasible to digest the quantity of icons, and for multivariate data there is no natural order so it can be like having a mountain of little stamps to rearrange and organize, in order to understand the structures present in the data. An early paper on multivariate graphics \citep{kleiner:1981} and a recent paper \citep{hurley:2010} propose some approaches for organizing the icons. Ordering of icons is not an issue with spatiotemporal data, because it is naturally handled by spatial location. The spatial trend, or continuity, usually gives the plot an appearance of texturing on a landscape, make it easier to digest patterns among the icons.
+
+% Reference Tufte's small multiples
+Figure \ref{fig:gistemp-pred} (left) shows the time series icons and star glyphs drawn for each spatial location of the predicted temperature data across the USA, we call it a \emph{glyph-map}. The data contains 2$^o$x2$^o$ gridded temperature anomalies 1950-2010, from the GISTEMP surface temperature data provided by the Earth System Research Laboratory, Physical Sciences Division, National Oceanic and Atmospheric Administration. Most locations observe an increasing temperature, to varying degrees, over this time period. A few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems.
+%The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. \citet{pickett:1988} introduced the idea of using icons on maps to display multivariate spatial data. This area of work has morphed into the field of metaphorical data displays, which creates abstract landscapes of spatial data, a digression from glyph-maps. \citet{gribov:2006} describes the use ogf glyph-maps for multivariate data also, with emphasis on the graphics software Gauguin. 
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1\linewidth]{gistemp-pred}%
+
+  %\includegraphics[width=1\linewidth]{gistemp-polar-pred}
+
+  \caption{Glyph-maps of gridded predicted temperature anomaly data}
+  \label{fig:gistemp-pred}
+\end{figure}
 
 % Add time series as well as radial
-\begin{figure*}[htp]
-\centerline{\includegraphics[width=3.5in]{nasa-glyph-all.pdf}\includegraphics[width=3.5in]{nasa-glyph-ts-all.pdf}}
-\caption{Glyph-map of raw data, using star glyphs (left), and time series as glyphs (right).}
-\label{fig:glyph-map}
-\end{figure*}
+%\begin{figure*}[htp]
+%\centerline{\includegraphics[width=3.5in]{nasa-glyph-all.pdf}\includegraphics[width=3.5in]{nasa-glyph-ts-all.pdf}}
+%\caption{Glyph-map of raw data, using star glyphs (left), and time series as glyphs (right).}
+%\label{fig:glyph-map}
+%\end{figure*}
 
 In this paper we describe the algorithm for creating glyphs of temporal data on maps, generally in R, and the various modifcations that can enable different features in the data to be detected. The next section (\ref{sec:construction}) describes how to construct glyph-maps. Section \ref{sec:reference} discusses the use of reference lines and boxes, and Section \ref{sec:scale} visits issues of scaling values for different information purposes. Generalizations to different types of icons are described in Section \ref{sec:scatter}. Glyph-maps work nicely with gridded data, but may be less effective with irregular spatial locations. Possible adjustments are discussed in Section \ref{sec:irregular}. Code and data is available in the online supplementary materials.
  
@@ -128,15 +152,6 @@ Figure~\ref{fig:cycle} shows average monthly temperature as time (Cartesian coor
 \end{figure}
 
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.5\linewidth]{euclid-to-polar-1}%
-  \includegraphics[width=0.5\linewidth]{euclid-to-polar-2}
-
-  \caption{Examples for some small time series with strongly expressed trends in Euclidean coordinates (left) and polar coordinates (right).}
-  \label{fig:ref-basic-polar}
-\end{figure}
-
 Figure \ref{fig:ref-basic-polar} gives some small examples of time series with strongly expressed trends, shown both in cartesian coordinates and polar coordinates. What might be surprising is that time series that seem to have opposing trends in cartesian coordinates don't necessarily show this symmetry  in polar coordinates. What becomes apparent, though is that the area of glyphs in polar coordinates mainly reflect the average value of a time series, while its shape shows deviations from average values. Adding a circular reference line helps to pick out these deviations.
 
 Since the $x$ and $y$ locations are linear combinations of two variables, these types of displays can also be built interactively by software that supports tours \citep{cook:2006}, such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}.  This technique is used to good effect in \citet{buja:1996a}.
@@ -158,15 +173,6 @@ The graphics in this paper were created in R \citep{R} using {\tt ggplot2} \cite
   \label{fig:ref-gistemp}
 \end{figure}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=1\linewidth]{gistemp-pred}%
-
-  \includegraphics[width=1\linewidth]{gistemp-polar-pred}
-
-  \caption{Glyph-maps of gridded predicted temperature anomaly data}
-  \label{fig:ref-gistemp}
-\end{figure}
 
 
 \section{Reference frames}~\label{sec:reference}
@@ -325,7 +331,7 @@ Rectangular, but not in this projection.  Other types of regular grids.
 \section*{Acknowledgements}
 
 GISTEMP data provided by the NOAA/OAR/ESRL PSD, Boulder, Colorado,
-USA, from their Web site at \url{http://www.esrl.noaa.gov/psd/}.
+USA, from their web site at \url{http://www.esrl.noaa.gov/psd/}.
 
 \bibliography{references}
 

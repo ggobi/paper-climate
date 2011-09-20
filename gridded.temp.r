@@ -16,13 +16,23 @@ temp.usa.melt.gly<-glyphs(temp.usa.melt, "lon", "time", "lat", "temp")
 qplot(gx, gy, data=temp.usa.melt.gly, group=gid, geom="line")
 
 library(maps)
+world <- map_data("world")
+world <- getbox(world, xlim = c(-138, -55), ylim = c(22, 52))
+world <- ddply(world, "group", function(df) {
+  if (diff(range(df$long)) < 1e-6) return(NULL)
+  if (diff(range(df$lat)) < 1e-6) return(NULL)
+  df
+})
 
-outlines <- as.data.frame(map("state",
-                              plot=FALSE)[c("x","y")])
-map <- c(
-  geom_path(aes(x, y), inherit.aes = FALSE, 
-    data = outlines, colour = alpha("grey60", 0.4))
-)
+colnames(world)[1]<-"lon"
+
+map <- list(
+  geom_polygon(aes(lon, lat, group = group), inherit.aes = FALSE, 
+    data = world, legend = FALSE, fill = "grey80", colour = "grey90"),
+  scale_x_continuous(breaks = NA, expand = c(0.02, 0)),
+  scale_y_continuous(breaks = NA, expand = c(0.02, 0)), 
+  xlab(NULL),
+  ylab(NULL))
 
 qplot(gx, gy, data=temp.usa.melt.gly, group=gid, geom="line") + map
 
@@ -38,6 +48,7 @@ lon<-(lon+180)%%360 - 180
 length(lon)
 dim(temp)
 
+library(ggplot2)
 # Ok, this now works for transforming the lon, and selecting the USA
 temp.usa<-temp[114:150, 20:33,] # lon -130, -65; lat 25, 50
 temp.usa.melt<-melt(temp.usa)
@@ -47,11 +58,12 @@ temp.usa.melt$lat<-lat[temp.usa.melt$gridy+19]
 
 temp.usa.melt.gly<-glyphs(temp.usa.melt, "lon", "time", "lat", "temp")
 qplot(gx, gy, data=temp.usa.melt.gly, group=gid, geom="line") + map + coord_map() # Testing
-ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) + 
-  map + 
-  geom_path() +
-  ref_boxes +
-  theme_fullframe()
+p <-ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) + 
+  map
+p <- p + geom_line(aes(y = lat), colour = "grey90", size = 1.5) 
+p <- p + geom_path() 
+p <- p + ref_boxes # This part is really slow
+p <- p + theme_fullframe() + coord_map() # but not as slow as this part
 ggsave("../images/gistemp-raw.png", width = 8, height = 4)
 
 temp.usa.melt.gly<-glyphs(temp.usa.melt, "lon", "time", "lat", "temp", polar=T)
@@ -59,7 +71,7 @@ ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) +
   map + 
   geom_path() +
   ref_boxes +
-  theme_fullframe()
+  theme_fullframe() + coord_map()
 ggsave("../images/gistemp-polar-raw.png", width = 8, height = 4)
 
 # Predictions
@@ -88,19 +100,21 @@ year_preds <- ldply(temp_models, function(mod) {
 })
 temp.usa.melt.sub.gly<-glyphs(year_preds, "lon", "year", "lat", "pred")
 ggplot(temp.usa.melt.sub.gly, aes(gx, gy, group = gid)) + 
-  map + 
+  map + geom_line(aes(y = lat), colour = "grey80", size = 1.5) +
   geom_path() +
   ref_boxes +
-  theme_fullframe()
+  theme_fullframe() + coord_map()
 ggsave("../images/gistemp-pred.png", width = 8, height = 4)
+# Coord map seems to make the plotting REALLY SLOW!
 
 temp.usa.melt.sub.gly<-glyphs(year_preds, "lon", "year", "lat", "pred", polar=T)
 ggplot(temp.usa.melt.sub.gly, aes(gx, gy, group = gid)) + 
-  map + 
+  map + # Need to get the circles drawn here
   geom_path() +
   ref_boxes +
-  theme_fullframe()
+  theme_fullframe() + coord_map()
 ggsave("../images/gistemp-polar-pred.png", width = 8, height = 4)
+
 
 # Testing/checking
 library(plyr)

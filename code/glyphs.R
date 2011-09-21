@@ -15,6 +15,7 @@ rescale11 <- function(x, xlim=NULL) 2 * rescale01(x, xlim) - 1
 # scale individually, globally
 # Absolute ylims, for use when plotting model predictions on the data
 #    scale - got it with the ylim argument
+# Resolution needs to take into account irregular grid
 glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = F, height = NULL, width = NULL, ylim=NULL) {
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
   

@@ -33,10 +33,37 @@ qplot(lon, lat, data=colorado)
 colorado.gly <- glyphs(colorado, "lon", "time", "lat", "temp", width=100, height=100) 
 qplot(gx, gy, data=colorado.gly, group=gid, geom="line")
 
+# Mountain states: Colorado, Wyoming, Idaho, Montana, Nevada, Utah
+mountains <- subset(temp.01.10.melt, state == "CO" | state =="WY" | state =="ID" | state == "MT" | state == "NV"| state == "UT")
+ddply(mountains, "stn", summarise, nstns = length(temp))
+mountains <- subset(mountains, stn != "261071")
+mountains <- subset(mountains, stn != "426686")
+mountains <- subset(mountains, stn != "421731")
+mountains <- subset(mountains, stn != "428973")
+mountains$state<-factor(mountains$state)
+qplot(lon, lat, data=mountains, colour=state)
+models <- dlply(mountains, c("lat", "lon"), function(df) {
+  lm(temp ~ year + month, data=df)
+})
+year_grid <- expand.grid(year = unique(mountains$year), month = "jan")
+year_preds <- ldply(models, function(mod) {
+  year_grid$pred <- predict(mod, newdata = year_grid)
+  year_grid
+})
+mountains.gly<-glyphs(year_preds, "lon", "year", "lat", "pred", width=1000, height=4000)
+ggplot(mountains.gly, aes(gx, gy, group = gid)) + 
+  #map +
+  geom_line(aes(y = lat), colour = "white", size = 1) +
+  geom_path() +
+  ref_boxes +
+  theme_fullframe() + coord_map()
+ggsave("../images/ghcn-mountains.png")
 
-models <- dlply(temp.01.10.melt, .(stn), function(df) {
-  df$mpi <- mpi(df$time)
-  lm(temp ~ time + sin(mpi) + cos(mpi), data=df)
+temp.01.10.melt <- subset(temp.01.10.melt, !is.na(temp))
+models <- dlply(temp.01.10.melt, c("lat", "lon"), function(df) {
+  #df$mpi <- mpi(df$time)
+  #lm(temp ~ time + sin(mpi) + cos(mpi), data=df)
+  lm(temp ~ year + month, data=df)
 })
 
 preds <- ldply(models, function(m) {

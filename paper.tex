@@ -142,7 +142,8 @@ Figure \ref{fig:gistemp-pred} shows the star glyphs for each spatial location of
 
 \section{Computation}~\label{sec:construction}
 
-A big advantage of glyph-maps is that they can be generated with existing graphics software after performing a simple pre-processing step, making them easily accessible to a wide audience. The pre-processing step is simple, once you notice that the position of graphical elements is determined by a major and minor axis in each direction ($x$ and $y$). For maps, the major axes are latitude and longitude, and the minor axes are typically time and some measurement or model prediction. In addition, the minor axes are rescaled to have range $[0, 1]$. The final data values are a simple linear combination, as given by 
+%A big advantage of glyph-maps is that they can be generated with existing graphics software after performing a simple pre-processing step, making them easily accessible to a wide audience. 
+Creating a glyph-map, involves recognizing that they combine two structural components of the data: spatial location and data values. The spatial location is the major positioning component, and the data values are minor adjustments to these positions. For spatiotemporal data, the major axes are latitude ($y_{\amaj}$) and longitude ($x_{\amaj}$), and the minor axes are time ($x_{\amin}$) and some measurement ($y_{\amin}$), for example, temperature, or predicted temperature. The minor axes are rescaled to have range $[0, 1]$, and further adjusted to fit into the resolution of the spatial coordinates. The final values to be plotted are a simple linear combination, as given by 
 
 \begin{equation}
 \begin{array}{lll}
@@ -150,7 +151,7 @@ x_\text{ coordinate}&=& x_{\amaj} + w \cdot x_{\amin}\\
 y_\text{ coordinate}&=& y_{\amaj} + h \cdot y_{\amin}, 
 \end{array}\label{coords.eqn}
 \end{equation}
-where $w$ and $h$ are width and height respectively. The width and height will typically take into account the resolution of the major and minor axes, that is the minimum difference between consecutive locations.
+where $w$ and $h$ are width and height respectively. The width and height will typically take into account the resolution of the major axes, that is, the minimum difference between consecutive locations.
 
 Computing the coordinates for star glyphs is achieved by using polar coordinates,  $r=y_{\amin}$, and $\theta=x_{\amin}$, both scaled to be between 0 and 1. Then the glyph coordinates are given by 
 \begin{equation}
@@ -159,9 +160,11 @@ x_\text{ coordinate}&=& x_{\amaj} + \frac{w \cdot r}{2} \sin(2 \pi \theta) \\
 y_\text{ coordinate}&=& y_{\amaj} + \frac{h \cdot r}{2} \cos(2 \pi \theta).
 \end{array}\label{coords.polar.eqn}
 \end{equation}
-Note that this is is a non-standard conversion to polar coordinates, but this conversion provides us with a time line that starts at 12 o'clock and wraps around the origin in a clockwise fashion.
+Note that, this is is a non-standard conversion to polar coordinates, but this conversion provides a time line that starts at 12 o'clock and wraps around the origin in a clockwise fashion.
 
 Figure~\ref{fig:cycle} shows average monthly temperature as time (Cartesian coordinates) and star (polar coordinates) glyphs, for a subset of the spatial region. In this case, the star glyphs are not as effective as the linear glyphs: perhaps because of the absence of cyclical pattern.
+
+*** Perhaps replace these figures with something from the GISTEMP data.
 
 \begin{figure}[htbp]
   \centering
@@ -174,16 +177,12 @@ Figure~\ref{fig:cycle} shows average monthly temperature as time (Cartesian coor
 \end{figure}
 
 
-Figure \ref{fig:ref-basic-polar} gives some small examples of time series with strongly expressed trends, shown both in cartesian coordinates and polar coordinates. What might be surprising is that time series that seem to have opposing trends in cartesian coordinates don't necessarily show this symmetry  in polar coordinates. What becomes apparent, though is that the area of glyphs in polar coordinates mainly reflect the average value of a time series, while its shape shows deviations from average values. Adding a circular reference line helps to pick out these deviations.
+Figure \ref{fig:templates} gives some small examples of time series with prototypical trends, shown both in cartesian coordinates and polar coordinates. Differences between linear and nonlinear trend are more apparent in the time series icons, and are effectively lost in polar coordinates. The star plots are most effective in exposing cyclical patterns due to seasonality. Seasonality appears like floral cartoons in the polar coordinates, with peaks forming petals. What might be surprising is that time series that seem to have opposing trends in cartesian coordinates don't necessarily show this symmetry in polar coordinates. The area of glyphs in polar coordinates mainly reflect the average value of a time series, while its shape shows deviations from average values. 
 
-Since the $x$ and $y$ locations are linear combinations of two variables, these types of displays can also be built interactively by software that supports tours \citep{cook:2006}, such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}.  This technique is used to good effect in \citet{buja:1996a}.
+Since the coordinates are linear combinations of two variables, it is possible to build these these time series icon displays interactively, illustrated by software packages that have incorporated tours \citep{cook:2006}, such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}.  This technique is used to good effect in \citet{buja:1996a}, and was used to examine the climate data in \citet{hobbs:2010}.
 
 % Show the glyph-map for de-seasonalized data, and describe what we
 % see differently from the facetted map
-
-The graphics in this paper were created in R \citep{R} using {\tt ggplot2} \citep{me:ggplot2} and {\tt plyr} \citep{me:plyr}. 
-
-*** These figures need to be placed yet, but are here as a start on better climate data examples:
 
 %\begin{figure}[htbp]
 %  \centering
@@ -199,7 +198,7 @@ The graphics in this paper were created in R \citep{R} using {\tt ggplot2} \cite
 
 \section{Reference frames}~\label{sec:reference}
 
-Graphical displays benefit from a \emph{visual reference grid} \citep{cleveland:1993a} to compare values mapped to position along a line. The same is true for glyph-maps, but it is not feasible to make a full set of axes for each icon. A complete axis would dominate the picture, and draw the eye away from the pattern of the data. The types of comparisons that are needed across icons are:
+A \emph{visual reference grid} \citep{cleveland:1993a} is fundamental to a good data visualization, in order to compare values mapped to position along a line. For glyph-maps, it is not feasible to make a full set of axes for each icon, because these would dominate the picture. Visual reference grids need to be post-attentive, de-emphasized, and serve as posterior look up after the patterns in the data have been read. For glyph-maps, we need to be able to make the following types of comparisons across icons:
 
 \begin{itemize} \itemsep 0in
 \item Slope, or trend
@@ -207,11 +206,15 @@ Graphical displays benefit from a \emph{visual reference grid} \citep{cleveland:
 \item Variance, or size
 \end{itemize}
 
-Space-time-glyphs usually require a  to make it easier to compare locations. This is important for accurate perception of important line properties like slope and minima. This need is evident in Figure~\ref{fig:glyph-map}. There is a hint that the average value is not the same from right time series to the next in the map (right), or if the center of the icons is the same in the polar time series (left). We have no frame of reference on which to judge this. The regular grid provides a very rudimentary frame of reference, but it is not sufficient. 
+The structured spatial arrangement of icons in a glyph-map helps to compare the patterns of shape, like slope, intercept, or size, across icons. But, additional clues would make it comparisons easier. For example glyph-map in Figure~\ref{fig:gistemp-pred}, contains two additional guides, a reference grid, and reference line. Both are drawn in white, because it is minimally perceptible (post-attentive), relative to the dark black ink of the data.
 
-Figure~\ref{fig:ref-basic} shows two reference grid variants: a line drawn at the overall mid-range, and a box drawn around each grid cell. We prefer using white for these references because it is minimally perceptible: you can see the grid easily when looking for it, but it does not otherwise distract from the perception of the graphic \citep{carr:1994}. When we add a reference to each location, as in Figure~\ref{fig:ref-basic}, we see not only a difference in shape between Northern and Southern hemispheres, but also average value. Without reference lines, it is difficult to see that average seasonal coefficients are much higher in the North than in the South.
+The reference grid is a box, framing each icon, representing the spatial grid. It helps to read differences in slope and intercept. Slope is read by comparing the left and right endpoints of the predictions (line) against the relative location on the frame. Intercept is compared by reading the ``average'' position of the line in the box, near the top, or near the bottom. The reference line, drawn as a horizontal line at the average predicted temperature value, provides for better reading of the intercept. The average value for the temperature anomaly data is not the same across the map: at higher latitudes the temperatures are uniformly higher, but at lower latitudes they are uniformly lower. (**** Can this be right? Would it mean that at these locations the temperatures 1950-2010 are much higher than the reference year temperatures?)
+
+%Figure~\ref{fig:ref-basic} shows two reference grid variants: a line drawn at the overall mid-range, and a box drawn around each grid cell. We prefer using white for these references because it is minimally perceptible: you can see the grid easily when looking for it, but it does not otherwise distract from the perception of the graphic \citep{carr:1994}. When we add a reference to each location, as in Figure~\ref{fig:ref-basic}, we see not only a difference in shape between Northern and Southern hemispheres, but also average value. Without reference lines, it is difficult to see that average seasonal coefficients are much higher in the North than in the South.
 
 % Think we might need to show the original figures of data with reference lines
+
+*** Re-do these figures with zooms in on the GISTEMP data
 
 \begin{figure}[htbp]
   \centering
@@ -221,6 +224,10 @@ Figure~\ref{fig:ref-basic} shows two reference grid variants: a line drawn at th
   \caption{Glyph-maps of seasonal temperature patterns. Adding reference lines, (left) mid-range lines and (right) grid-cell boxes, makes it easier to see differences in glyph position, not just shape.}
   \label{fig:ref-basic}
 \end{figure}
+
+For star glyphs, the reference frames are also useful, but the reference line would be replaced by a reference circle, drawn at the average data value. Figures \ref{fig:templates} and \ref{fig:gistemp-raw} show examples.
+
+*** Re-visit this next paragraph - its a little too airy-fairy, and the plot with color needs to have the color dampened more. Its way too dominant.
 
 It's also often useful to display other types of reference information. You are only limited by your imagination (and the capabilities of your graphics software), but two simple ideas are to (1) vary the colour or transparency of glyphs or references, or (2) use an additional layer to highlight special points. Figure~\ref{fig:ref-adv} illustrates these ideas to display the month with the highest temperature at each locations. Careful colour choice is necessary so that this information is perceptible, but not distracting.
 
@@ -233,6 +240,9 @@ It's also often useful to display other types of reference information. You are 
 \end{figure}
 
 A particularly useful summary when to add when displaying model predictions, is some measure of model fit. This makes it easier to avoid over-interpreting predictions from poorly-fitting models.
+
+
+*** Adding a circular reference line helps to pick out these deviations.
 
 \section{Perception of structure}~\label{sec:scale}
 
@@ -249,9 +259,8 @@ differences. Accurate perception of color differences is difficult.
 
 \section{Effect of scale}~\label{sec:scale}
 
-*** This section might benefit from some equations also.
-
 *** Global/local min/max, remove intercept/average, data vs model scale
+*** This section needs to have plots re-done, once we have decided on the key pieces
 
 Scaling of the data can produce dramatically different emphases on
 structure. For spatiotemporal data the most natural scale is to use
@@ -346,6 +355,13 @@ Rectangular, but not in this projection.  Other types of regular grids.
 
 \subsection{Irregular locations}
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\linewidth]{ghcn-mountains}%
+  \caption{Glyph-maps of ground station temperature values, 2001-2010, for mountain states.}
+  \label{fig:irregular}
+\end{figure}
+
 \section{Long time series}
 
 \section{Conclusions}
@@ -354,6 +370,8 @@ Rectangular, but not in this projection.  Other types of regular grids.
 
 GISTEMP data provided by the NOAA/OAR/ESRL PSD, Boulder, Colorado,
 USA, from their web site at \url{http://www.esrl.noaa.gov/psd/}.
+
+The graphics in this paper were created in R \citep{R} using {\tt ggplot2} \citep{me:ggplot2} and {\tt plyr} \citep{me:plyr}. 
 
 \bibliography{references}
 

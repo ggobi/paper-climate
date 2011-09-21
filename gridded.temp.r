@@ -60,11 +60,11 @@ temp.usa.melt.gly<-glyphs(temp.usa.melt, "lon", "time", "lat", "temp")
 qplot(gx, gy, data=temp.usa.melt.gly, group=gid, geom="line") + map + coord_map() # Testing
 p <-ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) + 
   map
-p <- p + geom_line(aes(y = lat), colour = "grey90", size = 1.5) 
+p <- p + geom_line(aes(y = lat), colour = "white", size = 1.2) 
 p <- p + geom_path() 
 p <- p + ref_boxes # This part is really slow
 p <- p + theme_fullframe() + coord_map() # but not as slow as this part
-ggsave("../images/gistemp-raw.png", width = 8, height = 4)
+ghcn
 
 temp.usa.melt.gly<-glyphs(temp.usa.melt, "lon", "time", "lat", "temp", polar=T)
 p <- ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) + 
@@ -101,7 +101,7 @@ year_preds <- ldply(temp_models, function(mod) {
 })
 temp.usa.melt.sub.gly<-glyphs(year_preds, "lon", "year", "lat", "pred")
 ggplot(temp.usa.melt.sub.gly, aes(gx, gy, group = gid)) + 
-  map + geom_line(aes(y = lat), colour = "grey80", size = 1.5) +
+  map + geom_line(aes(y = lat), colour = "white", size = 1.5) +
   geom_path() +
   ref_boxes +
   theme_fullframe() + coord_map()

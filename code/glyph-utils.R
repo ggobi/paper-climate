@@ -44,3 +44,4 @@ ref_boxes <- list(
 
 # Need to have a function for the circles references for polar coords
 # Need to have a function for the reference lines
+# Need to have reference boxes for the irregular grid, too

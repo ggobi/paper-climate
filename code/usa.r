@@ -126,8 +126,7 @@ glyph.seasonal.col <- glyphs(pred.seas.post1980.collapse, "lon", "time", "lat", 
 ggplot(glyph.seasonal.col) +
   geom_line(aes(gx, gy, group = stn.id)) +
   theme_fullframe() + 
-  geom_rect(aes(xmin = lon - w/2, xmax = lon + w/2, ymin = lat - h/2, 
-    ymax = lat + h/2), fill = "grey80") +
+  geom_tile(height = h/2, width= w/2, colour = "white", fill = NA) +
   geom_line(aes(gx, gy, group = stn)) 
 ggsave("../images/usa-collapsed.pdf", width = 8, height = 6)
   

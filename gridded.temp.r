@@ -67,11 +67,12 @@ p <- p + theme_fullframe() + coord_map() # but not as slow as this part
 ggsave("../images/gistemp-raw.png", width = 8, height = 4)
 
 temp.usa.melt.gly<-glyphs(temp.usa.melt, "lon", "time", "lat", "temp", polar=T)
-ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) + 
-  map + 
-  geom_path() +
-  ref_boxes +
-  theme_fullframe() + coord_map()
+p <- ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) + 
+  map  
+p <- p + geom_path() 
+p <- p +  ref_boxes 
+#  theme_fullframe() + coord_map()
+p
 ggsave("../images/gistemp-polar-raw.png", width = 8, height = 4)
 
 # Predictions

@@ -83,8 +83,12 @@ For temporal data, time measurements can be treated as variables in a multivaria
 
 Icon plots are used, infrequently, to examine multivariate data. For large data sets it is infeasible to digest the quantity of icons, and for multivariate data there is no natural order so it can be like having a mountain of little stamps to rearrange and organize, in order to understand the structures present in the data. An early paper on multivariate graphics \citep{kleiner:1981} and a recent paper \citep{hurley:2010} propose some approaches for organizing the icons. Ordering of icons is not an issue with spatiotemporal data, because it is naturally handled by spatial location. The spatial trend, or continuity, usually gives the plot an appearance of texturing on a landscape, make it easier to digest patterns among the icons.
 
+In this paper we describe the algorithm for creating glyphs of temporal data on maps, generally in R, and the various modifcations that can enable different features in the data to be detected. The next section (\ref{sec:glyph-map}) describes the use of glyphs on maps, and Section \ref{sec:construction} explains how to construct glyph-maps. Section \ref{sec:reference} discusses the use of reference lines and boxes, and Section \ref{sec:scale} visits issues of scaling values for different information purposes. Generalizations to different types of icons are described in Section \ref{sec:scatter}. Glyph-maps work nicely with gridded data, but many spaiottemporaral data sets have irregular spatial locations. Possible adjustments are discussed in Section \ref{sec:irregular}. Code and data is available in the online supplementary materials.
+
+\section{Glyph-maps}~\label{sec:glyph-map}
+
 % Reference Tufte's small multiples
-Figure \ref{fig:gistemp-pred} (left) shows the time series icons and star glyphs drawn for each spatial location of the predicted temperature data across the USA, we call it a \emph{glyph-map}. The data contains 2$^o$x2$^o$ gridded temperature anomalies 1950-2010, from the GISTEMP surface temperature data provided by the Earth System Research Laboratory, Physical Sciences Division, National Oceanic and Atmospheric Administration. Most locations observe an increasing temperature, to varying degrees, over this time period. A few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems.
+\emph{Glyph-maps} are maps where a glyph is displayed at each spatial location to represent multiple data values. To explain the glyph-map, we use data of 2$^o$x2$^o$ gridded temperature anomalies, from the GISTEMP surface temperature data provided by the Earth System Research Laboratory, Physical Sciences Division, National Oceanic and Atmospheric Administration. Ground station data was de-seasonalized, differenced from ***, and spatially averaged to obtain gridded measurements. Figure \ref{fig:gistemp-pred} shows the time series icons for each spatial location of predicted temperature for 1950-2010 across the USA. Most locations observe an increasing temperature, to varying degrees, over this time period. A few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems. There is a difference in the temperature increase at different regions: steeper inclines can be seen in the north and western mountain region and across the Great Lakes, but inclines are flatter in the southeastern USA. 
 %The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. \citet{pickett:1988} introduced the idea of using icons on maps to display multivariate spatial data. This area of work has morphed into the field of metaphorical data displays, which creates abstract landscapes of spatial data, a digression from glyph-maps. \citet{gribov:2006} describes the use ogf glyph-maps for multivariate data also, with emphasis on the graphics software Gauguin. 
 
 \begin{figure}[htbp]
@@ -93,9 +97,15 @@ Figure \ref{fig:gistemp-pred} (left) shows the time series icons and star glyphs
 
   %\includegraphics[width=1\linewidth]{gistemp-polar-pred}
 
-  \caption{Glyph-maps of gridded predicted temperature anomaly data}
+  \caption{Glyph-map of predicted temperature anomaly data, from
+    1950-2010. Increasing trends can be seen over most of the USA,
+    with varying degrees of increase. Some isolated locations exhibit
+    steep declines, and inclines, perpahs indicative of some isolated
+    data problems.}
   \label{fig:gistemp-pred}
 \end{figure}
+
+*** Remove the strange data over ocean, and make the reference lines white?
 
 % Add time series as well as radial
 %\begin{figure*}[htp]
@@ -104,7 +114,19 @@ Figure \ref{fig:gistemp-pred} (left) shows the time series icons and star glyphs
 %\label{fig:glyph-map}
 %\end{figure*}
 
-In this paper we describe the algorithm for creating glyphs of temporal data on maps, generally in R, and the various modifcations that can enable different features in the data to be detected. The next section (\ref{sec:construction}) describes how to construct glyph-maps. Section \ref{sec:reference} discusses the use of reference lines and boxes, and Section \ref{sec:scale} visits issues of scaling values for different information purposes. Generalizations to different types of icons are described in Section \ref{sec:scatter}. Glyph-maps work nicely with gridded data, but may be less effective with irregular spatial locations. Possible adjustments are discussed in Section \ref{sec:irregular}. Code and data is available in the online supplementary materials.
+Figure \ref{fig:gistemp-pred} shows the star glyphs for each spatial location of raw temperature for 1880-2011 across the USA. The major feature to notice is the pattern of missing values, icons that do not complete the full circle. The high noon position of the circle is the first time point, Jan 1880, and it is this early time period that has missing values are a lot of locations. It was for this reason that the temporal model was fit just to 1950-2010 data. Another important feature is variability, indicated by the thickness of the circle. Some locations, particularly in the north western mountain region, have big variability in temperature, both low minima, and high maxima. At these locaations there are large fluctuations from the long term mean.
+
+\begin{figure}[htbp]
+  \centering
+  %\includegraphics[width=1\linewidth]{gistemp-pred}%
+
+  \includegraphics[width=1\linewidth]{gistemp-polar-raw}
+
+  \caption{Glyph-map of raw temperature anomaly data, from 1880-2011. Gaps in the full circle indicate missing values, and thickness of the circle indicates more variability in the measurements.}
+  \label{fig:gistemp-raw}
+\end{figure}
+
+*** Need to add reference circles.
  
 %\subsection{Glyph plots}
 
@@ -163,15 +185,15 @@ The graphics in this paper were created in R \citep{R} using {\tt ggplot2} \cite
 
 *** These figures need to be placed yet, but are here as a start on better climate data examples:
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=1\linewidth]{gistemp-raw}%
+%\begin{figure}[htbp]
+%  \centering
+%  \includegraphics[width=1\linewidth]{gistemp-raw}%
 
-  \includegraphics[width=1\linewidth]{gistemp-polar-raw}
+%  \includegraphics[width=1\linewidth]{gistemp-polar-raw}
 
-  \caption{Glyph-maps of gridded raw temperature anomaly data}
-  \label{fig:ref-gistemp}
-\end{figure}
+%  \caption{Glyph-maps of gridded raw temperature anomaly data}
+%  \label{fig:ref-gistemp}
+%\end{figure}
 
 
 

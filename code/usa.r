@@ -3,7 +3,7 @@ library(mgcv)
 library(ggplot2)
 library(plyr)
 
-source("0-glyphs.r")
+source("0-glyph.r")
 source("0-nasa.r")
 source("overlapping.r")
 

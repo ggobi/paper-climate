@@ -2,7 +2,7 @@ library("ggplot2")
 library("plyr")
 library("mgcv")
 
-source("0-glyphs.r")
+source("0-glyph.r")
 source("0-nasa.r")
 source("0-cache.r")
 

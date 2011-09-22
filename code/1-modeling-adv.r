@@ -1,5 +1,5 @@
 source("0-nasa.r")
-source("0-glyphs.r")
+source("0-glyph.r")
 
 library(ggplot2)
 library(plyr)

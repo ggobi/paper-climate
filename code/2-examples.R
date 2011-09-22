@@ -1,3 +1,5 @@
+source("0-glyph.r")
+source("0-glyph-utils.r")
 # Template time series
 amp <- 30
 mu <- 300
@@ -26,11 +28,10 @@ library(ggplot2)
 qplot(time,temp, data=subset(locs, x_max==1), geom="line")
 
 # multiple lines
-locs <- glyphs(locs, "x_max", "time", "y_max", "temp") 
-locs2 <- glyphs(locs2, "x_max", "time", "y_max", "temp", ylim=range(locs$temp)) 
-ggplot(locs2, aes(gx, gy, group = gid)) + 
-  geom_path(colour="grey80") +
-  geom_path(aes(gx, gy, group = gid), data=locs, colour="black") +
+locs <- glyphs(locs, "x_max", "time", "y_max", "temp")
+ggplot(locs, aes(gx, gy, group = gid)) + 
+  geom_path(colour="grey80", data = ref_lines(locs)) +
+  geom_path(aes(gx, gy, group = gid), colour="black") +
   geom_tile(aes(x_max, y_max), colour = "white", fill = NA) +
   theme_fullframe() + coord_equal()
 ggsave("../images/euclid-to-polar-1.pdf")
@@ -38,9 +39,8 @@ ggsave("../images/euclid-to-polar-1.pdf")
 
 # now in polar coordinates:
 locs <- glyphs(locs, "x_max", "time", "y_max", "temp", polar = T) 
-locs2 <- glyphs(locs2, "x_max", "time", "y_max", "temp", ylim=range(locs$temp), polar = T) 
 ggplot(locs, aes(gx, gy, group = gid)) + 
-  geom_path(aes(gx, gy, group = gid), data=locs2, colour="grey80") +
+  geom_path(data = ref_lines(locs), colour="grey80") +
   geom_path() +
   geom_tile(aes(x_max, y_max), colour = "white", fill = NA) +
   theme_fullframe() + coord_equal()
@@ -52,8 +52,7 @@ ggsave("../images/euclid-to-polar-2.pdf")
 # overall average temp as reference circle
 locs2 <- data.frame(cbind(rep(t+pi,3), rep(c(mean(locs$temp)), each=3*12), rep(1:3, each=12), rep(1,3*12)))
 names(locs2) <- c("time","temp","x_max", "y_max")
-locs2 <- glyphs(locs2, "x_max", "time", "y_max", "temp", ylim=range(locs$temp), polar = T) 
 ggplot(locs, aes(gx, gy, group = gid)) + 
-  geom_path(aes(gx, gy, group = gid), data=locs2, colour="grey80") +
+  geom_path(data = ref_lines(locs), colour="grey80") +
   geom_path() +
   geom_tile(aes(x_max, y_max), colour = "white", fill = NA)

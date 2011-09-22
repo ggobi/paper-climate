@@ -2,9 +2,9 @@ library("ggplot2")
 library("plyr")
 library("mgcv")
 
-source("0-glyph.r")
-source("0-nasa.r")
-source("0-cache.r")
+source("glyph.r")
+source("nasa.r")
+source("cache.r")
 
 # Scatterplots ----------------------------------------------------------------
 

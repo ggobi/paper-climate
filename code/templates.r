@@ -1,5 +1,5 @@
-source("0-glyph.r")
-source("0-glyph-utils.r")
+source("glyph.r")
+source("glyph-utils.r")
 # Template time series
 amp <- 30
 mu <- 300

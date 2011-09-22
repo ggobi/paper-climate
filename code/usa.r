@@ -96,8 +96,8 @@ w <- 2
 
 # the overlapping problem
 glyph.seasonal <- glyphs(pred.seas.post1980, "lon", "time", "lat", "pred.cent",
-  width = abs.dim(w, pred.seas.post1980, "lon"),
-  height = abs.dim(h, pred.seas.post1980, "lat")
+  width = w,
+  height = h
 )
 ggplot(glyph.seasonal) +
   geom_line(aes(gx, gy, group = stn)) +
@@ -118,23 +118,20 @@ pred.seas.post1980.collapse$stn <- pred.seas.post1980.collapse$group
  
 pred.seas.post1980.collapse <- merge(pred.seas.post1980.collapse, stn.all)
 
-glyph.seasonal.col <- glyphs(pred.seas.post1980.collapse, "lon", "time", "lat", "pred.cent",   
-  width = abs.dim(0.8 * w, pred.seas.post1980.collapse, "lon"),
-  height = abs.dim(0.8 * h, pred.seas.post1980.collapse, "lat")
+glyph.seasonal.col <- glyphs(pred.seas.post1980.collapse, "lon", "time", "lat", "pred.cent",  width = w,  height = h
   )
 
-ggplot(glyph.seasonal.col) +
-  geom_line(aes(gx, gy, group = stn.id)) +
-  theme_fullframe() + 
-  geom_tile(height = h/2, width= w/2, colour = "white", fill = NA) +
-  geom_line(aes(gx, gy, group = stn)) 
+ggplot(glyph.seasonal.col, aes(gx, gy, group = gid)) +
+  add_ref_boxes(glyph.seasonal.col) +
+  geom_line(aes(group = stn.id)) +
+  theme_fullframe() 
 ggsave("../images/usa-collapsed.pdf", width = 8, height = 6)
   
 #== another solution gridding
 pred.seas.post1980.grid <- grid.all(pred.seas.post1980, "lon", "lat", w, h)
 glyph.seasonal.grid <- glyphs(pred.seas.post1980.grid, "grid.x", "time", "grid.y", "pred.cent",   
-  width = abs.dim(0.8 * w, pred.seas.post1980.grid, "grid.x"),
-  height = abs.dim(0.8 * h, pred.seas.post1980.grid, "grid.y")
+  width = w,
+  height = h
   )
 
 ggplot(glyph.seasonal.grid) +

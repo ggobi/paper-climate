@@ -54,7 +54,7 @@ Climate data is composed of measurements on variables such as temperature, preci
 
 \begin{figure*}[htp]
 \centerline{\includegraphics[width=6in]{nasa-colored-map.png}}
-\caption{Facetted map of de-seasonalized temperature.}
+\caption{Facetted map of de-seasonalized temperature. The dominant feature is the El Ni\~no warming in the qouthern equatorial region in the last half of 1997 and first half of 1998. Smaller features are only noticeable on closer inspection, or if pointed out: such as the relative warming on the mountain regions in south and north America in the later years.}
 \label{fig:facetted-map}
 \end{figure*}
 
@@ -227,26 +227,27 @@ The reference grid is a box, framing each icon, representing the spatial grid. I
 
 For star glyphs, the reference frames are also useful, but the reference line would be replaced by a reference circle, drawn at the average data value. Figures \ref{fig:templates} and \ref{fig:gistemp-raw} show examples.
 
-*** Re-visit this next paragraph - its a little too airy-fairy, and the plot with color needs to have the color dampened more. Its way too dominant.
+%*** Re-visit this next paragraph - its a little too airy-fairy, and the plot with color needs to have the color dampened more. Its way too dominant. This paragraph is too speculative for the paper, so removing it from first draft.
 
-It's also often useful to display other types of reference information. You are only limited by your imagination (and the capabilities of your graphics software), but two simple ideas are to (1) vary the colour or transparency of glyphs or references, or (2) use an additional layer to highlight special points. Figure~\ref{fig:ref-adv} illustrates these ideas to display the month with the highest temperature at each locations. Careful colour choice is necessary so that this information is perceptible, but not distracting.
+%It's also often useful to display other types of reference information. You are only limited by your imagination (and the capabilities of your graphics software), but two simple ideas are to (1) vary the colour or transparency of glyphs or references, or (2) use an additional layer to highlight special points. Figure~\ref{fig:ref-adv} illustrates these ideas to display the month with the highest temperature at each locations. Careful colour choice is necessary so that this information is perceptible, but not distracting.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.5\linewidth]{ref-max-1}%
-  \includegraphics[width=0.5\linewidth]{ref-max-2}
-  \caption{Glyph-maps of seasonal temperature patterns also showing the month with the highest temperature using (left) an additional layer of points and (right) changing the background colour of the reference grid.}
-  \label{fig:ref-adv}
-\end{figure}
+%\begin{figure}[htbp]
+%  \centering
+%  \includegraphics[width=0.5\linewidth]{ref-max-1}%
+%  \includegraphics[width=0.5\linewidth]{ref-max-2}
+%  \caption{Glyph-maps of seasonal temperature patterns also showing the month with the highest temperature using (left) an additional layer of points and (right) changing the background colour of the reference grid.}
+%  \label{fig:ref-adv}
+%\end{figure}
 
-A particularly useful summary when to add when displaying model predictions, is some measure of model fit. This makes it easier to avoid over-interpreting predictions from poorly-fitting models.
+%A particularly useful summary when to add when displaying model predictions, is some measure of model fit. This makes it easier to avoid over-interpreting predictions from poorly-fitting models.
 
 
-*** Adding a circular reference line helps to pick out these deviations.
+%*** Adding a circular reference line helps to pick out these deviations.
 
 \section{Perception of structure}~\label{sec:scale}
 
-Compare the facetted map Fig 1 with the glyph-map of de-seasonalized data
+Compare the facetted map Figure \ref{facetted-map} with the glyph-map
+of de-seasonalized data in Figure \ref{fig:nasa-deseas-glyph}.
 
 Glyph-maps using trend lines enable the reading of trends across
 spatial locations directly from the plot. In comparison, to read trend
@@ -256,6 +257,13 @@ map with the slope of the trend coded as color. Cleveland's
 \citep{cleveland:1993a} perceptual tests suggests that the reader can
 perceive the positional difference of the lines better than the color
 differences. Accurate perception of color differences is difficult.
+
+\begin{figure*}[htp]
+\centerline{\includegraphics[width=6in]{nasa-deseas-glyph.png}}
+\caption{Glyph-map of de-seasonalized temperature, to compare with Figure \ref{facetted-map}. }
+\label{fig:nasa-deseas-glyph}
+\end{figure*}
+
 
 \section{Effect of scale}~\label{sec:scale}
 

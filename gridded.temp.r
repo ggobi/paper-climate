@@ -63,8 +63,8 @@ p <-ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) +
 p <- p + geom_line(aes(y = lat), colour = "white", size = 1.2) 
 p <- p + geom_path() 
 p <- p + ref_boxes # This part is really slow
-p <- p + theme_fullframe() + coord_map() # but not as slow as this part
-ghcn
+p <- p + theme_fullframe() #+ coord_map() # but not as slow as this part
+ggsave("../images/gistemp-raw.png", width = 8, height = 4)
 
 temp.usa.melt.gly<-glyphs(temp.usa.melt, "lon", "time", "lat", "temp", polar=T)
 p <- ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) + 
@@ -104,7 +104,7 @@ ggplot(temp.usa.melt.sub.gly, aes(gx, gy, group = gid)) +
   map + geom_line(aes(y = lat), colour = "white", size = 1.5) +
   geom_path() +
   ref_boxes +
-  theme_fullframe() + coord_map()
+  theme_fullframe() #+ coord_map() makes a strange tranformation of boxes
 ggsave("../images/gistemp-pred.png", width = 8, height = 4)
 # Coord map seems to make the plotting REALLY SLOW!
 

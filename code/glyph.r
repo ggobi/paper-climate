@@ -84,15 +84,19 @@ ref_lines <- function(data) {
 }
 
 #' Create reference boxes for a glyph plot
-ref_boxes <- function(data) {
+ref_boxes <- function(data, fill = NULL) {
   stopifnot(is.glyphplot(data))
   glyph <- attributes(data)
-  cells <- data.frame(unique(data[c(glyph$x_major, glyph$y_major, "gid")]))
+  cells <- data.frame(unique(data[c(glyph$x_major, glyph$y_major, "gid", fill)]))
   
-  data.frame(xmin = cells[[glyph$x_major]] - glyph$width/2, 
+  df <- data.frame(xmin = cells[[glyph$x_major]] - glyph$width/2, 
       xmax = cells[[glyph$x_major]] + glyph$width/2, 
       ymin = cells[[glyph$y_major]] - glyph$height/2,
       ymax = cells[[glyph$y_major]] + glyph$height/2) 
+  if (!is.null(fill)){
+    df$fill <- cells[[fill]]
+  }
+  df
 }
 
 

@@ -41,10 +41,17 @@ add_ref_lines <- function(data, colour = "white", size = 1.5, ...){
   geom_line(data = rl, colour = colour, size = size, ...)
 }
 
-add_ref_boxes <- function(data, colour = "white", size = 0.5, fill = NA, ...){
-  rb <- ref_boxes(data)
-  geom_rect(aes_all(names(rb)), data = rb,
-     colour = colour, size = size, fill = fill, inherit.aes = FALSE, ...)
+add_ref_boxes <- function(data, var_fill = NULL, colour = "white", size = 0.5, 
+    fill = NA, ...){
+  rb <- ref_boxes(data, var_fill)
+  if (!is.null(var_fill)){
+    geom_rect(aes_all(names(rb)), data = rb,
+     colour = colour, size = size, inherit.aes = FALSE, ...)
+   }
+   else{
+     geom_rect(aes_all(names(rb)), data = rb,
+      colour = colour, size = size, inherit.aes = FALSE, fill = fill, ...)
+   }
 }
 
 # Need to have a function for the circles references for polar coords

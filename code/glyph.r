@@ -27,8 +27,8 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = FALSE, heig
     message("Using height ", format(height, digits = 3))
   }
   
-  if (!identical(x_scale, identity) && !identical(y_scale, identity)) {
-    ddply(data, "gid", function(df) {
+  if (!identical(x_scale, identity) || !identical(y_scale, identity)) {
+    data <- ddply(data, "gid", function(df) {
       df[[x_minor]] <- x_scale(df[[x_minor]])
       df[[y_minor]] <- y_scale(df[[y_minor]])
       df

@@ -198,7 +198,14 @@ Since the coordinates are linear combinations of two variables, it is possible t
 
 \section{Reference frames}~\label{sec:reference}
 
-A \emph{visual reference grid} \citep{cleveland:1993a} is fundamental to a good data visualization, in order to compare values mapped to position along a line. For glyph-maps, it is not feasible to make a full set of axes for each icon, because these would dominate the picture. Visual reference grids need to be post-attentive, de-emphasized, and serve as posterior look up after the patterns in the data have been read. For glyph-maps, we need to be able to make the following types of comparisons across icons:
+A \emph{visual reference grid} \citep{cleveland:1993a} is fundamental
+to a good data visualization, in order to compare values mapped to
+position along a line. For glyph-maps, it is not feasible to make a
+full set of axes for each icon, because these would dominate the
+picture. Visual reference grids need to be post-attentive
+\citep{healey}, de-emphasized, and serve as posterior look up after
+the patterns in the data have been read. For glyph-maps, we need to be
+able to make the following types of comparisons across icons:
 
 \begin{itemize} \itemsep 0in
 \item Slope, or trend
@@ -252,17 +259,43 @@ from facetted colored maps one needs to spot the difference between
 the different maps.  Compare the facetted map in Figure
 \ref{fig:facetted-map} with the glyph-map of de-seasonalized data in
 Figure \ref{fig:nasa-deseas-glyph}. The glyph-map provides a texturing
-over the map. The El Ni\~no event is still primary structure, visible
-as the region that has a bump in the middle of the time series, the
-hot 1997-1998 period. We can also see that the temperatures are
-generally more varied over land. There are a few locations with
-dramatically increasing temperature in the later years
+over the map. The El Ni\~no event is still the primary visble
+structure, the region that has a bump in the middle of the time
+series, correspondingto the hot 1997-1998 period. We can also see
+other temporal features: that the temperatures are generally more
+varied over land, there are a few locations with dramatically
+increasing temperature in the later years typically in locations that
+are the high elevation areas, along the Andes, and Sierra Madre
+Occiddental in Mexico.
 
-Another common approach is to compute the slope at each location code
-this as color on the map. Cleveland's \citep{cleveland:1993a}
-perceptual tests suggests that the reader can perceive the positional
-difference of the lines better than the color differences. Accurate
-perception of color differences is difficult.
+The glyph-map can be considered to be small multiples as named by
+\citet{tufte:2001}, in this case, small multiples of time series. By
+laying the time series out on the spatial grid, the main task expected
+of the viewer is comparing the temporal patterns from one location to
+the next. In contrast, in the small multiples used in the facetted
+colored map, the viewer is expected to compare the patterns in the
+maps from one year to the next, for corresponding months. (See
+\citet{carr:1999} for a discussion on perceptual grouping.) That is,
+compare and contrast maps with factted colred map, or compare and
+contrast time series using the glyph-map. One draw-back of the
+glyph-maps, particularly if linear trend is displayed as an icon, is
+they may suffer from the Z\"ollner Illusion \citep{Zollner} which is
+visible in Figure \ref{fig:gistemp-pred}. On the other hand, comparing
+images require that we play a spot the difference game, which is
+perceptually difficult \citet{busey}.
+
+An alternative, to both of these approaches, to focus attention on
+specific parts of the data calculate the relevant statistic for each
+location and display these values as color on a map. For example, to
+study the warming or cooling trends, we might calculate the slope of a
+linear model at each location and color tiles across the map by the
+value of the slope. From this we might see the increasing temperatures
+at higher altitudes in the NASA temperature data. However, we would
+fail to see the finer points of the time series, that the increase is
+not as simple as a linear increase. In addition, Cleveland's
+\citep{cleveland:1993a} perceptual tests suggest that the reader can
+perceive the positional difference of the lines better than the color
+differences. Accurate perception of color differences is difficult.
 
 \begin{figure*}[htp]
 \centerline{\includegraphics[width=5in]{nasa-deseas-glyph.png}}

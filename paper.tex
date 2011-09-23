@@ -364,7 +364,7 @@ Figure \ref{fig:irregular} shows linear trends for monthly average surface tempe
   \centering
   \includegraphics[width=0.55\linewidth]{usa-lin-overlap}%
   \includegraphics[width=0.35\linewidth]{ghcn-mountains}%
-  \caption{Glyph-maps of the linear trend in ground station temperature values, 1950-2010, of all continental US USHCN stations (left) and stations in the mountain states (right).} 
+  \caption{Glyph-maps of the linear trend in ground station temperature values, 1950--2010, for all continental US USHCN stations (left) and stations in the mountain states (right).} 
   \label{fig:irregular}
 \end{figure}
 The two panels illustrate one approach to the overlapping problem: zooming.  There is an interplay between icon size (in geographical units), plotting area (in geographical units) and plot size (in display units).  Icons need to be big enough to be readable on the display, but small enough to avoid overlapping.  Readability can be maintained and overlapping reduced by decreasing the icon size and simultaneously increasing the display size or decreasing the plotting area (as done in the right panel in Figure \ref{fig:irregular}).  However, there are generally limitations in the maximum display size (or resolution) and the utility of plotting very small areas.  
@@ -375,7 +375,7 @@ An alternative approach is to combine overlapping locations and plot a single su
   \centering
   \includegraphics[width=0.5\linewidth]{usa-season-collapsed}%
   \includegraphics[width=0.5\linewidth]{usa-lin-collapse}%
-  \caption{Glyph-maps of ground station temperature values, with nearby locations collapsed.1950-2010.}
+  \caption{Glyph-maps of seasonal patterns (left) and linear trends (right) of USHCN stations, 1950--2010.  Nearby stations whose icons would overlap have been collapsed.  Each location has a glpyh in the seasonal plot and colour of the tiles corresponds to the average temperature of the locations (red=warm, blue=cool).  Heavy lines in the linear trend plot correspond to average trends over more than one location.}
   \label{fig:irregular-collapsed}
 \end{figure}
 
@@ -385,7 +385,7 @@ In both examples of collapsing locations, the icon locations still represent rea
   \centering
   \includegraphics[width=0.5\linewidth]{usa-season-grid}%
   \includegraphics[width=0.5\linewidth]{usa-lin-grid}%
-  \caption{Glyph-maps of ground station temperature values, with locations rounded to 1$^o$. 1950-2010.}
+  \caption{Glyph-maps of seasonal patterns (left) and linear trends (right) of USHCN stations, 1950--2010.  Station locations have been rounded to the nearest degree Each location has a glpyh in the seasonal plot and colour of the tiles corresponds to the average temperature of the locations (red=warm, blue=cool).  Heavy lines in the linear trend plot correspond to average trends over more than one location.}
   \label{fig:irregular-grid}
 \end{figure}
 
@@ -401,6 +401,8 @@ A lot of climate data records contain long temporal history. For temperature rec
 
 GISTEMP data provided by the NOAA/OAR/ESRL PSD, Boulder, Colorado,
 USA, from their web site at \url{http://www.esrl.noaa.gov/psd/}.
+
+USHCN data provided by NOAA NCDC from their website \url{http://cdiac.ornl.gov/ftp/ushcn_v2_monthly/}.
 
 The graphics in this paper were created in R \citep{R} using {\tt ggplot2} \citep{me:ggplot2} and {\tt plyr} \citep{me:plyr}. 
 

@@ -7,6 +7,27 @@ source("glyph.r")
 source("glyph-utils.r")
 source("overlapping.r")
 
+states <- map_data("state")
+world <- map_data("world")
+states$group <- max(world$group) + states$group
+both <- rbind(world, states)
+both <- getbox(both, xlim = c(-126, -55.07), ylim = c(24, 50))
+
+both <- ddply(both, "group", function(df) {
+  if (diff(range(df$long)) < 1e-6) return(NULL)
+  if (diff(range(df$lat)) < 1e-6) return(NULL)
+  df
+})
+
+us.map <- list(
+  geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
+    data = both, legend = FALSE, fill = "grey80", colour = "grey90"),
+  scale_x_continuous(breaks = NA, expand = c(0.02, 0)),
+  scale_y_continuous(breaks = NA, expand = c(0.02, 0)), 
+  xlab(NULL),
+  ylab(NULL))
+
+
 # All
 temp.all<-read.table("../data/9641C_201012_raw.avg")
 colnames(temp.all)<-c("year", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "ann")
@@ -74,10 +95,11 @@ lin.pred.gly <- glyphs(lin.pred.post1950, "lon", "year", "lat", "pred",
   width=w, height=h, y_scale = mean0)
 
 ggplot(lin.pred.gly, aes(gx, gy, group = gid)) + 
+  us.map + 
   add_ref_lines(lin.pred.gly) +
   geom_path() +
-  theme_fullframe()
-ggsave("../images/usa-lin-overlap.pdf", width = 8, height = 6)
+  theme_fullframe() 
+ggsave("../images/usa-lin-overlap.png", width = 5.5, height = 4)
 
 #== one solution combine overlapping glyphs
 stn.dists <- get.stn.dists(stn.all, "lon", "lat")
@@ -118,7 +140,7 @@ ggplot(lin.pred.sum, aes(gx, gy, group = gid)) +
   geom_path(aes(size = n > 1)) +
   theme_fullframe() +
   scale_size_manual(values = c("TRUE" = 1, "FALSE" = 0.25))
-ggsave("../images/usa-lin-collapse.pdf", width = 8, height = 6)
+ggsave("../images/usa-lin-collapse.png", width = 4, height = 3)
 
 
 

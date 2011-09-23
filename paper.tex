@@ -355,13 +355,29 @@ Regularly gridded spatial data helps with the perception of structure, because i
 Rectangular, but not in this projection.  Other types of regular grids.
 
 \subsection{Irregular locations}
+Figure \ref{fig:irregular} shows linear trends for monthly average surface temperature at stations in the USHCN (Version 2) ground station network.  It illustrates three challenges in working with irregular locations: there is no natural choice for icon size, icons can potentially overlap, and comparisons rely more heavily on the reference guides.  The icon sizes were chosen manually for these two plots, although the icons are displayed at about the same size, they correspond to XX degrees and YY degrees square respectively in the geographical coordinates. 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.4\linewidth]{ghcn-mountains}%
+  \includegraphics[width=0.6\linewidth]{usa-lin-overlap}%
+  \caption{Glyph-maps of ground station temperature values, 2001-2010, for the mountain states and the entire United States.} % these aren't actually plotting the same thing.
+  \label{fig:irregular}
+\end{figure}
+The two panels illustrate one approach to the overlapping problem: zooming.  There is an interplay between icon size (in geographical units), plotting area (in geographical units) and plot size (in display units).  Icons need to be big enough to be readable on the display, but small enough to avoid overlapping.  Readability can be maintained and overlapping reduced by decreasing the icon size and simultaneously increasing the display size or decreasing the plotting area.  However, there are generally limitations in display size (or resolution) and the utility of plotting very small areas.  
+
+An alternative approach is to combine overlapping locations and plot a single summary icon.  In Figure \ref{fig:irregular-collapsed} nearby locations are collapsed to a single icon.  In the left panel each station still has an individual glpyh but locations close to each other share a plotting area.  Not all glyphs are suited to this kind of space sharing, another option is to perform a summary of the locations that are collapsed and display that instead of the raw data.  The right panel shows an example of this where the average trend for the collapsed locations is displayed.  It is helpful to differentiate glyphs that involve summaries of more than one location, here a heavier line indicates at least two locations have been averaged.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.8\linewidth]{ghcn-mountains}%
-  \caption{Glyph-maps of ground station temperature values, 2001-2010, for mountain states.}
-  \label{fig:irregular}
+  \includegraphics[width=0.5\linewidth]{usa-season-collapsed}%
+  \includegraphics[width=0.5\linewidth]{usa-lin-collapse}%
+  \caption{Glyph-maps of ground station temperature values, with nearby locations collapsed.1950-2010.}
+  \label{fig:irregular-collapsed}
 \end{figure}
+
+In both examples of collapsing locations, the icon locations still represent real geographical locations of data, but contain data from up to an icon width away.  An alternative way to combine stations is to round locations to the icon size.  This produces a regular grid with the advantage of easier perception of structure.  However, it hides the irregular nature of the locations and icons may end up centered over nonsense places (i.e. land measurements in the ocean).
+
+Reference guides become especially important in the irregular location case. Comparisons are harder in this case, as the ability to easily compare icons along a common baseline, be it along a row or column of glyphs, is absent. Without reference it is hard to tell if short series are missing data at the start or end.  
 
 \section{Long time series}
 

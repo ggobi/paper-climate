@@ -157,9 +157,9 @@ lin.pred.sum <- glyphs(lin.pred.post1950.sum, "lon", "year", "lat",
 ggplot(lin.pred.sum, aes(gx, gy, group = gid)) +
   us.map + 
   add_ref_lines(lin.pred.sum) +
-  geom_path(aes(size = n > 1)) +
+  geom_path(aes(colour = n > 1)) +
   theme_fullframe() +
-  scale_size_manual(values = c("TRUE" = 1, "FALSE" = 0.25))
+  scale_colour_manual(values = c("TRUE" = "black", "FALSE" = "grey40"))
 ggsave("../images/usa-lin-collapse.png", width = 6, height = 4)
 
 
@@ -177,9 +177,9 @@ lin.pred.grid.gly <- glyphs(lin.pred.grid.sum, "grid.x", "year", "grid.y",
 ggplot(lin.pred.grid.gly,aes(gx, gy, group = gid)) +
   us.map + 
   add_ref_lines(lin.pred.grid.gly) +
-  geom_path(aes(size = n > 1)) +
+  geom_path(aes(colour = n > 1)) +
   theme_fullframe() +
-  scale_size_manual(values = c("TRUE" = 1, "FALSE" = 0.25))
+  scale_colour_manual(values = c("TRUE" = "black", "FALSE" = "grey40"))
 ggsave("../images/usa-lin-grid.png", width = 6, height = 4)
 
 #=== SEASONAL ===#

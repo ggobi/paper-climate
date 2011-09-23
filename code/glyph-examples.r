@@ -21,7 +21,7 @@ map <- list(
 
 # De-seasonalized nasa data: matches the facetted, coloured map, need
 # to run that code before this
-resids.gly <- glyphs(resids, "long", "day", "lat", "temp_resid") 
+resids.gly <- glyphs(resids, "long", "day", "lat", "temp_resid", height=2.5) 
 colnames(resids.gly)[6] <- "lon"
 ggplot(resids.gly, aes(gx, gy, group = gid)) + map + geom_line(aes(y = lat), colour = "white", size = 1.5) + geom_path() + ref_boxes + theme_fullframe() + coord_map()
 #qplot(gx, gy, data = resids, geom = "line", group = gid) + map

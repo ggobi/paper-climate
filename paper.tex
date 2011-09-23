@@ -253,49 +253,11 @@ For star glyphs, the reference frames are also useful, but the reference line wo
 
 \section{Perception of structure}~\label{sec:scale}
 
-Glyph-maps using trend lines enable the reading of trends across
-spatial locations directly from the plot. In comparison, to read trend
-from facetted colored maps one needs to spot the difference between
-the different maps.  Compare the facetted map in Figure
-\ref{fig:facetted-map} with the glyph-map of de-seasonalized data in
-Figure \ref{fig:nasa-deseas-glyph}. The glyph-map provides a texturing
-over the map. The El Ni\~no event is still the primary visble
-structure, the region that has a bump in the middle of the time
-series, correspondingto the hot 1997-1998 period. We can also see
-other temporal features: that the temperatures are generally more
-varied over land, there are a few locations with dramatically
-increasing temperature in the later years typically in locations that
-are the high elevation areas, along the Andes, and Sierra Madre
-Occiddental in Mexico.
+Glyph-maps using trend lines enable the reading of trends across spatial locations directly from the plot. In comparison, to read trend from facetted colored maps one needs to spot the difference between the different maps.  Compare the facetted map in Figure \ref{fig:facetted-map} with the glyph-map of de-seasonalized data in Figure \ref{fig:nasa-deseas-glyph}. The glyph-map provides a texturing over the map. The El Ni\~no event is still the primary visble structure, the region that has a bump in the middle of the time series, correspondingto the hot 1997-1998 period. We can also see other temporal features: that the temperatures are generally more varied over land, there are a few locations with dramatically increasing temperature in the later years typically in locations that are the high elevation areas, along the Andes, and Sierra Madre Occiddental in Mexico.
 
-The glyph-map can be considered to be small multiples as named by
-\citet{tufte:2001}, in this case, small multiples of time series. By
-laying the time series out on the spatial grid, the main task expected
-of the viewer is comparing the temporal patterns from one location to
-the next. In contrast, in the small multiples used in the facetted
-colored map, the viewer is expected to compare the patterns in the
-maps from one year to the next, for corresponding months. (See
-\citet{carr:1999} for a discussion on perceptual grouping.) That is,
-compare and contrast maps with factted colred map, or compare and
-contrast time series using the glyph-map. One draw-back of the
-glyph-maps, particularly if linear trend is displayed as an icon, is
-they may suffer from the Z\"ollner Illusion \citep{Zollner} which is
-visible in Figure \ref{fig:gistemp-pred}. On the other hand, comparing
-images require that we play a spot the difference game, which is
-perceptually difficult \citet{busey}.
+The glyph-map can be considered to be small multiples as named by \citet{tufte:2001}, in this case, small multiples of time series. By laying the time series out on the spatial grid, the main task expected of the viewer is comparing the temporal patterns from one location to the next. In contrast, in the small multiples used in the facetted colored map, the viewer is expected to compare the patterns in the maps from one year to the next, for corresponding months. (See \citet{carr:1999} for a discussion on perceptual grouping.) That is, compare and contrast maps with factted colred map, or compare and contrast time series using the glyph-map. One draw-back of the glyph-maps, particularly if linear trend is displayed as an icon, is they may suffer from the Z\"ollner Illusion \citep{Zollner} which is visible in Figure \ref{fig:gistemp-pred}. On the other hand, comparing images require that we play a spot the difference game, which is perceptually difficult \citet{busey}.
 
-An alternative, to both of these approaches, to focus attention on
-specific parts of the data calculate the relevant statistic for each
-location and display these values as color on a map. For example, to
-study the warming or cooling trends, we might calculate the slope of a
-linear model at each location and color tiles across the map by the
-value of the slope. From this we might see the increasing temperatures
-at higher altitudes in the NASA temperature data. However, we would
-fail to see the finer points of the time series, that the increase is
-not as simple as a linear increase. In addition, Cleveland's
-\citep{cleveland:1993a} perceptual tests suggest that the reader can
-perceive the positional difference of the lines better than the color
-differences. Accurate perception of color differences is difficult.
+An alternative, to both of these approaches, to focus attention on specific parts of the data calculate the relevant statistic for each location and display these values as color on a map. For example, to study the warming or cooling trends, we might calculate the slope of a linear model at each location and color tiles across the map by the value of the slope. From this we might see the increasing temperatures at higher altitudes in the NASA temperature data. However, we would fail to see the finer points of the time series, that the increase is not as simple as a linear increase. In addition, Cleveland's \citep{cleveland:1993a} perceptual tests suggest that the reader can perceive the positional difference of the lines better than the color differences. Accurate perception of color differences is difficult.
 
 \begin{figure*}[htp]
 \centerline{\includegraphics[width=5in]{nasa-deseas-glyph.png}}
@@ -306,64 +268,58 @@ differences. Accurate perception of color differences is difficult.
 
 \section{Effect of scale}~\label{sec:scale}
 
-*** Global/local min/max, remove intercept/average, data vs model scale
-*** This section needs to have plots re-done, once we have decided on the key pieces
+%*** Global/local min/max, remove intercept/average, data vs model scale
+%*** This section needs to have plots re-done, once we have decided on the key pieces
 
-Scaling of the data can produce dramatically different emphases on
-structure. For spatiotemporal data the most natural scale is to use
-the global minumum and maximum. The resulting icons will have size
-relative to the magnitude of the full range of the data. Locations
-with overall large or small temperature will be the focus. Figure
-\ref{fig:glyph-map} shows data scaled to -1 to 1 based on the global
-minimum and maximum, using:
+Scaling of the data, into the values used for each glyph, emphasizes different aspects of the data. For spatiotemporal data the most natural scale is to use the global minumum and maximum, because the temporal variables are measuring the same information, and we want to make comparisons across the spatial region. The icons will have size relative to the magnitude of the full range of the data. Locations with overall large temperature will catch the focus. Figure \ref{fig:nasa-deseas-glyph} shows data scaled to 0 to 1 based on the global minimum and maximum, using:
 
 \begin{equation}
-y_{st} = \frac{y_{st}-y_{min}}{y_{max}-y_{min}} \times 2 - 1
+y_{st} = \frac{y_{st}-y_{min}}{y_{max}-y_{min}} %\times 2 - 1
 \label{scale1}
 \end{equation}
 
-\noindent where $y$ is the variable used on the minor axis in equations \ref{coords.eqn}, \ref{coords.polar.eqn}, $y_{min} = \mbox{minimum}\{y_{st}; s=1, \dots S, t=1, ..., T \}, y_{max} = \mbox{maximum}\{y_{st}; s=1, \dots S, t=1, ..., T\}$, $S=$ is the number of spatial locations and $T=$ is the number of time points. *** Reference other plots that use global scale too.
+\noindent where $y$ is the variable used on the minor axis in equations \ref{coords.eqn}, \ref{coords.polar.eqn}, $y_{min} = \mbox{minimum}\{y_{st}; s=1, \dots S, t=1, ..., T \}, y_{max} = \mbox{maximum}\{y_{st}; s=1, \dots S, t=1, ..., T\}$, $S=$ is the number of spatial locations and $T=$ is the number of time points. In addition, $y_{st}$ may be further scaled by doubling and subtracting 1 to give values between -0.5 and 0.5 for using in equations \ref{coords.eqn}, \ref{coords.polar.eqn}.
 
-Alternatively, scaling locally at each spatial location enables
-exploring the seasonal scale, or shape differences, from one location
-to another. Fig \ref{***} uses local scaling using:
+Alternatively, scaling locally at each spatial location enables exploring shape differences, particularly seasonal patterns, from one location to another:
 
 \begin{equation}
-y_{st} = \frac{y_{st}-y_{s,min}}{y_{s,max}-y_{s,min}} \times 2 - 1
+y_{st} = \frac{y_{st}-y_{s,min}}{y_{s,max}-y_{s,min}} %\times 2 - 1
 \label{scale2}
 \end{equation}
 
-\noindent where $y_{s, min} = \mbox{minimum}\{y_{st}; t=1, ..., T \}, y_{s,max} = \mbox{maximum}\{y_{st}; t=1, ..., T\}$. With the local scaling, the shape of the icon, for example, differences in the seasonal patterns over spatial locations, are emphasized.
-Figure \ref{***} shows data that has been locally scaled. We can see *** The local scale is equivalent to using individual scales in the facetted graphics of \texttt{ggplot2}.
+\noindent where $y_{s, min} = \mbox{minimum}\{y_{st}; t=1, ..., T \}, y_{s,max} = \mbox{maximum}\{y_{st}; t=1, ..., T\}$. With the local scaling, the shape of the icon, for example, differences in the seasonal patterns over spatial locations, are emphasized.  Fig \ref{fig:scaling} shows glyph-maps generated usng both global scaling (left) and local scaling (right) for the NASA temperature data. On the global scale, the El Ni\~no blip in temperature is primarily visible, along with the generally flat series over most water locations, and somewhat increasing or variable temerpatures over land. The local scale emhpasizes the individual shapes: The El Ni\~no pattern is visible, but extend to a larger spatial region including the Caribbean, dramatic linear increases across the Andes, decreases in the Gulf of Mexico. (The local scale is equivalent to using individual scales in the facetted graphics of \texttt{ggplot2}). One caution, with local scale, the viewer needs to realize that the scale is not relative, big patterns in some locations might be just tiny effects. To indicate this on the locally scaled data plots, using a very pale coloring to code the original scale in the tiles, might help puts patterns in perspective.
 
-It can also be advantageous to relocate the data uniformly, by extracting the average at each location. Particularly for polar glyphs the average value can lead to some unintuitive patterns in the glyphs. In this situation we would use $y_{st}-\bar{y}_s$ instead of $y_{st}$ in equations \ref{scale1}, \ref{scale2}, with minima and maxima calculated on the mean-shifted data.
+Other types of shifting and scaling can be useful. The mean and standard deviation might be used to standardize values, or the median and interquartile range, might be useful with some types of data. Shifting the values at each location to have mean zero, places more focus on the trend. This is particularly important for the star glyphs, where differences in the average value lead to unintuitive patterns in the resulting glyphs.  In this situation we would use $y_{st}-\bar{y}_s$ instead of $y_{st}$ in equations \ref{scale1}, \ref{scale2}, with minima and maxima calculated on the mean-shifted data.
 
-Another way to think about these scale options is partitioning the data structure into shape, magnitude and shift components. The different ways to scale emphasize these different components. The shift component can be extracted from the data in different ways, using the intercept from a linear model, for example, instead of the average. 
+%Another way to think about these scale options is partitioning the data structure into shape, magnitude and shift components. The different ways to scale emphasize these different components. The shift component can be extracted from the data in different ways, using the intercept from a linear model, for example, instead of the average. 
 
 
-**** This is different - I think it just confuses the topic of scaling. Because the GAM is not used to rescale the data, you still have to do that using the local or global scling equations above. Moving the discussion to ``What to plot''. 
+%**** This is different - I think it just confuses the topic of scaling. Because the GAM is not used to rescale the data, you still have to do that using the local or global scling equations above. Moving the discussion to ``What to plot''. 
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.33\linewidth]{month-rescale-none}%
-  \includegraphics[width=0.33\linewidth]{month-rescale-max}%
-  \includegraphics[width=0.33\linewidth]{month-rescale01}
-  \caption{Smoothed de-seasonalized daily temperature glyph-map. (Left) unscaled, (center) scaled to have maximum 1, (right) scaled to have maximum 1 and minimum 0.}
+  %\includegraphics[width=0.33\linewidth]{month-rescale-none}%
+  \includegraphics[width=0.5\linewidth]{month-rescale-max}%
+  \includegraphics[width=0.5\linewidth]{month-rescale01}
+  \caption{Smoothed de-seasonalized daily temperature glyph-map. (Left) %unscaled, (center) 
+globally scaled, (right) locally scaled.}
   \label{fig:scaling}
 \end{figure}
 
-A possible compromise is to use line colour to display the standardising variable, as shown in Figure~\ref{fig:scaling-col}.  This makes it possible to see the individual patterns while still retaining some ability to see which shapes represent small absolute changes.
+%A possible compromise is to use line colour to display the standardising variable, as shown in Figure~\ref{fig:scaling-col}.  This makes it possible to see the individual patterns while still retaining some ability to see which shapes represent small absolute changes.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.33\linewidth]{month-rescale01-col}
-  \caption{Adding colour to scaled plots. Here each location has been scaled to range $[0, 1]$ and colour mapped to the range of the original predictions.}
-  \label{fig:scaling-col}
-\end{figure}
+%\begin{figure}[htbp]
+%  \centering
+%  \includegraphics[width=0.33\linewidth]{month-rescale01-col}
+%  \caption{Adding colour to scaled plots. Here each location has been scaled to range $[0, 1]$ and colour mapped to the range of the original predictions.}
+%  \label{fig:scaling-col}
+%\end{figure}
 
-Other types of scaling may be interesting to explore, such as a classical scaling using the mean and standard deviation.
+%Other types of scaling may be interesting to explore, such as a classical scaling using the mean and standard deviation.
 
-Equivalent to using individual scales in facetted graphics. 
+%Equivalent to using individual scales in facetted graphics. 
+
+One more important point: if a model summary is displayed in the glyph-map, such as the predicted values, it may be important to force the scale to that of the original data. Displaying the predicted values in the absence of the raw data scale can skew the interpretation of the magnitude of the effect. 
 
 \section{What to plot: raw data, trend lines, residuals,  seasonal}
 
@@ -389,8 +345,6 @@ So far we have limited ourselves to always mapping some aspect of time on the x-
 \end{figure}
 
 In the Gauguin software one alternative was an icon based on a histogram. 
-
-*** Connection to small multiples, facetted plots
 
 \section{Regular vs irregular locations}~\label{sec:irregular}
 

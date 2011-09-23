@@ -1,14 +1,14 @@
 library(maps)
 
 # All
-temp.all<-read.table("9641C_201012_raw.avg")
+temp.all<-read.table("../data/9641C_201012_raw.avg")
 colnames(temp.all)<-c("year", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "ann")
 temp.all$stn<-temp.all$year%/%100000
 temp.all$year<-temp.all$year%%10000
 
 temp.01.10 <- subset(temp.all, year > 2000)
   
-stn.all<-read.table("ushcn-stations.txt", fill=T)
+stn.all<-read.table("../data/ushcn-stations.txt", fill=T)
 stn.all<-stn.all[,c(1:3,5:6)]
 colnames(stn.all)<-c("stn", "lat", "lon", "state", "town")
 stn.all$name<-paste(stn.all$town, stn.all$state)
@@ -50,14 +50,17 @@ year_preds <- ldply(models, function(mod) {
   year_grid$pred <- predict(mod, newdata = year_grid)
   year_grid
 })
-mountains.gly<-glyphs(year_preds, "lon", "year", "lat", "pred", width=1000, height=4000)
+mountains.gly<-glyphs(year_preds, "lon", "year", "lat", "pred", width=1, height=1)
+
 ggplot(mountains.gly, aes(gx, gy, group = gid)) + 
   #map +
-  geom_line(aes(y = lat), colour = "white", size = 1) +
+  add_ref_boxes(mountains.gly) +
+  add_ref_lines(mountains.gly) +
   geom_path() +
-  ref_boxes +
   theme_fullframe() + coord_map()
 ggsave("../images/ghcn-mountains.png")
+
+
 
 temp.01.10.melt <- subset(temp.01.10.melt, !is.na(temp))
 models <- dlply(temp.01.10.melt, c("lat", "lon"), function(df) {

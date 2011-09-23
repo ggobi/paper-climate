@@ -4,7 +4,7 @@ library(ggplot2)
 library(plyr)
 
 source("glyph.r")
-source("nasa.r")
+source("glyph-utils.r")
 source("overlapping.r")
 
 # All
@@ -18,127 +18,171 @@ stn.all<-stn.all[,c(1:3,5:6)]
 colnames(stn.all)<-c("stn", "lat", "lon", "state", "town")
 stn.all$name<-paste(stn.all$town, stn.all$state)
 
-# Post 1980
-temp.post1980 <- subset(temp.all, year >= 1980)
-temp.post1980 <- merge(temp.post1980, stn.all, by="stn")
+# Post 1950
+temp.post1950 <- subset(temp.all, year >= 1950)
+temp.post1950 <- merge(temp.post1950, stn.all, by="stn")
 
-temp.post1980.melt <- melt(temp.post1980[,-c(15, 19)], 
+temp.post1950.melt <- melt(temp.post1950[,-c(15, 19)], 
   id=c("stn", "year", "lat", "lon", "name", "state"))
-temp.post1980.melt <- rename(temp.post1980.melt, 
+temp.post1950.melt <- rename(temp.post1950.melt, 
     c("variable" = "month", "value" = "temp"))
 
 season_index <- function(time){
   (time %% 12  + 1 )/ 12
 }
 
-temp.post1980.melt <- mutate(temp.post1980.melt, 
+temp.post1950.melt <- mutate(temp.post1950.melt, 
     temp = temp/10,
     date = as.Date(paste(year, "-", as.numeric(month), "-01", sep = "")),
-    time = (year - 1980) * 12 + as.numeric(month),
+    time = (year - 1950) * 12 + as.numeric(month),
     season = season_index(time)
     )    
-temp.post1980.melt$temp[temp.post1980.melt$temp == -999.9] = NA
+temp.post1950.melt$temp[temp.post1950.melt$temp == -999.9] = NA
 
 #==== Modelling
 
-seasonal.fit.post1980 <- dlply(temp.post1980.melt, "stn", function(df){
-  gam(temp ~ s(season, bs = "cc"), 
-    knots = list(season = c(0, 12)),
+# seasonal.fit.post1950 <- dlply(temp.post1950.melt, "stn", function(df){
+#   gam(temp ~ s(season, bs = "cc"), 
+#     knots = list(season = c(0, 12)),
+#     data = df, na.action = "na.exclude")
+#   }, .progress = "text"
+# ) 
+fit.post1950 <- dlply(temp.post1950.melt, "stn", function(df){
+  lm(temp ~ year + month, 
     data = df, na.action = "na.exclude")
   }, .progress = "text"
 ) 
 
-temp.post1980.melt <- cbind(temp.post1980.melt, 
-  ldply(seasonal.fit.post1980, function(fit) {
+temp.post1950.melt <- cbind(temp.post1950.melt, 
+  ldply(fit.post1950, function(fit) {
     data.frame(res = residuals(fit), pred = predict(fit))},
   .progress = "text"))
 
-pred.seas.post1980 <- ldply(seasonal.fit.post1980, function(fit){
-    one.df <- data.frame(time = 1:24)
-    one.df <- mutate(one.df, season = season_index(time))
-    one.df$pred <- predict(fit, one.df)
-    one.df$intercept <- coef(fit)[1]
-    one.df
-  }, .progress = "text")
-
-
-pred.seas.post1980 <- ddply(pred.seas.post1980, "stn", mutate, avg = mean(pred), pred.cent = pred - avg)
-pred.seas.post1980 <- merge(pred.seas.post1980, stn.all)
-
-change.fit.post1980 <- dlply(temp.post1980.melt, "stn", function(df){
-  loess(res ~ time, data = df)
-  }, .progress = "text"
-) 
-
-pred.change.post1980 <- ldply(change.fit.post1980, function(fit){
-    one.df <- data.frame(
-      time = seq(min(fit$x, na.rm = TRUE), max(fit$x, na.rm = TRUE), 12))
+lin.pred.post1950 <- ldply(fit.post1950, function(fit){
+    one.df <- data.frame(year = 1950:2010, 
+      month = "jan")
     one.df$pred <- predict(fit, one.df)
     one.df
   }, .progress = "text")
-pred.change.post1980 <- merge(pred.change.post1980, stn.all)
 
-warm.change.post1980 <- ddply(pred.change.post1980, "stn", summarise,
-  warmer = pred[time == min(time)] < pred[time == max(time)],
-  .progress = "text")
+lin.pred.post1950 <- merge(lin.pred.post1950, stn.all)
 
-
-#==== Plotting
-
-# resolution doesn't really work non gridded data
-# it looks at univariate distances, but really we want bivarite ones
-# euclidean distance isn't quite right either, becasue we want rectangular(?) 
-# icons
-stn.dists <- get.stn.dists(stn.all, "lon", "lat")
-
+w <- 1
 h <- 1
-w <- 2
 
-# the overlapping problem
-glyph.seasonal <- glyphs(pred.seas.post1980, "lon", "time", "lat", "pred.cent",
-  width = abs.dim(w, pred.seas.post1980, "lon"),
-  height = abs.dim(h, pred.seas.post1980, "lat")
-)
-ggplot(glyph.seasonal) +
-  geom_line(aes(gx, gy, group = stn)) +
+lin.pred.gly <- glyphs(lin.pred.post1950, "lon", "year", "lat", "pred", 
+  width=w, height=h, y_scale = mean0)
+
+ggplot(lin.pred.gly, aes(gx, gy, group = gid)) + 
+  add_ref_lines(lin.pred.gly) +
+  geom_path() +
   theme_fullframe()
-ggsave("../images/usa-overlapping.pdf", width = 8, height = 6)
-
-#== shrinking glyphs isn't an option here, zooming is...
+ggsave("../images/usa-lin-overlap.pdf", width = 8, height = 6)
 
 #== one solution combine overlapping glyphs
+stn.dists <- get.stn.dists(stn.all, "lon", "lat")
 grps <- combine.overlapping(stn.dists, "lon.dist", "lat.dist", w, h)
 
-pred.seas.post1980.g <- merge(pred.seas.post1980[, c("stn", "time", "pred", "pred.cent")],   
+lin.pred.post1950.g <- merge(lin.pred.post1950[, c("stn", "year", "pred")],   
   grps, all = TRUE)
 
-pred.seas.post1980.collapse <- pred.seas.post1980.g
-pred.seas.post1980.collapse$stn.id <- pred.seas.post1980.collapse$stn
-pred.seas.post1980.collapse$stn <- pred.seas.post1980.collapse$group
+lin.pred.post1950.g$stn.id <- lin.pred.post1950.g$stn
+lin.pred.post1950.g$stn <- lin.pred.post1950.g$group
  
-pred.seas.post1980.collapse <- merge(pred.seas.post1980.collapse, stn.all)
+lin.pred.post1950.g <- merge(lin.pred.post1950.g, stn.all)
 
-glyph.seasonal.col <- glyphs(pred.seas.post1980.collapse, "lon", "time", "lat", "pred.cent",   
-  width = abs.dim(0.8 * w, pred.seas.post1980.collapse, "lon"),
-  height = abs.dim(0.8 * h, pred.seas.post1980.collapse, "lat")
-  )
+# scale by hand here becasue want to scale on stn.id level not grid cell level
+lin.pred.post1950.g  <- ddply(lin.pred.post1950.g, "stn.id", mutate,
+  pred.ind = pred - pred[year == min(year)])
 
-ggplot(glyph.seasonal.col) +
-  geom_line(aes(gx, gy, group = stn.id)) +
-  theme_fullframe() + 
-  geom_tile(height = h/2, width= w/2, colour = "white", fill = NA) +
-  geom_line(aes(gx, gy, group = stn)) 
-ggsave("../images/usa-collapsed.pdf", width = 8, height = 6)
-  
-#== another solution gridding
-pred.seas.post1980.grid <- grid.all(pred.seas.post1980, "lon", "lat", w, h)
-glyph.seasonal.grid <- glyphs(pred.seas.post1980.grid, "grid.x", "time", "grid.y", "pred.cent",   
-  width = abs.dim(0.8 * w, pred.seas.post1980.grid, "grid.x"),
-  height = abs.dim(0.8 * h, pred.seas.post1980.grid, "grid.y")
-  )
+lin.pred.collapsed <- glyphs(lin.pred.post1950.g, "lon", "year", "lat",
+  "pred.ind",  width = w,  height = h)
 
-ggplot(glyph.seasonal.grid) +
+# doesn't really work...might be better just to average within grid cells
+ggplot(lin.pred.collapsed, aes(gx, gy, group = gid)) +
+  add_ref_lines(lin.pred.collapsed) +
+  add_ref_boxes(lin.pred.collapsed) + 
+  geom_path(aes(group = stn.id)) +
+  theme_fullframe() 
+
+lin.pred.post1950.sum  <- ddply(lin.pred.post1950.g, c("year", "stn"),
+  summarise, pred = mean(pred, na.rm = TRUE), n = length(pred), 
+  lon = lon[1], lat = lat[1])
+
+lin.pred.sum <- glyphs(lin.pred.post1950.sum, "lon", "year", "lat",
+  "pred",  width = w,  height = h, y_scale = mean0)
+
+# averaging within grid cells
+ggplot(lin.pred.sum, aes(gx, gy, group = gid)) +
+  add_ref_lines(lin.pred.sum) +
+  geom_path(aes(size = n > 1)) +
+  theme_fullframe() +
+  scale_size_manual(values = c("TRUE" = 1, "FALSE" = 0.25))
+ggsave("../images/usa-lin-collapse.pdf", width = 8, height = 6)
+
+
+
+#== gridding
+lin.pred.grid <- grid.all(lin.pred.post1950, "lon", "lat", w, h)
+glyph.lin.grid <- glyphs(lin.pred.grid, "grid.x", "year", "grid.y",   
+  "pred", width = 0.95 * w, height = 0.95 * h, y_scale = mean0)
+
+ggplot(glyph.lin.grid) +
+  add_ref_lines(glyph.lin.grid) +
   geom_line(aes(gx, gy, group = stn)) +
   theme_fullframe() 
-ggsave("../images/usa-grid.pdf", width = 8, height = 6)
+ggsave("../images/usa-lin-grid.pdf", width = 8, height = 6)
+
+
+#=== SEASONAL ===#
+
+seas.pred.post1950 <- ldply(fit.post1950, function(fit){
+    one.df <- data.frame(month = sort(unique(fit$model$month)), year = 1980)
+    one.df$pred <- predict(fit, one.df)
+    one.df
+  }, .progress = "text")
+
+seas.pred.post1950 <- merge(seas.pred.post1950, stn.all)
+seas.pred.post1950$time <- as.numeric(seas.pred.post1950$month)
+seas.pred.post1950 <- ddply(seas.pred.post1950, "stn", mutate,
+  avg = mean(pred, na.rm = TRUE))
+
+seas.pred.gly <- glyphs(seas.pred.post1950, "lon", "time", "lat", "pred", 
+  width=1, height=1, y_scale = mean0)
+
+ggplot(seas.pred.gly, aes(gx, gy, group = gid)) + 
+  add_ref_boxes(seas.pred.gly, "avg", colour = NA, alpha = 0.2) +
+  geom_path() +
+  theme_fullframe()
+ggsave("../images/usa-season-overlap.pdf", width = 8, height = 6)
+
+##=== collapsing
+seas.pred.post1950.g <- merge(seas.pred.post1950[, c("stn", "time", "pred")],   
+  grps, all = TRUE)
+seas.pred.post1950.g$stn.id <- seas.pred.post1950.g$stn
+seas.pred.post1950.g$stn <- seas.pred.post1950.g$group
+ 
+seas.pred.post1950.g <- merge(seas.pred.post1950.g, stn.all)
+seas.pred.post1950.g <- ddply(seas.pred.post1950.g, "stn", mutate,
+  avg = mean(pred, na.rm = TRUE))
+
+seas.pred.collapsed <- glyphs(seas.pred.post1950.g, "lon", "time", "lat",
+  "pred",  width = w,  height = h, y_scale = mean0)
+
+ggplot(seas.pred.collapsed, aes(gx, gy, group = gid)) +
+  add_ref_boxes(seas.pred.collapsed, "avg", alpha = 0.2, colour = NA) +
+  geom_line(aes(group = stn.id)) +
+  theme_fullframe() 
+ggsave("../images/usa-season-collapsed.pdf", width = 8, height = 6)
+
+#== gridding
+seas.pred.grid <- grid.all(seas.pred.post1950, "lon", "lat", w, h)
+glyph.seasonal.grid <- glyphs(seas.pred.grid, "grid.x", "time", "grid.y",   
+  "pred", width = 0.95 * w, height = 0.95 * h, y_scale = mean0)
+
+ggplot(glyph.seasonal.grid) +
+  add_ref_boxes(glyph.seasonal.grid) +
+  geom_line(aes(gx, gy, group = stn)) +
+  theme_fullframe() 
+ggsave("../images/usa-season-grid.pdf", width = 8, height = 6)
 

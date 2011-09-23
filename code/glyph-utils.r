@@ -36,11 +36,23 @@ theme_fullframe <- function (base_size = 12){
   ), class = "options")
 }
 
-ref_boxes <- list(
-  geom_tile(aes(lon, lat), colour = "white", fill = NA, inherit.aes = FALSE),
-  scale_x_continuous(breaks = NA, expand = c(0, 0)),
-  scale_y_continuous(breaks = NA, expand = c(0, 0))
-)
+add_ref_lines <- function(data, colour = "white", size = 1.5, ...){
+  rl <- ref_lines(data)
+  geom_line(data = rl, colour = colour, size = size, ...)
+}
+
+add_ref_boxes <- function(data, var_fill = NULL, colour = "white", size = 0.5, 
+    fill = NA, ...){
+  rb <- ref_boxes(data, var_fill)
+  if (!is.null(var_fill)){
+    geom_rect(aes_all(names(rb)), data = rb,
+     colour = colour, size = size, inherit.aes = FALSE, ...)
+   }
+   else{
+     geom_rect(aes_all(names(rb)), data = rb,
+      colour = colour, size = size, inherit.aes = FALSE, fill = fill, ...)
+   }
+}
 
 # Need to have a function for the circles references for polar coords
 # Need to have a function for the reference lines

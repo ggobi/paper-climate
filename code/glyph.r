@@ -18,17 +18,17 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = FALSE, heig
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
   
   if (is.rel(width)) {
-    width <- resolution(data[[x_major]]) * unclass(width)
+    width <- resolution(data[[x_major]], zero = FALSE) * unclass(width)
     message("Using width ", format(width, digits = 3))
   }
     
   if (is.rel(height)) {
-    height <- resolution(data[[y_major]]) * unclass(height)
+    height <- resolution(data[[y_major]], zero = FALSE) * unclass(height)
     message("Using height ", format(height, digits = 3))
   }
   
-  if (!identical(x_scale, identity) && !identical(y_scale, identity)) {
-    ddply(data, "gid", function(df) {
+  if (!identical(x_scale, identity) || !identical(y_scale, identity)) {
+    data <- ddply(data, "gid", function(df) {
       df[[x_minor]] <- x_scale(df[[x_minor]])
       df[[y_minor]] <- y_scale(df[[y_minor]])
       df
@@ -82,6 +82,23 @@ ref_lines <- function(data) {
   }
   ddply(cells, "gid", ref_line)
 }
+
+#' Create reference boxes for a glyph plot
+ref_boxes <- function(data, fill = NULL) {
+  stopifnot(is.glyphplot(data))
+  glyph <- attributes(data)
+  cells <- data.frame(unique(data[c(glyph$x_major, glyph$y_major, "gid", fill)]))
+  
+  df <- data.frame(xmin = cells[[glyph$x_major]] - glyph$width/2, 
+      xmax = cells[[glyph$x_major]] + glyph$width/2, 
+      ymin = cells[[glyph$y_major]] - glyph$height/2,
+      ymax = cells[[glyph$y_major]] + glyph$height/2) 
+  if (!is.null(fill)){
+    df$fill <- cells[[fill]]
+  }
+  df
+}
+
 
 # Glyph plot class -----------------------------------------------------------
 

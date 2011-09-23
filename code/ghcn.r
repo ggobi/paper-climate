@@ -50,7 +50,7 @@ year_preds <- ldply(models, function(mod) {
   year_grid$pred <- predict(mod, newdata = year_grid)
   year_grid
 })
-mountains.gly<-glyphs(year_preds, "lon", "year", "lat", "pred", width=1, height=1, scale_y = mean0)
+mountains.gly<-glyphs(year_preds, "lon", "year", "lat", "pred", width=1, height=1, y_scale = mean0)
 
 ggplot(mountains.gly, aes(gx, gy, group = gid)) + 
   #map +

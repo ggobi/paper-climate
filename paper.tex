@@ -337,16 +337,14 @@ Issues of scale relative to modeling. Switching from the data to model summaries
 
 \section{Generalization}~\label{sec:scatter}
 
-Glyph-maps are not limited to time series plots. They are readily generalized to use any other type of display as an icon. Figure~\ref{fig:cloud} shows scatterplots as icons: low-cloud level is displayed horizontally and high-cloud level vertically. The bivariate relationship between the two types of clouds is explored spatially, and it is clear that it is different across the region. The second plot displays a loess curve fit to the data instead of the individual points, sharpening the view of association: most locations have a negative or zero association.   In the Gauguin software \citep{gribov:2006} one alternative is an icon based on a histogram, small univariate distribution displays for each glyph. 
-
-*** Need to use local scaling here.
+Glyph-maps are not limited to time series plots. They are readily generalized to use any other type of display as an icon. Figure~\ref{fig:cloud} shows scatterplots as icons: temperature values are displayed horizontally and high-cloud values are displayed vertically, both locally scaled. The bivariate relationship between the two variables is explored spatially, and it is clear that it is different across the region. The equatorial Pacific and Caribbean have positve association between temperature and high cloud, while the south American continent has negative association. The second plot displays a loess curve fit to the data instead of the individual points, sharpening the view of association. In the Gauguin software \citep{gribov:2006} one alternative is an icon based on a histogram, small univariate distribution displays for each glyph. 
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.5\linewidth]{clouds}%
-  \includegraphics[width=0.5\linewidth]{clouds-smooth}
+  \includegraphics[width=0.5\linewidth]{nasa-scat-glyph}%
+  \includegraphics[width=0.5\linewidth]{nasa-loess-glyph}
 
-  \caption{Glyph-map showing (left) scatterplot of high-cloud vs. low-cloud and (right) smoothed (loess) curve fit to each location. The relationship between these two variables varies considerably over the spatial domain (particularly between land and ocean), but neighbouring locations tend to similar. }
+  \caption{Glyph-map showing (left) scatterplot of temperature vs high-cloud and (right) smoothed (loess) curve fit to each location. The relationship between these two variables varies considerably over the spatial domain. }
   \label{fig:cloud}
 \end{figure}
 

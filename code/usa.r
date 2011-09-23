@@ -166,13 +166,21 @@ ggsave("../images/usa-lin-collapse.png", width = 6, height = 4)
 
 #== gridding
 lin.pred.grid <- grid.all(lin.pred.post1950, "lon", "lat", w, h)
-glyph.lin.grid <- glyphs(lin.pred.grid, "grid.x", "year", "grid.y",   
-  "pred", width = 0.95 * w, height = 0.95 * h, y_scale = mean0)
 
-ggplot(glyph.lin.grid) +
-  add_ref_lines(glyph.lin.grid) +
-  geom_line(aes(gx, gy, group = stn)) +
-  theme_fullframe() 
+lin.pred.grid.sum  <- ddply(lin.pred.grid, c("year", "grid.x", "grid.y"),
+  summarise, pred = mean(pred, na.rm = TRUE), n = length(pred), 
+  grid.x = grid.x[1], grid.y = grid.y[1])
+
+lin.pred.grid.gly <- glyphs(lin.pred.grid.sum, "grid.x", "year", "grid.y",
+  "pred",  width = w,  height = h, y_scale = mean0)
+
+ggplot(lin.pred.grid.gly,aes(gx, gy, group = gid)) +
+  us.map + 
+  add_ref_lines(lin.pred.grid.gly) +
+  geom_path(aes(size = n > 1)) +
+  theme_fullframe() +
+  scale_size_manual(values = c("TRUE" = 1, "FALSE" = 0.25))
+ggsave("../images/usa-lin-grid.png", width = 6, height = 4)
 
 #=== SEASONAL ===#
 
@@ -218,11 +226,15 @@ ggsave("../images/usa-season-collapsed.png", width = 6, height = 4)
 
 #== gridding
 seas.pred.grid <- grid.all(seas.pred.post1950, "lon", "lat", w, h)
+seas.pred.grid <- ddply(seas.pred.grid, c("grid.x", "grid.y"), mutate,
+  avg = mean(unique(avg)))
+
 glyph.seasonal.grid <- glyphs(seas.pred.grid, "grid.x", "time", "grid.y",   
   "pred", width = 0.95 * w, height = 0.95 * h, y_scale = mean0)
 
 ggplot(glyph.seasonal.grid) +
   us.map + 
-  add_ref_boxes(glyph.seasonal.grid) +
+  add_ref_boxes(glyph.seasonal.grid, "avg", alpha = 0.2, colour = NA) +
   geom_line(aes(gx, gy, group = stn)) +
   theme_fullframe() 
+ggsave("../images/usa-season-grid.png", width = 6, height = 4)

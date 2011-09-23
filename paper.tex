@@ -354,10 +354,12 @@ Regularly gridded spatial data helps with the perception of structure, because i
 
 \subsection{Non-rectangular grids}
 
-Glyph-maps work best in mercator projection, where the icons are organized into rectangular microplots. Spatial coordinates are often not given in this coordinate system, and so may require a transformation into mercator projection coordinates.
+Glyph-maps work best when displayed in the coordinate system in which the grid is rectangular and regular.  For example, the GISTEMP grid is 2$^o$ square and is displayed treating longitude and latitude as cartesian coordinates in Figure \ref{fig:gistemp-pred}.  For regularly gridded data, this results in icons that are rectangles of equal size.  It is often preferable to display maps as a projection of the geographical coordinates which preserves a property of interest, area for example. When a projection is desired a choice needs to be made between applying the projection to the completed glyph-map, or to just the spatial locations.  When the completed glyph-map is projected the icons are no longer rectangles of the same size but they do retain their space filling property.  When applying a projection to the spatial locations and then constructing a glyph-map, the grid becomes irregular. 
+
+*** Example?
 
 \subsection{Irregular locations}
-Figure \ref{fig:irregular} shows linear trends for monthly average surface temperature at stations in the USHCN (Version 2) ground station network.  It illustrates three challenges in working with irregular locations: there is no natural choice for icon size, icons can potentially overlap, and comparisons rely more heavily on the reference guides.  The icon sizes were chosen manually for these two plots, although the icons are displayed at about the same size, they correspond to 1 degrees and 0.5 degrees square respectively in the geographical coordinates. 
+Figure \ref{fig:irregular} shows linear trends for monthly average surface temperature at stations in the USHCN (Version 2) ground station network.  It illustrates three challenges in working with irregular locations: there is no natural choice for icon size, icons can potentially overlap, and comparisons rely more heavily on the reference guides.  The icon sizes were chosen manually for these two plots, although the icons are displayed at about the same size, they correspond to 1$^o$ and 0.5$^o$ square respectively in the geographical coordinates. 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.55\linewidth]{usa-lin-overlap}%
@@ -377,7 +379,15 @@ An alternative approach is to combine overlapping locations and plot a single su
   \label{fig:irregular-collapsed}
 \end{figure}
 
-In both examples of collapsing locations, the icon locations still represent real geographical locations of data, but contain data from up to an icon width away.  An alternative way to combine stations is to round locations to the icon size.  This produces a regular grid with the advantage of easier perception of structure.  However, it hides the irregular nature of the locations and icons may end up centered over nonsense places (i.e. land measurements in the ocean).
+In both examples of collapsing locations, the icon locations still represent real geographical locations of data, but contain data from up to an icon width away.  An alternative way to combine stations is to round locations to the icon size, Figure \ref{fig:irregular-grid}. This produces a regular grid with the advantage of easier perception of structure.  However, it hides the irregular nature of the locations and icons may end up centered over nonsense places (i.e. land measurements in the ocean).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\linewidth]{usa-season-grid}%
+  \includegraphics[width=0.5\linewidth]{usa-lin-grid}%
+  \caption{Glyph-maps of ground station temperature values, with locations rounded to 1$^o$. 1950-2010.}
+  \label{fig:irregular-grid}
+\end{figure}
 
 Reference guides become especially important in the irregular location case. Comparisons are harder in this case, as the ability to easily compare icons along a common baseline, be it along a row or column of glyphs, is absent. Without reference it is hard to tell if short series are missing data at the start or end.  
 

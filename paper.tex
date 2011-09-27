@@ -172,7 +172,7 @@ The raw data shows us missing values and gives some sense of variability, but gi
 
 \section{Construction}~\label{sec:construction}
 
-Glyph-maps can be generated with existing graphics software after performing a simple pre-processing step, making them easily accessible to a wide audience. Creating a glyph-map, involves recognizing that they combine two structural components of the data: spatial location and data values. The spatial location is the major positioning component, and the data values are minor adjustments to these positions. For spatiotemporal data, the major axes are latitude ($y_{\amaj}$) and longitude ($x_{\amaj}$), and the minor axes are time ($x_{\amin}$) and some measurement ($y_{\amin}$), for example, temperature, or predicted temperature. The minor axes are rescaled to have range $[0, 1]$, and further adjusted to fit into the resolution of the spatial coordinates. The final values to be plotted are a simple linear combination, as given by
+Glyph-maps can be generated with existing graphics software after performing a simple pre-processing step, making them easily accessible to a wide audience. Creating a glyph-map requires a recognition they combine two structural components of the data: spatial location and data values. The spatial location is the major positioning component, and the data values are minor adjustments to those positions. For spatiotemporal data, the major axes are latitude ($y_{\amaj}$) and longitude ($x_{\amaj}$), and the minor axes are time ($x_{\amin}$) and some measurement ($y_{\amin}$), for example, temperature, or predicted temperature. Assuming the minor axes are rescaled to $[-1, 1]$, the final positions are a simple linear combination:
 
 \begin{equation}
   \begin{array}{lll}
@@ -182,9 +182,9 @@ Glyph-maps can be generated with existing graphics software after performing a s
   \label{coords.eqn}
 \end{equation}
 
-\noindent where $w$ and $h$ are width and height respectively. The width and height will typically take into account the resolution of the major axes, that is, the minimum difference between consecutive locations.
+\noindent where $w$ and $h$ are width and height respectively. For gridded data, the width and height be the resolution of the major axes, that is, the minimum difference between consecutive locations. Since the coordinates are linear combinations of two variables, it is possible to build these these line-glyphs interactively, illustrated by software packages that have incorporated tours \citep{cook:2006}, such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}. This technique is used to good effect in \citet{buja:1996a}, and was used to examine the climate data in \citet{hobbs:2010}.
 
-Computing the coordinates for star glyphs is achieved with a simple polar transformation: 
+Computing the coordinates for star glyphs is achieved with a simple polar transformation, with minor axes scaled to $[0, 1]$: 
 
 \begin{equation}
   \begin{array}{lll}
@@ -194,25 +194,25 @@ Computing the coordinates for star glyphs is achieved with a simple polar transf
   \label{coords.polar.eqn}
 \end{equation}
 
-\noindent Note that this is is a non-standard conversion to polar coordinates, but it provides a timeline that starts at 12 o'clock and travels clockwise.
+\noindent This is a non-standard conversion to polar coordinates, but it creates a timeline that starts at 12 o'clock and proceeds clockwise.
 
-Figure~\ref{fig:cycle} shows average monthly temperature as time (Cartesian coordinates) and star (polar coordinates) glyphs, for a subset of the spatial region. In this case, the star glyphs are not as effective as the linear glyphs: perhaps because of the absence of cyclical pattern.
+% HW: I removed this because I don't think it adds anything at this point
+%
+% Figure~\ref{fig:cycle} shows average monthly temperature as time (Cartesian coordinates) and star (polar coordinates) glyphs, for a subset of the spatial region. In this case, the star glyphs are not as effective as the linear glyphs: perhaps because of the absence of cyclical pattern.
+% 
+% *** Perhaps replace these figures with something from the GISTEMP data.
+% 
+% \begin{figure}[htbp]
+%   \centering
+%   \includegraphics[width=3in]{month-cartesian}
+%   \includegraphics[width=3in]{month-polar}
+%     
+%   \caption{Monthly averages in (left) Cartesian coordinates and (right) polar coordinates.}
+%   
+%   \label{fig:cycle}
+% \end{figure}
 
-*** Perhaps replace these figures with something from the GISTEMP data.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=3in]{month-cartesian}
-  \includegraphics[width=3in]{month-polar}
-    
-  \caption{Monthly averages in (left) Cartesian coordinates and (right) polar coordinates.}
-  
-  \label{fig:cycle}
-\end{figure}
-
-Figure \ref{fig:templates} gives some small examples of time series with prototypical trends, shown both in cartesian coordinates and polar coordinates. Differences between linear and nonlinear trend are more apparent in the time series icons, and are effectively lost in polar coordinates. The star plots are most effective in exposing cyclical patterns due to seasonality. Seasonality appears like floral cartoons in the polar coordinates, with peaks forming petals. What might be surprising is that time series that seem to have opposing trends in cartesian coordinates don't necessarily show this symmetry in polar coordinates. The area of glyphs in polar coordinates mainly reflect the average value of a time series, while its shape shows deviations from average values. 
-
-Since the coordinates are linear combinations of two variables, it is possible to build these these time series icon displays interactively, illustrated by software packages that have incorporated tours \citep{cook:2006}, such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}.  This technique is used to good effect in \citet{buja:1996a}, and was used to examine the climate data in \citet{hobbs:2010}.
+Figure~\ref{fig:templates} gives some small examples of time series with prototypical trends, shown both in cartesian coordinates and polar coordinates. Differences between linear and nonlinear trend are more apparent in the line-glyphs, and are effectively lost in the star-glyphs, which are most effective in exposing cyclical patterns due to seasonality. Star-glyphs show seasonality as floral cartoons, with peaks forming petals. It is surprising that time series with opposing trends in line-glyphs don't show this symmetry when displayed with star-glyphs. The area of star-glyphs coordinates mainly reflect the average value of a time series, while its shape shows deviations from the average.
 
 \section{Reference frames}~\label{sec:reference}
 

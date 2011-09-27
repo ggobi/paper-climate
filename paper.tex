@@ -62,32 +62,33 @@ We include a description of how to create glyph-maps using existing statistical 
 
 \section{Introduction}
 
-Climate data is composed of measurements on variables such as temperature, precipitation, and winds that have been collected from a spatial and temporal context. The classic display of this type of is to use color or grey scale overlaid on geographic location, typically including a map. When measurements are made at different time periods it is common to display the data as small multiples, such as in Figure~\ref{fig:facetted-map}. In this plot, a separate map is drawn for each month (columns) and year (rows), over a 6 year period of remotely sensed temperature data above Central America \citet{murrell:2010}. Color is used to display the de-seasonalized temperature measurements, with red being high values and blue being low values. The most noticeable feature in this display is the strong red in the equatorial region beginning in mid-1997 and tapering out during 1998. This is the pattern of an El Ni\~no event, a major temperature anomaly. With some work other more localized patterns can be perceived, for example, cooler over the land mass in the early year, but warmer in the latter years. 
+Climate data is composed of measurements, such as temperature, precipitation, and winds, with a spatial and temporal context. The classic display for data of this type of is a tiled plot using color to display the value of the variable of interest as each location. When measurements are made at multiple time points it is common to display the data with small multiples, such as in Figure~\ref{fig:nasa-facet}. In this plot, a separate map is drawn for each month (columns) and year (rows), over a 6 year period of remotely sensed temperature data above Central America \citet{murrell:2010}. Color is used to display de-seasonalized temperature, with red mapped to high values and blue to low. The most noticeable feature is the strong red patch in the equatorial Pacific beginning mid-1997 and tapering out during 1998. This is the El Ni\~no event, a major temperature anomaly. More work is required to see more localized patterns, like the cooler land temperatures seen in early years.
 
-Reading this plot is cognitively challenging: the reader must play ``spot the difference'' from one small image to another. Large structures such as the El Ni\~no event are clear but it is very difficult to glue the images together to read off the trend over the years or to notice local deviations. Rendering these small multiples as a movie can help with picking up strong trends, but small trends still fail to draw readers' attention and escape unnoticed \citep{simons:gradual}.
+Reading this type of plot is cognitively challenging: the reader must play ``spot the difference'' from one small image to another. Large structures such as El Ni\~no are clear but it is very difficult to mentally difference the images and read off the long-term trend or to notice local deviations. Using a movie to render these small multiples can help, but small trends still fail to draw readers' attention and escape unnoticed \citep{simons:gradual}.
 
 \begin{figure*}[htbp]
   \centering
   \includegraphics[width=5.5in]{nasa-colored-map.png}
   \caption{Facetted map of de-seasonalized temperature. The dominant feature is the El Ni\~no warming in the southern equatorial region in the last half of 1997 and first half of 1998. Smaller features are only noticeable on closer inspection, or if pointed out: such as the relative warming on the mountain regions in south and north America in the later years.}
-  \label{fig:facetted-map}
+  \label{fig:nasa-facet}
 \end{figure*}
 
 %% Reproduce all of the icon displays using the fixed glyph code
 
-In this paper we develop a different type of display that resolves these problems: the \emph{glyph-map}. The glyph-map uses a small glyph, or icon, to represent multiple values at each location. Glyph maps are an adaptation of glyphs, tools developed for display multivariate data, including the star plots of \citet{mayr:1877}, the semi-graphic displays of \citet{anderson:1960}, and the infamous Chernoff faces \citep{chernoff:1973}. An glyph is produced by mapping each variable to some graphical feature. Figure~\ref{fig:nasa-deseas-glyph} shows the glyph-map equivalent of Figure~\ref{fig:facetted-map}: each location is represented by a tiny time series glyph. The glyph-map can also be thought of as a small multiple display \citet{tufte:2001} of time series. 
+In this paper we develop a new type of display to resolves these problems: the \emph{glyph-map}. The glyph-map uses a small glyph, or icon, to represent multiple values at each location. Glyph maps are an adaptation of glyphs, tools developed for display multivariate data. Multivariate glyphs include the star plots of \citet{mayr:1877}, the semi-graphic displays of \citet{anderson:1960}, and the infamous Chernoff faces \citep{chernoff:1973}. An glyph is produced by mapping each variable to some graphical feature, such as the length of a line. Figure~\ref{fig:nasa-glyph} shows the glyph-map equivalent of Figure~\ref{fig:nasa-facet}: each location is represented by a small time series glyph. As suggested by this plot, the glyph-map can also be thought of as a small multiple display \citet{tufte:2001} of time series with a geographic context.
+
+% The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. 
 
 \begin{figure*}[htbp]
   \centering
-  \includegraphics[width=3.5in]{nasa-deseas-glyph.png}
-  \caption{Glyph-map of de-seasonalized temperature, to compare with Figure \ref{fig:facetted-map}. }
-  \label{fig:nasa-deseas-glyph}
+  \includegraphics[width=3.5in]{nasa-glyph.png}
+  \caption{Glyph-map of de-seasonalized temperature, to compare with Figure \ref{fig:nasa-facet}. }
+  \label{fig:nasa-glyph}
 \end{figure*}
 
-One problem with glyph displays of multivariate data is that there is no natural ordering of each glyph, or of the mapping between variables and glyph properties. This leads to a combinatorial explosion of possibilities which may have dramatically different perceptual properties. Despite some proposed remedies \citep{kleiner:1981,hurley:2010}, this problem has prevented the widespread adoption of glyph displays. Using glyphs for space-time data resolves this problem: we place glyphs according to the measurement location of the data, and we order variables in time. Additionally, climate data usually has high-correlations between nearby locations and times. This imposes a certain degree of smoothness that gives the plot an appearance of texturing on a landscape, making it easier to digest patterns.
-Others \citet{pickett:1988} have used glyphs on maps to display multivariate spatial data. This area of work has morphed into the field of metaphorical data displays, which creates abstract landscapes of spatial data, a digression from glyph-maps. \citet{gribov:2006} describes the use of glyph-maps for multivariate data also, with emphasis on the graphics software Gauguin. 
+One problem with multivariate glyph is that lack of natural ordering of each glyph, or of the mapping between variables and glyph properties. This leads to a combinatorial explosion of possibilities, each of which may have dramatically different perceptual properties. This problem has prevented the widespread adoption of glyph displays, despite some proposed remedies \citep{kleiner:1981,hurley:2010}. Using glyphs with space-time data makes the problem go away: we place glyphs according to the location of the measurement, and we order variables by the time they were collected. Additionally, climate data usually has high correlations between nearby locations and times. This imposes a degree of smoothness that gives the plot an appearance of a textured  landscape, making it easier to digest patterns. Others \citet{pickett:1988} have used glyphs on maps to display multivariate spatial data. This area of work has morphed into the field of metaphorical data displays, which creates abstract landscapes of spatial data, a digression from glyph-maps. \citet{gribov:2006} describes the use of glyph-maps for multivariate data also, with emphasis on the graphics software Gauguin.
 
-We focus our attention on two glyphs: lines and stars. Figure~\ref{fig:templates} displays 12 iconic time series shapes with line and star glyphs. The data underlying each glyph has 36 time variables. The star glyphs is formed by considering the 36 axes radiating from a common midpoint, and the data values for the row are plotted on each axis relative to the locations of the minimum and maximum of the variable.
+We focus our attention on two types of glyph: lines and stars. Figure~\ref{fig:templates} displays 12 iconic time series shapes with line- and star-glyphs. The data underlying each glyph is measured at 36 time points. The line-glyphs are a simple time series plot. The star-glyphs are formed by considering the 36 axes radiating from a common midpoint, and the data values for the row are plotted on each axis relative to the locations of the minimum and maximum of the variable. This is a polar transformation of the line-glyph.
 
 \begin{figure}[htbp]
   \centering
@@ -102,13 +103,10 @@ We focus our attention on two glyphs: lines and stars. Figure~\ref{fig:templates
 
 %These displays tend to be particularly effective when printed in large format, as the much higher resolution of print (600 dpi) compared to computer  screen (72-120 dpi) allows for much finer reading. These are high-density data displays in the best tradition of Tufte. Wall size maps are not usually practical during analysis, but are very engaging.
 
-In this paper we describe the algorithm for creating glyphs of temporal data on maps, and the various modifications that can enable different features in the data to be detected. Section~\ref{sec:glyph-map} describes the use of glyphs on maps, and Section~\ref{sec:construction} explains how to construct glyph-maps. Section~\ref{sec:reference} discusses the use of reference lines and boxes, and Section~\ref{sec:scale} visits issues of scaling values for different information purposes. Generalizations to different types of icons are described in Section~\ref{sec:scatter}. Glyph-maps work nicely with gridded data, but many spatiotemporal data sets have irregular spatial locations. Possible adjustments are discussed in Section \ref{sec:irregular}. 
+In this paper we describe the algorithm for creating glyphs-maps, and various modifications that can enable different features in the data to be detected. Section~\ref{sec:large-data} describes how glyph-maps scale to large climate data sets, and Section~\ref{sec:construction} explains how to construct them. Section~\ref{sec:reference} discusses the use of reference lines and boxes, Section~\ref{sec:perception}, their perceptual properties, and Section~\ref{sec:scale} visits scaling issues. We originally developed glyph-maps for data on a rectangular grid, but many spatiotemporal data sets have irregular spatial locations. Section~\ref{sec:irregular} discusses how glyph-maps can be adjusted for this type of data.
 
 To demonstrate the glyph-map we will use three datasets:
 
-% Reference Tufte's small multiples
-%\emph{Glyph-maps} are maps where a glyph is displayed at each spatial location to represent multiple data values. To explain the glyph-map, we use data of 2$^o$x2$^o$ gridded temperature anomalies, from the GISTEMP surface temperature data provided by the Earth System Research Laboratory, Physical Sciences Division, National Oceanic and Atmospheric Administration. Ground station data was de-seasonalized, differenced from the 1951-1980 temperatue averages, and spatially averaged to obtain gridded measurements. Figure \ref{fig:gistemp-pred} shows the time series icons for each spatial location of predicted temperature for 1950-2010 across the USA. Most locations observe an increasing temperature, to varying degrees, over this time period. A few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems. There is a difference in the temperature increase at different regions: steeper inclines can be seen in the north and western mountain region and across the Great Lakes, but inclines are flatter in the southeastern USA. 
-%The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. 
 \begin{itemize}
 
   \item The ASA 2009 data expo data which consists of monthly observations of
@@ -118,14 +116,14 @@ To demonstrate the glyph-map we will use three datasets:
   $113.75^{\circ}$W to $56.25^{\circ}$W longitude and $21.25^{\circ}$S to
   $36.25{^\circ}$N latitude.
 
-\item GISTEMP surface temperature data provided by the Earth System
-  Research Laboratory, Physical Sciences Division, National Oceanic
-  and Atmospheric Administration. This data is provided on $2^{\circ}$
-  x $2^{\circ}$ grid over the entire globe, continental United States
-  (XXX locations), measured monthly.  Ground station data was
-  de-seasonalized, differenced from from the 1951-1980 temperature
-  averages, and spatially averaged to obtain gridded measurements. We
-  extracted the locations corresponding to the continental USA.
+  \item GISTEMP surface temperature data provided by the Earth System Research
+  Laboratory, Physical Sciences Division, National Oceanic and Atmospheric
+  Administration. This data is provided on $2^{\circ}$ x $2^{\circ}$ grid over
+  the entire globe, continental United States (XXX locations), measured
+  monthly. Ground station data was de-seasonalized, differenced from from the
+  1951-1980 temperature averages, and spatially averaged to obtain gridded
+  measurements. We extracted the locations corresponding to the continental
+  USA.
 
   \item USHCN (Version 2) ground station network.
   
@@ -275,7 +273,7 @@ For star glyphs, the reference frames are also useful, but the reference line wo
 
 % From a cognitive perspective, this is a very hard task to do. It falls into the framework of {\it change blindness} (see e.g. \citet{healey:2011} and often leads to failure without readers realizing, in particular for small areas of change or subtle changes.
 
-Glyph-maps using trend lines enable the reading of trends across spatial locations directly from the plot. In comparison, to read trend from facetted colored maps one needs to spot the difference between the different maps.  Compare the facetted map in Figure \ref{fig:facetted-map} with the glyph-map of de-seasonalized data in Figure \ref{fig:nasa-deseas-glyph}. The glyph-map provides a texturing over the map. The El Ni\~no event is still the primary visible structure, the region that has a bump in the middle of the time series, corresponding to the hot 1997-1998 period. We can also see other temporal features: that the temperatures are generally more varied over land, there are a few locations with dramatically increasing temperature in the later years typically in locations that are the high elevation areas, along the Andes, and Sierra Madre Occiddental in Mexico.
+Glyph-maps using trend lines enable the reading of trends across spatial locations directly from the plot. In comparison, to read trend from facetted colored maps one needs to spot the difference between the different maps.  Compare the facetted map in Figure \ref{fig:nasa-facet} with the glyph-map of de-seasonalized data in Figure \ref{fig:nasa-glyph}. The glyph-map provides a texturing over the map. The El Ni\~no event is still the primary visible structure, the region that has a bump in the middle of the time series, corresponding to the hot 1997-1998 period. We can also see other temporal features: that the temperatures are generally more varied over land, there are a few locations with dramatically increasing temperature in the later years typically in locations that are the high elevation areas, along the Andes, and Sierra Madre Occiddental in Mexico.
 
 By laying the time series out on the spatial grid, the main task expected of the viewer is comparing the temporal patterns from one location to the next. In contrast, in the small multiples used in the facetted colored map, the viewer is expected to compare the patterns in the maps from one year to the next, for corresponding months. (See \citet{carr:1999} for a discussion on perceptual grouping.) That is, compare and contrast maps with facetted colored map, or compare and contrast time series using the glyph-map. One draw-back of the glyph-maps, particularly if linear trend is displayed as an icon, is they may suffer from the Z\"ollner Illusion \citep{Zollner} which is visible in Figure \ref{fig:gistemp-pred}. On the other hand, comparing images require that we play a spot the difference game, which is perceptually difficult \citet{busey}.
 
@@ -287,7 +285,7 @@ An alternative, to both of these approaches, to focus attention on specific part
 %*** Global/local min/max, remove intercept/average, data vs model scale
 %*** This section needs to have plots re-done, once we have decided on the key pieces
 
-Scaling of the data, into the values used for each glyph, emphasizes different aspects of the data. For spatiotemporal data the most natural scale is to use the global minimum and maximum, because the temporal variables are measuring the same information, and we want to make comparisons across the spatial region. The icons will have size relative to the magnitude of the full range of the data. Locations with overall large temperature will catch the focus. Figure \ref{fig:nasa-deseas-glyph} shows data scaled to 0 to 1 based on the global minimum and maximum, using:
+Scaling of the data, into the values used for each glyph, emphasizes different aspects of the data. For spatiotemporal data the most natural scale is to use the global minimum and maximum, because the temporal variables are measuring the same information, and we want to make comparisons across the spatial region. The icons will have size relative to the magnitude of the full range of the data. Locations with overall large temperature will catch the focus. Figure \ref{fig:nasa-glyph} shows data scaled to 0 to 1 based on the global minimum and maximum, using:
 
 \begin{equation}
 y_{st} = \frac{y_{st}-y_{min}}{y_{max}-y_{min}} %\times 2 - 1

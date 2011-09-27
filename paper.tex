@@ -120,7 +120,7 @@ To demonstrate the glyph-map we will use three datasets:
 All datasets and R code used to produce the plots are available in the online supplementary materials.
 
 \section{Glyph plots for large data}
-\label{sec:construction}
+\label{sec:large-data}
 
 A lot of climate data records contain long temporal history. For temperature records often extend from the 1800s to present day. This places some difficulties, one being computational because of the volume of records, and the second being visual display of a lot of data. Plotting the full raw time series in miniature for the glyph-maps often reveals little more than an irrelevant observation that ``temperature is quite varied!'' Careful use of de-seasonalizing, and models that can reflect nuances in global trend are needed to improve the visualization. And efficient computation to calculate and store predicted values will be required.
 
@@ -158,7 +158,7 @@ Large datasets often required the display of summaries other than the raw data. 
 
 %The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. 
 
-\section{Computation}~\label{sec:construction}
+\section{Construction}~\label{sec:construction}
 
 Glyph-maps can be generated with existing graphics software after performing a simple pre-processing step, making them easily accessible to a wide audience. Creating a glyph-map, involves recognizing that they combine two structural components of the data: spatial location and data values. The spatial location is the major positioning component, and the data values are minor adjustments to these positions. For spatiotemporal data, the major axes are latitude ($y_{\amaj}$) and longitude ($x_{\amaj}$), and the minor axes are time ($x_{\amin}$) and some measurement ($y_{\amin}$), for example, temperature, or predicted temperature. The minor axes are rescaled to have range $[0, 1]$, and further adjusted to fit into the resolution of the spatial coordinates. The final values to be plotted are a simple linear combination, as given by
 
@@ -257,7 +257,7 @@ For star glyphs, the reference frames are also useful, but the reference line wo
 
 %*** Adding a circular reference line helps to pick out these deviations.
 
-\section{Perception of structure}~\label{sec:scale}
+\section{Perception of structure}~\label{sec:perception}
 
 % From a cognitive perspective, this is a very hard task to do. It falls into the framework of {\it change blindness} (see e.g. \citet{healey:2011} and often leads to failure without readers realizing, in particular for small areas of change or subtle changes.
 

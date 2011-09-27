@@ -19,10 +19,10 @@
 \begin{document}
 
 \title{Glyph-maps for Visualizing Climate Data and Models}
-\author{Dianne Cook$^1$, Heike Hofmann$^1$, Hadley Wickham$^2$, Charlotte Wickham$^3$\\
+\author{Dianne Cook$^1$, Heike Hofmann$^1$, Charlotte Wickham$^2$, Hadley Wickham$^3$, \\
 $^1$Department of Statistics, Iowa State University\\
-$^2$ Department of Statistics, Rice University\\
-$^3$ Department of Statistics, Oregon State University}
+$^2$ Department of Statistics, Oregon State University\\
+$^3$ Department of Statistics, Rice University}
 \date{}
 
 % Found data: http://www.esrl.noaa.gov/psd/data/gridded/data.HADCRUT2.html
@@ -216,14 +216,7 @@ Figure~\ref{fig:templates} gives some small examples of time series with prototy
 
 \section{Reference frames}~\label{sec:reference}
 
-A \emph{visual reference grid} \citep{cleveland:1993a} is fundamental
-to a good data visualization, in order to compare values mapped to
-position along a line. For glyph-maps, it is not feasible to make a
-full set of axes for each icon, because these would dominate the
-picture. Visual reference grids need to be post-attentive
-\citep{healey}, de-emphasized, and serve as posterior look up after
-the patterns in the data have been read. For glyph-maps, we need to be
-able to make the following types of comparisons across icons:
+The structured spatial arrangement of icons in a glyph-map helps to compare the patterns of shape, like slope, intercept, or size, across icons. However, additional clues can make comparisons easier, converting the perceptual task from comparing length to the easier position along a common scale \citep{cleveland:1984}. This \emph{visual reference grid} \citep{cleveland:1993a} helps to support the comparisons we are most interested in:
 
 \begin{itemize} \itemsep 0in
 \item Slope, or trend
@@ -231,9 +224,11 @@ able to make the following types of comparisons across icons:
 \item Variance, or size
 \end{itemize}
 
-The structured spatial arrangement of icons in a glyph-map helps to compare the patterns of shape, like slope, intercept, or size, across icons. But, additional clues would make it comparisons easier. For example glyph-map in Figure~\ref{fig:gistemp-pred}, contains two additional guides, a reference grid, and reference line. Both are drawn in white, because it is minimally perceptible (post-attentive), relative to the dark black ink of the data.
+Each glyph is small, so there is not enough space for a full set of axes. Instead, we add reference lines and boxes. These need to be minimally perceptible, post-attentive \citep{healey} and de-emphasized, so as not to detract from the raw data. For example, glyph-map in Figure~\ref{fig:gistemp-pred}, contains two additional guides, a reference grid and a reference line. Both are drawn in white, because it is minimally perceptible relative to the black ink of the data.
 
-The reference grid is a box, framing each icon, representing the spatial grid. It helps to read differences in slope and intercept. Slope is read by comparing the left and right endpoints of the predictions (line) against the relative location on the frame. Intercept is compared by reading the ``average'' position of the line in the box, near the top, or near the bottom. The reference line, drawn as a horizontal line at the average predicted temperature value, provides for better reading of the intercept. The average value for the temperature anomaly data is not the same across the map: at higher latitudes the temperatures are uniformly higher, but at lower latitudes they are uniformly lower. (**** Can this be right? Would it mean that at these locations the temperatures 1950-2010 are much higher than the reference year temperatures?)
+The \textbf{reference grid} is a box, framing each icon, which represents the spatial grid. The \textbf{reference line} is a horizontal line at mid-range.  Both helps to read differences in slope and intercept. Slope is read by comparing the left and right endpoints of the predictions (line) against the relative location on the frame. Intercept is compared by reading the ``average'' position of the line in the box: is it near the top, or near the bottom? 
+
+% , making it easier to compare the slopprovides for better reading of the intercept. The average value for the temperature anomaly data is not the same across the map: at higher latitudes the temperatures are uniformly higher, but at lower latitudes they are uniformly lower. (**** Can this be right? Would it mean that at these locations the temperatures 1950-2010 are much higher than the reference year temperatures?)
 
 %Figure~\ref{fig:ref-basic} shows two reference grid variants: a line drawn at the overall mid-range, and a box drawn around each grid cell. We prefer using white for these references because it is minimally perceptible: you can see the grid easily when looking for it, but it does not otherwise distract from the perception of the graphic \citep{carr:1994}. When we add a reference to each location, as in Figure~\ref{fig:ref-basic}, we see not only a difference in shape between Northern and Southern hemispheres, but also average value. Without reference lines, it is difficult to see that average seasonal coefficients are much higher in the North than in the South.
 
@@ -250,7 +245,7 @@ The reference grid is a box, framing each icon, representing the spatial grid. I
   \label{fig:ref-basic}
 \end{figure}
 
-For star glyphs, the reference frames are also useful, but the reference line would be replaced by a reference circle, drawn at the average data value. Figures \ref{fig:templates} and \ref{fig:gistemp-raw} show examples.
+For star glyphs, the reference frames are also useful and the equivalent of the reference line is a circle. Figures~\ref{fig:templates} and \ref{fig:gistemp-raw} show examples.
 
 %*** Re-visit this next paragraph - its a little too airy-fairy, and the plot with color needs to have the color dampened more. Its way too dominant. This paragraph is too speculative for the paper, so removing it from first draft.
 

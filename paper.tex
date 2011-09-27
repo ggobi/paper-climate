@@ -131,12 +131,12 @@ To demonstrate the glyph-map we will use three datasets:
 
 All datasets and R code used to produce the plots are available in the online supplementary materials.
 
-\section{Glyph plots for large data}
+\section{Glyph-maps for large data}
 \label{sec:large-data}
 
-A lot of climate data records contain long temporal history. For temperature records often extend from the 1800s to present day. This places some difficulties, one being computational because of the volume of records, and the second being visual display of a lot of data. Plotting the full raw time series in miniature for the glyph-maps often reveals little more than an irrelevant observation that ``temperature is quite varied!'' Careful use of de-seasonalizing, and models that can reflect nuances in global trend are needed to improve the visualization. And efficient computation to calculate and store predicted values will be required.
+Climate data is usually large: many locations in space, and many points in time. This makes climate data challenging to work with computationally and to visualise. Plotting the raw data often reveals little more than a well-known observation that ``temperature is quite varied!'' Careful use of models than Careful use of models to decompose data into long-term trend, seasonal effects and error is vital for to make the problem both computationally and visually tractable.
 
-Figure~\ref{fig:gistemp-pred} shows the a glyph plot for a dataset that represents a more typical size of climate data, the GISTEMP data. Star glyphs at each location represent temperature from 1880--2011 across the USA. The major feature to notice is the pattern of missing values, glyphs that do not complete the full circle. The high noon position of the circle is the first time point, Jan 1880, and it is this early time period that has missing values are a lot of locations. Another important feature is variability, indicated by the thickness of the circle. Some locations, particularly in the north western mountain region, have big variability in temperature, both low minima, and high maxima. At these locations there are large fluctuations from the long term mean.
+Figure~\ref{fig:gistemp-pred} shows the a glyph-map for the large GISTEMP dataset. Glyphs at each location represent temperature from 1880--2011, starting with Jan 1880 at 12 o'clock and proceeding clockwise to 2011 at 11:59. The most important feature to notice is the pattern of missing values. Most glyphs do not complete the full circle, typically missing points between 12 and 1, suggesting missing values in the earliest part of the data. Another important feature is variability, shown by the thickness of the circle. Some locations, particularly in the north western mountain region, have large variations in temperature. 
 
 *** Need to add reference circles.
 
@@ -150,7 +150,7 @@ Figure~\ref{fig:gistemp-pred} shows the a glyph plot for a dataset that represen
   \label{fig:gistemp-raw}
 \end{figure}
 
-Large datasets often required the display of summaries other than the raw data. Structure in temporal data is composed of different parts: global trend, seasonality and error. Extracting each of these for visualization improves the focus on different aspects of the time series. Figure~\ref{fig:gistemp-pred} shows the time series icons for each spatial location of predicted temperature for 1950--2010 across the USA (limited time period used due to missing data). Most locations observe an increasing temperature, to varying degrees, over this time period. A few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems. There is a difference in the temperature increase at different regions: steeper inclines can be seen in the north and western mountain region and across the Great Lakes, but inclines are flatter in the southeastern USA.
+The raw data shows us missing values and gives some sense of variability, but gives no information about long-term trend. We can look trend by fitting a linear model to each location and displaying the predicted values. Figure~\ref{fig:gistemp-pred} shows this for 1950--2010 (limited time period used due to missing data). Most locations have increasing temperature over this time period. Only a few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems. The rate of increase differs across regions: steeper inclines in the north and western mountain regions and across the Great Lakes, and flatter inclines in the southeastern USA.
 
 *** Remove the strange data over ocean, and make the reference lines white?
 

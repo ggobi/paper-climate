@@ -18,8 +18,12 @@
 
 \begin{document}
 
-\title{Glyph-maps for visualizing climate data and models}
-\author{Cook, Hofmann, Wickham, Wickham}
+\title{Glyph-maps for Visualizing Climate Data and Models}
+\author{Dianne Cook$^1$, Heike Hofmann$^1$, Hadley Wickham$^2$, Charlotte Wickham$^3$\\
+$^1$Department of Statistics, Iowa State University\\
+$^2$ Department of Statistics, Rice University\\
+$^3$ Department of Statistics, Oregon State University}
+\date{}
 
 % Found data: http://www.esrl.noaa.gov/psd/data/gridded/data.HADCRUT2.html
 %     air.mon.anom.nc, var adj, this is 5x5 degree grid, a bit sparse
@@ -47,6 +51,9 @@
 % NARCAP from NCAR?
 % Fill in with NASA data, to start, try to put new data for final version
 \maketitle
+
+\section*{Abstract}
+
 
 \section{Introduction}
 
@@ -88,7 +95,7 @@ In this paper we describe the algorithm for creating glyphs of temporal data on 
 \section{Glyph-maps}~\label{sec:glyph-map}
 
 % Reference Tufte's small multiples
-\emph{Glyph-maps} are maps where a glyph is displayed at each spatial location to represent multiple data values. To explain the glyph-map, we use data of 2$^o$x2$^o$ gridded temperature anomalies, from the GISTEMP surface temperature data provided by the Earth System Research Laboratory, Physical Sciences Division, National Oceanic and Atmospheric Administration. Ground station data was de-seasonalized, differenced from ***, and spatially averaged to obtain gridded measurements. Figure \ref{fig:gistemp-pred} shows the time series icons for each spatial location of predicted temperature for 1950-2010 across the USA. Most locations observe an increasing temperature, to varying degrees, over this time period. A few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems. There is a difference in the temperature increase at different regions: steeper inclines can be seen in the north and western mountain region and across the Great Lakes, but inclines are flatter in the southeastern USA. 
+\emph{Glyph-maps} are maps where a glyph is displayed at each spatial location to represent multiple data values. To explain the glyph-map, we use data of 2$^o$x2$^o$ gridded temperature anomalies, from the GISTEMP surface temperature data provided by the Earth System Research Laboratory, Physical Sciences Division, National Oceanic and Atmospheric Administration. Ground station data was de-seasonalized, differenced from the 1951-1980 temperatue averages, and spatially averaged to obtain gridded measurements. Figure \ref{fig:gistemp-pred} shows the time series icons for each spatial location of predicted temperature for 1950-2010 across the USA. Most locations observe an increasing temperature, to varying degrees, over this time period. A few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems. There is a difference in the temperature increase at different regions: steeper inclines can be seen in the north and western mountain region and across the Great Lakes, but inclines are flatter in the southeastern USA. 
 %The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. 
 
 \begin{figure}[htbp]

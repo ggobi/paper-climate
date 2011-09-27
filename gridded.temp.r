@@ -1,4 +1,11 @@
 library(ncdf)
+
+# Download dataset if not present
+if (!file.exists("air.mon.anom.nc")) {
+  url <- "ftp://ftp.cdc.noaa.gov/Datasets/cru/hadcrut2/var/air.mon.anom.nc"
+  download.file(url, basename(url))
+}
+
 fo<-open.ncdf("air.mon.anom.nc")
 fo$nvars
 lon <- get.var.ncdf(fo, "lon")

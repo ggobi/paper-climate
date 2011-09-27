@@ -1,3 +1,4 @@
+source("glyph-utils.r")
 library("maps")
 library("ggplot2")
 
@@ -13,21 +14,6 @@ if (!file.exists("nasadata.rds")) {
   saveRDS(nasa, "nasadata.rds")
 } else {
   nasa <- readRDS("nasadata.rds")
-}
-
-getbox <- function (map, xlim, ylim) {
-	# identify all regions involved
-	small <- subset(map, (long > xlim[1]) & (long < xlim[2]) & (lat > ylim[1]) & (lat < ylim[2]))
-	regions <- unique(small$region)
-	small <- subset(map, region %in% regions)	
-	
-	# now shrink all nodes back to the bounding box
-	small$long <- pmax(small$long, xlim[1])
-	small$long <- pmin(small$long, xlim[2])
-	small$lat <- pmax(small$lat, ylim[1])
-	small$lat <- pmin(small$lat, ylim[2])
-
-	return(small)
 }
 
 world <- map_data("world")

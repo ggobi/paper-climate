@@ -65,6 +65,3 @@ grid.all <- function(data, x, y, width, height){
   data
 }
 
-abs.dim <- function(size, data, x){
-  size / resolution(data[[x]])
-}

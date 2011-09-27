@@ -334,18 +334,6 @@ A generalized additive model \citep{wood:2006} with a seasonal term and a long-t
 
 Issues of scale relative to modeling. Switching from the data to model summaries brings new scaling issues. Often the scale of the raw data is ignored when the model is plotted, one usually shows just the line showing the trend, in the range of the trend. This has the effect of exaggerating the significance of the model. Scaling the trend lines relative to the range of the data may be useful sometimes.
 
-\section{Generalization}~\label{sec:scatter}
-
-Glyph-maps are not limited to time series plots. They are readily generalized to use any other type of display as an icon. Figure~\ref{fig:cloud} shows scatterplots as icons: temperature values are displayed horizontally and high-cloud values are displayed vertically, both locally scaled. The bivariate relationship between the two variables is explored spatially, and it is clear that it is different across the region. The equatorial Pacific and Caribbean have positive association between temperature and high cloud, while the south American continent has negative association. The second plot displays a loess curve fit to the data instead of the individual points, sharpening the view of association. In the Gauguin software \citep{gribov:2006} one alternative is an icon based on a histogram, small univariate distribution displays for each glyph. 
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.5\linewidth]{nasa-scat-glyph}%
-  \includegraphics[width=0.5\linewidth]{nasa-loess-glyph}
-
-  \caption{Glyph-map showing (left) scatterplot of temperature vs high-cloud and (right) smoothed (loess) curve fit to each location. The relationship between these two variables varies considerably over the spatial domain. }
-  \label{fig:cloud}
-\end{figure}
 
 \section{Regular vs irregular locations}~\label{sec:irregular}
 
@@ -391,6 +379,17 @@ In both examples of collapsing locations, the icon locations still represent rea
 Reference guides become especially important in the irregular location case. Comparisons are harder in this case, as the ability to easily compare icons along a common baseline, be it along a row or column of glyphs, is absent. Without reference it is hard to tell if short series are missing data at the start or end.  
 
 \section{Conclusions}
+
+There is much more work to be done on this type of display. Glyph-maps are not limited to time series plots. They are readily generalized to use any other type of display as an icon. Figure~\ref{fig:cloud} shows scatterplots as icons: temperature values are displayed horizontally and high-cloud values are displayed vertically, both locally scaled. The bivariate relationship between the two variables is explored spatially, and it is clear that it is different across the region. The equatorial Pacific and Caribbean have positive association between temperature and high cloud, while the south American continent has negative association. The second plot displays a loess curve fit to the data instead of the individual points, sharpening the view of association. Another option is available in Gauguin \citep{gribov:2006}, a icon based on a histogram, giving small univariate distribution displays for each location.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\linewidth]{nasa-scat-glyph}%
+  \includegraphics[width=0.5\linewidth]{nasa-loess-glyph}
+
+  \caption{Glyph-map showing (left) scatterplot of temperature vs high-cloud and (right) smoothed (loess) curve fit to each location. The relationship between these two variables varies considerably over the spatial domain. }
+  \label{fig:cloud}
+\end{figure}
 
 \section*{Acknowledgements}
 

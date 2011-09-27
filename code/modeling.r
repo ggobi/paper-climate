@@ -3,7 +3,7 @@ library("plyr")
 library("mgcv")
 
 source("glyph.r")
-source("nasa.r")
+source("data-nasa.r")
 source("cache.r")
 
 # Scatterplots ----------------------------------------------------------------

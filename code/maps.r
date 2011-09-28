@@ -31,10 +31,11 @@ states$group <- max(world$group) + states$group
 both <- rbind(world, states)
 both <- getbox(both, xlim = c(-126, -65), ylim = c(24, 52))
 
+central <- getbox(world, xlim=c(-115.05217, -54.94783), ylim = c(-21.81739, 36.81739))
 ##### Maps
 map <- list(
   geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = world, legend = FALSE, fill = "grey80", colour = "grey90"),
+    data = central, legend = FALSE, fill = "grey80", colour = "grey90"),
   scale_x_continuous(breaks = NA, expand = c(0.02, 0)),
   scale_y_continuous(breaks = NA, expand = c(0.02, 0)), 
   xlab(NULL),

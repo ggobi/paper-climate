@@ -2,6 +2,7 @@ library("maps")
 library("ggplot2")
 
 source("maps.r")
+source("glyph.r")
 
 theme_fullframe <- function (base_size = 12){
   structure(list(

@@ -63,6 +63,8 @@ colnames(temp.usa.melt)<-c("gridx", "gridy", "time", "temp")
 temp.usa.melt$lon<-lon[temp.usa.melt$gridx+113]
 temp.usa.melt$lat<-lat[temp.usa.melt$gridy+19]
 
+temp.usa.melt<-subset(temp.usa.melt, !(lon>-70 & lat<37))
+
 temp.usa.melt.gly<-glyphs(temp.usa.melt, "lon", "time", "lat", "temp")
 qplot(gx, gy, data=temp.usa.melt.gly, group=gid, geom="line") + map + coord_map() # Testing
 p <-ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) + 
@@ -75,9 +77,9 @@ ggsave("../images/gistemp-raw.png", width = 8, height = 4)
 
 temp.usa.melt.gly<-glyphs(temp.usa.melt, "lon", "time", "lat", "temp", polar=T)
 p <- ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) + 
-  map  
+  map_gistemp
+p <- p + add_ref_lines(temp.usa.melt.gly) + add_ref_boxes(temp.usa.melt.gly)
 p <- p + geom_path() 
-p <- p +  ref_boxes 
 #  theme_fullframe() + coord_map()
 p
 ggsave("../images/gistemp-polar-raw.png", width = 8, height = 4)

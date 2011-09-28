@@ -167,8 +167,23 @@ The raw data shows us missing values and gives some sense of variability, but gi
   \label{fig:gistemp-pred}
 \end{figure}
 
-
 %The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. 
+
+% \section{What to plot: raw data, trend lines, residuals,  seasonal}
+% 
+% A generalized additive model \citep{wood:2006} with a seasonal term and a long-term smooth term can be useful. This is revealing for smooth models of surface temperature, shown in Figure~\ref{fig:scaling}. Each location is modeled using a generalized additive model \citep{wood:2006} with a seasonal term and a long-term smooth term. The three plots in the figure show the long-term smooth term. 
+% 
+% %Because some locations are uniformly warmer than others, the impact of
+% %changes across time are diminished. In the center plot, each location is
+% %scaled by dividing out the maximum, and on the right, each location is scaled
+% %to range $[0, 1]$. These emphasize individual changes but lose the ability to
+% %make global comparisons, and need caution when interpreting - a small
+% %absolute change gets blown up into a large relative change.
+% 
+% *** Need three plots here: trend, seasonality and residuals, shall we do this with NASA ozone data or stick to temperature?
+% 
+% Issues of scale relative to modeling. Switching from the data to model summaries brings new scaling issues. Often the scale of the raw data is ignored when the model is plotted, one usually shows just the line showing the trend, in the range of the trend. This has the effect of exaggerating the significance of the model. Scaling the trend lines relative to the range of the data may be useful sometimes.
+
 
 \section{Construction}~\label{sec:construction}
 
@@ -261,7 +276,6 @@ For star glyphs, the reference frames are also useful and the equivalent of the 
 
 %A particularly useful summary when to add when displaying model predictions, is some measure of model fit. This makes it easier to avoid over-interpreting predictions from poorly-fitting models.
 
-
 %*** Adding a circular reference line helps to pick out these deviations.
 
 \section{Perception of structure}~\label{sec:perception}
@@ -330,19 +344,7 @@ globally scaled, (right) locally scaled.}
 
 One more important point: if a model summary is displayed in the glyph-map, such as the predicted values, it may be important to force the scale to that of the original data. Displaying the predicted values in the absence of the raw data scale can skew the interpretation of the magnitude of the effect. 
 
-\section{What to plot: raw data, trend lines, residuals,  seasonal}
-
-A generalized additive model \citep{wood:2006} with a seasonal term and a long-term smooth term can be useful. This is revealing for smooth models of surface temperature, shown in Figure~\ref{fig:scaling}. Each location is modeled using a generalized additive model \citep{wood:2006} with a seasonal term and a long-term smooth term. The three plots in the figure show the long-term smooth term. %Because some locations are uniformly warmer than others, the impact of changes across time are diminished. In the center plot, each location is scaled by dividing out the maximum, and on the right, each location is scaled to range $[0, 1]$. These emphasize individual changes but lose the ability to make global comparisons, and need caution when interpreting - a small absolute change gets blown up into a large relative change.
- %The three plots in the figure show the long-term smooth term. Because some locations are uniformly warmer than others, the impact of changes across time are diminished.
-
-% is a extremely useful technique: product plots, ANOVA, ...  For glyph plots, it's often useful to partition the glyphs into shape and scale components, decomposing the values into a product of maximum and scaled values.  In this section we explore how decomposing each series into scale and shape components can be useful.
-
-*** Need three plots here: trend, seasonality and residuals, shall we do this with NASA ozone data or stick to temperature?
-
-Issues of scale relative to modeling. Switching from the data to model summaries brings new scaling issues. Often the scale of the raw data is ignored when the model is plotted, one usually shows just the line showing the trend, in the range of the trend. This has the effect of exaggerating the significance of the model. Scaling the trend lines relative to the range of the data may be useful sometimes.
-
-
-\section{Regular vs irregular locations}~\label{sec:irregular}
+\section{Non-gridded data}~\label{sec:irregular}
 
 Regularly gridded spatial data helps with the perception of structure, because it helps to provide the reference frames upon which to make comparisons among the icons. When spatial locations are not on a regular grid, some difficulties arise. In this situation it is not clear what the scale of icons should be, there is no regular spacing. Some locations may be close to each other which would generate icons that overlap. 
 

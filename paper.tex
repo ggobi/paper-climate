@@ -141,24 +141,26 @@ All datasets and R code used to produce the plots are available in the online su
 
 \section{Construction}~\label{sec:construction}
 
-Glyph-maps can be generated with existing graphics software after performing a simple pre-processing step, making them easily accessible to a wide audience. Creating a glyph-map requires a recognition they combine two structural components of the data: spatial location and data values. The spatial location is the major positioning component, and the data values are minor adjustments to those positions. For spatiotemporal data, the major axes are latitude ($y_{\amaj}$) and longitude ($x_{\amaj}$), and the minor axes are time ($x_{\amin}$) and some measurement ($y_{\amin}$), for example, temperature, or predicted temperature. Assuming the minor axes are rescaled to $[-1, 1]$, the final positions are a simple linear combination:
+Glyph-maps can be generated with existing graphics software after performing a simple pre-processing step, making them easily accessible to a wide audience. Creating a glyph-map requires a recognition of the two structural components of the data: spatial location and data values. The spatial location is the major positioning component, while the data values are minor adjustments to those positions. For spatiotemporal data, the major axes are latitude ($y_{\amaj}$) and longitude ($x_{\amaj}$), and the minor axes are time ($x_{\amin}$) and some measurement ($y_{\amin}$), for example, temperature, or predicted temperature. Assuming the minor axes are rescaled to $[-1, 1]$, the final coordinates $(x,y)$ on the chart are a simple linear combination:
 
 \begin{equation}
   \begin{array}{lll}
-  x_\text{ coordinate}&=& x_{\amaj} + w \cdot x_{\amin}\\
-  y_\text{ coordinate}&=& y_{\amaj} + h \cdot y_{\amin}, 
+  x &=& x_{\amaj} + \frac{w}{2} \cdot x_{\amin}\\
+  y &=& y_{\amaj} + \frac{h}{2} \cdot y_{\amin}, 
   \end{array}
   \label{coords.eqn}
 \end{equation}
 
-\noindent where $w$ and $h$ are width and height respectively. For gridded data, the width and height be the resolution of the major axes, that is, the minimum difference between consecutive locations. Since the coordinates are linear combinations of two variables, it is possible to build these these line-glyphs interactively, illustrated by software packages that have incorporated tours \citep{cook:2006}, such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}. This technique is used to good effect in \citet{buja:1996a}, and was used to examine the climate data in \citet{hobbs:2010}.
+\noindent where $w$ and $h$ are maximal width and height of the glyph, respectively. For gridded data, it is convenient to make use of the resolution of the major axes, that is, the minimum difference between neighboring locations. 
+
+Since the coordinates are linear combinations of two variables, it is possible to build these these line-glyphs interactively, illustrated by software packages that have incorporated tours \citep{cook:2006}, such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}. This technique is used to good effect in \citet{buja:1996a}, and was used to examine the climate data in \citet{hobbs:2010}.
 
 Computing the coordinates for star glyphs is achieved with a simple polar transformation, with minor axes scaled to $[0, 1]$: 
 
 \begin{equation}
   \begin{array}{lll}
-  x_\text{ coordinate}&=& x_{\amaj} + y_{\amin} \cdot \frac{w}{2} \sin(2 \pi x_{\amin}) \\
-  y_\text{ coordinate}&=& y_{\amaj} + y_{\amin} \cdot \frac{h}{2} \cos(2 \pi x_{\amin}).
+  x &=& x_{\amaj} + y_{\amin} \cdot \frac{w}{2} \sin(2 \pi x_{\amin}) \\
+  y &=& y_{\amaj} + y_{\amin} \cdot \frac{h}{2} \cos(2 \pi x_{\amin}).
   \end{array}
   \label{coords.polar.eqn}
 \end{equation}

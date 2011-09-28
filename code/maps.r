@@ -29,26 +29,22 @@ world <- map_data("world")
 states <- map_data("state")
 states$group <- max(world$group) + states$group
 both <- rbind(world, states)
-both <- getbox(both, xlim = c(-126, -65), ylim = c(24, 52))
 
-central <- getbox(world, xlim=c(-115.05217, -54.94783), ylim = c(-21.81739, 36.81739))
 ##### Maps
-map <- list(
+nasa <- getbox(both, xlim = c(-115, -55), ylim = c(-21.1, 36.6))
+map_nasa <- list(
   geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = central, legend = FALSE, fill = "grey80", colour = "grey90"),
+    data = nasa, legend = FALSE, fill = "grey80", colour = "grey90"),
   scale_x_continuous(breaks = NA, expand = c(0.02, 0)),
   scale_y_continuous(breaks = NA, expand = c(0.02, 0)), 
   xlab(NULL),
   ylab(NULL))
 
-
-map_mini <- c(map, list(
-  coord_cartesian(xlim = c(-114.93, -85), ylim = c(7.55, 36.64), wise = T)))
-
-
+ushcn <- subset(getbox(both, xlim = c(-126, -65), ylim = c(24, 52)),
+  region != "Great Lakes")
 map_ushcn <- list(
   geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = subset(both, region != "Great Lakes"), legend = FALSE, fill = "grey80", colour = "grey90"),
+    data = ushcn, legend = FALSE, fill = "grey80", colour = "grey90"),
   scale_x_continuous(breaks = NA, expand = c(0.02, 0)),
   scale_y_continuous(breaks = NA, expand = c(0.02, 0)), 
   xlab(NULL),

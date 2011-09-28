@@ -25,6 +25,9 @@ $^2$ Department of Statistics, Oregon State University\\
 $^3$ Department of Statistics, Rice University}
 \date{}
 
+% Remove words like "obvious", "challenge", "scratched the surface"
+% Make data URLs references
+
 % Found data: http://www.esrl.noaa.gov/psd/data/gridded/data.HADCRUT2.html
 %     air.mon.anom.nc, var adj, this is 5x5 degree grid, a bit sparse
 % Or: http://www.esrl.noaa.gov/psd/data/gridded/data.gisstemp.html
@@ -296,7 +299,7 @@ One more important point: if a model summary is displayed in the glyph-map, as d
 \section{Large data and models}
 \label{sec:large-data}
 
-Climate data is usually large: many locations in space, and many points in time. This makes climate data challenging to work with computationally and to visualize. Plotting the raw data often reveals little more than a well-known observation that ``temperature is quite varied!'' Careful use of models than Careful use of models to decompose data into long-term trend, seasonal effects and error is vital for to make the problem both computationally and visually tractable.
+Climate data is usually large: many locations in space, and many points in time. This makes climate data challenging to work with computationally and to visualize. Plotting the raw data often reveals little more than a well-known observation that ``temperature is quite varied!'' Careful use of models to decompose data into long-term trend, seasonal effects and error is vital for to make the problem both computationally and visually tractable.
 
 Figure~\ref{fig:gistemp-pred} shows the a glyph-map for the large GISTEMP dataset. Glyphs at each location represent temperature from 1880--2011, starting with Jan 1880 at 12 o'clock and proceeding clockwise to 2011 at 11:59. The most important feature to notice is the pattern of missing values. Most glyphs do not complete the full circle, typically missing points between 12 and 1, suggesting missing values in the earliest part of the data. Another important feature is variability, shown by the thickness of the circle. Some locations, particularly in the north western mountain region, have large variations in temperature. 
 

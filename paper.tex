@@ -230,7 +230,17 @@ Computing the coordinates for star glyphs is achieved with a simple polar transf
 
 Figure~\ref{fig:templates} gives some small examples of time series with prototypical trends, shown both in cartesian coordinates and polar coordinates. Differences between linear and nonlinear trend are more apparent in the line-glyphs, and are effectively lost in the star-glyphs, which are most effective in exposing cyclical patterns due to seasonality. Star-glyphs show seasonality as floral cartoons, with peaks forming petals. It is surprising that time series with opposing trends in line-glyphs don't show this symmetry when displayed with star-glyphs. The area of star-glyphs coordinates mainly reflect the average value of a time series, while its shape shows deviations from the average.
 
-\section{Reference frames}~\label{sec:reference}
+\section{Perception}~\label{sec:perception}
+
+% From a cognitive perspective, this is a very hard task to do. It falls into the framework of {\it change blindness} (see e.g. \citet{healey:2011} and often leads to failure without readers realizing, in particular for small areas of change or subtle changes.
+
+Glyph-maps using trend lines enable the reading of trends across spatial locations directly from the plot. In comparison, to read trend from facetted colored maps one needs to spot the difference between the different maps.  Compare the facetted map in Figure \ref{fig:nasa-facet} with the glyph-map of de-seasonalized data in Figure \ref{fig:nasa-glyph}. The glyph-map provides a texturing over the map. The El Ni\~no event is still the primary visible structure, the region that has a bump in the middle of the time series, corresponding to the hot 1997-1998 period. We can also see other temporal features: that the temperatures are generally more varied over land, there are a few locations with dramatically increasing temperature in the later years typically in locations that are the high elevation areas, along the Andes, and Sierra Madre Occiddental in Mexico.
+
+By laying the time series out on the spatial grid, the main task expected of the viewer is comparing the temporal patterns from one location to the next. In contrast, in the small multiples used in the facetted colored map, the viewer is expected to compare the patterns in the maps from one year to the next, for corresponding months. (See \citet{carr:1999} for a discussion on perceptual grouping.) That is, compare and contrast maps with facetted colored map, or compare and contrast time series using the glyph-map. One draw-back of the glyph-maps, particularly if linear trend is displayed as an icon, is they may suffer from the Z\"ollner Illusion \citep{Zollner} which is visible in Figure \ref{fig:gistemp-pred}. On the other hand, comparing images require that we play a spot the difference game, which is perceptually difficult \citet{busey}.
+
+An alternative, to both of these approaches, to focus attention on specific parts of the data calculate the relevant statistic for each location and display these values as color on a map. For example, to study the warming or cooling trends, we might calculate the slope of a linear model at each location and color tiles across the map by the value of the slope. From this we might see the increasing temperatures at higher altitudes in the NASA temperature data. However, we would fail to see the finer points of the time series, that the increase is not as simple as a linear increase. In addition, Cleveland's \citep{cleveland:1993a} perceptual tests suggest that the reader can perceive the positional difference of the lines better than the color differences. Accurate perception of color differences is difficult.
+
+\subsection{Reference frames}~\label{sec:reference}
 
 The structured spatial arrangement of icons in a glyph-map helps to compare the patterns of shape, like slope, intercept, or size, across icons. However, additional clues can make comparisons easier, converting the perceptual task from comparing length to the easier position along a common scale \citep{cleveland:1984}. This \emph{visual reference grid} \citep{cleveland:1993a} helps to support the comparisons we are most interested in:
 
@@ -279,18 +289,7 @@ For star glyphs, the reference frames are also useful and the equivalent of the 
 
 %*** Adding a circular reference line helps to pick out these deviations.
 
-\section{Perception of structure}~\label{sec:perception}
-
-% From a cognitive perspective, this is a very hard task to do. It falls into the framework of {\it change blindness} (see e.g. \citet{healey:2011} and often leads to failure without readers realizing, in particular for small areas of change or subtle changes.
-
-Glyph-maps using trend lines enable the reading of trends across spatial locations directly from the plot. In comparison, to read trend from facetted colored maps one needs to spot the difference between the different maps.  Compare the facetted map in Figure \ref{fig:nasa-facet} with the glyph-map of de-seasonalized data in Figure \ref{fig:nasa-glyph}. The glyph-map provides a texturing over the map. The El Ni\~no event is still the primary visible structure, the region that has a bump in the middle of the time series, corresponding to the hot 1997-1998 period. We can also see other temporal features: that the temperatures are generally more varied over land, there are a few locations with dramatically increasing temperature in the later years typically in locations that are the high elevation areas, along the Andes, and Sierra Madre Occiddental in Mexico.
-
-By laying the time series out on the spatial grid, the main task expected of the viewer is comparing the temporal patterns from one location to the next. In contrast, in the small multiples used in the facetted colored map, the viewer is expected to compare the patterns in the maps from one year to the next, for corresponding months. (See \citet{carr:1999} for a discussion on perceptual grouping.) That is, compare and contrast maps with facetted colored map, or compare and contrast time series using the glyph-map. One draw-back of the glyph-maps, particularly if linear trend is displayed as an icon, is they may suffer from the Z\"ollner Illusion \citep{Zollner} which is visible in Figure \ref{fig:gistemp-pred}. On the other hand, comparing images require that we play a spot the difference game, which is perceptually difficult \citet{busey}.
-
-An alternative, to both of these approaches, to focus attention on specific parts of the data calculate the relevant statistic for each location and display these values as color on a map. For example, to study the warming or cooling trends, we might calculate the slope of a linear model at each location and color tiles across the map by the value of the slope. From this we might see the increasing temperatures at higher altitudes in the NASA temperature data. However, we would fail to see the finer points of the time series, that the increase is not as simple as a linear increase. In addition, Cleveland's \citep{cleveland:1993a} perceptual tests suggest that the reader can perceive the positional difference of the lines better than the color differences. Accurate perception of color differences is difficult.
-
-
-\section{Effect of scale}~\label{sec:scale}
+\subsection{Effect of scale}~\label{sec:scale}
 
 %*** Global/local min/max, remove intercept/average, data vs model scale
 %*** This section needs to have plots re-done, once we have decided on the key pieces

@@ -174,6 +174,14 @@ ggplot(day_preds2, aes(gx, gy, group = gid)) +
   scale_colour_gradient(high = "black", low = "grey60")
 ggsave("../images/month-rescale01-col.png", width = 4, height = 4)
 
+grid <- unique(day_preds2[c("lat", "long", "range")])
+
+ggplot(day_preds2) + 
+  map + 
+  geom_tile(aes(long, lat, fill = range), data = grid, alpha = 0.5) +
+  geom_path(aes(gx, gy, group = gid)) +
+  theme_fullframe()
+ggsave("../images/month-rescale01-fill.png", width = 4, height = 4)
 
 # Residuals ------------------------------------------------------------------
 

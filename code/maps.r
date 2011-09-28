@@ -29,13 +29,7 @@ world <- map_data("world")
 states <- map_data("state")
 states$group <- max(world$group) + states$group
 both <- rbind(world, states)
-both <- getbox(both, xlim = c(-126, -65), ylim = c(24, 50))
-
-both.gistemp <- rbind(world, states)
-both.gistemp <- getbox(both, xlim = c(-140, -55), ylim = c(20, 60))
-
-# Enter the coords of the data for the limits
-world <- getbox(world, xlim = c(-114.93, -55.07), ylim = c(-21.53, 36.64))
+both <- getbox(both, xlim = c(-126, -65), ylim = c(24, 52))
 
 ##### Maps
 map <- list(
@@ -59,12 +53,5 @@ map_ushcn <- list(
   xlab(NULL),
   ylab(NULL))
 
-map_gistemp <- list(
-  geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = subset(both.gistemp, region != "Great Lakes"), legend = FALSE, fill = "grey80", colour = "grey90"),
-  scale_x_continuous(breaks = NA, expand = c(0.02, 0)),
-  scale_y_continuous(breaks = NA, expand = c(0.02, 0)), 
-  xlab(NULL),
-  ylab(NULL))
 
 

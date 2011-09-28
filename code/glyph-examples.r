@@ -2,6 +2,7 @@
 # putting all of the glyph-map examples, using gistemp and ushcn data
 # here too
 
+source("glyph.r")
 source("maps.r")
 # world, map are created in maps.r
 
@@ -10,8 +11,8 @@ source("maps.r")
 # to run that code before this
 resids.gly <- glyphs(resids, "long", "day", "lat", "temp_resid", height=2.5) 
 ggplot(resids.gly, aes(gx, gy, group = gid)) + map +
-  ref_lines(resids.gly) +
-  ref_boxes(resids.gly) +
+  add_ref_lines(resids.gly) +
+  add_ref_boxes(resids.gly) +
   geom_path() + theme_fullframe() + coord_map()
 #qplot(gx, gy, data = resids, geom = "line", group = gid) + map
 ggsave("../images/nasa-deseas-glyph.png")

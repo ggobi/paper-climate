@@ -198,28 +198,22 @@ Two other factors are critical for accurate perception of change: reference fram
 
 The structured spatial arrangement of icons in a glyph-map helps to compare the patterns of shape, like slope, intercept, or size, across icons. However, additional clues can make comparisons easier, converting the perceptual task from comparing length to the easier position along a common scale \citep{cleveland:1984}. This is also called a \emph{visual reference grid} \citep{cleveland:1993a}.
 
-Each glyph is small, so there is not enough space for a full set of axes. Instead, we add reference lines and boxes. These need to be minimally perceptible, post-attentive \citep{healey} and de-emphasized, so as not to detract from the raw data. For example, glyph-map in Figure~\ref{fig:gistemp-pred}, contains two additional guides, a reference grid and a reference line. Both are drawn in white, because it is minimally perceptible relative to the black ink of the data.
-
-The \textbf{reference grid} is a box, framing each icon, which represents the spatial grid. The \textbf{reference line} is a horizontal line at mid-range.  Both helps to read differences in slope and intercept. Slope is read by comparing the left and right endpoints of the predictions (line) against the relative location on the frame. Intercept is compared by reading the ``average'' position of the line in the box: is it near the top, or near the bottom? 
+Each glyph is small, so there is not enough space for a full set of axes. Instead, we add reference lines and boxes. These need to be minimally perceptible, post-attentive \citep{healey} and de-emphasized, so as not to detract from the raw data. The \textbf{reference grid} is a box, framing each icon, which represents the spatial grid. The \textbf{reference line} is a horizontal line at mid-range. Both help to read differences in slope and intercept. Slope is read by comparing the position of left and right endpoints on the frame, or by reading the angle between the data line and the reference line. Intercept is read from ``average'' position of the line in the box: is it near the top, or near the bottom? Figure~\ref{fig:ref-basic} demonstrates both guides. We draw them in white, so they are minimally perceptible relative to the black data.
 
 % , making it easier to compare the slopprovides for better reading of the intercept. The average value for the temperature anomaly data is not the same across the map: at higher latitudes the temperatures are uniformly higher, but at lower latitudes they are uniformly lower. (**** Can this be right? Would it mean that at these locations the temperatures 1950-2010 are much higher than the reference year temperatures?)
 
-%Figure~\ref{fig:ref-basic} shows two reference grid variants: a line drawn at the overall mid-range, and a box drawn around each grid cell. We prefer using white for these references because it is minimally perceptible: you can see the grid easily when looking for it, but it does not otherwise distract from the perception of the graphic \citep{carr:1994}. When we add a reference to each location, as in Figure~\ref{fig:ref-basic}, we see not only a difference in shape between Northern and Southern hemispheres, but also average value. Without reference lines, it is difficult to see that average seasonal coefficients are much higher in the North than in the South.
-
-% Think we might need to show the original figures of data with reference lines
-
-*** Re-do these figures with zooms in on the GISTEMP data
+% *** Re-do these figures with zooms in on the GISTEMP data
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.5\linewidth]{ref-line}%
   \includegraphics[width=0.5\linewidth]{ref-box}
 
-  \caption{Glyph-maps of seasonal temperature patterns. Adding reference lines, (left) mid-range lines and (right) grid-cell boxes, makes it easier to see differences in glyph position, not just shape.}
+  \caption{Glyph-maps of seasonal temperature patterns (averages for each month), using the data-expo data. Adding mid-range reference lines (left) and grid-cell reference boxes (right), makes it easier to see differences in glyph position, not just shape.}
   \label{fig:ref-basic}
 \end{figure}
 
-For star glyphs, the reference frames are also useful and the equivalent of the reference line is a circle. Figures~\ref{fig:templates} and \ref{fig:gistemp-raw} show examples.
+For star glyphs the reference frames are also useful and the equivalent of the reference line is a circle. Figures~\ref{fig:templates} and \ref{fig:gistemp-raw} show examples.
 
 %*** Re-visit this next paragraph - its a little too airy-fairy, and the plot with color needs to have the color dampened more. Its way too dominant. This paragraph is too speculative for the paper, so removing it from first draft.
 
@@ -235,64 +229,71 @@ For star glyphs, the reference frames are also useful and the equivalent of the 
 
 %A particularly useful summary when to add when displaying model predictions, is some measure of model fit. This makes it easier to avoid over-interpreting predictions from poorly-fitting models.
 
-%*** Adding a circular reference line helps to pick out these deviations.
+\subsection{Scaling}~\label{sec:scale}
 
-\subsection{Effect of scale}~\label{sec:scale}
-
-%*** Global/local min/max, remove intercept/average, data vs model scale
 %*** This section needs to have plots re-done, once we have decided on the key pieces
 
-Scaling of the data, into the values used for each glyph, emphasizes different aspects of the data. For spatiotemporal data the most natural scale is to use the global minimum and maximum, because the temporal variables are measuring the same information, and we want to make comparisons across the spatial region. The icons will have size relative to the magnitude of the full range of the data. Locations with overall large temperature will catch the focus. Figure \ref{fig:nasa-glyph} shows data scaled to 0 to 1 based on the global minimum and maximum, using:
+We can also emphasise different features of the data by varying the scale used with each cell. By default, we use a global scale, so the same position within each cell corresponds to the same value in all locations. This facilitates the comparison of absolute values, and draws attention to plots with large overall variation.
 
-\begin{equation}
-y_{st} = \frac{y_{st}-y_{min}}{y_{max}-y_{min}} %\times 2 - 1
-\label{scale1}
-\end{equation}
-
-\noindent where $y$ is the variable used on the minor axis in equations \ref{coords.eqn}, \ref{coords.polar.eqn}, $y_{min} = \mbox{minimum}\{y_{st}; s=1, \dots S, t=1, ..., T \}, y_{max} = \mbox{maximum}\{y_{st}; s=1, \dots S, t=1, ..., T\}$, $S=$ is the number of spatial locations and $T=$ is the number of time points. In addition, $y_{st}$ may be further scaled by doubling and subtracting 1 to give values between -0.5 and 0.5 for using in equations \ref{coords.eqn}, \ref{coords.polar.eqn}.
-
-Alternatively, scaling locally at each spatial location enables exploring shape differences, particularly seasonal patterns, from one location to another:
-
-\begin{equation}
-y_{st} = \frac{y_{st}-y_{s,min}}{y_{s,max}-y_{s,min}} %\times 2 - 1
-\label{scale2}
-\end{equation}
-
-\noindent where $y_{s, min} = \mbox{minimum}\{y_{st}; t=1, ..., T \}, y_{s,max} = \mbox{maximum}\{y_{st}; t=1, ..., T\}$. With the local scaling, the shape of the icon, for example, differences in the seasonal patterns over spatial locations, are emphasized.  Fig \ref{fig:scaling} shows glyph-maps generated using both global scaling (left) and local scaling (right) for the NASA temperature data. On the global scale, the El Ni\~no blip in temperature is primarily visible, along with the generally flat series over most water locations, and somewhat increasing or variable temperatures over land. The local scale emphasizes the individual shapes: The El Ni\~no pattern is visible, but extend to a larger spatial region including the Caribbean, dramatic linear increases across the Andes, decreases in the Gulf of Mexico. (The local scale is equivalent to using individual scales in the facetted graphics of \texttt{ggplot2}). One caution, with local scale, the viewer needs to realize that the scale is not relative, big patterns in some locations might be just tiny effects. To indicate this on the locally scaled data plots, using a very pale coloring to code the original scale in the tiles, might help puts patterns in perspective.
-
-Other types of shifting and scaling can be useful. The mean and standard deviation might be used to standardize values, or the median and interquartile range, might be useful with some types of data. Shifting the values at each location to have mean zero, places more focus on the trend. This is particularly important for the star glyphs, where differences in the average value lead to unintuitive patterns in the resulting glyphs (eg Figure \ref{fig:cycle} star glyphs obscure the seasonal pattern).  In this situation we would use $y_{st}-\bar{y}_s$ instead of $y_{st}$ in equations \ref{scale1}, \ref{scale2}, with minima and maxima calculated on the mean-shifted data.
-
-%Another way to think about these scale options is partitioning the data structure into shape, magnitude and shift components. The different ways to scale emphasize these different components. The shift component can be extracted from the data in different ways, using the intercept from a linear model, for example, instead of the average. 
-
-
-%**** This is different - I think it just confuses the topic of scaling. Because the GAM is not used to rescale the data, you still have to do that using the local or global scling equations above. Moving the discussion to ``What to plot''. 
+Alternatively, we can re-scale values within each location prior to plotting. In local scaling, the values within each location are scaled to range $[0, 1]$ before plot construction. This makes it easier to compare shape (ignoring amplitude), and draws attention to locations with large relative variation. Figure~\ref{fig:scaling} compares global scaling and local scaling for the smoothed temperature data from the data-expo data. On the global scale, the El Ni\~no blip in temperature is just visible, along with variation in the average temperature at each location. Local scaling emphasizes the individual shapes: we see the impact of El Ni\~no over a wider region, dramatic linear increases across the Andes, and decreases in the Gulf of Mexico.
 
 \begin{figure}[htbp]
   \centering
-  %\includegraphics[width=0.33\linewidth]{month-rescale-none}%
-  \includegraphics[width=0.5\linewidth]{month-rescale-max}%
+  \includegraphics[width=0.5\linewidth]{month-rescale-none}%
+  % \includegraphics[width=0.5\linewidth]{month-rescale-max}%
   \includegraphics[width=0.5\linewidth]{month-rescale01}
-  \caption{Smoothed de-seasonalized daily temperature glyph-map. (Left) %unscaled, (center) 
+  \caption{Smoothed de-seasonalized daily temperature glyph-map. (Left)
 globally scaled, (right) locally scaled.}
   \label{fig:scaling}
 \end{figure}
 
-%A possible compromise is to use line colour to display the standardising variable, as shown in Figure~\ref{fig:scaling-col}.  This makes it possible to see the individual patterns while still retaining some ability to see which shapes represent small absolute changes.
+% 
+% \begin{equation}
+% y_{st} = \frac{y_{st}-y_{min}}{y_{max}-y_{min}} %\times 2 - 1
+% \label{scale1}
+% \end{equation}
+% 
+% \noindent where $y$ is the variable used on the minor axis in equations \ref{coords.eqn}, \ref{coords.polar.eqn}, $y_{min} = \mbox{minimum}\{y_{st}; s=1, \dots S, t=1, ..., T \}, y_{max} = \mbox{maximum}\{y_{st}; s=1, \dots S, t=1, ..., T\}$, $S=$ is the number of spatial locations and $T=$ is the number of time points. In addition, $y_{st}$ may be further scaled by doubling and subtracting 1 to give values between -0.5 and 0.5 for using in equations \ref{coords.eqn}, \ref{coords.polar.eqn}.
+% 
+% \begin{equation}
+% y_{st} = \frac{y_{st}-y_{s,min}}{y_{s,max}-y_{s,min}} %\times 2 - 1
+% \label{scale2}
+% \end{equation}
+% 
+% \noindent where $y_{s, min} = \mbox{minimum}\{y_{st}; t=1, ..., T \}, y_{s,max} = \mbox{maximum}\{y_{st}; t=1, ..., T\}$. 
 
-%\begin{figure}[htbp]
-%  \centering
-%  \includegraphics[width=0.33\linewidth]{month-rescale01-col}
-%  \caption{Adding colour to scaled plots. Here each location has been scaled to range $[0, 1]$ and colour mapped to the range of the original predictions.}
-%  \label{fig:scaling-col}
-%\end{figure}
+Other types of shifting and scaling can be useful:
 
-%Other types of scaling may be interesting to explore, such as a classical scaling using the mean and standard deviation.
+\begin{itemize}
 
-%Equivalent to using individual scales in facetted graphics. 
+  \item The mean and standard deviation (or robust equivalents) could be used
+  to standardize values to common moments.
+  
+   \item Scaling to maximum 1 (but leaving the minimum unchanged) can help
+  emphasis the relative shape, but not distort the range as much as rescaling
+  to range $[0, 1]$.
 
-One more important point: if a model summary is displayed in the glyph-map, such as the predicted values, it may be important to force the scale to that of the original data. Displaying the predicted values in the absence of the raw data scale can skew the interpretation of the magnitude of the effect. 
+  \item Shifting the values at each location to have mean zero places more
+  focus on the trend. This is particularly important for the star glyphs,
+  where differences in the average value lead to unintuitive patterns in the
+  resulting glyphs.
 
-\section{Glyph-maps for large data}
+\end{itemize}
+
+Note that the use of local scales needs to be clearly marked. The viewer must realize that the scale is not relative and that big patterns in some locations might be just tiny effects. To indicate this on the locally scaled data plots, one can use an additional aesthetic, like colour, to encode the original scale.  This is illustrated in Figure~\ref{fig:scaling-col}.
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.33\linewidth]{month-rescale01-col}
+ \caption{Adding colour to scaled plots. Here each location has been scaled to range $[0, 1]$ and colour mapped to the range of the original predictions. Pale locations have smaller range than darker locations. Shapes at all locations are visible, but attention is drawn to locations with larger ranges.}
+ \label{fig:scaling-col}
+\end{figure}
+
+One more important point: if a model summary is displayed in the glyph-map, as discussed in the following section, it may be important to force the scale to that of the original data. The range of predicted values is typically smaller than the raw data, so angles of slopes is increase.  
+
+% Displaying the predicted values in the absence of the raw data scale typically increases magnitude because the variation is much lower.
+
+\section{Large data and models}
 \label{sec:large-data}
 
 Climate data is usually large: many locations in space, and many points in time. This makes climate data challenging to work with computationally and to visualise. Plotting the raw data often reveals little more than a well-known observation that ``temperature is quite varied!'' Careful use of models than Careful use of models to decompose data into long-term trend, seasonal effects and error is vital for to make the problem both computationally and visually tractable.

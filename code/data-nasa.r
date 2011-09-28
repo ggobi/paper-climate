@@ -1,5 +1,6 @@
 source("glyph-utils.r")
-library("maps")
+source("maps.r")
+
 library("ggplot2")
 
 if (!file.exists("../data/nasadata.rds")) {
@@ -16,23 +17,6 @@ if (!file.exists("../data/nasadata.rds")) {
   nasa <- readRDS("../data/nasadata.rds")
 }
 
-world <- map_data("world")
-world <- getbox(world, xlim = c(-114.93, -55.07), ylim = c(-21.53, 36.64))
-# Remove slivvers
-
-world <- ddply(world, "group", function(df) {
-  if (diff(range(df$long)) < 1e-6) return(NULL)
-  if (diff(range(df$lat)) < 1e-6) return(NULL)
-  df
-})
-
-map <- list(
-  geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = world, legend = FALSE, fill = "grey80", colour = "grey90"),
-  scale_x_continuous(breaks = NA, expand = c(0.02, 0)),
-  scale_y_continuous(breaks = NA, expand = c(0.02, 0)), 
-  xlab(NULL),
-  ylab(NULL))
   
 theme_fullframe <- function (base_size = 12){
   structure(list(

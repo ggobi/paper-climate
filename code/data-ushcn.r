@@ -4,25 +4,7 @@ library(plyr)
 
 source("glyph-utils.r")
 
-states <- map_data("state")
-world <- map_data("world")
-states$group <- max(world$group) + states$group
-both <- rbind(world, states)
-both <- getbox(both, xlim = c(-126, -65), ylim = c(24, 50))
-
-both <- ddply(both, "group", function(df) {
-  if (diff(range(df$long)) < 1e-6) return(NULL)
-  if (diff(range(df$lat)) < 1e-6) return(NULL)
-  df
-})
-
-map_ushcn <- list(
-  geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = subset(both, region != "Great Lakes"), legend = FALSE, fill = "grey80", colour = "grey90"),
-  scale_x_continuous(breaks = NA, expand = c(0.02, 0)),
-  scale_y_continuous(breaks = NA, expand = c(0.02, 0)), 
-  xlab(NULL),
-  ylab(NULL))
+source("maps.r")
 
 ushcn.loc <- "../data/ushcndata.rds"
 ushcn.stations.loc <- "../data/ushcnstations.rds"

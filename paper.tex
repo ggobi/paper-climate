@@ -27,6 +27,8 @@ $^3$ Department of Statistics, Oregon State University\\
 
 % Remove words like "obvious", "challenge", "scratched the surface"
 % Make data URLs references
+% Do we have different aspect ratios between the different US maps?
+% Check where data is described, just use key names given in the description at beginning of paper
 
 % Found data: http://www.esrl.noaa.gov/psd/data/gridded/data.HADCRUT2.html
 %     air.mon.anom.nc, var adj, this is 5x5 degree grid, a bit sparse
@@ -304,8 +306,6 @@ Climate data is usually large: many locations in space, and many points in time.
 
 Figure~\ref{fig:gistemp-pred} shows the a glyph-map for the large GISTEMP dataset. Glyphs at each location represent temperature from 1880--2011, starting with Jan 1880 at 12 o'clock and proceeding clockwise to 2011 at 11:59. The most important feature to notice is the pattern of missing values. Most glyphs do not complete the full circle, typically missing points between 12 and 1, suggesting missing values in the earliest part of the data. Another important feature is variability, shown by the thickness of the circle. Some locations, particularly in the north western mountain region, have large variations in temperature. 
 
-*** Need to add reference circles.
-
 \begin{figure}[htbp]
   \centering
   %\includegraphics[width=1\linewidth]{gistemp-pred}%
@@ -317,8 +317,6 @@ Figure~\ref{fig:gistemp-pred} shows the a glyph-map for the large GISTEMP datase
 \end{figure}
 
 The raw data shows us missing values and gives some sense of variability, but gives no information about long-term trend. We can look trend by fitting a linear model to each location and displaying the predicted values. Figure~\ref{fig:gistemp-pred} shows this for 1950--2010 (limited time period used due to missing data). Most locations have increasing temperature over this time period. Only a few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems. The rate of increase differs across regions: steeper inclines in the north and western mountain regions and across the Great Lakes, and flatter inclines in the southeastern USA.
-
-*** Remove the strange data over ocean, and make the reference lines white?
 
 \begin{figure}[htbp]
   \centering
@@ -357,8 +355,6 @@ Regularly gridded spatial data helps with the perception of structure, because i
 \subsection{Non-rectangular grids}
 
 Glyph-maps work best when displayed in the coordinate system in which the grid is rectangular and regular.  For example, the GISTEMP grid is 2$^o$ square and is displayed treating longitude and latitude as cartesian coordinates in Figure \ref{fig:gistemp-pred}.  For regularly gridded data, this results in icons that are rectangles of equal size.  It is often preferable to display maps as a projection of the geographical coordinates which preserves a property of interest, area for example. When a projection is desired a choice needs to be made between applying the projection to the completed glyph-map, or to just the spatial locations.  When the completed glyph-map is projected the icons are no longer rectangles of the same size but they do retain their space filling property.  When applying a projection to the spatial locations and then constructing a glyph-map, the grid becomes irregular. 
-
-*** Example?
 
 \subsection{Irregular locations}
 Figure \ref{fig:irregular} shows linear trends for monthly average surface temperature at stations in the USHCN (Version 2) ground station network.  It illustrates three challenges in working with irregular locations: there is no natural choice for icon size, icons can potentially overlap, and comparisons rely more heavily on the reference guides.  The icon sizes were chosen manually for these two plots, although the icons are displayed at about the same size, they correspond to 1$^o$ and 0.5$^o$ square respectively in the geographical coordinates. 

@@ -123,13 +123,14 @@ To demonstrate the glyph-map we will use three datasets:
   monthly. Ground station data was de-seasonalized, differenced from from the
   1951-1980 temperature averages, and spatially averaged to obtain gridded
   measurements. We extracted the locations corresponding to the continental
-  USA.
+  USA. Provided by the NOAA/OAR/ESRL PSD, Boulder, Colorado,
+  USA, from their web site at \url{http://www.esrl.noaa.gov/psd/}.
 
-  \item USHCN (Version 2) ground station network.
+  \item USHCN (Version 2) ground station network. USHCN data provided by NOAA NCDC from their website \url{http://cdiac.ornl.gov/ftp/ushcn_v2_monthly/}.
   
 \end{itemize}
 
-All datasets and R code used to produce the plots are available in the online supplementary materials.
+All datasets and R code used to produce the plots are available in the online supplementary materials. All plots were created in R \citep{R} using the {\tt ggplot2} \citep{me:ggplot2} and {\tt plyr} \citep{me:plyr} packages. 
 
 \section{Glyph-maps for large data}
 \label{sec:large-data}
@@ -401,15 +402,6 @@ We have only scratched the surface of the potential of this type of display for 
 \end{figure}
 
 There is also much work to be done on the perceptual underpinnings of these displays. We have noticed that periodic trends are easier to perceive in star-glyphs, and long-term trends in line-glyphs. Is this always the case? Are their certain types of periodicity that are particularly easy to spot? These questions need to be answered with rigorous perceptual studies to help guide the use of these plots.
-
-\section*{Acknowledgements}
-
-GISTEMP data provided by the NOAA/OAR/ESRL PSD, Boulder, Colorado,
-USA, from their web site at \url{http://www.esrl.noaa.gov/psd/}.
-
-USHCN data provided by NOAA NCDC from their website \url{http://cdiac.ornl.gov/ftp/ushcn_v2_monthly/}.
-
-The graphics in this paper were created in R \citep{R} using {\tt ggplot2} \citep{me:ggplot2} and {\tt plyr} \citep{me:plyr}. 
 
 \bibliography{references}
 

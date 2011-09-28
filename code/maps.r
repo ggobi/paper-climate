@@ -50,5 +50,15 @@ map_ushcn <- list(
   xlab(NULL),
   ylab(NULL))
 
+gistemp <- subset(getbox(both, xlim = c(-135, -57), ylim = c(22, 53)),
+  region != "Great Lakes")
+map_gistemp <- list(
+  geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
+    data = gistemp, legend = FALSE, fill = "grey80", colour = "grey90"),
+  scale_x_continuous(breaks = NA, expand = c(0.02, 0)),
+  scale_y_continuous(breaks = NA, expand = c(0.02, 0)), 
+  xlab(NULL),
+  ylab(NULL))
+
 
 

@@ -25,13 +25,14 @@ getbox <- function (map, xlim, ylim) {
 
 ##### Prepping Data
 world <- map_data("world")
-# Enter the coords of the data for the limits
-world <- getbox(world, xlim = c(-114.93, -55.07), ylim = c(-21.53, 36.64))
 
 states <- map_data("state")
 states$group <- max(world$group) + states$group
 both <- rbind(world, states)
 both <- getbox(both, xlim = c(-126, -65), ylim = c(24, 50))
+
+# Enter the coords of the data for the limits
+world <- getbox(world, xlim = c(-114.93, -55.07), ylim = c(-21.53, 36.64))
 
 ##### Maps
 map <- list(

@@ -105,7 +105,7 @@ We focus our attention on two types of glyph: lines and stars. Figure~\ref{fig:t
 
 %These displays tend to be particularly effective when printed in large format, as the much higher resolution of print (600 dpi) compared to computer  screen (72-120 dpi) allows for much finer reading. These are high-density data displays in the best tradition of Tufte. Wall size maps are not usually practical during analysis, but are very engaging.
 
-In this paper we describe the algorithm for creating glyphs-maps, and various modifications that can enable different features in the data to be detected. Section~\ref{sec:large-data} describes how glyph-maps scale to large climate data sets, and Section~\ref{sec:construction} explains how to construct them. Section~\ref{sec:reference} discusses the use of reference lines and boxes, Section~\ref{sec:perception}, their perceptual properties, and Section~\ref{sec:scale} visits scaling issues. We originally developed glyph-maps for data on a rectangular grid, but many spatiotemporal data sets have irregular spatial locations. Section~\ref{sec:irregular} discusses how glyph-maps can be adjusted for this type of data.
+We begin in Section~\ref{sec:construction} by describing the algorithm used to create glyphs-maps. Section~\ref{sec:perception} discusses their perceptual properties, including the importance of a visual reference grid, and of carefully considering scale. Section~\ref{sec:large-data} shows how glyph-maps scale to large data, and the interplay of models with glyph-maps. We originally developed glyph-maps for data on a rectangular grid, but many spatiotemporal data sets have irregular spatial locations. Section~\ref{sec:irregular} discusses how glyph-maps can be adjusted for this type of data.
 
 To demonstrate the glyph-map we will use three datasets:
 
@@ -133,60 +133,6 @@ To demonstrate the glyph-map we will use three datasets:
 \end{itemize}
 
 All datasets and R code used to produce the plots are available in the online supplementary materials. All plots were created in R \citep{R} using the {\tt ggplot2} \citep{me:ggplot2} and {\tt plyr} \citep{me:plyr} packages. 
-
-\section{Glyph-maps for large data}
-\label{sec:large-data}
-
-Climate data is usually large: many locations in space, and many points in time. This makes climate data challenging to work with computationally and to visualise. Plotting the raw data often reveals little more than a well-known observation that ``temperature is quite varied!'' Careful use of models than Careful use of models to decompose data into long-term trend, seasonal effects and error is vital for to make the problem both computationally and visually tractable.
-
-Figure~\ref{fig:gistemp-pred} shows the a glyph-map for the large GISTEMP dataset. Glyphs at each location represent temperature from 1880--2011, starting with Jan 1880 at 12 o'clock and proceeding clockwise to 2011 at 11:59. The most important feature to notice is the pattern of missing values. Most glyphs do not complete the full circle, typically missing points between 12 and 1, suggesting missing values in the earliest part of the data. Another important feature is variability, shown by the thickness of the circle. Some locations, particularly in the north western mountain region, have large variations in temperature. 
-
-*** Need to add reference circles.
-
-\begin{figure}[htbp]
-  \centering
-  %\includegraphics[width=1\linewidth]{gistemp-pred}%
-
-  \includegraphics[width=1\linewidth]{gistemp-polar-raw}
-
-  \caption{Glyph-map of raw temperature anomaly data, from 1880-2011. Gaps in the full circle indicate missing values, and thickness of the circle indicates more variability in the measurements.}
-  \label{fig:gistemp-raw}
-\end{figure}
-
-The raw data shows us missing values and gives some sense of variability, but gives no information about long-term trend. We can look trend by fitting a linear model to each location and displaying the predicted values. Figure~\ref{fig:gistemp-pred} shows this for 1950--2010 (limited time period used due to missing data). Most locations have increasing temperature over this time period. Only a few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems. The rate of increase differs across regions: steeper inclines in the north and western mountain regions and across the Great Lakes, and flatter inclines in the southeastern USA.
-
-*** Remove the strange data over ocean, and make the reference lines white?
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=1\linewidth]{gistemp-pred}%
-  %\includegraphics[width=1\linewidth]{gistemp-polar-pred}
-
-  \caption{Glyph-map of predicted temperature anomaly data, from
-    1950-2010. Increasing trends can be seen over most of the USA,
-    with varying degrees of increase. Some isolated locations exhibit
-    steep declines, and inclines, perhaps indicative of some isolated
-    data problems.}
-  \label{fig:gistemp-pred}
-\end{figure}
-
-%The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. 
-
-% \section{What to plot: raw data, trend lines, residuals,  seasonal}
-% 
-% A generalized additive model \citep{wood:2006} with a seasonal term and a long-term smooth term can be useful. This is revealing for smooth models of surface temperature, shown in Figure~\ref{fig:scaling}. Each location is modeled using a generalized additive model \citep{wood:2006} with a seasonal term and a long-term smooth term. The three plots in the figure show the long-term smooth term. 
-% 
-% %Because some locations are uniformly warmer than others, the impact of
-% %changes across time are diminished. In the center plot, each location is
-% %scaled by dividing out the maximum, and on the right, each location is scaled
-% %to range $[0, 1]$. These emphasize individual changes but lose the ability to
-% %make global comparisons, and need caution when interpreting - a small
-% %absolute change gets blown up into a large relative change.
-% 
-% *** Need three plots here: trend, seasonality and residuals, shall we do this with NASA ozone data or stick to temperature?
-% 
-% Issues of scale relative to modeling. Switching from the data to model summaries brings new scaling issues. Often the scale of the raw data is ignored when the model is plotted, one usually shows just the line showing the trend, in the range of the trend. This has the effect of exaggerating the significance of the model. Scaling the trend lines relative to the range of the data may be useful sometimes.
-
 
 \section{Construction}~\label{sec:construction}
 
@@ -345,6 +291,59 @@ globally scaled, (right) locally scaled.}
 %Equivalent to using individual scales in facetted graphics. 
 
 One more important point: if a model summary is displayed in the glyph-map, such as the predicted values, it may be important to force the scale to that of the original data. Displaying the predicted values in the absence of the raw data scale can skew the interpretation of the magnitude of the effect. 
+
+\section{Glyph-maps for large data}
+\label{sec:large-data}
+
+Climate data is usually large: many locations in space, and many points in time. This makes climate data challenging to work with computationally and to visualise. Plotting the raw data often reveals little more than a well-known observation that ``temperature is quite varied!'' Careful use of models than Careful use of models to decompose data into long-term trend, seasonal effects and error is vital for to make the problem both computationally and visually tractable.
+
+Figure~\ref{fig:gistemp-pred} shows the a glyph-map for the large GISTEMP dataset. Glyphs at each location represent temperature from 1880--2011, starting with Jan 1880 at 12 o'clock and proceeding clockwise to 2011 at 11:59. The most important feature to notice is the pattern of missing values. Most glyphs do not complete the full circle, typically missing points between 12 and 1, suggesting missing values in the earliest part of the data. Another important feature is variability, shown by the thickness of the circle. Some locations, particularly in the north western mountain region, have large variations in temperature. 
+
+*** Need to add reference circles.
+
+\begin{figure}[htbp]
+  \centering
+  %\includegraphics[width=1\linewidth]{gistemp-pred}%
+
+  \includegraphics[width=1\linewidth]{gistemp-polar-raw}
+
+  \caption{Glyph-map of raw temperature anomaly data, from 1880-2011. Gaps in the full circle indicate missing values, and thickness of the circle indicates more variability in the measurements.}
+  \label{fig:gistemp-raw}
+\end{figure}
+
+The raw data shows us missing values and gives some sense of variability, but gives no information about long-term trend. We can look trend by fitting a linear model to each location and displaying the predicted values. Figure~\ref{fig:gistemp-pred} shows this for 1950--2010 (limited time period used due to missing data). Most locations have increasing temperature over this time period. Only a few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems. The rate of increase differs across regions: steeper inclines in the north and western mountain regions and across the Great Lakes, and flatter inclines in the southeastern USA.
+
+*** Remove the strange data over ocean, and make the reference lines white?
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1\linewidth]{gistemp-pred}%
+  %\includegraphics[width=1\linewidth]{gistemp-polar-pred}
+
+  \caption{Glyph-map of predicted temperature anomaly data, from
+    1950-2010. Increasing trends can be seen over most of the USA,
+    with varying degrees of increase. Some isolated locations exhibit
+    steep declines, and inclines, perhaps indicative of some isolated
+    data problems.}
+  \label{fig:gistemp-pred}
+\end{figure}
+
+%The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. 
+
+% \section{What to plot: raw data, trend lines, residuals,  seasonal}
+% 
+% A generalized additive model \citep{wood:2006} with a seasonal term and a long-term smooth term can be useful. This is revealing for smooth models of surface temperature, shown in Figure~\ref{fig:scaling}. Each location is modeled using a generalized additive model \citep{wood:2006} with a seasonal term and a long-term smooth term. The three plots in the figure show the long-term smooth term. 
+% 
+% %Because some locations are uniformly warmer than others, the impact of
+% %changes across time are diminished. In the center plot, each location is
+% %scaled by dividing out the maximum, and on the right, each location is scaled
+% %to range $[0, 1]$. These emphasize individual changes but lose the ability to
+% %make global comparisons, and need caution when interpreting - a small
+% %absolute change gets blown up into a large relative change.
+% 
+% *** Need three plots here: trend, seasonality and residuals, shall we do this with NASA ozone data or stick to temperature?
+% 
+% Issues of scale relative to modeling. Switching from the data to model summaries brings new scaling issues. Often the scale of the raw data is ignored when the model is plotted, one usually shows just the line showing the trend, in the range of the trend. This has the effect of exaggerating the significance of the model. Scaling the trend lines relative to the range of the data may be useful sometimes.
 
 \section{Non-gridded data}~\label{sec:irregular}
 

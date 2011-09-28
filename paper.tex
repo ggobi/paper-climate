@@ -54,9 +54,9 @@ $^3$ Department of Statistics, Rice University}
 
 \begin{abstract}
 
-Climate data is challenging to visualise because it is multivariate and has both spatial (2d) and temporal (1d) components. In this paper we propose an new display for climate data: glyph-maps. Glyph-maps are a specialisation of multivariate glyph plots; each spatial location is display with one glyph that represents the measurements recorded over time at that location. Glyph-maps allow the discovery of both local and global structure, making discovery much easier than the classical display using colours.
+Climate data is challenging to visualize because it is multivariate and has both spatial (2d) and temporal (1d) components. In this paper we propose an new display for climate data: glyph-maps. Glyph-maps are a specialization of multivariate glyph plots; each spatial location is display with one glyph that represents the measurements recorded over time at that location. Glyph-maps allow the discovery of both local and global structure, making discovery much easier than the classical display using colors.
 
-We include a description of how to create glyph-maps using existing statistical software, our initial explorations of their perceptual features, and a discussion of reference frames. Our techniques are inspired by rectangular gridded data, but we provide generalisation to deal with non-rectangular grids and irregular locations.
+We include a description of how to create glyph-maps using existing statistical software, our initial explorations of their perceptual features, and a discussion of reference frames. Our techniques are inspired by rectangular gridded data, but we provide generalization to deal with non-rectangular grids and irregular locations.
 
 \end{abstract}
 
@@ -76,7 +76,7 @@ Reading this type of plot is cognitively challenging: the reader must play ``spo
 \begin{figure*}[htbp]
   \centering
   \includegraphics[width=3.5in]{nasa-deseas-glyph}
-  \caption{Glyph-map of de-seasonalized temperature, to compare with Figure \ref{fig:nasa-facet}. }
+  \caption{Glyph-map of de-seasonalized temperature, to compare with Figure \ref{fig:nasa-facet}. Time series of the six years of monthly temperature are plotted at each spatial grid location. The El Ni\~no appears as a bump in the middle of the time series, in the equatorial Pacific region. Large variations in temperature can be seen in areas over land, while being fairly constant over water. }
   \label{fig:nasa-glyph}
 \end{figure*}
 
@@ -233,7 +233,7 @@ For star glyphs the reference frames are also useful and the equivalent of the r
 
 %*** This section needs to have plots re-done, once we have decided on the key pieces
 
-We can also emphasise different features of the data by varying the scale used with each cell. By default, we use a global scale, so the same position within each cell corresponds to the same value in all locations. This facilitates the comparison of absolute values, and draws attention to plots with large overall variation.
+We can also emphasize different features of the data by varying the scale used with each cell. By default, we use a global scale, so the same position within each cell corresponds to the same value in all locations. This facilitates the comparison of absolute values, and draws attention to plots with large overall variation.
 
 Alternatively, we can re-scale values within each location prior to plotting. In local scaling, the values within each location are scaled to range $[0, 1]$ before plot construction. This makes it easier to compare shape (ignoring amplitude), and draws attention to locations with large relative variation. Figure~\ref{fig:scaling} compares global scaling and local scaling for the smoothed temperature data from the data-expo data. On the global scale, the El Ni\~no blip in temperature is just visible, along with variation in the average temperature at each location. Local scaling emphasizes the individual shapes: we see the impact of El Ni\~no over a wider region, dramatic linear increases across the Andes, and decreases in the Gulf of Mexico.
 
@@ -296,7 +296,7 @@ One more important point: if a model summary is displayed in the glyph-map, as d
 \section{Large data and models}
 \label{sec:large-data}
 
-Climate data is usually large: many locations in space, and many points in time. This makes climate data challenging to work with computationally and to visualise. Plotting the raw data often reveals little more than a well-known observation that ``temperature is quite varied!'' Careful use of models than Careful use of models to decompose data into long-term trend, seasonal effects and error is vital for to make the problem both computationally and visually tractable.
+Climate data is usually large: many locations in space, and many points in time. This makes climate data challenging to work with computationally and to visualize. Plotting the raw data often reveals little more than a well-known observation that ``temperature is quite varied!'' Careful use of models than Careful use of models to decompose data into long-term trend, seasonal effects and error is vital for to make the problem both computationally and visually tractable.
 
 Figure~\ref{fig:gistemp-pred} shows the a glyph-map for the large GISTEMP dataset. Glyphs at each location represent temperature from 1880--2011, starting with Jan 1880 at 12 o'clock and proceeding clockwise to 2011 at 11:59. The most important feature to notice is the pattern of missing values. Most glyphs do not complete the full circle, typically missing points between 12 and 1, suggesting missing values in the earliest part of the data. Another important feature is variability, shown by the thickness of the circle. Some locations, particularly in the north western mountain region, have large variations in temperature. 
 

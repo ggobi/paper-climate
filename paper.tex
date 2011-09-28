@@ -285,13 +285,13 @@ Other types of shifting and scaling can be useful:
 
 \end{itemize}
 
-Note that the use of local scales needs to be clearly marked. The viewer must realize that the scale is not relative and that big patterns in some locations might be just tiny effects. To indicate this on the locally scaled data plots, one can use an additional aesthetic, like colour, to encode the original scale.  This is illustrated in Figure~\ref{fig:scaling-col}.
+Note that the use of local scales needs to be clearly marked. The viewer must realize that the scale is not relative and that big patterns in some locations might be just tiny effects. To indicate this on the locally scaled data plots, one can use an additional aesthetic, like colour, to encode the range of original scale. This is illustrated in Figure~\ref{fig:scaling-col}.
 
 \begin{figure}[htbp]
  \centering
  \includegraphics[width=0.5\linewidth]{month-rescale01-col}%
  \includegraphics[width=0.5\linewidth]{month-rescale01-fill}
- \caption{Adding colour to scaled plots. Here each location has been scaled to range $[0, 1]$ and colour mapped to the range of the original predictions. Pale locations have smaller range than darker locations. Shapes at all locations are visible, but attention is drawn to locations with larger ranges.}
+ \caption{Adding colour to scaled plots. Here each location has been scaled to range $[0, 1]$ and colour mapped to the range of the original predictions. (Left) Range mapped to colour of line: pale locations have smaller range than darker locations. (Right) Range mapped to fill colour of grid box: blue boxes have larger ranges. Shapes at all locations are visible, but attention is drawn to locations with larger ranges.}
  \label{fig:scaling-col}
 \end{figure}
 

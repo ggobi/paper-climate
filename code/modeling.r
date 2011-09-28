@@ -180,7 +180,8 @@ ggplot(day_preds2) +
   map + 
   geom_tile(aes(long, lat, fill = range), data = grid, alpha = 0.5) +
   geom_path(aes(gx, gy, group = gid)) +
-  theme_fullframe()
+  theme_fullframe() + 
+  scale_fill_gradient(low = "white", high = "#3B4FB8")
 ggsave("../images/month-rescale01-fill.png", width = 4, height = 4)
 
 # Residuals ------------------------------------------------------------------

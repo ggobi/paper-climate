@@ -59,9 +59,9 @@ day_preds2 <- ddply(day_preds, c("lat", "long"), mutate,
 
 day_preds2 <- glyphs(day_preds2, "long", "day", "lat", "pred_s") 
 ggplot(day_preds2, aes(gx, gy, group = gid)) + 
-  map + 
+  map_nasa + 
+  add_ref_boxes(day_preds) +
   geom_path(aes(colour = range)) +
-  ref_boxes +
   theme_fullframe() + 
   scale_colour_gradient(high = "black", low = "grey60")
 ggsave("../images/month-rescale01-col.png", width = 4, height = 4)
@@ -69,11 +69,11 @@ ggsave("../images/month-rescale01-col.png", width = 4, height = 4)
 grid <- unique(day_preds2[c("lat", "long", "range")])
 
 ggplot(day_preds2) + 
-  map + 
+  map_nasa + 
   geom_tile(aes(long, lat, fill = range), data = grid, alpha = 0.5) +
   geom_path(aes(gx, gy, group = gid)) +
   theme_fullframe() + 
-  scale_fill_gradient(low = "white", high = "#3B4FB8")
+  scale_fill_gradient(high = "white", low = "#3B4FB8")
 ggsave("../images/month-rescale01-fill.png", width = 4, height = 4)
 
 

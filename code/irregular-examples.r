@@ -16,6 +16,8 @@ temp.post1950 <- mutate(temp.post1950,
     season = season_index(time)
     )    
 
+width.mod <- (diff(range(ushcn$lon))/diff(range(gistemp$lon)))/(diff(range(ushcn$lat))/diff(range(gistemp$lat)))
+
 #==== Modelling
 
 # seasonal.fit.post1950 <- dlply(temp.post1950, "stn", function(df){
@@ -55,7 +57,7 @@ ggplot(lin.pred.gly, aes(gx, gy, group = gid)) +
   add_ref_lines(lin.pred.gly) +
   geom_path() +
   theme_fullframe() 
-ggsave("../images/usa-lin-overlap.png", width = 5.5, height = 4)
+ggsave("../images/usa-lin-overlap.png", width = 8, height = 4.5)
 
 # Mountain states: Colorado, Wyoming, Idaho, Montana, Nevada, Utah
 mountain.states <- c("CO", "WY", "ID", "MT", "NV", "UT")
@@ -73,7 +75,7 @@ ggplot(mountains.gly, aes(gx, gy, group = gid)) +
   geom_path() +
   theme_fullframe() +
   coord_cartesian(xlim = c(-121, -101), ylim = c(34, 50)) 
-ggsave("../images/ghcn-mountains.png", width = 3.5, height = 4)
+ggsave("../images/ghcn-mountains.png", width = 4, height = 4.5)
 
 #== one solution combine overlapping glyphs
 stn.dists <- get.stn.dists(ushcn.stations, "lon", "lat")
@@ -116,7 +118,7 @@ ggplot(lin.pred.sum, aes(gx, gy, group = gid)) +
   geom_path(aes(colour = n > 1)) +
   theme_fullframe() +
   scale_colour_manual(values = c("TRUE" = "black", "FALSE" = "grey40"))
-ggsave("../images/usa-lin-collapse.png", width = 6, height = 4)
+ggsave("../images/usa-lin-collapse.png", width = 8, height = 4.5)
 
 
 
@@ -136,7 +138,7 @@ ggplot(lin.pred.grid.gly,aes(gx, gy, group = gid)) +
   geom_path(aes(colour = n > 1)) +
   theme_fullframe() +
   scale_colour_manual(values = c("TRUE" = "black", "FALSE" = "grey40"))
-ggsave("../images/usa-lin-grid.png", width = 6, height = 4)
+ggsave("../images/usa-lin-grid.png", width = 8, height = 4.5)
 
 #=== SEASONAL ===#
 
@@ -178,7 +180,7 @@ ggplot(seas.pred.collapsed, aes(gx, gy, group = gid)) +
   add_ref_boxes(seas.pred.collapsed, "avg", alpha = 0.2, colour = NA) +
   geom_line(aes(group = stn.id)) +
   theme_fullframe()  
-ggsave("../images/usa-season-collapsed.png", width = 6, height = 4)
+ggsave("../images/usa-season-collapsed.png", width = 8, height = 4.5)
 
 #== gridding
 seas.pred.grid <- grid.all(seas.pred.post1950, "lon", "lat", w, h)
@@ -193,4 +195,4 @@ ggplot(glyph.seasonal.grid) +
   add_ref_boxes(glyph.seasonal.grid, "avg", alpha = 0.2, colour = NA) +
   geom_line(aes(gx, gy, group = stn)) +
   theme_fullframe() 
-ggsave("../images/usa-season-grid.png", width = 6, height = 4)
+ggsave("../images/usa-season-grid.png", width = 8, height = 4.5)

@@ -67,7 +67,7 @@ The instructions for computing and displaying glyph-maps are described, along wi
 
 \section{Introduction}
 
-Climate data is composed of measurements, such as temperature, precipitation, and winds, with a spatial and temporal context. The classic display for data of this type of is ``heatmap'', a tiled plot using color to display the value of the variable of interest as each location. When measurements are made at multiple time points it is common to display the data with small multiples, such as in Figure~\ref{fig:nasa-facet}. In this plot, a separate map is drawn for each month (columns) and year (rows), over a 6 year period of remotely sensed temperature data above Central America \citep{murrell:2010}. Color is used to display de-seasonalized temperature, with red mapped to high values and blue to low. The most noticeable feature is the strong red patch in the equatorial Pacific beginning mid-1997 and tapering out during 1998. This is the El Ni\~no event, a major temperature anomaly. More work is required to see more localized patterns, like the cooler land temperatures seen in early years.
+Climate data is composed of measurements, such as temperature, precipitation, and winds, with a spatial and temporal context. The classic display for data of this type of is ``heatmap'', a tiled plot using color to display the value of the variable of interest as each location. When measurements are made at multiple time points it is common to display the data with small multiples, such as in Figure~\ref{fig:nasa-facet}. In this plot, a separate map is drawn for each month (columns) and year (rows), over a six year period of remotely sensed temperature data above Central America \citep{murrell:2010}. Color is used to display de-seasonalized temperature, with red mapped to high values and blue to low. The most noticeable feature is the strong red patch in the equatorial Pacific beginning mid-1997 and tapering out during 1998. This is the El Ni\~no event, a major temperature anomaly. More work is required to see more localized patterns, like the cooler land temperatures seen in early years.
 
 Reading this type of plot is cognitively challenging: the reader must play ``spot the difference'' from one small image to another. Large structures such as El Ni\~no are clear but it is very difficult to mentally difference the images and read off the long-term trend or to notice local deviations. Using a movie to render these small multiples can help, but small trends still fail to draw readers' attention and escape unnoticed \citep{simons:gradual}.
 
@@ -110,32 +110,32 @@ We focus our attention on two types of glyph: lines and stars. Figure~\ref{fig:t
 
 %These displays tend to be particularly effective when printed in large format, as the much higher resolution of print (600 dpi) compared to computer  screen (72-120 dpi) allows for much finer reading. These are high-density data displays in the best tradition of Tufte. Wall size maps are not usually practical during analysis, but are very engaging.
 
-We begin in Section~\ref{sec:construction} by describing the algorithm used to create glyphs-maps. Section~\ref{sec:perception} discusses their perceptual properties, including the importance of a visual reference grid, and of carefully considering scale. Section~\ref{sec:large-data} shows how glyph-maps scale to large data, and the interplay of models with glyph-maps. We originally developed glyph-maps for data on a rectangular grid, but many spatiotemporal data sets have irregular spatial locations. Section~\ref{sec:irregular} discusses how glyph-maps can be adjusted for this type of data.
+The paper is structured as follows. Section~\ref{sec:construction} describes the algorithm used to create glyphs-maps. Section~\ref{sec:perception} discusses their perceptual properties, including the importance of a visual reference grid, and of carefully consideration of scale. Large data and the interplay of models and data are discussed in Section~\ref{sec:large-data}. Many spatiotemporal data sets have irregular spatial locations, and Section~\ref{sec:irregular} discusses how glyph-maps can be adjusted for this type of data. Three datasets are used for examples:
 
-To demonstrate the glyph-map we will use three datasets:
-
+\begin{quote}
 \begin{itemize}
 
-  \item The ASA 2009 data expo data which consists of monthly observations of
-  several atmospheric variables from the International Satellite Cloud
-  Climatology Project. The dataset includes observations over 72 months
-  (1995--2000) on a 24 x 24 grid (576 locations) stretching from
-  $113.75^{\circ}$W to $56.25^{\circ}$W longitude and $21.25^{\circ}$S to
-  $36.25{^\circ}$N latitude.
+\item[data-expo] The ASA 2009 data expo data \citep{murrell:2010} consists
+  of monthly observations of several atmospheric variables from the
+  International Satellite Cloud Climatology Project. The dataset
+  includes observations over 72 months (1995--2000) on a 24 x 24 grid
+  (576 locations) stretching from $113.75^{\circ}$W to
+  $56.25^{\circ}$W longitude and $21.25^{\circ}$S to $36.25{^\circ}$N
+  latitude.
 
-\item GISTEMP surface temperature data provided on $2^{\circ}$ x
-  $2^{\circ}$ grid over the entire globe, measured monthly. Ground
+\item[GISTEMP] surface temperature data provided on $2^{\circ}$ x
+  $2^{\circ}$ grid over the entire globe, measured monthly \citep{GISTEMP}. Ground
   station data was de-seasonalized, differenced from from the
   1951-1980 temperature averages, and spatially averaged to obtain
   gridded measurements. For the purposes of this paper, we extracted
-  the locations corresponding to the continental USA. The data is made
-  available by the Earth System Research Laboratory, Physical Sciences
-  Division, National Oceanic and Atmospheric Administration, from
-  their web site at \url{http://www.esrl.noaa.gov/psd/}.
+  the locations corresponding to the continental USA. 
 
-  \item USHCN (Version 2) ground station network. USHCN data provided by NOAA NCDC from their website \url{http://cdiac.ornl.gov/ftp/ushcn_v2_monthly/}.
+\item[USHCN] (Version 2) ground station network of historical
+  temperatures \citep{USHCN}. Temperatures from 1219 stations on the
+  contiguous United States, from 1871 to present.
   
 \end{itemize}
+\end{quote}
 
 All datasets and R code used to produce the plots are available in the online supplementary materials. All plots were created in R \citep{R} using the {\tt ggplot2} \citep{me:ggplot2} and {\tt plyr} \citep{me:plyr} packages. 
 
@@ -153,7 +153,7 @@ Glyph-maps can be generated with existing graphics software after performing a s
 
 \noindent where $w$ and $h$ are maximal width and height of the glyph, respectively. For gridded data, it is convenient to make use of the resolution of the major axes, that is, the minimum difference between neighboring locations. 
 
-Since the coordinates are linear combinations of two variables, it is possible to build these these line-glyphs interactively, illustrated by software packages that have incorporated tours \citep{cook:2006}, such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}. This technique is used to good effect in \citet{buja:1996a}, and was used to examine the climate data in \citet{hobbs:2010}.
+Since the coordinates are linear combinations of two variables, it is possible to build these these line-glyphs interactively, illustrated by software packages that have incorporated tours (as described in \citet{cook:2006}), such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or GGobi \citep{swayne:2003}. This technique is used to good effect in \citet{buja:1996a}, and was used to examine the climate data in \citet{hobbs:2010}.
 
 Computing the coordinates for star glyphs is achieved with a simple polar transformation, with minor axes scaled to $[0, 1]$: 
 
@@ -197,7 +197,7 @@ This is particularly obvious when comparing Figure~\ref{fig:nasa-facet} to Figur
 
 One draw-back of the glyph-maps, particularly if linear trend is displayed as an icon, is they may suffer from the Z\"ollner Illusion \citep{Zollner}, which makes straight lines look crooked, and is visible in Figure \ref{fig:gistemp-pred}.
 
-An third alternative is to calculate the relevant statistic for each location and display these values as single heatmap. For example, to study long-term trends, we could calculate the slope of a linear model at each location and color tiles across the map by the value of the slope. The disadvantage of this approach is that it is not exploratory, and requires that we have a very precise definition of the measurement we are interested in, and it still suffers from the relative difficultly of colour perception.
+An third alternative is to calculate the relevant statistic for each location and display these values as single heatmap. For example, to study long-term trends, we could calculate the slope of a linear model at each location and color tiles across the map by the value of the slope. The disadvantage of this approach is that it is not exploratory, and requires that we have a very precise definition of the measurement we are interested in, and it still suffers from the relative difficultly of color perception.
 
 Two other factors are critical for accurate perception of change: reference frames and scaling. These are described in the following two sections.
 
@@ -205,7 +205,7 @@ Two other factors are critical for accurate perception of change: reference fram
 
 The structured spatial arrangement of icons in a glyph-map helps to compare the patterns of shape, like slope, intercept, or size, across icons. However, additional clues can make comparisons easier, converting the perceptual task from comparing length to the easier position along a common scale \citep{cleveland:1984}. This is also called a \emph{visual reference grid} \citep{cleveland:1993a}.
 
-Each glyph is small, so there is not enough space for a full set of axes. Instead, we add reference lines and boxes. These need to be minimally perceptible, post-attentive \citep{healey} and de-emphasized, so as not to detract from the raw data. The \textbf{reference grid} is a box, framing each icon, which represents the spatial grid. The \textbf{reference line} is a horizontal line at mid-range. Both help to read differences in slope and intercept. Slope is read by comparing the position of left and right endpoints on the frame, or by reading the angle between the data line and the reference line. Intercept is read from ``average'' position of the line in the box: is it near the top, or near the bottom? Figure~\ref{fig:ref-basic} demonstrates both guides. We draw them in white, so they are minimally perceptible relative to the black data.
+Each glyph is small, so there is not enough space for a full set of axes. Instead, we add reference lines and boxes. These need to be minimally perceptible, post-attentive \citep{healey} and de-emphasized, so as not to detract from the data. The \textbf{reference grid} is a box, framing each icon, which represents the spatial grid. The \textbf{reference line} is a horizontal line at mid-range. Both help to read differences in slope and intercept. Slope is read by comparing the position of left and right endpoints on the frame, or by reading the angle between the data line and the reference line. Intercept is read from ``average'' position of the line in the box: is it near the top, or near the bottom? Figure~\ref{fig:ref-basic} demonstrates both guides. We draw them in white, so they are minimally perceptible relative to the black data.
 
 % , making it easier to compare the slopprovides for better reading of the intercept. The average value for the temperature anomaly data is not the same across the map: at higher latitudes the temperatures are uniformly higher, but at lower latitudes they are uniformly lower. (**** Can this be right? Would it mean that at these locations the temperatures 1950-2010 are much higher than the reference year temperatures?)
 
@@ -224,13 +224,13 @@ For star glyphs the reference frames are also useful and the equivalent of the r
 
 %*** Re-visit this next paragraph - its a little too airy-fairy, and the plot with color needs to have the color dampened more. Its way too dominant. This paragraph is too speculative for the paper, so removing it from first draft.
 
-%It's also often useful to display other types of reference information. You are only limited by your imagination (and the capabilities of your graphics software), but two simple ideas are to (1) vary the colour or transparency of glyphs or references, or (2) use an additional layer to highlight special points. Figure~\ref{fig:ref-adv} illustrates these ideas to display the month with the highest temperature at each locations. Careful colour choice is necessary so that this information is perceptible, but not distracting.
+%It's also often useful to display other types of reference information. You are only limited by your imagination (and the capabilities of your graphics software), but two simple ideas are to (1) vary the color or transparency of glyphs or references, or (2) use an additional layer to highlight special points. Figure~\ref{fig:ref-adv} illustrates these ideas to display the month with the highest temperature at each locations. Careful color choice is necessary so that this information is perceptible, but not distracting.
 
 %\begin{figure}[htbp]
 %  \centering
 %  \includegraphics[width=0.5\linewidth]{ref-max-1}%
 %  \includegraphics[width=0.5\linewidth]{ref-max-2}
-%  \caption{Glyph-maps of seasonal temperature patterns also showing the month with the highest temperature using (left) an additional layer of points and (right) changing the background colour of the reference grid.}
+%  \caption{Glyph-maps of seasonal temperature patterns also showing the month with the highest temperature using (left) an additional layer of points and (right) changing the background color of the reference grid.}
 %  \label{fig:ref-adv}
 %\end{figure}
 
@@ -287,13 +287,13 @@ Other types of shifting and scaling can be useful:
 
 \end{itemize}
 
-Note that the use of local scales needs to be clearly marked. The viewer must realize that the scale is not relative and that big patterns in some locations might be just tiny effects. To indicate this on the locally scaled data plots, one can use an additional aesthetic, like colour, to encode the range of original scale. This is illustrated in Figure~\ref{fig:scaling-col}.
+Note that the use of local scales needs to be clearly marked. The viewer must realize that the scale is not relative and that big patterns in some locations might be just tiny effects. To indicate this on the locally scaled data plots, one can use an additional aesthetic, like color, to encode the range of original scale. This is illustrated in Figure~\ref{fig:scaling-col}.
 
 \begin{figure}[htbp]
  \centering
  \includegraphics[width=0.5\linewidth]{month-rescale01-col}%
  \includegraphics[width=0.5\linewidth]{month-rescale01-fill}
- \caption{Adding colour to scaled plots. Here each location has been scaled to range $[0, 1]$ and colour mapped to the range of the original predictions. (Left) Range mapped to colour of line: pale locations have smaller range than darker locations. (Right) Range mapped to fill colour of grid box: blue boxes have smaller ranges. Shapes at all locations are visible, but attention is drawn to locations with larger ranges.}
+ \caption{Adding intensity and color to scaled plots. Here each location has been scaled to range $[0, 1]$ and color mapped to the range of the original predictions. (Left) Range mapped to intensity of line: pale locations have smaller range than darker locations. (Right) Range mapped to fill color of grid box: blue boxes have smaller ranges. Shapes at all locations are visible, but attention is drawn to locations with larger ranges.}
  \label{fig:scaling-col}
 \end{figure}
 
@@ -304,7 +304,7 @@ One more important point: if a model summary is displayed in the glyph-map, as d
 \section{Large data and models}
 \label{sec:large-data}
 
-Climate data is usually large: many locations in space, and many points in time. This makes climate data challenging to work with computationally and to visualize. Plotting the raw data often reveals little more than a well-known observation that ``temperature is quite varied!'' Careful use of models to decompose data into long-term trend, seasonal effects and error is vital for to make the problem both computationally and visually tractable.
+Climate data is usually large: many locations in space, and many points in time. This makes climate data challenging to work with computationally and to visualize. Careful use of models to decompose data into long-term trend, seasonal effects and error is vital for to make the problem both computationally and visually tractable.
 
 Figure~\ref{fig:gistemp-pred} shows the a glyph-map for the large GISTEMP dataset. Glyphs at each location represent temperature from 1880--2011, starting with Jan 1880 at 12 o'clock and proceeding clockwise to 2011 at 11:59. The most important feature to notice is the pattern of missing values. Most glyphs do not complete the full circle, typically missing points between 12 and 1, suggesting missing values in the earliest part of the data. Another important feature is variability, shown by the thickness of the circle. Some locations, particularly in the north western mountain region, have large variations in temperature. 
 
@@ -314,18 +314,18 @@ Figure~\ref{fig:gistemp-pred} shows the a glyph-map for the large GISTEMP datase
 
   \includegraphics[width=1\linewidth]{gistemp-polar-raw}
 
-  \caption{Glyph-map of raw temperature anomaly data, from 1880-2011. Gaps in the full circle indicate missing values, and thickness of the circle indicates more variability in the measurements.}
+  \caption{Glyph-map of raw temperature anomaly data (GISTEMP), from 1880-2011. Gaps in the full circle indicate missing values, and thickness of the circle indicates more variability in the measurements.}
   \label{fig:gistemp-raw}
 \end{figure}
 
-The raw data shows us missing values and gives some sense of variability, but gives no information about long-term trend. We can look trend by fitting a linear model to each location and displaying the predicted values. Figure~\ref{fig:gistemp-pred} shows this for 1950--2010 (limited time period used due to missing data). Most locations have increasing temperature over this time period. Only a few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems. The rate of increase differs across regions: steeper inclines in the north and western mountain regions and across the Great Lakes, and flatter inclines in the southeastern USA.
+The raw data shows us missing values and gives some sense of variability, but gives no information about long-term trend. We can look at trend by fitting a linear model to each location and displaying the predicted values. Figure~\ref{fig:gistemp-pred} shows this for 1950--2010 (limited time period used due to missing data). Most locations have increasing temperature over this time period. Only a few locations show a decline. These locations tend to be different from their neighbors, which might suggest isolated data problems. The rate of increase differs across regions: steeper inclines in the north and western mountain regions and across the Great Lakes, and flatter inclines in the southeastern USA.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=1\linewidth]{gistemp-pred}%
   %\includegraphics[width=1\linewidth]{gistemp-polar-pred}
 
-  \caption{Glyph-map of predicted temperature anomaly data, from
+  \caption{Glyph-map of predicted temperature anomaly data (GISTEMP), from
     1950-2010. Increasing trends can be seen over most of the USA,
     with varying degrees of increase. Some isolated locations exhibit
     steep declines, and inclines, perhaps indicative of some isolated
@@ -360,12 +360,12 @@ Regularly gridded spatial data helps with the perception of structure, because i
 Glyph-maps work best when displayed in the coordinate system in which the grid is rectangular and regular.  For example, the GISTEMP grid is 2$^o$ square and is displayed treating longitude and latitude as cartesian coordinates in Figure \ref{fig:gistemp-pred}.  For regularly gridded data, this results in icons that are rectangles of equal size.  It is often preferable to display maps as a projection of the geographical coordinates which preserves a property of interest, area for example. When a projection is desired a choice needs to be made between applying the projection to the completed glyph-map, or to just the spatial locations.  When the completed glyph-map is projected the icons are no longer rectangles of the same size but they do retain their space filling property.  When applying a projection to the spatial locations and then constructing a glyph-map, the grid becomes irregular. 
 
 \subsection{Irregular locations}
-Figure \ref{fig:irregular} shows linear trends for monthly average surface temperature at stations in the USHCN (Version 2) ground station network.  It illustrates three challenges in working with irregular locations: there is no natural choice for icon size, icons can potentially overlap, and comparisons rely more heavily on the reference guides.  The icon sizes were chosen manually for these two plots, although the icons are displayed at about the same size, they correspond to 1$^o$ and 0.5$^o$ square respectively in the geographical coordinates. 
+Figure \ref{fig:irregular} shows linear trends for monthly average surface temperature at stations in the USHCN data.  It illustrates three challenges in working with irregular locations: there is no natural choice for icon size, icons can potentially overlap, and comparisons rely more heavily on the reference guides.  The icon sizes were chosen manually for these two plots, although the icons are displayed at about the same size, they correspond to 1$^o$ and 0.5$^o$ square respectively in the geographical coordinates. 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.55\linewidth]{usa-lin-overlap}%
   \includegraphics[width=0.35\linewidth]{ghcn-mountains}%
-  \caption{Glyph-maps of the linear trend in ground station temperature values, 1950--2010, for all continental US USHCN stations (left) and stations in the mountain states (right).} 
+  \caption{Glyph-maps of the linear trend in ground station temperature values, 1950--2010, for USHCN stations (left) and stations in the mountain states (right).} 
   \label{fig:irregular}
 \end{figure}
 The two panels illustrate one approach to the overlapping problem: zooming.  There is an interplay between icon size (in geographical units), plotting area (in geographical units) and plot size (in display units).  Icons need to be big enough to be readable on the display, but small enough to avoid overlapping.  Readability can be maintained and overlapping reduced by decreasing the icon size and simultaneously increasing the display size or decreasing the plotting area (as done in the right panel in Figure \ref{fig:irregular}).  However, there are generally limitations in the maximum display size (or resolution) and the utility of plotting very small areas.  
@@ -394,7 +394,7 @@ Reference guides become especially important in the irregular location case. Com
 
 \section{Generalizations}
 
-Glyphs can be more general than time series or stars. For multivariate data we may want to represent several variables in the glyphs. Figure~\ref{fig:cloud} shows scatterplots as icons: temperature values are displayed horizontally and high-cloud values are displayed vertically, both locally scaled. The bivariate relationship between the two variables is explored spatially, and it is clear that it is different across the region. The equatorial Pacific and Caribbean have positive association between temperature and high cloud, while the south American continent has negative association. The second plot displays a loess curve fit to the data instead of the individual points, sharpening the view of association. Another option is available in Gauguin \citep{gribov:2006}, a icon based on a histogram, giving small univariate distribution displays for each location.
+Glyphs can be more general than time series or stars. For multivariate data we may want to represent several variables in the glyphs. Figure~\ref{fig:cloud} shows scatterplots of the data-expo data as icons: temperature values are displayed horizontally and high-cloud values are displayed vertically, both locally scaled. The bivariate relationship between the two variables is explored spatially, and it is clear that it is different across the region. The equatorial Pacific and Caribbean have positive association between temperature and high cloud, while the south American continent has negative association. The second plot displays a loess curve fit to the data instead of the individual points, sharpening the view of association. Another option is available in Gauguin \citep{gribov:2006}, a icon based on a histogram, giving small univariate distribution displays for each location.
 
 \begin{figure}[htbp]
   \centering

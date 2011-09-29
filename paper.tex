@@ -59,7 +59,7 @@ $^3$Department of Statistics, Oregon State University}
 
 \begin{abstract}
 
-Climate data poses visual challenges because it is has both spatial and temporal components, and is often multivariate. In this paper we propose an new display for climate data: glyph-maps. Glyph-maps are a specialization of multivariate glyph plots; each spatial location is displayed with one glyph that represents the measurements recorded over time at that location. Glyph-maps allow the discovery of both local and global structure, with a particular focus on temporal relationships.
+Understanding the multiple aspects of climate data is a challenge. There are both spatial and temporal components to examine, and often multivariate dependencies. In this paper we propose a new display for climate data: glyph-maps. Glyph-maps are a specialization of multivariate glyph plots; each spatial location is displayed with one glyph that represents the measurements recorded over time at that location. Glyph-maps allow the discovery of both local and global structure, with a particular focus on temporal relationships.
 
 The instructions for computing and displaying glyph-maps are described, along with the design of reference frames, and the effects of different scaling of the data on perception of structure. The methods are developed for rectangularly gridded data, but with some clever processing, which is explained, it is possible get good glyph-maps of irregularly gridded data.
 
@@ -325,12 +325,13 @@ The raw data shows us missing values and gives some sense of variability, but gi
   \includegraphics[width=1\linewidth]{gistemp-pred}%
   %\includegraphics[width=1\linewidth]{gistemp-polar-pred}
 
-  \caption{Glyph-map of predicted temperature anomaly data (GISTEMP), from
-    1950-2010. Increasing trends can be seen over most of the USA,
-    with varying degrees of increase. Some isolated locations exhibit
-    steep declines, and inclines, perhaps indicative of some isolated
-    data problems. References line are straight, but look curves because of
-    the Z\"ollner optical illusion}
+  \caption{Glyph-map of predicted temperature anomaly data (GISTEMP),
+    from 1950-2010. Increasing trends can be seen over most of the
+    USA, with varying degrees of increase. Some isolated locations
+    exhibit steep declines, and inclines, perhaps indicative of some
+    isolated data problems. Note that, the reference lines are
+    straight, but they look curved because of the Z\"ollner optical
+    illusion.}
   \label{fig:gistemp-pred}
 \end{figure}
 

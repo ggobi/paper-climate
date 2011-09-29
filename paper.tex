@@ -59,9 +59,9 @@ $^3$Department of Statistics, Oregon State University}
 
 \begin{abstract}
 
-Climate data is challenging to visualize because it is multivariate and has both spatial (2d) and temporal (1d) components. In this paper we propose an new display for climate data: glyph-maps. Glyph-maps are a specialization of multivariate glyph plots; each spatial location is display with one glyph that represents the measurements recorded over time at that location. Glyph-maps allow the discovery of both local and global structure, making discovery much easier than the classical display using colors.
+Climate data poses visual challenges because it is has both spatial and temporal components, and is often multivariate. In this paper we propose an new display for climate data: glyph-maps. Glyph-maps are a specialization of multivariate glyph plots; each spatial location is displayed with one glyph that represents the measurements recorded over time at that location. Glyph-maps allow the discovery of both local and global structure, with a particular focus on temporal relationships.
 
-We include a description of how to create glyph-maps using existing statistical software, our initial explorations of their perceptual features, and a discussion of reference frames. Our techniques are inspired by rectangular gridded data, but we provide generalization to deal with non-rectangular grids and irregular locations.
+The instructions for computing and displaying glyph-maps are described, along with the design of reference frames, and the effects of different scaling of the data on perception of structure. The methods are developed for rectangularly gridded data, but with some clever processing, which is explained, it is possible get good glyph-maps of irregularly gridded data.
 
 \end{abstract}
 
@@ -392,9 +392,9 @@ In both examples of collapsing locations, the icon locations still represent rea
 
 Reference guides become especially important in the irregular location case. Comparisons are harder in this case, as the ability to easily compare icons along a common baseline, be it along a row or column of glyphs, is absent. Without reference it is hard to tell if short series are missing data at the start or end.  
 
-\section{Conclusions}
+\section{Generalizations}
 
-We have only scratched the surface of the potential of this type of display for climate data. Glyph-maps are not limited to time series plots. They are readily generalized to use any other type of display as an icon. Figure~\ref{fig:cloud} shows scatterplots as icons: temperature values are displayed horizontally and high-cloud values are displayed vertically, both locally scaled. The bivariate relationship between the two variables is explored spatially, and it is clear that it is different across the region. The equatorial Pacific and Caribbean have positive association between temperature and high cloud, while the south American continent has negative association. The second plot displays a loess curve fit to the data instead of the individual points, sharpening the view of association. Another option is available in Gauguin \citep{gribov:2006}, a icon based on a histogram, giving small univariate distribution displays for each location.
+Glyphs can be more general than time series or stars. For multivariate data we may want to represent several variables in the glyphs. Figure~\ref{fig:cloud} shows scatterplots as icons: temperature values are displayed horizontally and high-cloud values are displayed vertically, both locally scaled. The bivariate relationship between the two variables is explored spatially, and it is clear that it is different across the region. The equatorial Pacific and Caribbean have positive association between temperature and high cloud, while the south American continent has negative association. The second plot displays a loess curve fit to the data instead of the individual points, sharpening the view of association. Another option is available in Gauguin \citep{gribov:2006}, a icon based on a histogram, giving small univariate distribution displays for each location.
 
 \begin{figure}[htbp]
   \centering
@@ -405,7 +405,11 @@ We have only scratched the surface of the potential of this type of display for 
   \label{fig:cloud}
 \end{figure}
 
-There is also much work to be done on the perceptual underpinnings of these displays. We have noticed that periodic trends are easier to perceive in star-glyphs, and long-term trends in line-glyphs. Is this always the case? Are their certain types of periodicity that are particularly easy to spot? These questions need to be answered with rigorous perceptual studies to help guide the use of these plots.
+\section{Conclusions}
+
+In summary, glyph-maps enable the study of temporal patterns in multivariate spatiotemporal data. Climate change is focused on changes over time, so glyph-maps provide a way to study these changes directly. Glyph-maps enable different resolutions of the data to be examined: the raw data to discover data quality issues, early, global trend, seasonality, residuals, and multivariate dependencies. When the data is spatially gridded the glyphs are organized in a manner that makes reasonable comparisons. For irregularly gridded data the icon size needs to be chosen to minimize overlap but use as much display space as possible, or combined to produce close to gridded icons. 
+
+The next direction would be to examine the perceptual elements of these displays, in more detail. For example, it appears that periodic trends are easier to perceive in star-glyphs, and long-term trends in line-glyphs. Is this always the case? Are their certain types of periodicity that are particularly easy to spot? These questions need to be answered with rigorous perceptual studies to help guide the use of these plots.
 
 \bibliography{references}
 

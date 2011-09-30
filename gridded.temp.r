@@ -64,7 +64,10 @@ temp.usa.melt$lon<-lon[temp.usa.melt$gridx+113]
 temp.usa.melt$lat<-lat[temp.usa.melt$gridy+19]
 
 temp.usa.melt<-subset(temp.usa.melt, !(lon>-70 & lat<37))
-
+x<-ddply(temp.usa.melt, c("lon","lat"), function(df) {
+ if (nrow(subset(df,is.na(temp))) == nrow(df)) NULL else df 
+})
+      
 temp.usa.melt.gly<-glyphs(temp.usa.melt, "lon", "time", "lat", "temp")
 qplot(gx, gy, data=temp.usa.melt.gly, group=gid, geom="line") + map + coord_map() # Testing
 p <-ggplot(temp.usa.melt.gly, aes(gx, gy, group = gid)) + 
@@ -110,10 +113,8 @@ year_preds <- ldply(temp_models, function(mod) {
 })
 temp.usa.melt.sub.gly<-glyphs(year_preds, "lon", "year", "lat", "pred")
 ggplot(temp.usa.melt.sub.gly, aes(gx, gy, group = gid)) + 
-  map + geom_line(aes(y = lat), colour = "white", size = 1.5) +
-  geom_path() +
-  ref_boxes +
-  theme_fullframe() #+ coord_map() makes a strange tranformation of boxes
+  map_gistemp + geom_line(aes(y = lat), colour = "white", size = 1.5) +
+  add_ref_lines(temp.usa.melt.sub.gly) + add_ref_boxes(temp.usa.melt.sub.gly) + geom_path()
 ggsave("../images/gistemp-pred.png", width = 8, height = 4)
 # Coord map seems to make the plotting REALLY SLOW!
 

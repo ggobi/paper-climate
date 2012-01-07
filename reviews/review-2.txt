@@ -1,0 +1,60 @@
+Primary Concern
+---------------
+- p16, l18-24: The authors suggest "rigorous perceptual studies".  As outlined below, glyph-maps have been used before in several publications. Personally, I think a perceptual study needs to be added to this paper.
+
+I would leave it to the editor whether to enforce this request, but in my opinion, there is no need for yet another "example-only" paper that does not really advance these methods. This is fine for a conference presentation and resulting paper, but not really for a journal paper. The combination of this current paper with a perceptual study clearly would be an advancement; similarly, aiming at a different journal such as the "Journal of  Statistical Software" or "Computers & Geosciences" and placing a major weight on the accompanying computer code (hopefully an R package) - and using the examples from this current paper to outline the capabilities of the R package also would be a publishable advancement.
+
+If the editor believes that a perceptual study is not needed for this paper, at least the authors could formulate a few additional hypotheses in Section 7 what might be expected as the outcomes of such a perceptual study. Morphet & Symanzik, International Journal of Digital Earth 3(1): 47-71, compared their color-coding of directional data with the traditional arrow coding (that are obviously some kind of glyphs). It appears that for some perceptual tasks, colors are more suitable while for other tasks, arrows (i.e., glyphs) are more suitable. Some of their results may lead to hypotheses and guidelines where the glyph-maps presented in this paper may be beneficial - and where they better should be avoided.
+
+Major Comments
+--------------
+- p1, l28: The authors state "This paper proposes a new display for climate data"; "proposes" seems to be the wrong word as others have used glyph-maps for climate data before, in particular two of the 2006 data expo papers. The authors cite their own publication (Hobbs et al., 2010), but surprisingly, they do not cite Eden et al., Comput Stat 25:587-601. However, Fig 2 here is a close adaptation of Eden's Fig 3 (applied to a different data set) and the polar coords here in Fig 3 (right plot) & 7 have been used in Eden's Fig 5. Also noteworthy is Eden's Fig 7.
+
+So, Eden clearly needs to be given proper credit - and I would rephrase this sentence as "extends work previously introduced by Hobbs et al. and Eden at al." or something similar. [and then later on p2, l17, "advances" rather than "develops"]
+
+- p1, l32: There has been a 2nd use for glyph-maps in the past, the "ray-glyph arc maps", for the visualization of multivariate data - see Figs 5 & 7a in Carr et al., Cartography and Geographic Information Systems, 19(4):228-236. This needs to be cited early on.
+
+- p1, l50: "small multiples" - when you speak of small multiples, perhaps refer to Tufte (1983/1990) for more details; a climatologist may not be familiar with this term
+
+- p2, l3: "Reading this type of plot is cognitively challenging" - but the same is true for Fig 2; here, the reader has to distinguish among same 625 time series plots; honestly, I could only detect about 5 to 8 different main patterns
+
+- p2, l34: "Andes and the Sierra Madre Occidental in Mexico" - can you annotate these on your map, either by using different colors or by circling the approximate areas
+
+- p6, l40: reference to "Fig 8" - figs should be references in the sequential order, so your Fig 8 has to become Fig 4 - or shift this statement to a place after Fig 8 has been presented in the paper.
+
+- p7, l50: Fig 4 - be more precise about the data you are using; a reader cannot follow without a more detailed explanation; how were data for Fig 4 exactly obtained from the data in Fig 2?
+
+- p8, l3: reference to "Fig 7" - again, a forward reference
+
+- p8, l24: omit "dramatic"; similarly, Fig 5 (right plot), 2nd row from top, 2 rightmost locations also would present "dramatic" increases
+
+- p8, l49: Fig 5 - again, more details are needed, e.g., which kind of smoothing, which parameters, etc.; this is not important for a conference presentation or paper, but such information should be included in a journal paper (think of Reproducible Research)
+
+- p9, Fig 6: what about adding an additional color legend here that shows the numerical ranges for each color class
+
+- p10, l22: even in combination with p4, it is not really clear what these data represent; these are spatially averaged over the locations in each grid cell, and monthly averages - or are these based on 365 observations for each year ?!?
+
+- p11, Fig 8 & p12, Fig 9: these 2 figs show univariate data: the slope of a single linear trend; do we really need a glyph map here? - couldn't we show the same information on a choropleth map (perhaps after some spatial smoothing in Fig 9) that makes use of a divergent color scheme (see the work of Cindy Brewer and the R package Rcolorbrewer)?; in my opinion, it appears that we are wasting a lot of space by drawing a glyph map here that makes up multiple pixels, rather than using color that could be limited to a single pixel and thus could be suitable for even a much denser spatial data set; moreover, overplotting wouldn't be an issue for pixel-based color visualizations
+
+- p13, l8: when you suggest to combine overlapping locations, you clearly need to discuss the Modifiable Area Unit Problem (MAUP) here (cite 1 or 2 main references); spatial aggregation is not as simple as it appears
+
+
+Minor Comments
+--------------
+- p1, l44: "data is composed" - aren't data plural ??? (several other occurrences throughout the paper)
+
+- many small typos or mistakes, such as (these are just a sample; carefully proofread yourselves):
+ - p1, l48: "interest as each location" - should be "at"
+ - p2, l26: "display Tufte (2001) of" - location of "("
+ - p2, l36: "One problem with multivariate glyph is that lack of" - perhaps "they lack" ?
+ - p2, l48: "Others Pickett and Grinstein (1988) have" - "(" again
+ - p4, l28: "carefully consideration" - "careful"
+ - p4, l35: "2009" - should be "2006" !
+ - p4, l45-47: "from from"
+ - p5, l33: "these these"
+ -p10, l13: "Figure 8" - I suppose "Fig 7"?
+ -p17, l4, l11, l52: just use author/editor initials
+ -p17, l28: page # or URL missing (at least indicate doi)
+ -p18, l12: ".N" - should be "N."
+ -p18, l24: von Mayr reference incomplete and misspelled
+ - this is just a sample!

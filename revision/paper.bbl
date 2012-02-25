@@ -1,0 +1,176 @@
+\begin{thebibliography}{27}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Anderson(1960)]{anderson:1960}
+E.~Anderson.
+\newblock {A Semigraphical Method for the Analysis of Complex Problems}.
+\newblock \emph{Technometrics}, 2\penalty0 (3):\penalty0 387--391, 1960.
+
+\bibitem[Buja et~al.(1986)Buja, Hurley, and McDonald]{buja:1986}
+A.~Buja, C.~Hurley, and J.~A. McDonald.
+\newblock {A Data Viewer for Multivariate Data}.
+\newblock In T.~Boardman, editor, \emph{Computing Science and Statistics:
+  Proceedings of the 18th Symposium on the Interface}, pages 171--174,
+  Washington, DC, 1986. American Statistical Association.
+
+\bibitem[Buja et~al.(1996)Buja, Cook, and Swayne]{buja:1996a}
+A.~Buja, D.~Cook, and D.~F. Swayne.
+\newblock {Interactive High-Dimensional Data Visualization}.
+\newblock \emph{Journal of Computational and Graphical Statistics}, 5\penalty0
+  (1):\penalty0 78--99, 1996.
+
+\bibitem[Busey(2011)]{busey}
+T.~Busey.
+\newblock Change {B}lindness.
+\newblock
+  \url{http://cognitrn.psych.indiana.edu/CogsciSoftware/ChangeBlindness/},
+  2011.
+
+\bibitem[Chernoff(1973)]{chernoff:1973}
+H.~Chernoff.
+\newblock {The Use of Faces to Represent Points in K-Dimensional Space
+  Graphically}.
+\newblock \emph{Journal of the American Statistical Association}, 68\penalty0
+  (342):\penalty0 361--368, 1973.
+
+\bibitem[Cleveland(1993)]{cleveland:1993a}
+W.~S. Cleveland.
+\newblock {A Model for Studying Display Methods of Statistical Graphics}.
+\newblock \emph{Journal of Computational and Graphical Statistics}, 2:\penalty0
+  323--364, 1993.
+\newblock URL \url{http://stat.bell-labs.com/doc/93.4.ps}.
+
+\bibitem[Cleveland and McGill(1984)]{cleveland:1984}
+W.~S. Cleveland and R.~McGill.
+\newblock Graphical {P}erception: {T}heory, {E}xperimentation and {A}pplication
+  to the {D}evelopment of {G}raphical {M}ethods.
+\newblock \emph{Journal of the American Statistical Association}, 79\penalty0
+  (387):\penalty0 531--554, 1984.
+
+\bibitem[Cook et~al.(2008)Cook, Lee, Buja, and Wickham]{cook:2006}
+D.~Cook, E.-K. Lee, A.~Buja, and H.~Wickham.
+\newblock {Grand Tours, Projection Pursuit Guided Tours and Manual Controls}.
+\newblock In Chunhouh Chen, Wolfgang H{\"a}rdle, and Antony Unwin, editors,
+  \emph{Handbook of Data Visualization}, Springer Handbooks of Computational
+  Statistics, chapter III.2, pages 295--314. Springer, 2008.
+
+\bibitem[{Earth System Research Laboratory, Physical Sciences Division,
+  National Oceanic and Atmospheric Administration}(2011)]{GISTEMP}
+{Earth System Research Laboratory, Physical Sciences Division, National Oceanic
+  and Atmospheric Administration}.
+\newblock {Monthly Temperature Anomaly}.
+\newblock \url{http://www.esrl.noaa.gov/psd/}, 2011.
+
+\bibitem[Gribov et~al.(2006)Gribov, Unwin, and Hofmann]{gribov:2006}
+A.~Gribov, A.~Unwin, and H.~Hofmann.
+\newblock {Tools for Multivariate Data Exploration}.
+\newblock \emph{ASA Statistical Computing and Graphics Newsletter}, 17\penalty0
+  (2):\penalty0 18--21, 2006.
+
+\bibitem[Healey(2011)]{healey}
+C.~G. Healey.
+\newblock {Perception in Visualization}.
+\newblock \url{http://www.csc.ncsu.edu/faculty/healey/PP/index.html}, 2011.
+
+\bibitem[Healey and Enns(2011)]{healey:2011}
+C.~G. Healey and J.~T Enns.
+\newblock {Attention and Visual Memory in Visualization and Computer Graphics}.
+\newblock \emph{IEEE Transactions on Visualization and Computer Graphics},
+  2011.
+
+\bibitem[Hobbs et~al.(2010)Hobbs, Wickham, Hofmann, and Cook]{hobbs:2010}
+J.~Hobbs, H.~Wickham, H.~Hofmann, and D.~Cook.
+\newblock {Glaciers Melt as Mountains Warm: A Graphical Case Study}.
+\newblock \emph{Computational Statistics}, 25\penalty0 (4):\penalty0 569--586,
+  2010.
+
+\bibitem[Hurley and Oldford(2010)]{hurley:2010}
+C.~B. Hurley and R.~W. Oldford.
+\newblock {Pairwise Display of High-Dimensional Information via Eulerian Tours
+  and Hamiltonian Decompositions}.
+\newblock \emph{Journal of Computational and Graphical Statistics}, 19\penalty0
+  (4):\penalty0 861--886, 2010.
+
+\bibitem[Kleiner and Hartigan(1981)]{kleiner:1981}
+B.~Kleiner and J.~A. Hartigan.
+\newblock {Representing Points in Many Dimensions by Trees and Castles}.
+\newblock \emph{Journal of the American Statistical Association}, 76\penalty0
+  (374):\penalty0 260--269, 1981.
+
+\bibitem[Murrell(2010)]{murrell:2010}
+P.~Murrell.
+\newblock {The 2006 Data Expo of the American Statistical Association}.
+\newblock \emph{Computational Statistics}, 25:\penalty0 551--554, 2010.
+
+\bibitem[{National Oceanic and Atmospheric Administration, National Climatic
+  Data Center}(2011)]{USHCN}
+{National Oceanic and Atmospheric Administration, National Climatic Data
+  Center}.
+\newblock {US Historical Climatology Network}.
+\newblock \url{http://cdiac.ornl.gov/ftp/ushcn_v2_monthly/}, 2011.
+
+\bibitem[Pickett and Grinstein(1988)]{pickett:1988}
+R.~M. Pickett and Georges~G. Grinstein.
+\newblock {Iconographics Displays for Visualizing Multidimensional Data}.
+\newblock In \emph{Proc. IEEE Conference on Systems, Man, and Cybernetics},
+  pages 514--19, 1988.
+
+\bibitem[{R Development Core Team}(2011)]{R}
+{R Development Core Team}.
+\newblock \emph{R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria, 2011.
+\newblock URL \url{http://www.R-project.org/}.
+\newblock {ISBN} 3-900051-07-0.
+
+\bibitem[Simons et~al.(2000)Simons, Franconeri, and Reimer]{simons:gradual}
+D.~J. Simons, S.~L. Franconeri, and R.~L. Reimer.
+\newblock C{hange Blindness in the Absence of a Visual Disruption}.
+\newblock \emph{Perception}, 29:\penalty0 1143--1154, 2000.
+
+\bibitem[Swayne et~al.(1991)Swayne, Buja, and Hubbell]{swayne:1991}
+D.~F. Swayne, A.~Buja, and .N~Hubbell.
+\newblock {XGobi} meets {S}: integrating software for data analysis.
+\newblock \emph{Computing Science and Statistics}, 23:\penalty0 430--434, 1991.
+
+\bibitem[Swayne et~al.(2003)Swayne, {Temple Lang}, Buja, and Cook]{swayne:2003}
+D.~F. Swayne, D.~{Temple Lang}, A.~Buja, and D.~Cook.
+\newblock {GGobi: Evolving from XGobi into an Extensible Framework for
+  Interactive Data Visualization}.
+\newblock \emph{Computational Statistics \& Data Analysis}, 43:\penalty0
+  423--444, 2003.
+
+\bibitem[Tufte(2001)]{tufte:2001}
+E.~R. Tufte.
+\newblock \emph{{The Visual Display of Quantitative Information (Second
+  Edition)}}.
+\newblock Graphics Press, Cheshire, CT, 2001.
+
+\bibitem[{von Mayr}(1877)]{mayr:1877}
+G.~{von Mayr}.
+\newblock {Die Gesetzmässigkeit im Gesellschaftsleben}.
+\newblock 1877.
+
+\bibitem[Wickham(2009)]{me:ggplot2}
+H.~Wickham.
+\newblock \emph{{ggplot2: Elegant Graphics for Data Analysis}}.
+\newblock {useR}. Springer, July 2009.
+
+\bibitem[Wickham(2011)]{me:plyr}
+H.~Wickham.
+\newblock {The Split-apply-combine Strategy for Data Analysis}.
+\newblock \emph{Journal of Statistical Software}, 40\penalty0 (1):\penalty0
+  1--29, 2011.
+\newblock URL \url{http://www.jstatsoft.org/v40/i01/}.
+
+\bibitem[{Z{\"o}llner}(1860)]{Zollner}
+F.~{Z{\"o}llner}.
+\newblock {Ueber eine neue Art von Pseudoskopie und ihre Beziehungen zu den von
+  Plateau und Oppel beschriebenen Bewegungsph{\"a}nomenen}.
+\newblock \emph{Annalen der Physik}, 186:\penalty0 500--523, 1860.
+\newblock \doi{10.1002/andp.18601860712}.
+
+\end{thebibliography}

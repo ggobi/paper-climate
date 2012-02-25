@@ -1,0 +1,7 @@
+outlines <- as.data.frame(map("world", plot = FALSE,
+  xlim = -c(113.8, 56.2), ylim = c(-21.2, 36.2))[c("x","y")])
+map <- geom_polygon(aes(x, y), inherit.aes = FALSE, data = outlines, 
+  alpha = 0.2, legend = FALSE)
+
+resids <- glyphs(resids, "long", "day", "lat", "temp_resid") 
+qplot(gx, gy, data = resids, geom = "line", group = gid) + map

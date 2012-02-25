@@ -1,0 +1,18 @@
+theme_nothing <- function (base_size = 12) {
+  structure(list(
+	panel.grid.minor=theme_blank(), 
+	panel.grid.major=theme_blank(), 
+	panel.background=theme_blank(), 
+	panel.border = theme_blank(), 
+	panel.margin = unit(0, "lines"), 
+	axis.title.x=theme_blank(), 
+	axis.title.y=theme_blank(), 
+	axis.line=theme_blank(), 
+	axis.ticks=theme_blank(), 
+	axis.text.y = theme_blank(), 
+	axis.text.x = theme_blank()#,
+	#legend.position = "none"
+  ), class = "options")
+}
+qplot(long, lat, data=resids, geom="tile", fill=temp_resid, facets=year~month) + scale_fill_gradient2(midpoint=0, mid="white", high="red", low="blue") + map + theme_nothing() + coord_map()
+ggsave("../images/nasa-colored-map.png", height=10, width=18)

@@ -1,0 +1,5 @@
+library("maps")
+library("ggplot2")
+
+map_mini <- c(map, list(
+  coord_cartesian(xlim = c(-114.93, -85), ylim = c(7.55, 36.64), wise = T)))

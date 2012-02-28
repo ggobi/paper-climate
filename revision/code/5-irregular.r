@@ -2,7 +2,7 @@ library(mgcv)
 
 source("glyph.r")
 source("glyph-utils.r")
-source("overlapping.r")
+source("5-overlapping.r")
 source("data-ushcn.r")
 
 temp.post1950 <- subset(ushcn, year >= 1950)

@@ -1,19 +1,16 @@
-library("maps")
 library("ggplot2")
-
-source("maps.r")
-source("glyph.r")
+library("grid")
 
 theme_fullframe <- function (base_size = 12){
-  structure(list(
+  opts(
     axis.line = theme_blank(), 
-    axis.text.x = theme_blank(), 
-    axis.text.y = theme_blank(),
-    axis.ticks = theme_blank(), 
+    # axis.text.x = theme_blank(), 
+    # axis.text.y = theme_blank(),
+    # axis.ticks = theme_blank(), 
     axis.title.x = theme_blank(), 
     axis.title.y = theme_blank(), 
-    axis.ticks.length = unit(0, "lines"), 
-    axis.ticks.margin = unit(0, "lines"), 
+    # axis.ticks.length = unit(0, "lines"), 
+    # axis.ticks.margin = unit(0, "lines"), 
     legend.position = "none", 
     panel.border = theme_blank(), 
     panel.grid.major = theme_blank(), 
@@ -21,7 +18,7 @@ theme_fullframe <- function (base_size = 12){
     panel.margin = unit(0, "lines"), 
     plot.background = theme_blank(), 
     plot.margin = unit(rep(2, 4), "mm")
-  ), class = "options")
+  )
 }
 
 add_ref_lines <- function(data, colour = "white", size = 1.5, ...){

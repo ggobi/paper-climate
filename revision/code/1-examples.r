@@ -3,9 +3,9 @@
 # here too
 
 source("glyph.r")
+source("glyph-utils.r")
 source("maps.r")
 source("data-nasa.r")
-source("glyph-utils.r")
 
 temp_seas_models <- dlply(nasa, c("lat", "long"), function(df) {
   lm(surftemp ~ factor(month), data = df)
@@ -30,13 +30,29 @@ preds <- mdply(cbind(d = locs, m = temp_seas_models), function(d, m) {
 
 # First figure: facetted colored map -----------------------------------------
 
+outline_nasa <- list(
+  geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
+    data = .nasa, legend = FALSE, fill = NA, colour = "grey60"),
+  scale_x_continuous(expand = c(0.02, 0)),
+  scale_y_continuous(expand = c(0.02, 0)), 
+  xlab(NULL),
+  ylab(NULL))
+
+# This plot is INCREDIBLY slow in 0.8.9, so I've switched to 0.9.0 to make
+# it a bit faster - it's still not great, but it's at least tolerable.
+
 ggplot(resids, aes(long, lat)) +
-  geom_tile(aes(fill = temp_resid)) +
+  geom_raster(aes(fill = temp_resid)) +
   outline_nasa + 
   facet_grid(year ~ month) + 
   scale_fill_gradient2(mid = "white", high = "red", low = "blue") + 
-  theme_fullframe() +
-  coord_map()
+  theme_fullframe() + 
+  opts(
+    axis.text.x = theme_blank(), 
+    axis.text.y = theme_blank(),
+    axis.ticks = theme_blank(), 
+    axis.ticks.length = unit(0, "lines"), 
+    axis.ticks.margin = unit(0, "lines"))
 ggsave("../images/nasa-colored-map.png", height = 10, width = 18)
 
 # Second figure: same data but with glyphs -----------------------------------
@@ -50,3 +66,10 @@ ggplot(resids.gly, aes(gx, gy, group = gid)) +
   theme_fullframe() 
 ggsave("../images/nasa-deseas-glyph.png", width = 6, height = 6)
 
+# Legend
+ggplot(resids.gly, aes(time, temp_resid)) + 
+  geom_line(aes(group = gid), alpha = 1/0) + 
+  opts(aspect.ratio = 1) + 
+  xlab("Month") + 
+  ylab("Temperature deviation (C)")
+ggsave("../images/nasa-deseas-glyph-leg.png", width = 4, height = 4)

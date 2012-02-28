@@ -31,23 +31,14 @@ states$group <- max(world$group) + states$group
 both <- rbind(world, states)
 
 ##### Maps
-nasa <- getbox(both, xlim = c(-115, -55), ylim = c(-21.1, 36.6))
+.nasa <- getbox(both, xlim = c(-115, -55), ylim = c(-21.1, 36.6))
 map_nasa <- list(
   geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = nasa, legend = FALSE, fill = "grey80", colour = "grey90"),
+    data = .nasa, legend = FALSE, fill = "grey80", colour = "grey90"),
   scale_x_continuous(expand = c(0.02, 0)),
   scale_y_continuous(expand = c(0.02, 0)), 
   xlab(NULL),
   ylab(NULL))
-
-outline_nasa <- list(
-  geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = nasa, legend = FALSE, fill = NA, colour = "grey20"),
-  scale_x_continuous(expand = c(0.02, 0)),
-  scale_y_continuous(expand = c(0.02, 0)), 
-  xlab(NULL),
-  ylab(NULL))
-
 
 ushcn <- subset(getbox(both, xlim = c(-126, -65), ylim = c(24, 52)),
   region != "Great Lakes")

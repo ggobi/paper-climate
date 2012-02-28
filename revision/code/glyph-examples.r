@@ -4,39 +4,49 @@
 
 source("glyph.r")
 source("maps.r")
-# world, map are created in maps.r
+source("data-nasa.r")
+source("glyph-utils.r")
 
+temp_seas_models <- dlply(nasa, c("lat", "long"), function(df) {
+  lm(surftemp ~ factor(month), data = df)
+})
 
-# De-seasonalized nasa data: matches the facetted, coloured map, need
-# to run that code before this
+# Including trend
+temp_trend_models <- dlply(nasa, c("lat", "long"), function(df) {
+  lm(surftemp ~ year + factor(month), data = df)
+})
+
+locs <- dlply(nasa, c("lat", "long"))
+
+resids <- mdply(cbind(d = locs, m = temp_seas_models), function(d, m) {
+  d$temp_resid <- d$surftemp - predict(m, newdata = d)
+  d
+})
+
+preds <- mdply(cbind(d = locs, m = temp_seas_models), function(d, m) {
+  d$temp_pred <- predict(m, newdata = d)
+  d
+})
+
+# First figure: facetted colored map -----------------------------------------
+
+ggplot(resids, aes(long, lat)) +
+  geom_tile(aes(fill = temp_resid)) +
+  outline_nasa + 
+  facet_grid(year ~ month) + 
+  scale_fill_gradient2(mid = "white", high = "red", low = "blue") + 
+  theme_fullframe() +
+  coord_map()
+ggsave("../images/nasa-colored-map.png", height = 10, width = 18)
+
+# Second figure: same data but with glyphs -----------------------------------
+
 resids.gly <- glyphs(resids, "long", "day", "lat", "temp_resid", height=2.5) 
-ggplot(resids.gly, aes(gx, gy, group = gid)) + map +
+ggplot(resids.gly, aes(gx, gy, group = gid)) + 
+  map_nasa +
   add_ref_lines(resids.gly) +
   add_ref_boxes(resids.gly) +
-  geom_path() + theme_fullframe() 
-#qplot(gx, gy, data = resids, geom = "line", group = gid) + map
-ggsave("../images/nasa-deseas-glyph.png")
+  geom_path() + 
+  theme_fullframe() 
+ggsave("../images/nasa-deseas-glyph.png", width = 6, height = 6)
 
-# Scatterplot
-nasa.scale<-ddply(nasa, c("long","lat"), summarise,
-                  cloudlow.s=scale(cloudlow), 
-                  cloudhigh.s=scale(cloudhigh),
-                  temp.s=scale(surftemp))
-#nasa.scat.gly <- glyphs(nasa.scale, "long", "cloudlow.s", "lat", "cloudhigh.s") 
-#ggplot(nasa.scat.gly, aes(gx, gy, group = gid)) + map +
-#  add_ref_boxes(nasa.scat.gly) +
-#  geom_point(size=I(0.7), alpha=I(0.5)) + theme_fullframe() 
-#ggsave("../images/nasa-scat-glyph.png")
-nasa.scat.gly <- glyphs(nasa.scale, "long", "temp.s", "lat", "cloudhigh.s") 
-ggplot(nasa.scat.gly, aes(gx, gy, group = gid)) + map +
-  add_ref_boxes(nasa.scat.gly) +
-  geom_point(size=I(0.7), alpha=I(0.5)) + theme_fullframe() 
-ggsave("../images/nasa-scat-glyph.png")
-nasa.loess<-ddply(nasa.scale, c("long","lat"), summarise,
-                  temp.s=temp.s,
-                  pcloud=predict(loess(cloudhigh.s~temp.s)))
-nasa.loess.gly <- glyphs(nasa.loess, "long", "temp.s", "lat", "pcloud") 
-ggplot(nasa.loess.gly, aes(gx, gy, group = gid)) + map +
-  add_ref_boxes(nasa.loess.gly) +
-  geom_line() + theme_fullframe() 
-ggsave("../images/nasa-loess-glyph.png")

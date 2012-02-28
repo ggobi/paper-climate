@@ -122,30 +122,3 @@ last_plot() + geom_line(aes(gx, gy, group = gid, fill = NULL), data = resids)
 
 # Shrink the pdfs without losing any detail
 tools::compactPDF("../images/")
-
-# Scatterplots ----------------------------------------------------------------
-
-cloud <- glyphs(nasa, "long", "cloudlow", "lat", "cloudhigh") 
-ggplot(cloud, aes(gx, gy, group = gid)) + 
-  map +
-  geom_point(shape = ".") +
-  geom_tile(aes(long, lat), colour = "white", fill = NA)
-ggsave("../images/clouds.png", width = 6, height = 6)
-
-grid_along <- function(x, n = 20) {
-  rng <- range(x, na.rm = TRUE)
-  seq(rng[1], rng[2], length = n)
-}
-
-cloud_mod <- ddply(nasa, c("lat", "long"), function(df) {
-  grid_low <- data.frame(cloudlow = grid_along(df$cloudlow))
-  mod <- loess(cloudhigh ~ cloudlow, data = df, na = na.exclude)
-  mutate(grid_low, cloudhigh = predict(mod, newdata = grid_low))
-})
-cloud_mod <- glyphs(cloud_mod, "long", "cloudlow", "lat", "cloudhigh") 
-
-ggplot(cloud_mod, aes(gx, gy, group = gid)) + 
-  map +
-  geom_line() +
-  geom_tile(aes(long, lat), colour = "white", fill = NA) 
-ggsave("../images/clouds-smooth.png", width = 6, height = 6)

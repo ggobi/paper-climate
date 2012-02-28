@@ -6,8 +6,8 @@ source("glyph-utils.r")
 
 source("maps.r")
 
-ushcn.loc <- "../data/ushcndata.rds"
-ushcn.stations.loc <- "../data/ushcnstations.rds"
+ushcn.loc <- "../../data/ushcndata.rds"
+ushcn.stations.loc <- "../../data/ushcnstations.rds"
 
 if (!file.exists(ushcn.loc)) {
   temp.all<-read.table("../data/9641C_201012_raw.avg")
@@ -16,7 +16,7 @@ if (!file.exists(ushcn.loc)) {
   temp.all$stn<-temp.all$year%/%100000
   temp.all$year<-temp.all$year%%10000
 
-  stn.all<-read.table("../data/ushcn-stations.txt", fill=T)
+  stn.all<-read.table("../../data/ushcn-stations.txt", fill=T)
   stn.all<-stn.all[,c(1:3,5:6)]
   colnames(stn.all)<-c("stn", "lat", "lon", "state", "town")
   stn.all$name<-paste(stn.all$town, stn.all$state)

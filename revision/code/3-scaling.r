@@ -16,6 +16,13 @@ ggplot(day_preds, aes(gx, gy, group = gid)) +
   theme_fullframe()
 ggsave("../images/month-rescale-none.png", width = 4, height = 4)
 
+ggplot(day_preds, aes(day, pred)) + 
+  geom_line(aes(group = gid), alpha = 1/10) + 
+  opts(aspect.ratio = 1) + 
+  xlab("Days from start") + 
+  ylab("Average temperature (K)")
+ggsave("../images/month-rescale-legend.pdf", width = 4, height = 4)
+
 last_plot() %+% glyphs(day_preds, "long", "day", "lat", "pred", 
   y_scale = range01) 
 ggsave("../images/month-rescale01.png", width = 4, height = 4)
@@ -33,8 +40,13 @@ ggplot(day_preds2, aes(gx, gy, group = gid)) +
   add_ref_boxes(day_preds) +
   geom_path(aes(colour = range)) +
   theme_fullframe() + 
-  scale_colour_gradient(high = "black", low = "grey60")
-ggsave("../images/month-rescale01-col.png", width = 4, height = 4)
+  scale_colour_gradient("Temperature\nrange (K)",
+    high = "black", low = "grey60", limits = c(0, 8.5),
+    breaks = seq(0, 8, by = 2), guide = guide_colourbar(
+      direction = "horizontal", title.vjust = 0.7, 
+      title.theme = theme_text(face = "bold"))) +
+  opts(legend.position = "bottom", aspect.ratio = 1) 
+ggsave("../images/month-rescale01-col.png", width = 4, height = 4.5)
 
 grid <- unique(day_preds2[c("lat", "long", "range")])
 
@@ -43,8 +55,13 @@ ggplot(day_preds2) +
   geom_tile(aes(long, lat, fill = range), data = grid, alpha = 0.5) +
   geom_path(aes(gx, gy, group = gid)) +
   theme_fullframe() + 
-  scale_fill_gradient(high = "white", low = "#3B4FB8")
-ggsave("../images/month-rescale01-fill.png", width = 4, height = 4)
+  scale_fill_gradient("Temperature\nrange (K)",
+    high = "white", low = "#3B4FB8", limits = c(0, 8.5),
+    breaks = seq(0, 8, by = 2), guide = guide_colourbar(
+      direction = "horizontal", title.vjust = 0.7, 
+      title.theme = theme_text(face = "bold"))) +
+  opts(legend.position = "bottom", aspect.ratio = 1) 
+ggsave("../images/month-rescale01-fill.png", width = 4, height = 4.5)
 
 
 

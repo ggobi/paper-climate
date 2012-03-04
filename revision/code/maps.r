@@ -34,7 +34,7 @@ both <- rbind(world, states)
 .nasa <- getbox(both, xlim = c(-115, -55), ylim = c(-21.1, 36.6))
 map_nasa <- list(
   geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = .nasa, legend = FALSE, fill = "grey80", colour = "grey90"),
+    data = .nasa, show_guide = FALSE, fill = "grey80", colour = "grey90"),
   scale_x_continuous(expand = c(0.02, 0)),
   scale_y_continuous(expand = c(0.02, 0)), 
   xlab(NULL),
@@ -44,7 +44,7 @@ ushcn <- subset(getbox(both, xlim = c(-126, -65), ylim = c(24, 52)),
   region != "Great Lakes")
 map_ushcn <- list(
   geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = ushcn, legend = FALSE, fill = "grey80", colour = "grey90"),
+    data = ushcn, show_guide = FALSE, fill = "grey80", colour = "grey90"),
   scale_x_continuous(expand = c(0.02, 0)),
   scale_y_continuous(expand = c(0.02, 0)), 
   xlab(NULL),
@@ -54,7 +54,7 @@ gistemp <- subset(getbox(both, xlim = c(-135, -57), ylim = c(22, 53)),
   region != "Great Lakes")
 map_gistemp <- list(
   geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = gistemp, legend = FALSE, fill = "grey80", colour = "grey90"),
+    data = gistemp, show_guide = FALSE, fill = "grey80", colour = "grey90"),
   scale_x_continuous(expand = c(0.02, 0)),
   scale_y_continuous(expand = c(0.02, 0)), 
   xlab(NULL),

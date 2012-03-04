@@ -3,6 +3,7 @@
 \usepackage[pdftex]{graphicx}
 \DeclareGraphicsExtensions{.png,.pdf}
 \graphicspath{{images/}}
+\usepackage[dvipsnames,usenames]{color}
 \usepackage{hyperref}
 \usepackage{verbatim}
 \usepackage[format=plain,font=small]{caption}
@@ -218,7 +219,9 @@ Each glyph is small, so there is not enough space for a full set of axes. Instea
   \includegraphics[width=0.5\linewidth]{ref-line}%
   \includegraphics[width=0.5\linewidth]{ref-box}
 
-  \caption{Glyph-maps of seasonal temperature patterns (averages for each month), using the data-expo data. Adding mid-range reference lines (left) and grid-cell reference boxes (right), makes it easier to see differences in glyph position, not just shape.}
+  \includegraphics[width=0.33\linewidth]{ref-legend}
+
+  \caption{Glyph-maps of seasonal temperature patterns (averages for each month), using the data-expo data. Adding mid-range reference lines (top-left) and grid-cell reference boxes (top-right), makes it easier to see differences in glyph position, not just shape. (Bottom) Legend shows overall scales to aid interpretation.}
   \label{fig:ref-basic}
 \end{figure}
 
@@ -251,8 +254,11 @@ Alternatively, local scale can be used. In local scaling, the values within each
   \includegraphics[width=0.5\linewidth]{month-rescale-none}%
   % \includegraphics[width=0.5\linewidth]{month-rescale-max}%
   \includegraphics[width=0.5\linewidth]{month-rescale01}
-  \caption{Smoothed de-seasonalized daily temperature glyph-map. (Left)
-globally scaled, (right) locally scaled.}
+
+  \includegraphics[width=0.33\linewidth]{month-rescale-legend}
+
+  \caption{Smoothed de-seasonalized daily temperature glyph-map. (Top-left)
+globally scaled, (Top-right) locally scaled. (Bottom) Legend showing ranges of individual glyphs.}
   \label{fig:scaling}
 \end{figure}
 
@@ -405,7 +411,11 @@ Reference guides become especially important in the irregular location case. Com
   \includegraphics[width=0.5\linewidth]{nasa-scat-glyph}%
   \includegraphics[width=0.5\linewidth]{nasa-loess-glyph}
 
-  \caption{Glyph-map showing (left) scatterplot of temperature vs high-cloud and (right) smoothed (loess) curve fit to each location. The relationship between these two variables varies considerably over the spatial domain. }
+  \includegraphics[width=0.33\linewidth]{nasa-scat-legend}%
+  \hspace{0.17\linewidth}%
+  \includegraphics[width=0.33\linewidth]{nasa-loess-legend}
+
+  \caption{Glyph-map showing (top-left) scatterplot of temperature vs high-cloud and (top-right) smoothed (loess) curve fit to each location. The relationship between these two variables varies considerably over the spatial domain. (Bottom) Legends show overall patterns and scales.}
   \label{fig:cloud}
 \end{figure}
 

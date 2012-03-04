@@ -1,4 +1,5 @@
 library(plyr)
+source("glyph-utils.r")
 
 #' Create the data needed to generate a glyph plot.
 #'

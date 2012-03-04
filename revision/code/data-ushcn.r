@@ -2,8 +2,6 @@ library(maps)
 library(ggplot2)
 library(plyr)
 
-source("glyph-utils.r")
-
 source("maps.r")
 
 ushcn.loc <- "../../data/ushcndata.rds"

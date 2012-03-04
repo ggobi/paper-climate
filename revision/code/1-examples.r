@@ -32,7 +32,7 @@ preds <- mdply(cbind(d = locs, m = temp_seas_models), function(d, m) {
 
 outline_nasa <- list(
   geom_polygon(aes(long, lat, group = group), inherit.aes = FALSE, 
-    data = .nasa, legend = FALSE, fill = NA, colour = "grey60"),
+    data = .nasa, show_guide = FALSE, fill = NA, colour = "grey60"),
   scale_x_continuous(expand = c(0.02, 0)),
   scale_y_continuous(expand = c(0.02, 0)), 
   xlab(NULL),
@@ -52,8 +52,9 @@ ggplot(resids, aes(long, lat)) +
     axis.text.y = theme_blank(),
     axis.ticks = theme_blank(), 
     axis.ticks.length = unit(0, "lines"), 
-    axis.ticks.margin = unit(0, "lines"))
-ggsave("../images/nasa-colored-map.png", height = 10, width = 18)
+    axis.ticks.margin = unit(0, "lines"),
+    legend.position = "right")
+ggsave("../images/nasa-colored-map.png", height = 10, width = 18, dpi = 72)
 
 # Second figure: same data but with glyphs -----------------------------------
 
@@ -64,12 +65,12 @@ ggplot(resids.gly, aes(gx, gy, group = gid)) +
   add_ref_boxes(resids.gly) +
   geom_path() + 
   theme_fullframe() 
-ggsave("../images/nasa-deseas-glyph.png", width = 6, height = 6)
+ggsave("../images/nasa-deseas-glyph.png", width = 6, height = 6, dpi = 72)
 
 # Legend
 ggplot(resids.gly, aes(time, temp_resid)) + 
-  geom_line(aes(group = gid), alpha = 1/0) + 
+  geom_line(aes(group = gid), alpha = 1/10) + 
   opts(aspect.ratio = 1) + 
   xlab("Month") + 
   ylab("Temperature deviation (C)")
-ggsave("../images/nasa-deseas-glyph-leg.png", width = 4, height = 4)
+ggsave("../images/nasa-deseas-glyph-leg.png", width = 4, height = 4, dpi = 72)

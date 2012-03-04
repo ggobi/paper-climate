@@ -2,39 +2,9 @@ library("ggplot2")
 library("plyr")
 library("mgcv")
 
-source("data-nasa.r")
+source("models-nasa")
 source("glyph.r")
-source("glyph-utils.r")
-source("cache.r")
 source("maps.r")
-
-# Model fitting --------------------------------------------------------------
-
-temp_models %<-cache% dlply(nasa, c("lat", "long"), function(df) {
-  lm(surftemp ~ year + factor(month), data = df)
-})
-
-temp_smooth %<-cache% dlply(nasa, c("lat", "long"), function(df) {
-  gam(surftemp ~ s(day) + factor(month), data = df)
-})
-
-month_grid <- expand.grid(year = 2000, month = 1:12)
-month_preds <- ldply(temp_models, function(mod) {
-  month_grid$pred <- predict(mod, newdata = month_grid)
-  month_grid
-})
-
-year_grid <- expand.grid(year = unique(nasa$year), month = 1)
-year_preds <- ldply(temp_models, function(mod) {
-  year_grid$pred <- predict(mod, newdata = year_grid)
-  year_grid
-})
-
-day_grid <- expand.grid(day = seq(0, 2161, length = 50), month = 1)
-day_preds <- ldply(temp_smooth, function(mod) {
-  day_grid$pred <- predict(mod, newdata = day_grid)
-  day_grid
-})
 
 # Rescale predictions to individual scales -----------------------------------
 
@@ -45,6 +15,13 @@ ggplot(day_preds, aes(gx, gy, group = gid)) +
   geom_path() +
   theme_fullframe()
 ggsave("../images/month-rescale-none.png", width = 4, height = 4)
+
+ggplot(day_preds, aes(day, pred)) + 
+  geom_line(aes(group = gid), alpha = 1/10) + 
+  opts(aspect.ratio = 1) + 
+  xlab("Days from start") + 
+  ylab("Average temperature (K)")
+ggsave("../images/month-rescale-legend.pdf", width = 4, height = 4)
 
 last_plot() %+% glyphs(day_preds, "long", "day", "lat", "pred", 
   y_scale = range01) 
@@ -63,8 +40,13 @@ ggplot(day_preds2, aes(gx, gy, group = gid)) +
   add_ref_boxes(day_preds) +
   geom_path(aes(colour = range)) +
   theme_fullframe() + 
-  scale_colour_gradient(high = "black", low = "grey60")
-ggsave("../images/month-rescale01-col.png", width = 4, height = 4)
+  scale_colour_gradient("Temperature\nrange (K)",
+    high = "black", low = "grey60", limits = c(0, 8.5),
+    breaks = seq(0, 8, by = 2), guide = guide_colourbar(
+      direction = "horizontal", title.vjust = 0.7, 
+      title.theme = theme_text(face = "bold"))) +
+  opts(legend.position = "bottom", aspect.ratio = 1) 
+ggsave("../images/month-rescale01-col.png", width = 4, height = 4.5)
 
 grid <- unique(day_preds2[c("lat", "long", "range")])
 
@@ -73,8 +55,13 @@ ggplot(day_preds2) +
   geom_tile(aes(long, lat, fill = range), data = grid, alpha = 0.5) +
   geom_path(aes(gx, gy, group = gid)) +
   theme_fullframe() + 
-  scale_fill_gradient(high = "white", low = "#3B4FB8")
-ggsave("../images/month-rescale01-fill.png", width = 4, height = 4)
+  scale_fill_gradient("Temperature\nrange (K)",
+    high = "white", low = "#3B4FB8", limits = c(0, 8.5),
+    breaks = seq(0, 8, by = 2), guide = guide_colourbar(
+      direction = "horizontal", title.vjust = 0.7, 
+      title.theme = theme_text(face = "bold"))) +
+  opts(legend.position = "bottom", aspect.ratio = 1) 
+ggsave("../images/month-rescale01-fill.png", width = 4, height = 4.5)
 
 
 

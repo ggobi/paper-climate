@@ -1,5 +1,6 @@
 library("maps")
 library("ggplot2")
+library("plyr")
 
 getbox <- function (map, xlim, ylim) {
 	# identify all regions involved

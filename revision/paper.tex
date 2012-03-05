@@ -59,14 +59,9 @@ $^3$Department of Statistics, Oregon State University}
 % Fill in with NASA data, to start, try to put new data for final version
 \maketitle
 
-% resolution issues with large data - reference - also long time series - large spatial domain.
+% re-work equations, to incorporate scale, and interaction, use spatial location letter and time/var letters
 
-% order of the algorithm calculations
-
-% emphasize way of thinking, which leads into interactive setting
-
-% refer to the wrapping of times series in eden
-
+% overlay legends on the plots?
 
 \begin{abstract}
 
@@ -236,7 +231,7 @@ Each glyph is small, so there is not enough space for a full set of axes. Instea
 
   \includegraphics[width=0.33\linewidth]{ref-legend}
 
-  \caption{Glyph-maps of seasonal temperature patterns (averages for each month over all years), using the EXPO data. Adding mid-range reference lines (top-left) and grid-cell reference boxes (top-right), makes it easier to see differences in glyph position, not just shape. (Bottom) Legend shows temperature values across all locations to aid interpretation.}
+  \caption{Glyph-maps of seasonal temperature patterns (averages for each month over all years), using the EXPO data. Adding mid-range reference lines (top left) and grid-cell reference boxes (top right), makes it easier to see differences in glyph position, not just shape. (Bottom) Legend shows temperature values across all locations to aid interpretation.}
   \label{fig:ref-basic}
 \end{figure}
 
@@ -272,8 +267,7 @@ Alternatively, local scale can be used. In local scaling, the values within each
 
   \includegraphics[width=0.33\linewidth]{month-rescale-legend}
 
-  \caption{Glyph-map using predicted daily temperature values from a generalized additive model fit, where seasonality has been extracted. (Top-left)
-globally scaled, (Top-right) locally scaled. (Bottom) Legend showing ranges of individual glyphs.}
+  \caption{Glyph-map using predicted daily temperature values from a generalized additive model fit, where seasonality has been extracted: globally scaled (top left), locally scaled (top right). (Bottom) Legend showing ranges of individual glyphs.}
   \label{fig:scaling}
 \end{figure}
 
@@ -393,9 +387,12 @@ Glyph-maps work best when displayed in the coordinate system in which the grid i
 Figure \ref{fig:irregular} shows linear trends for monthly average surface temperature at stations in the USHCN data.  It illustrates three challenges in working with irregular locations: there is no natural choice for icon size, icons can potentially overlap, and comparisons rely more heavily on the reference guides.  The icon sizes were chosen manually for these two plots, although the icons are displayed at about the same size, they correspond to 1$^o$ and 0.5$^o$ square respectively in the geographical coordinates. 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.95\linewidth]{usa-lin-overlap}%
+  \includegraphics[width=1\linewidth]{usa-lin-overlap}%
+
+\includegraphics[width=0.33\linewidth]{usa-lin-legend}
   %\includegraphics[width=0.25\linewidth]{ghcn-mountains}%
-  \caption{Glyph-maps of the linear trend in ground station temperature values, 1950--2010, for USHCN stations, illustrating three issues for irregularly gridded data: overlapping icons, no natural choice for icon size, and the disordered appearance making comparisons more difficult. }% (left) and stations in the mountain states (right).} 
+  \caption{(Top) Glyph-maps of the linear trend in ground station temperature values, 1950--2010, for USHCN stations, illustrating three issues for irregularly gridded data: overlapping icons, no natural choice for icon size, and the disordered appearance making comparisons more difficult. (Bottom) Legend showing
+    temperature and temporal ranges of individual glyphs. }% (left) and stations in the mountain states (right).} 
   \label{fig:irregular}
 \end{figure}
 %The two panels illustrate one approach to the overlapping problem: zooming.  
@@ -408,32 +405,37 @@ An alternative approach is to combine overlapping locations and plot a single su
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.95\linewidth]{usa-season-collapsed}%
+  \includegraphics[width=0.5\linewidth]{usa-season-collapsed}%
+  \includegraphics[width=0.5\linewidth]{usa-lin-collapse}%
 
-  \includegraphics[width=0.95\linewidth]{usa-lin-collapse}%
-  \caption{Glyph-maps of seasonal patterns (top) and linear trends (bottom) of USHCN stations, 1950--2010.  Nearby stations whose icons would overlap have been collapsed.  Each location has a glyph in the seasonal plot and color of the tiles corresponds to the average temperature of the locations.  Heavy lines in the linear trend plot correspond to average trends over more than one location.  Legend in Figure~\ref{fig:irregular-legend}}
+\includegraphics[width=0.20\linewidth]{usa-season-legend}\hspace{2in}%
+\includegraphics[width=0.20\linewidth]{usa-lin-legend}
+  \caption{Glyph-maps of seasonal patterns (top left) and linear trends (top right) of USHCN stations, 1950--2010.  Nearby stations whose icons would overlap have been collapsed.  Each location has a glyph in the seasonal plot and color of the tiles corresponds to the average temperature of the locations.  Heavy lines in the linear trend plot correspond to average trends over more than one location. (Bottom) Legends showing scale of glyphs.} % Legend in Figure~\ref{fig:irregular-legend}}
   \label{fig:irregular-collapsed}
 \end{figure}
 
-In both examples of collapsing locations, the icon locations still represent real geographical locations of data, but contain data from up to an icon width away.  An alternative way to combine stations is to round locations to the icon size, Figure \ref{fig:irregular-grid}. This produces a regular grid with the advantage of easier perception of structure.  However, it hides the irregular nature of the locations and icons may end up centered over nonsense places (i.e. land measurements in the ocean).
+In both examples of collapsing locations, the icon locations still represent real geographical locations of data, but contain data from up to an icon width away.  An alternative way to combine stations is to round locations to the icon size, Figure \ref{fig:irregular-grid}. This produces a regular grid with the advantage of easier perception of structure.  However, it hides the irregular nature of the locations and icons may end up centered over nonsense places (i.e. land measurements in the ocean).  
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.5\linewidth]{usa-season-grid}%
   \includegraphics[width=0.5\linewidth]{usa-lin-grid}%
-  \caption{Glyph-maps of seasonal patterns (left) and linear trends (right) of USHCN stations, 1950--2010.  Station locations have been rounded to the nearest degree Each location has a glyph in the seasonal plot and color of the tiles corresponds to the average temperature of the locations. Heavy lines in the linear trend plot correspond to average trends over more than one location. Legend in Figure~\ref{fig:irregular-legend}}
+
+  \includegraphics[width=0.20\linewidth]{usa-season-legend}\hspace{2in}%
+  \includegraphics[width=0.20\linewidth]{usa-lin-legend}
+  \caption{Glyph-maps of seasonal patterns (top left) and linear trends (top right) of USHCN stations, 1950--2010.  Station locations have been rounded to the nearest degree Each location has a glyph in the seasonal plot and color of the tiles corresponds to the average temperature of the locations. Heavy lines in the linear trend plot correspond to average trends over more than one location. (Bottom) Legends showing scale of glyphs.} %Legend in Figure~\ref{fig:irregular-legend}}
   \label{fig:irregular-grid}
 \end{figure}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.33\linewidth]{usa-season-legend}%
-  \hspace{0.18 \linewidth}%
-  \includegraphics[width=0.33\linewidth]{usa-lin-legend}
+%\begin{figure}[htbp]
+%  \centering
+%  \includegraphics[width=0.33\linewidth]{usa-season-legend}%
+%  \hspace{0.18 \linewidth}%
+%  \includegraphics[width=0.33\linewidth]{usa-lin-legend}
   
-  \caption{Legend for Figures~\ref{fig:irregular-collapsed} aad \ref{fig:irregular-grid}.}
-  \label{fig:irregular-legend}
-\end{figure}
+%  \caption{Legend for Figures~\ref{fig:irregular-collapsed} aad \ref{fig:irregular-grid}.}
+%  \label{fig:irregular-legend}
+%\end{figure}
 
 Reference guides become especially important in the irregular location case. Comparisons are harder in this case, as the ability to easily compare icons along a common baseline, be it along a row or column of glyphs, is absent. Without reference it is hard to tell if short series are missing data at the start or end.  
 
@@ -442,11 +444,11 @@ Reference guides become especially important in the irregular location case. Com
   \includegraphics[width=0.5\linewidth]{nasa-scat-glyph}%
   \includegraphics[width=0.5\linewidth]{nasa-loess-glyph}
 
-  \includegraphics[width=0.33\linewidth]{nasa-scat-legend}%
+  \includegraphics[width=0.20\linewidth]{nasa-scat-legend}%
   \hspace{0.17\linewidth}%
-  \includegraphics[width=0.33\linewidth]{nasa-loess-legend}
+  \includegraphics[width=0.20\linewidth]{nasa-loess-legend}
 
-  \caption{Glyph-map showing (top-left) scatterplot of temperature vs high-cloud and (top-right) smoothed (loess) curve fit to each location. The relationship between these two variables varies considerably over the spatial domain. (Bottom) Legends show overall patterns and scales.}
+  \caption{Glyph-map showing (top left) scatterplot of temperature vs high-cloud and (top right) smoothed (loess) curve fit to each location. The relationship between these two variables varies considerably over the spatial domain. (Bottom) Legends show overall patterns and scales.}
   \label{fig:cloud}
 \end{figure}
 

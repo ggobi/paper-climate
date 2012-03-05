@@ -353,13 +353,14 @@ The raw data shows us missing values and gives some sense of variability, but gi
   \includegraphics[width=0.33\linewidth]{gistemp-pred-legend}
   %\includegraphics[width=1\linewidth]{gistemp-polar-pred}
 
-  \caption{(Top) Glyph-map of predicted temperature anomaly data (GISTEMP),
-    from 1950-2010. Increasing trends can be seen over most of the
-    USA, with varying degrees of increase. Some isolated locations
-    exhibit steep declines, and inclines, perhaps indicative of some
-    isolated data problems. Note that, the reference lines are
-    straight, but they look curved because of the Z\"ollner optical
-    illusion. (Bottom) Legend showing ranges of individual glyphs}
+  \caption{(Top) Glyph-map of predicted temperature anomaly data
+    (GISTEMP), on reduced range temperature 1950-2010. Increasing
+    trends can be seen over most of the USA, with varying degrees of
+    increase. Some isolated locations exhibit steep declines, and
+    inclines, perhaps indicative of some isolated data problems. Note
+    that, the reference lines are straight, but they look curved
+    because of the Z\"ollner optical illusion. (Bottom) Legend showing
+    temperature and temporal ranges of individual glyphs.}
   \label{fig:gistemp-pred}
 \end{figure}
 
@@ -386,7 +387,7 @@ Regularly gridded spatial data helps with the perception of structure, because i
 
 \subsection{Non-rectangular grids}
 
-Glyph-maps work best when displayed in the coordinate system in which the grid is rectangular and regular.  For example, the GISTEMP grid is 2$^o$ square and is displayed treating longitude and latitude as cartesian coordinates in Figure \ref{fig:gistemp-pred}.  For regularly gridded data, this results in icons that are rectangles of equal size.  It is often preferable to display maps as a projection of the geographical coordinates which preserves a property of interest, area for example. When a projection is desired a choice needs to be made between applying the projection to the completed glyph-map, or to just the spatial locations.  When the completed glyph-map is projected the icons are no longer rectangles of the same size but they do retain their space filling property.  When applying a projection to the spatial locations and then constructing a glyph-map, the grid becomes irregular. 
+Glyph-maps work best when displayed in the coordinate system in which the grid is rectangular and regular.  For example, the GISTEMP grid is 2$^o$ square and is displayed treating longitude and latitude as Cartesian coordinates in Figure \ref{fig:gistemp-pred}.  For regularly gridded data, this results in icons that are rectangles of equal size.  It is often preferable to display maps as a projection of the geographical coordinates which preserves a property of interest, area for example. When a projection is desired a choice needs to be made between applying the projection to the completed glyph-map, or to just the spatial locations.  When the completed glyph-map is projected the icons are no longer rectangles of the same size but they do retain their space filling property.  When applying a projection to the spatial locations and then constructing a glyph-map, the grid becomes irregular. 
 
 \subsection{Irregular locations}
 Figure \ref{fig:irregular} shows linear trends for monthly average surface temperature at stations in the USHCN data.  It illustrates three challenges in working with irregular locations: there is no natural choice for icon size, icons can potentially overlap, and comparisons rely more heavily on the reference guides.  The icon sizes were chosen manually for these two plots, although the icons are displayed at about the same size, they correspond to 1$^o$ and 0.5$^o$ square respectively in the geographical coordinates. 

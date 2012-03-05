@@ -80,7 +80,7 @@ The multivariate spatio-temporal nature of climate data makes it difficult to dr
 
 \section{Introduction}
 
-Climate data is composed of multiple variables, such as temperature, ozone, precipitation, and winds, with a spatial and temporal context. The classic display for data of this type is a ``heatmap'', a tiled plot using color to display the value of the variable of interest at each location. When measurements are made at multiple time points it is reasonably common to display the data with small multiples~\citep{tufte:2001}, such as in Figure~\ref{fig:nasa-facet}. In this plot, a separate map is drawn for each month (columns) and year (rows), over a six year period of remotely sensed temperature data above Central America \citep{murrell:2010}. Color is used to display de-seasonalized temperature, with red mapped to high values and blue to low. The most noticeable feature is the strong red patch in the equatorial Pacific beginning mid-1997 and tapering out during 1998. This is the El Ni\~no event, a major temperature anomaly (see for example, \citet{trenberth} or \url{http://www.esrl.noaa.gov/psd/enso/enso.description.html}.) More work is required to see more localized patterns, like the cooler land temperatures seen in early years.
+Climate data is composed of multiple variables, such as temperature, ozone, precipitation, and winds, with a spatial and temporal context. The classic display for data of this type is a ``heatmap'', a tiled plot using color to display the value of the variable of interest at each location. When measurements are made at multiple time points it is reasonably common to display the data with small multiples~\citep{tufte:2001}, such as in Figure~\ref{fig:nasa-facet}. In this plot, a separate map is drawn for each month (columns) and year (rows), over a six year period of remotely sensed temperature data above Central America \citep{murrell:2010}. Color is used to display de-seasonalized temperature (residuals from a linear model containing year and month terms), where red is mapped to high values and blue to low. The most noticeable feature is the strong red patch in the equatorial Pacific beginning mid-1997 and tapering out during 1998. This is the El Ni\~no event, a major temperature anomaly (see for example, \citet{trenberth} or \url{http://www.esrl.noaa.gov/psd/enso/enso.description.html}.) More work is required to see more localized patterns, like the cooler land temperatures seen in early years.
 
 To read long-term or localized temporal patterns, this type of plot is cognitively challenging: the reader must play ``spot the difference'' from one small image to another. Large spatial structures such as El Ni\~no are clear but it is very difficult to extract the temporal pattern because it requires mentally differencing the images. Using a movie to render these small multiples can help, but small trends still fail to draw readers' attention and escape unnoticed \citep{simons:gradual}. The \emph{glyph-map} display described in this paper enables easier perception of temporal patterns. 
 
@@ -97,7 +97,7 @@ The glyph-map can also be thought of as a small multiple display. The primary co
 \begin{figure*}[htbp]
   \centering
   \includegraphics[width=5.5in]{nasa-colored-map.png}
-  \caption{Facetted heatmap of de-seasonalized temperature. The dominant feature is the El Ni\~no warming in the southern equatorial region in the last half of 1997 and first half of 1998. Smaller features are only noticeable on closer inspection, or if pointed out: such as the relative warming on the mountain regions in south and north America in the later years.}
+  \caption{Facetted heatmap of de-seasonalized temperature. The dominant feature is the El Ni\~no warming in the southern equatorial region in the last half of 1997 and first half of 1998. Smaller features are only noticeable on closer inspection, or if pointed out: such as the relative warming on the mountain regions in south and north America which are red in all months in the later years.}
   \label{fig:nasa-facet}
 \end{figure*}
 
@@ -105,7 +105,7 @@ The glyph-map can also be thought of as a small multiple display. The primary co
   \centering
   \includegraphics[width=3.5in]{nasa-deseas-glyph}
   \includegraphics[width=2in]{nasa-deseas-glyph-leg}
-  \caption{(Left) Glyph-map of de-seasonalized temperature, to compare with Figure \ref{fig:nasa-facet}. Time series of the six years of monthly temperature are plotted at each spatial grid location. The El Ni\~no appears as a bump in the middle of the time series, in the equatorial Pacific region. Large variations in temperature can be seen in areas over land, while being fairly constant over water. (Right) Glyph-map legend, showing temporal pattern without spatial pattern: this allows you to see the scale of the individual axes.}
+  \caption{(Left) Glyph-map of de-seasonalized temperature, to compare with Figure \ref{fig:nasa-facet}. Time series of the six years of monthly temperature are plotted at each spatial grid location. The El Ni\~no appears as a bump in the middle of the time series, in the equatorial Pacific region. Large variations in temperature can be seen in areas over land, while being fairly constant over water. (Right) Glyph-map legend, showing temporal pattern without spatial pattern, giving the scale of the glyphs.}
   \label{fig:nasa-glyph}
 \end{figure*}
 
@@ -120,7 +120,7 @@ Two types of glyph -- lines and stars -- are especially useful for temporal disp
   \includegraphics[width=0.5\linewidth]{euclid-to-polar-1}%
   \includegraphics[width=0.5\linewidth]{euclid-to-polar-2}
 
-  \caption{Icon plots for 12 iconic time series shapes (linear increasing, decreasing, shifted, single peak, single dip, combined linear and nonlinear, seasonal trends with different scales, and a combined linear and seasonal trend) in Euclidean coordinates, time series icons (left) and polar coordinates, star plots (right).}
+  \caption{Icon plots for 12 iconic time series shapes (linear increasing, decreasing, shifted, single peak, single dip, combined linear and nonlinear, seasonal trends with different scales, and a combined linear and seasonal trend) in Euclidean coordinates, time series icons (left) and polar coordinates, star plots (right). White reference grids, lines and circles are added to help compare the shapes.}
   \label{fig:templates}
 \end{figure}
 
@@ -236,7 +236,7 @@ Each glyph is small, so there is not enough space for a full set of axes. Instea
 
   \includegraphics[width=0.33\linewidth]{ref-legend}
 
-  \caption{Glyph-maps of seasonal temperature patterns (averages for each month), using the EXPO data. Adding mid-range reference lines (top-left) and grid-cell reference boxes (top-right), makes it easier to see differences in glyph position, not just shape. (Bottom) Legend shows overall scales to aid interpretation.}
+  \caption{Glyph-maps of seasonal temperature patterns (averages for each month over all years), using the EXPO data. Adding mid-range reference lines (top-left) and grid-cell reference boxes (top-right), makes it easier to see differences in glyph position, not just shape. (Bottom) Legend shows temperature values across all locations to aid interpretation.}
   \label{fig:ref-basic}
 \end{figure}
 
@@ -262,7 +262,7 @@ For star glyphs the reference frames are also useful and the equivalent of the r
 
 Different features of the data can be emphasized by varying the scale used with each cell. By default, a global scale is used, so the same position within each cell corresponds to the same value in all locations. This facilitates the comparison of absolute values, and draws attention to plots with large overall variation.
 
-Alternatively, local scale can be used. In local scaling, the values within each location are scaled to range $[0, 1]$ before plot construction. This makes it easier to compare shape (ignoring amplitude), and draws attention to locations with large relative variation. Figure~\ref{fig:scaling} compares global scaling and local scaling for the smoothed temperature data from the EXPO data. (Generalized additive models using smooth terms as described in \citet{wood:2006} were used.)  On the global scale, the El Ni\~no blip in temperature is just visible, along with variation in the average temperature at each location. Local scaling emphasizes the individual shapes: the impact of El Ni\~no can be seen to be over a wider region, linear increases across the Andes, and decreases in the Gulf of Mexico.
+Alternatively, local scale can be used. In local scaling, the values within each location are scaled to range $[0, 1]$ before plot construction. This makes it easier to compare shape (ignoring amplitude), and draws attention to locations with large relative variation. Figure~\ref{fig:scaling} compares global scaling and local scaling for the smoothed temperature data from the EXPO data. (The model used to get the temperature values is a more complicated than that used previously to de-seasonalize. A generalized additive model using a month, and a smoothed day, term \citep{wood:2006} was fit to the observed data. The smoothed day was computed from the monthly resolution. Predicted values were computed for each day of the six year period. Season is removed but not overall average and long-term and trend.) On the global scale, the El Ni\~no blip in temperature is just visible, along with variation in the average temperature at each location. Local scaling emphasizes the individual shapes: the impact of El Ni\~no can be seen to be over a wider region, linear increases across the Andes, and decreases in the Gulf of Mexico.
 
 \begin{figure}[htbp]
   \centering

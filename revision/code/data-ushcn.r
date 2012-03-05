@@ -1,5 +1,6 @@
 library(maps)
 library(ggplot2)
+library(reshape2)
 library(plyr)
 
 source("maps.r")
@@ -8,7 +9,7 @@ ushcn.loc <- "../../data/ushcndata.rds"
 ushcn.stations.loc <- "../../data/ushcnstations.rds"
 
 if (!file.exists(ushcn.loc)) {
-  temp.all<-read.table("../data/9641C_201012_raw.avg")
+  temp.all<-read.table("../../data/9641C_201012_raw.avg")
   colnames(temp.all)<-c("year", "jan", "feb", "mar", "apr", "may", "jun", "jul",
     "aug", "sep", "oct", "nov", "dec", "ann")
   temp.all$stn<-temp.all$year%/%100000

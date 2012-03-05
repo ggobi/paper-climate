@@ -54,7 +54,7 @@ ggplot(resids, aes(long, lat)) +
     axis.ticks.length = unit(0, "lines"), 
     axis.ticks.margin = unit(0, "lines"),
     legend.position = "right")
-ggsave("../images/nasa-colored-map.png", height = 10, width = 18, dpi = 72)
+ggsave("../images/nasa-colored-map.png", height = 5, width = 9, dpi = 72)
 
 # Second figure: same data but with glyphs -----------------------------------
 

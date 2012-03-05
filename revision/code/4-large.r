@@ -45,9 +45,9 @@ if (file.exists("temp_usa.rds")) {
   saveRDS(temp_usa, "temp_usa.rds")
 }
 
-# x<-ddply(temp_usa, c("lon","lat"), function(df) {
-#  if (nrow(subset(df,is.na(temp))) == nrow(df)) NULL else df 
-# })
+temp_usa <- ddply(temp_usa, c("lon","lat"), function(df) {
+ if (all(is.na(df$temp))) NULL else df 
+})
 
 # Plots of raw data -------------------------------------------------------
 

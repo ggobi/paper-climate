@@ -310,13 +310,13 @@ Other types of shifting and scaling can be useful:
 
 \end{itemize}
 
-Note that the use of local scales needs to be clearly marked. The viewer must realize that the scale is not relative and that big patterns in some locations might be just tiny effects. To indicate this on the locally scaled data plots, one can use an additional aesthetic, like color, to encode the range of original scale. This is illustrated in Figure~\ref{fig:scaling-col}.
+Note that the use of local scales needs to be clearly marked. The viewer must realize that the scale is not relative and that big patterns in some locations might be just tiny effects. To indicate this on the locally scaled data plots, one can use an additional aesthetic, like color, to encode the range of original scale. This is illustrated in Figure~\ref{fig:scaling-col}. In the encoding, emphasis is placed on the locations with larger range, stronger effects: the line intensity is stronger (left plot), and the background is lightened to provide greater contrast (right plot) drawing the eye to these regions. 
 
 \begin{figure}[htbp]
  \centering
  \includegraphics[width=0.5\linewidth]{month-rescale01-col}%
  \includegraphics[width=0.5\linewidth]{month-rescale01-fill}
- \caption{Adding intensity and color to scaled plots. Here each location has been scaled to range $[0, 1]$ and color mapped to the range of the original predictions. (Left) Range mapped to intensity of line: pale locations have smaller range than darker locations. (Right) Range mapped to fill color of grid box: blue boxes have smaller ranges. Shapes at all locations are visible, but attention is drawn to locations with larger ranges.}
+ \caption{Adding intensity and color to scaled plots. Here each location has been scaled to range $[0, 1]$ and color mapped to the range of the original predictions. (Left) Range mapped to intensity (grey scale) of the line: pale locations have smaller range, smaller effect, than darker locations, stronger effect. (Right) Range mapped to fill color of grid box: blue boxes have smaller ranges, and light boxes have larger effects. Shapes at all locations are visible, but attention is drawn to locations with lighter backgrounds, larger ranges, because of the higher contrast.}
  \label{fig:scaling-col}
 \end{figure}
 

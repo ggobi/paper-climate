@@ -12,32 +12,59 @@ Major Comments
 
 So, Eden clearly needs to be given proper credit - and I would rephrase this sentence as "extends work previously introduced by Hobbs et al. and Eden at al." or something similar. [and then later on p2, l17, "advances" rather than "develops"]
 
+Done
+
 - p1, l32: There has been a 2nd use for glyph-maps in the past, the "ray-glyph arc maps", for the visualization of multivariate data - see Figs 5 & 7a in Carr et al., Cartography and Geographic Information Systems, 19(4):228-236. This needs to be cited early on.
+
+Done
 
 - p1, l50: "small multiples" - when you speak of small multiples, perhaps refer to Tufte (1983/1990) for more details; a climatologist may not be familiar with this term
 
+Done
+
 - p2, l3: "Reading this type of plot is cognitively challenging" - but the same is true for Fig 2; here, the reader has to distinguish among same 625 time series plots; honestly, I could only detect about 5 to 8 different main patterns
+
+Changed the language
 
 - p2, l34: "Andes and the Sierra Madre Occidental in Mexico" - can you annotate these on your map, either by using different colors or by circling the approximate areas
 
+Removed the reference to the mountain regions
+
 - p6, l40: reference to "Fig 8" - figs should be references in the sequential order, so your Fig 8 has to become Fig 4 - or shift this statement to a place after Fig 8 has been presented in the paper.
+
+removed the exolicit reference to a plot out of order
 
 - p7, l50: Fig 4 - be more precise about the data you are using; a reader cannot follow without a more detailed explanation; how were data for Fig 4 exactly obtained from the data in Fig 2?
 
+The captions explain these are average for each month. Another sentence added to the text.
+
 - p8, l3: reference to "Fig 7" - again, a forward reference
+
+Ok, took out the forward reference.
 
 - p8, l24: omit "dramatic"; similarly, Fig 5 (right plot), 2nd row from top, 2 rightmost locations also would present "dramatic" increases
 
+done
+
 - p8, l49: Fig 5 - again, more details are needed, e.g., which kind of smoothing, which parameters, etc.; this is not important for a conference presentation or paper, but such information should be included in a journal paper (think of Reproducible Research)
+
+was an oversight - reference had been taken out in pruning previous version of the paper. Code and data were/are provided in keeping with reproducible research!
 
 - p9, Fig 6: what about adding an additional color legend here that shows the numerical ranges for each color class
 
+done
+
 - p10, l22: even in combination with p4, it is not really clear what these data represent; these are spatially averaged over the locations in each grid cell, and monthly averages - or are these based on 365 observations for each year ?!?
+
+Not sure what this refers to? Have added a little to the GISTEMP data explanation, because dates of measurements is 1880-2011, but it is de-seasonalized by differencing from 1951-1980 averages.
 
 - p11, Fig 8 & p12, Fig 9: these 2 figs show univariate data: the slope of a single linear trend; do we really need a glyph map here? - couldn't we show the same information on a choropleth map (perhaps after some spatial smoothing in Fig 9) that makes use of a divergent color scheme (see the work of Cindy Brewer and the R package Rcolorbrewer)?; in my opinion, it appears that we are wasting a lot of space by drawing a glyph map here that makes up multiple pixels, rather than using color that could be limited to a single pixel and thus could be suitable for even a much denser spatial data set; moreover, overplotting wouldn't be an issue for pixel-based color visualizations
 
+Cleveland (1984) established that position along a line is more accurately read than color. In these examples, yes, color could be used to map the slopes, this is the class of using a single numerical statistical summary to show large scale structure. But it is good to have an alternative to color representation, that uses position along a line, which is what these plots provide.
+
 - p13, l8: when you suggest to combine overlapping locations, you clearly need to discuss the Modifiable Area Unit Problem (MAUP) here (cite 1 or 2 main references); spatial aggregation is not as simple as it appears
 
+done
 
 Minor Comments
 --------------
@@ -58,3 +85,5 @@ Minor Comments
  -p18, l12: ".N" - should be "N."
  -p18, l24: von Mayr reference incomplete and misspelled
  - this is just a sample!
+
+Think these have been fixed.

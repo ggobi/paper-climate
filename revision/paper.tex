@@ -59,9 +59,13 @@ $^3$Department of Statistics, Oregon State University}
 % Fill in with NASA data, to start, try to put new data for final version
 \maketitle
 
-% resolution issues with large data - reference - aloso long time series.
+% resolution issues with large data - reference - also long time series - large spatial domain.
+
+% order of the algorithm calculations
 
 % emphasize way of thinking, which leads into interactive setting
+
+% refer to the wrapping of times series in eden
 
 
 \begin{abstract}
@@ -82,7 +86,7 @@ To read long-term or localized temporal patterns, this type of plot is cognitive
 
 %% Reproduce all of the icon displays using the fixed glyph code
 
-The glyph-map uses a small glyph, or icon, to represent multiple variables, or time values, at each location. Glyph maps derive from glyph plots, which were initially developed to display multivariate data. One glyph is drawn for each observation in the data set. Types of glyph plots include the star plots \citep{mayr:1877, kleiner:1981}, the semi-graphic displays \citep{anderson:1960}, and the infamous Chernoff faces \citep{chernoff:1973}. An glyph is produced by mapping each variable to some graphical feature, such as the length of a line, curvature of the mouth, or size of the face. 
+The glyph-map uses a small glyph, or icon, to represent multiple variables, or time values, at each location. Glyph maps derive from glyph plots, which were initially developed to display multivariate data. One glyph is drawn for each observation in the data set. Types of glyph plots include the star plots \citep{mayr:1877, FD01, kleiner:1981}, the semi-graphic displays \citep{anderson:1960}, and the infamous Chernoff faces \citep{chernoff:1973}. An glyph is produced by mapping each variable to some graphical feature, such as the length of a line, curvature of the mouth, or size of the face. 
 
 Figure~\ref{fig:nasa-glyph} shows the glyph-map equivalent of Figure~\ref{fig:nasa-facet}: each location is represented by a small time series glyph of de-seasonalized temperature. The darker grey in the background represents the land mass of the study region. Because the data is de-seasonalized, the primary visible structure is still El Ni\~no -- it is both a temporal anomaly and a spatial phenomenon. It can be recognized by the bump in the middle of the series of the equatorial Pacific region. Other temporal features are visible from the many time series. Temperatures are generally more varied over land, than sea. A few locations have dramatic jumps in temperature in the later years.%, all in high elevation areas, along the Andes and the Sierra Madre Occidental in Mexico. 
 
@@ -139,7 +143,7 @@ Section~\ref{sec:construction} describes the algorithm used to create glyphs-map
 
 \item[GISTEMP] surface temperature data provided on $2^{\circ}$ x
   $2^{\circ}$ grid over the entire globe, measured monthly
-  \citep{GISTEMP}. Ground station data was de-seasonalized,
+  \citep{GISTEMP} from 1880-2011. Ground station data was de-seasonalized,
   differenced from from the 1951-1980 temperature averages, and
   spatially averaged to obtain gridded temperature anomalies. For the
   purposes of this paper, we extracted the locations corresponding to
@@ -211,7 +215,7 @@ Glyph-maps allow time trends to be read directly from the plot. Values are mappe
 
 % Laying time series out on the spatial grid, the main task expected of the viewer is comparing the temporal patterns from one location to the next. In contrast, in the small multiples used in the facetted colored map, the viewer is expected to compare the patterns in the maps from one year to the next, for corresponding months. (See \citet{carr:1999} for a discussion on perceptual grouping.) That is, compare and contrast maps with facetted colored map, or compare and contrast time series using the glyph-map. 
 
-A possible draw-back of the glyph-map, particularly if linear trend is displayed as an icon, is it may suffer from the Z\"ollner Illusion \citep{Zollner}, visible in Figure \ref{fig:gistemp-pred}, which makes straight lines look crooked.
+A possible draw-back of the glyph-map, particularly if linear trend is displayed as an icon, is it may suffer from the Z\"ollner Illusion \citep{Zollner}, which makes straight lines look crooked (Section \ref{sec:large-data} has an example).
 
 Two other factors are critical for accurate perception of change: reference frames and scaling. These are described in the following two sections.
 
@@ -219,7 +223,7 @@ Two other factors are critical for accurate perception of change: reference fram
 
 The structured spatial arrangement of icons in a glyph-map helps to compare the patterns of shape, like slope, intercept, or size, across icons. However, additional clues can make comparisons easier, converting the perceptual task from comparing length to the easier position along a common scale \citep{cleveland:1984}. This is also called a \emph{visual reference grid} \citep{cleveland:1993a}.
 
-Each glyph is small, so there is not enough space for a full set of axes. Instead, minimal reference lines and boxes are incorporated. These need to be minimally perceptible, post-attentive \citep{healey} and de-emphasized, so as not to detract from the data. The reference grid is a box, framing each icon, which represents the spatial grid. The reference line is a horizontal line at mid-range. Both help to read differences in slope and intercept. Slope is read by comparing the position of left and right endpoints on the frame, or by reading the angle between the data line and the reference line. Intercept is read from ``average'' position of the line in the box: is it near the top, or near the bottom? Figure~\ref{fig:ref-basic} demonstrates both guides. Reference elements are drawn in white, so they are minimally perceptible relative to the black data.
+Each glyph is small, so there is not enough space for a full set of axes. Instead, minimal reference lines and boxes are incorporated. These need to be minimally perceptible, post-attentive \citep{healey} and de-emphasized, so as not to detract from the data. The reference grid is a box, framing each icon, which represents the spatial grid. The reference line is a horizontal line at mid-range. Both help to read differences in slope and intercept. Slope is read by comparing the position of left and right endpoints on the frame, or by reading the angle between the data line and the reference line. Intercept is read from ``average'' position of the line in the box: is it near the top, or near the bottom? Figure~\ref{fig:ref-basic} demonstrates both guides. Reference elements are drawn in white, so they are minimally perceptible relative to the black data. Average temperatures were calculated for each month, and these were passed to the glyph calculations to produce the glyph-maps.   
 
 % , making it easier to compare the slopprovides for better reading of the intercept. The average value for the temperature anomaly data is not the same across the map: at higher latitudes the temperatures are uniformly higher, but at lower latitudes they are uniformly lower. (**** Can this be right? Would it mean that at these locations the temperatures 1950-2010 are much higher than the reference year temperatures?)
 
@@ -236,7 +240,7 @@ Each glyph is small, so there is not enough space for a full set of axes. Instea
   \label{fig:ref-basic}
 \end{figure}
 
-For star glyphs the reference frames are also useful and the equivalent of the reference line is a circle. Figures~\ref{fig:templates} and \ref{fig:gistemp-raw} show more examples.
+For star glyphs the reference frames are also useful and the equivalent of the reference line is a circle (see Figure~\ref{fig:templates}).
 
 %*** Re-visit this next paragraph - its a little too airy-fairy, and the plot with color needs to have the color dampened more. Its way too dominant. This paragraph is too speculative for the paper, so removing it from first draft.
 
@@ -258,7 +262,7 @@ For star glyphs the reference frames are also useful and the equivalent of the r
 
 Different features of the data can be emphasized by varying the scale used with each cell. By default, a global scale is used, so the same position within each cell corresponds to the same value in all locations. This facilitates the comparison of absolute values, and draws attention to plots with large overall variation.
 
-Alternatively, local scale can be used. In local scaling, the values within each location are scaled to range $[0, 1]$ before plot construction. This makes it easier to compare shape (ignoring amplitude), and draws attention to locations with large relative variation. Figure~\ref{fig:scaling} compares global scaling and local scaling for the smoothed temperature data from the data-expo data. On the global scale, the El Ni\~no blip in temperature is just visible, along with variation in the average temperature at each location. Local scaling emphasizes the individual shapes: the impact of El Ni\~no can be seen to be over a wider region, dramatic linear increases across the Andes, and decreases in the Gulf of Mexico.
+Alternatively, local scale can be used. In local scaling, the values within each location are scaled to range $[0, 1]$ before plot construction. This makes it easier to compare shape (ignoring amplitude), and draws attention to locations with large relative variation. Figure~\ref{fig:scaling} compares global scaling and local scaling for the smoothed temperature data from the data-expo data. (Generalized additive model using smooth terms as described in \citet{wood:2006} were used.)  On the global scale, the El Ni\~no blip in temperature is just visible, along with variation in the average temperature at each location. Local scaling emphasizes the individual shapes: the impact of El Ni\~no can be seen to be over a wider region, linear increases across the Andes, and decreases in the Gulf of Mexico.
 
 \begin{figure}[htbp]
   \centering

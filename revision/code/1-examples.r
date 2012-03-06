@@ -72,5 +72,5 @@ ggplot(resids.gly, aes(time, temp_resid)) +
   geom_line(aes(group = gid), alpha = 1/10) + 
   opts(aspect.ratio = 1) + 
   xlab("Month") + 
-  ylab("Temperature deviation (C)")
+  ylab("Temperature deviation (K)")
 ggsave("../images/nasa-deseas-glyph-leg.png", width = 4, height = 4, dpi = 72)

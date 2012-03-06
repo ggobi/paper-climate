@@ -45,7 +45,8 @@ ggplot(resids, aes(long, lat)) +
   geom_raster(aes(fill = temp_resid)) +
   outline_nasa + 
   facet_grid(year ~ month) + 
-  scale_fill_gradient2("Residuals", mid = "white", high = "red", low = "blue") + 
+  scale_fill_gradient2("Residuals", mid = "white", high = "red", 
+    low = "blue") + 
   theme_fullframe() + 
   opts(
     axis.text.x = theme_blank(), 

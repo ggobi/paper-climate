@@ -398,9 +398,9 @@ Figure \ref{fig:irregular} shows linear trends for monthly average surface tempe
 %The two panels illustrate one approach to the overlapping problem: zooming.  
 One solution to the overlapping problem is to zoom in on smaller regions. There is an interplay between icon size (in geographical units), area plotted (in geographical units) and plot size (in display units).  Icons need to be big enough to be readable on the display, but small enough to avoid overlapping.  Readability can be maintained and overlapping reduced by decreasing the icon size and simultaneously increasing the display size or decreasing the area plotted.
 % (as done in the right panel in Figure \ref{fig:irregular}).  
-However, there are generally limitations in the maximum display size (or resolution) and the utility of plotting very small areas.  
+%However, there are generally limitations in the maximum display size (or resolution) and the utility of plotting very small areas.  
 
-An alternative approach is to combine overlapping locations and plot a single summary icon.  In Figure \ref{fig:irregular-collapsed} nearby locations are collapsed to a single icon.  In the left panel each station still has an individual glyph but locations close to each other share a plotting area.  Not all glyphs are suited to this kind of space sharing, another option is to perform a summary of the locations that are collapsed and display that instead of the raw data.  The right panel shows an example of this where the average trend for the collapsed locations is displayed.  It is helpful to differentiate glyphs that involve summaries of more than one location, here a heavier line indicates at least two locations have been averaged.  The aggregation of spatial locations to a single summary can be misleading.  The sensitivity of analyses to the scale and configuration of aggregation is described by the  modifiable areal unit problem (\cite{Openshaw:1984kx, Fotheringham:1991uq}). In this type of glyph-map the scale of aggregation is determined, rather arbitrarily, by the icon size. This dependence of visual inferences on the icon size is undesirable.  The ability to interactively modify icon size, and zoom quickly to disaggregate locations would go some way to alleviating the problem.
+An alternative approach is to combine overlapping locations and plot a single summary icon.  In Figure \ref{fig:irregular-collapsed} nearby locations are collapsed to a single icon.  In the left panel each station still has an individual glyph but locations close to each other share a plotting area (note the multiple lines visible in some reference boxes). The right panel shows an example where glyphs are generated on aggregated data: the average trend for the collapsed locations is displayed.  To differentiate glyphs that involve summaries of more than one location, heavier lines (barely visible) indicate at least two locations that have been averaged.  The aggregation of spatial locations to a single summary can be misleading.  The sensitivity of analyses to the scale and configuration of aggregation is described by the  modifiable areal unit problem (\cite{Openshaw:1984kx, Fotheringham:1991uq}). In this type of glyph-map the scale of aggregation is determined, rather arbitrarily, by the icon size. This dependence of visual inferences on the icon size is undesirable.  The ability to interactively modify icon size, and zoom quickly to disaggregate locations would go some way to alleviating the problem.
 
 
 \begin{figure}[htbp]
@@ -414,7 +414,7 @@ An alternative approach is to combine overlapping locations and plot a single su
   \label{fig:irregular-collapsed}
 \end{figure}
 
-In both examples of collapsing locations, the icon locations still represent real geographical locations of data, but contain data from up to an icon width away.  An alternative way to combine stations is to round locations to the icon size, Figure \ref{fig:irregular-grid}. This produces a regular grid with the advantage of easier perception of structure.  However, it hides the irregular nature of the locations and icons may end up centered over nonsense places (i.e. land measurements in the ocean).  
+In both of the examples where locations have been collapsed, the icon locations still represent an actual geographic location of collected data, albeit including data from up to an icon-width away.  An alternative way to combine stations is to round locations to the icon size, as done in Figure \ref{fig:irregular-grid}. This produces a regular grid with the advantage of easier perception of structure \citet{Kr12b}. (Figure 9.12 of \citet{IPCC} uses a regular gridded time series over a spatial domain to illustrate temporal patterns in climate change data.) It hides the irregular nature of the locations, though, and a complication is that icons may end up centered over nonsense places, such as land measurements in the ocean.  
 
 \begin{figure}[htbp]
   \centering
@@ -437,7 +437,7 @@ In both examples of collapsing locations, the icon locations still represent rea
 %  \label{fig:irregular-legend}
 %\end{figure}
 
-Reference guides become especially important in the irregular location case. Comparisons are harder in this case, as the ability to easily compare icons along a common baseline, be it along a row or column of glyphs, is absent. Without reference it is hard to tell if short series are missing data at the start or end.  
+Reference guides become especially important in the irregularly gridded data. Comparisons are harder because comparing icons along a common baseline, be it along a row or column of glyphs, is absent. Without reference lines or boxes it is also hard to compare line lengths, to tell if short series are missing data at the start or end. In each of the plots in Figures \ref{fig:irregular}, \ref{fig:irregular-collapsed} and \ref{fig:irregular-grid}, reference lines or boxes have been included. 
 
 \begin{figure}[htbp]
   \centering

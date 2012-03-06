@@ -153,36 +153,36 @@ Section~\ref{sec:construction} describes the algorithm used to create glyph-maps
 Supplementary material contains the datasets and code to reproduce the plots in this paper.  R \citep{R} with the packages {\tt ggplot2} \citep{me:ggplot2} and {\tt plyr} \citep{me:plyr} was used. 
 
 
-\section{Construction}~\label{sec:construction}
+\section{Structural components}~\label{sec:construction}
 
 %Glyph-maps can be generated with existing graphics software after performing a simple pre-processing step, making them easily accessible to a wide audience. 
-To create a glyph-map it is useful to recognize that the glyph-map is a linear mix of two structural components of the data: spatial location and data values. The spatial location is the major positioning component, while the data values are minor adjustments to those positions. For spatiotemporal data, the major components are latitude ($y_{\amaj}$) and longitude ($x_{\amaj}$), and the minor components are time ($x_{\amin}$) and some measurement ($y_{\amin}$), for example, temperature, or predicted temperature. Assuming the minor components are rescaled to $[-1, 1]$, the final coordinates $(x,y)$ on the chart are the linear combination, given by:
+It is useful to recognize that the glyph-map is a linear mix of two structural components of the data: spatial location and data values. The spatial location is the major positioning component, while the data values are minor adjustments to those positions. For spatiotemporal data, the major components are longitude ($s_x$) and latitude ($s_y$), and the minor components are time ($t$) and some variable ($z$), for example, temperature, or predicted temperature. Assuming the minor components ($t, z$) are scaled into the range $[-1, 1]$, the final coordinates $(x,y)$ of the values in the plot are the linear combination, given by:
 
 \begin{equation}
   \begin{array}{lll}
-  x &=& x_{\amaj} + \frac{w}{2} \cdot x_{\amin}\\
-  y &=& y_{\amaj} + \frac{h}{2} \cdot y_{\amin}, 
+  x &=& s_x + \alpha_x \cdot w \cdot t\\
+  y &=& s_y + \alpha_y \cdot h \cdot z, 
   \end{array}
   \label{coords.eqn}
 \end{equation}
 
-\noindent where $w$ and $h$ are scale parameters, setting the width and height of the glyph, respectively. For gridded data, $w$ and $h$ will be the minimum difference between neighboring spatial locations to make use of the resolution of the major components. 
+\noindent where $\alpha_x, \alpha_y$ are scale parameters setting the fraction the width $w$ and height $h$ of the glyph, respectively. For gridded data, $w$ and $h$ will be the minimum difference between neighboring spatial locations to make use of the resolution of the major components. For irregularly gridded data, $w$ and $h$ would be set to minimize overlap between glyphs.
 
-This way of thinking of the glyph-map is convenient for several reasons. The first is that it moves the plots beyond the small multiples, many little plots, approach. That provides flexibility to cover large spatial domains using potentially tiny glyphs. A second, and major, reason is that with this approach they can then readily be made interactive. Different variables can be swept into, and out of, the minor axes using mouse motion, the scale can be adjusted by varying $w$ and $h$ proportional to mouse movement. Interactive glyph-maps were used to explore the EXPO data using  GGobi \citep{swayne:2003}, and then later reproduced in publication quality resolution using {\tt ggplot2} \citep{me:ggplot2} in \citet{hobbs:2010}. In GGobi, a manual tour is used to make the linear combination of spatial variables with other variables \citep{CB95}, and equation \ref{coords.eqn} makes this approach more explicit. The third reason is that it enables adjusting scales of glyphs in multiple ways to vary the emphasis, which is discussed in Section \ref{sec:perception}.
+This way of thinking of the glyph-map is convenient for several reasons. The first is, that it moves the plots beyond the small multiples, many little plots, approach. That provides flexibility to cover large spatial domains using potentially tiny glyphs. A second, and major, reason is that with this approach they can then readily be made interactive. Different variables can be swept into, and out of, the minor axes using mouse motion that maps to $\alpha_x, \alpha_y$. Interactive glyph-maps were used to explore the EXPO data using  GGobi \citep{swayne:2003}, and then later reproduced in publication quality resolution using {\tt ggplot2} \citep{me:ggplot2} in \citet{hobbs:2010}. In GGobi, a manual tour is used to make the linear combination of spatial variables with other variables \citep{CB95}, and Equation \ref{coords.eqn} makes this approach more explicit, and generalizable beyond tours. The third reason is that it enables adjusting scales of glyphs in multiple ways to vary the emphasis, which is discussed in Section \ref{sec:perception}.
 
 %Since the coordinates are linear combinations of two variables, it is possible to build these these line-glyphs interactively, illustrated by software packages that have incorporated tours (as described in \citet{cook:2006}), such as DataViewer \citep{buja:1986}, XGobi \citep{swayne:1991} or. This technique is used to good effect in \citet{buja:1996a}, and was used to examine the climate data in \citet{hobbs:2010}.
 
-Coordinates for star glyphs are computed with a polar transformation, with minor axes scaled to $[0, 1]$: 
+Coordinates for star glyphs are computed with a polar transformation of the minor components $(t, z)$:  
 
 \begin{equation}
   \begin{array}{lll}
-  x &=& x_{\amaj} + y_{\amin} \cdot \frac{w}{2} \sin(2 \pi x_{\amin}) \\
-  y &=& y_{\amaj} + y_{\amin} \cdot \frac{h}{2} \cos(2 \pi x_{\amin}).
+  x &=& s_x + \alpha_x \cdot z \cdot w \cdot \sin(2 \pi t) \\
+  y &=& s_y + \alpha_y \cdot z \cdot h \cdot \cos(2 \pi t).
   \end{array}
   \label{coords.polar.eqn}
 \end{equation}
 
-\noindent This is a non-standard conversion to polar coordinates, but it creates a timeline that starts at 12 o'clock and proceeds clockwise. \citet{eden:2010} wraps the time series, overplotting the multiple years, and this could be done also, by adjusting the scale of $x_{\amin}$. 
+\noindent where $(t, z)$ have been scaled into the range $[0, 1]$. This is a non-standard conversion to polar coordinates, but it creates a timeline that starts at 12 o'clock and proceeds clockwise. \citet{eden:2010} wraps the time series, overplotting the multiple years, and this could be done also, by adjusting the scale of $t$. 
 
 % HW: I removed this because I don't think it adds anything at this point
 %
@@ -200,7 +200,7 @@ Coordinates for star glyphs are computed with a polar transformation, with minor
 %   \label{fig:cycle}
 % \end{figure}
 
-Figure~\ref{fig:templates} gives some small examples of time series with prototypical trends, shown both in Cartesian coordinates and polar coordinates. Differences between linear and nonlinear trend are more apparent in the line-glyphs, and are effectively lost in the star-glyphs, which are most effective in exposing cyclical patterns due to seasonality. Star-glyphs show seasonality as floral cartoons, with peaks forming petals. It is surprising that time series with opposing trends in line-glyphs don't show this symmetry when displayed with star-glyphs. The area of star-glyphs coordinates mainly reflect the average value of a time series, while its shape shows deviations from the average.
+Figure~\ref{fig:templates} gives some iconic examples of time series, shown both in Cartesian coordinates and polar coordinates. Differences between linear and nonlinear trend are more apparent in the line-glyphs, and are effectively lost in the star-glyphs, which are most effective in exposing cyclical patterns due to seasonality. Star-glyphs show seasonality as floral cartoons, with peaks forming petals. Opposing linear trends (up vs down) in line-glyphs are not readily seen in the star-glyphs, appearing only as differences in the gaps at the top of each glyph. The internal area of the star-glyphs reflects to the average value of a time series, while its shape shows deviations from the average.
 
 \section{Perception}~\label{sec:perception}
 

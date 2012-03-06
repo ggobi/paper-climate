@@ -391,8 +391,8 @@ Figure \ref{fig:irregular} shows linear trends for monthly average surface tempe
 
 \includegraphics[width=0.33\linewidth]{usa-lin-legend}
   %\includegraphics[width=0.25\linewidth]{ghcn-mountains}%
-  \caption{(Top) Glyph-maps of the linear trend in ground station temperature values, 1950--2010, for USHCN stations, illustrating three issues for irregularly gridded data: overlapping icons, no natural choice for icon size, and the disordered appearance making comparisons more difficult. (Bottom) Legend showing
-    temperature and temporal ranges of individual glyphs. }% (left) and stations in the mountain states (right).} 
+  \caption{(Top) Glyph-maps of the linear trend in ground station temperature values, 1950--2010, for USHCN stations, illustrating three issues for irregularly gridded data: overlapping icons, no natural choice for icon size, and the disordered appearance making comparisons more difficult. Local centering, subtracting the location mean from the linear fit, is used as the variation in average temperature is of much greater magnitude than the variation in linear trend. (Bottom) Legend showing
+    temperature and temporal ranges of individual glyphs. The local scaling is apparent here with all lines going through zero at the mean year. }% (left) and stations in the mountain states (right).} 
   \label{fig:irregular}
 \end{figure}
 %The two panels illustrate one approach to the overlapping problem: zooming.  
@@ -409,7 +409,7 @@ An alternative approach is to combine overlapping locations and plot a single su
   \includegraphics[width=0.5\linewidth]{usa-lin-collapse}%
 
 \includegraphics[width=0.20\linewidth]{usa-season-legend}\hspace{2in}%
-\includegraphics[width=0.20\linewidth]{usa-lin-legend}
+\includegraphics[width=0.20\linewidth]{usa-lin-collapse-legend}
   \caption{Glyph-maps of seasonal patterns (top left) and linear trends (top right) of USHCN stations, 1950--2010.  Nearby stations whose icons would overlap have been collapsed.  Each location has a glyph in the seasonal plot and color of the tiles corresponds to the average temperature of the locations.  Heavy lines in the linear trend plot correspond to average trends over more than one location. (Bottom) Legends showing scale of glyphs.} % Legend in Figure~\ref{fig:irregular-legend}}
   \label{fig:irregular-collapsed}
 \end{figure}
@@ -422,7 +422,7 @@ In both examples of collapsing locations, the icon locations still represent rea
   \includegraphics[width=0.5\linewidth]{usa-lin-grid}%
 
   \includegraphics[width=0.20\linewidth]{usa-season-legend}\hspace{2in}%
-  \includegraphics[width=0.20\linewidth]{usa-lin-legend}
+  \includegraphics[width=0.20\linewidth]{usa-lin-grid-legend}
   \caption{Glyph-maps of seasonal patterns (top left) and linear trends (top right) of USHCN stations, 1950--2010.  Station locations have been rounded to the nearest degree Each location has a glyph in the seasonal plot and color of the tiles corresponds to the average temperature of the locations. Heavy lines in the linear trend plot correspond to average trends over more than one location. (Bottom) Legends showing scale of glyphs.} %Legend in Figure~\ref{fig:irregular-legend}}
   \label{fig:irregular-grid}
 \end{figure}

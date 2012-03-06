@@ -46,7 +46,7 @@ ggsave("../images/usa-lin-overlap.png", width = 8, height = 4.5)
 ggplot(lin.pred.gly, aes(year, pred)) + 
   geom_line(aes(group = gid), alpha = 1/20) + 
   xlab("Year") + 
-  ylab("Predicted January temperature (F)")
+  ylab("Linear Temp Anomaly (F)")
 ggsave("../images/usa-lin-legend.pdf", width = 4, height = 4)
 
 # # Mountain states: Colorado, Wyoming, Idaho, Montana, Nevada, Utah
@@ -112,6 +112,16 @@ ggplot(lin.pred.sum, aes(gx, gy, group = gid)) +
   opts(legend.position = "bottom")
 ggsave("../images/usa-lin-collapse.png", width = 8, height = 5)
 
+ggplot(lin.pred.sum, aes(year, pred)) + 
+  geom_line(aes(group = gid, colour = n > 1), alpha = 1/5) + 
+  xlab("Year") + 
+  scale_colour_manual("", values = c("TRUE" = "black", "FALSE" = "grey40"), 
+  breaks = c(F, T), labels = c("Single", "Multiple")) + 
+  ylab("Linear Temp Anomaly (F)") +
+  opts(legend.position = "none")
+ggsave("../images/usa-lin-collapse-legend.pdf", width = 4, height = 4)
+
+
 # Gridding -------------------------------------------------------------------
 lin.pred.grid <- grid.all(lin.pred.post1950, "lon", "lat", w, h)
 
@@ -131,6 +141,15 @@ ggplot(lin.pred.grid.gly,aes(gx, gy, group = gid)) +
     breaks = c(F, T), labels = c("Single", "Multiple")) +
   opts(legend.position = "bottom")
 ggsave("../images/usa-lin-grid.png", width = 8, height = 5)
+
+ggplot(lin.pred.grid.gly, aes(year, pred)) + 
+  geom_line(aes(group = gid, colour = n > 1), alpha = 1/5) + 
+  xlab("Year") + 
+  scale_colour_manual("", values = c("TRUE" = "black", "FALSE" = "grey40"), 
+  breaks = c(F, T), labels = c("Single", "Multiple")) + 
+  ylab("Linear Temp Anomaly (F)") +
+  opts(legend.position = "none")
+ggsave("../images/usa-lin-grid-legend.pdf", width = 4, height = 4)
 
 # Seasonal trends ============================================================
 
@@ -162,7 +181,7 @@ ggplot(seas.pred.gly, aes(gx, gy, group = gid)) +
 ggplot(seas.pred.gly, aes(time, pred, group = stn)) + 
   geom_line(alpha = 1/10) + 
   xlab("Month") + 
-  ylab("Average temperature (C)")
+  ylab("Monthly anomaly (F)")
 ggsave("../images/usa-season-legend.pdf", width = 4, height = 4)
 
 # Collapsing

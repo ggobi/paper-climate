@@ -2,13 +2,13 @@ I believe the primary purpose of this paper is to introduce glyph-maps as a pote
 
 However, it is not clear to me that this is necessarily a "new" contribution to the display and analysis of climate and weather data. For example, the inherently bivariate wind speed and direction are regularly displayed using a vector centered at the observational location and have been done so for as long as weather maps have been drawn. Even a crude form of these glyph-maps is used in the last IPCC report to display projections of climate change in different regions of the world. It would help to improve this paper by reviewing what types of graphics have been used and are now in use in the climate and weather communities, particularly those that are similar in nature to these glyph-maps even if they are more simplistic.
 
-Di: Is it Fig-4-6.jpg?? Fig-4-7.jpg, 6-11,  (these are just different symbols) fig 7.1, 7.2 are 3D bar charts!!!! 9Chapter 7 graphics stink!) 8.1 wind/directional glyph maps, 9.12 has time series charts gridded over the globe (just a handful)
+Di: Is it Fig-4-6.jpg?? Fig-4-7.jpg, 6-11,  (these are just different symbols) fig 7.1, 7.2 are 3D bar charts!!!! Chapter 7 graphics stink!) 8.1 wind/directional glyph maps, 9.12 has time series charts gridded over the globe (just a handful)
 
 Di: Also add some reference to IPCC for colored maps
 
 Ultimately, my biggest issue with this paper is the limited discussion about larger datasets. Granted, the idea to use various statistical summaries to explore the situation with lots of data for each of a limited set of spatial locations is promising, but what about datasets with larger numbers of spatial locations? Climate datasets, including climate model output, produce not just a few hundred locations but more like thousands of locations or more and growing with each generation of models and computing environments. The same is true with observational networks. And it is not always enough to just focus in on a specific area, limiting the domain, since some phenomenon are manifest on larger spatial scales. So, the question is, what is the upper bound on the sample sizes for these methods, both in terms of the spatial and "temporal" scales? Where does the technology stand on interactivity that might allow the user to dynamically change the scales, zooming in spatially while simultaneously increasing the detail in the glyphs? What other ideas are out there?
 
-Di: partially done, in large data sections
+Di:  done, in large data sections
 
 The referees’ also have a number of comments, and addressing these would would help to improve the paper. I am not sure that I agree with the second referee’s concern about including a perceptual study in this paper. That is not to say that that I do not believe that it is a worthy idea and something that would be important to both the statistics and climate and weather communities. However, I do concur that some additional background on perception could be included.
 

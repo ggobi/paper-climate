@@ -1,0 +1,42 @@
+\documentclass{letter}
+\usepackage{graphics}
+\usepackage{fullpage}
+\topmargin=-0.2in
+%\headheight=0in
+\setlength\oddsidemargin{-0.2in}
+\textheight=7in
+\textwidth=6in
+\def\apl#1#2{
+\begin{letter}{#1}
+\signature{Professor Dianne Cook\\Department of Statistics\\Iowa State University 
+\\Ames, Iowa 50011-1210\\ Phone (515) 294 8865\\{\tt dicook@iastate.edu}}
+\opening{Dear #2,}
+
+Please find attached our revision of  "Glyph-maps for Visually Exploring Temporal Patterns in Climate Data and Models" for the special issue of Environmetrics on Climate, with authors Hadley Wickham, Heike Hofmann, Charlotte Wickham and myself. 
+
+We appreciate the hard work and comments of the reviewers. We have made many changes to the paper reflecting the reviews, as follows:
+
+\begin{enumerate}
+\item All reviewers pointed to additional literature to cite. We have revised the literature accordingly and added more references that we found to be relevant, including the most recent IPCC report.  We have to admit that we were embarassed to have missed the Eden reference! This was a major oversight - yes, we had a paper in the same issue, and we had a poster in the same competition as these authors, but we reviewed a different paper of the issue and we had not realized how similar their work for the poster was to ours! 
+\item We believe that our paper adds substantially to the literature. The major contributions are coordinating the ideas used in previous publications on glyph plots in a way that will facilitate future work on interactive versions and perception experiments, and the adaption of the methods for irregularly gridded data.  This has been made more explicit in the paper.
+\item The section on large data has been expanded to better explain the approach and constraints. The actual bounds on data size are two-fold: one is computational, but the algorithm we have is efficient in this regard, and will depend somewhat on the memory of the computer used. The visual resolution is the second limit, and this requires some resolution reduction methods.
+\item The section on Construction has been re-posed as Structural components to better explain the key ideas behind the glyph-map development.
+\item Models used have been explained in more detail. Code and data are provided as supplementary material so that all work can be reproduced.
+\item Developing rigorous perceptual studies requires some careful work. Given the time frame to revise the paper, this would be impossible, but time is not the only reason for delaying this work. It is better tackled as a separate body of work that has the appropriate human subjects approval, and experimental design.
+\item Wording that was not clear or accurate and references to particular geographic locations have been fixed.
+\item The reviewers asked for axes and legends for the glyph maps, which is a good idea. We adopted a style that creates an additional plot that is displayed alongside the glyph-map, that ignores spatial location, to use as a legend. This has the advantage that the relationship between, trend and variance of, the glyphs can be directly compared with the overplotting, and the axes on this plot provide the scales of the glyphs in the glyph-map. It is also a style that can be generalized to many different types of glyphs that might be used in glyph-maps. One reviewer suggested annotating the plots with details of the scale, or geographic region. We feel that with today's technology, this should be avoided. In past years we have carefully re-processed each plot in a drawing program. But there is a distinct advantage to being able to re-generate plots exactly as they appear in a paper, for reproducibility, and for speed of re-working ideas.
+\item References and explanation of spatial aggregation issues (MAUP) have been added.
+\item Forward references have been removed.
+\item The typos and inconsistencies corrected, and a careful proof-read of the final version.
+\end{enumerate}
+
+\closing{Sincerely yours,
+{\pdfimage width 1.5in {signature2.pdf}}}
+\end{letter}}
+  
+\begin{document}
+
+{{\pdfimage width 4in {letterhead.jpg}}}
+\apl{Editors \\Environmetrics Special Issue on Climate}{Professors Guttorp, Sain and Wikle}
+
+\end{document}

@@ -32,7 +32,7 @@ Removed the reference to the mountain regions
 
 - p6, l40: reference to "Fig 8" - figs should be references in the sequential order, so your Fig 8 has to become Fig 4 - or shift this statement to a place after Fig 8 has been presented in the paper.
 
-removed the exolicit reference to a plot out of order
+removed the explicit reference to a plot out of order
 
 - p7, l50: Fig 4 - be more precise about the data you are using; a reader cannot follow without a more detailed explanation; how were data for Fig 4 exactly obtained from the data in Fig 2?
 

@@ -122,7 +122,7 @@ It is useful to recognize that the glyph-map is a linear mix of two structural c
   \label{coords.eqn}
 \end{equation}
 
-\noindent where $\alpha_x, \alpha_y$ are scale parameters setting the fraction the width $w$ and height $h$ of the glyph, respectively. For gridded data, $w$ and $h$ will be the minimum difference between neighboring spatial locations to make use of the resolution of the major components. For irregularly gridded data, $w$ and $h$ would be set to minimize overlap between glyphs.
+\noindent where $\alpha_x, \alpha_y$ are scale parameters setting the fraction of width, $w$, and height, $h$, of the glyph, respectively. For gridded data, $w$ and $h$ will be the minimum difference between neighboring spatial locations to make use of the resolution of the major components. For irregularly gridded data, $w$ and $h$ would be set to minimize overlap between glyphs.
 
 This way of thinking of the glyph-map is convenient for several reasons. The first is, that it moves the plots beyond the small multiples, many little plots, approach. That provides flexibility to cover large spatial domains using potentially tiny glyphs. A second, and major, reason is that with this approach they can then readily be made interactive. Different variables can be swept into, and out of, the minor axes using mouse motion that maps to $\alpha_x, \alpha_y$. Interactive glyph-maps were used to explore the EXPO data using  GGobi \citep{swayne:2003}, and then later reproduced in publication quality resolution using {\tt ggplot2} \citep{me:ggplot2} in \citet{hobbs:2010}. In GGobi, a manual tour is used to make the linear combination of spatial variables with other variables \citep{CB95}, and Equation \ref{coords.eqn} makes this approach more explicit, and generalizable beyond tours. The third reason is that it enables adjusting scales of glyphs in multiple ways to vary the emphasis, which is discussed in Section \ref{sec:perception}.
 
@@ -136,7 +136,7 @@ Coordinates for star glyphs are computed with a polar transformation of the mino
   \label{coords.polar.eqn}
 \end{equation}
 
-\noindent where $(t, z)$ have been scaled into the range $[0, 1]$. This is a non-standard conversion to polar coordinates, but it creates a timeline that starts at 12 o'clock and proceeds clockwise. \citet{eden:2010} wraps the time series, overplotting the multiple years, and this could be done also, by adjusting the scale of $t$. 
+\noindent where $(t, z)$ have been scaled into the range $[0, 1]$. This is a non-standard conversion to polar coordinates, but it creates a timeline that starts at 12 o'clock and proceeds clockwise. \citet{eden:2010} wrap the time series, overplotting the multiple years, and this could be done also, by adjusting the scale of $t$. 
 
 Figure~\ref{fig:templates} gives some iconic examples of time series, shown both in Cartesian coordinates and polar coordinates. Differences between linear and nonlinear trend are more apparent in the line-glyphs, and are effectively lost in the star-glyphs, which are most effective in exposing cyclical patterns due to seasonality. Star-glyphs show seasonality as floral cartoons, with peaks forming petals. Opposing linear trends (up vs down) in line-glyphs are not readily seen in the star-glyphs, appearing only as differences in the gaps at the top of each glyph. The internal area of the star-glyphs reflects to the average value of a time series, while its shape shows deviations from the average.
 

@@ -216,8 +216,6 @@ Note that the use of local scales needs to be clearly marked. The viewer must re
 
 One more important point: if a model summary is displayed in the glyph-map, as discussed in the following section, it may be important to force the scale to that of the original data. The range of predicted values is typically much smaller than the raw data, so angles of slopes are increased, giving an inaccurate sense of a stronger effect.  
 
-% Displaying the predicted values in the absence of the raw data scale typically increases magnitude because the variation is much lower.
-
 \section{Large data and models}
 \label{sec:large-data}
 
@@ -228,7 +226,6 @@ Figure~\ref{fig:gistemp-raw} shows the glyph-map for the GISTEMP data set, which
 
 \begin{figure}[htbp]
   \centering
-  %\includegraphics[width=1\linewidth]{gistemp-pred}%
 
   \includegraphics[width=1\linewidth]{gistemp-polar-raw}
 
@@ -245,8 +242,7 @@ The raw data shows us missing values and gives some sense of variability, but gi
   \includegraphics[width=1\linewidth]{gistemp-pred}
 
   \includegraphics[width=0.33\linewidth]{gistemp-pred-legend}
-  %\includegraphics[width=1\linewidth]{gistemp-polar-pred}
-
+  
   \caption{(Top) Glyph-map of predicted temperature anomaly data
     (GISTEMP), for the reduced period 1950-2010. Increasing
     trends can be seen over most of the USA, with varying degrees of
@@ -257,23 +253,6 @@ The raw data shows us missing values and gives some sense of variability, but gi
     temperature and temporal ranges of individual glyphs.}
   \label{fig:gistemp-pred}
 \end{figure}
-
-%The most seasonality occurs in north American. Some seasonal effects can also be seen in the Caribbean and in south American locations. Around the equator the temperatures are relatively warm for all seasons. Instead of radially displaying the temperature a glyph can be a regular time series, time displayed horizontally and temperature vertically (right plot). The structure perceived is different with this change in glyph type: locations at the equator have flat series, on land more varied temperatures. 
-
-% \section{What to plot: raw data, trend lines, residuals,  seasonal}
-% 
-% A generalized additive model \citep{wood:2006} with a seasonal term and a long-term smooth term can be useful. This is revealing for smooth models of surface temperature, shown in Figure~\ref{fig:scaling}. Each location is modeled using a generalized additive model \citep{wood:2006} with a seasonal term and a long-term smooth term. The three plots in the figure show the long-term smooth term. 
-% 
-% %Because some locations are uniformly warmer than others, the impact of
-% %changes across time are diminished. In the center plot, each location is
-% %scaled by dividing out the maximum, and on the right, each location is scaled
-% %to range $[0, 1]$. These emphasize individual changes but lose the ability to
-% %make global comparisons, and need caution when interpreting - a small
-% %absolute change gets blown up into a large relative change.
-% 
-% *** Need three plots here: trend, seasonality and residuals, shall we do this with NASA ozone data or stick to temperature?
-% 
-% Issues of scale relative to modeling. Switching from the data to model summaries brings new scaling issues. Often the scale of the raw data is ignored when the model is plotted, one usually shows just the line showing the trend, in the range of the trend. This has the effect of exaggerating the significance of the model. Scaling the trend lines relative to the range of the data may be useful sometimes.
 
 \section{Non-gridded data}~\label{sec:irregular}
 
@@ -290,15 +269,10 @@ Figure \ref{fig:irregular} shows linear trends for monthly average surface tempe
   \includegraphics[width=1\linewidth]{usa-lin-overlap}%
 
 \includegraphics[width=0.33\linewidth]{usa-lin-legend}
-  %\includegraphics[width=0.25\linewidth]{ghcn-mountains}%
   \caption{(Top) Glyph-maps of the linear trend in ground station temperature values, 1950--2010, for USHCN stations, illustrating three issues for irregularly gridded data: overlapping icons, no natural choice for icon size, and the disordered appearance making comparisons more difficult. Local centering, subtracting the location mean from the linear fit, is used as the variation in average temperature is of much greater magnitude than the variation in linear trend. (Bottom) Legend showing
-    temperature and temporal ranges of individual glyphs. The local scaling is apparent here with all lines going through zero at the mean year. }% (left) and stations in the mountain states (right).} 
-  \label{fig:irregular}
+    temperature and temporal ranges of individual glyphs. The local scaling is apparent here with all lines going through zero at the mean year. }  \label{fig:irregular}
 \end{figure}
-%The two panels illustrate one approach to the overlapping problem: zooming.  
 One solution to the overlapping problem is to zoom in on smaller regions. There is an interplay between icon size (in geographical units), area plotted (in geographical units) and plot size (in display units).  Icons need to be big enough to be readable on the display, but small enough to avoid overlapping.  Readability can be maintained and overlapping reduced by decreasing the icon size and simultaneously increasing the display size or decreasing the area plotted.
-% (as done in the right panel in Figure \ref{fig:irregular}).  
-%However, there are generally limitations in the maximum display size (or resolution) and the utility of plotting very small areas.  
 
 An alternative approach is to combine overlapping locations and plot a single summary icon.  In Figure \ref{fig:irregular-collapsed} nearby locations are collapsed to a single icon.  In the left panel each station still has an individual glyph but locations close to each other share a plotting area (note the multiple lines visible in some reference boxes). The right panel shows an example where glyphs are generated on aggregated data: the average trend for the collapsed locations is displayed.  To differentiate glyphs that involve summaries of more than one location, heavier lines (barely visible) indicate at least two locations that have been averaged.  The aggregation of spatial locations to a single summary can be misleading.  The sensitivity of analyses to the scale and configuration of aggregation is described by the  modifiable areal unit problem (\cite{Openshaw:1984kx, Fotheringham:1991uq}). In this type of glyph-map the scale of aggregation is determined, rather arbitrarily, by the icon size. This dependence of visual inferences on the icon size is undesirable.  The ability to interactively modify icon size, and zoom quickly to disaggregate locations would go some way to alleviating the problem.
 
@@ -310,7 +284,7 @@ An alternative approach is to combine overlapping locations and plot a single su
 
 \includegraphics[width=0.20\linewidth]{usa-season-legend}\hspace{2in}%
 \includegraphics[width=0.20\linewidth]{usa-lin-collapse-legend}
-  \caption{Glyph-maps of seasonal patterns (top left) and linear trends (top right) of USHCN stations, 1950--2010.  Nearby stations whose icons would overlap have been collapsed.  Each location has a glyph in the seasonal plot and color of the tiles corresponds to the average temperature of the locations.  Heavy lines in the linear trend plot correspond to average trends over more than one location. (Bottom) Legends showing scale of glyphs.} % Legend in Figure~\ref{fig:irregular-legend}}
+  \caption{Glyph-maps of seasonal patterns (top left) and linear trends (top right) of USHCN stations, 1950--2010.  Nearby stations whose icons would overlap have been collapsed.  Each location has a glyph in the seasonal plot and color of the tiles corresponds to the average temperature of the locations.  Heavy lines in the linear trend plot correspond to average trends over more than one location. (Bottom) Legends showing scale of glyphs.} 
   \label{fig:irregular-collapsed}
 \end{figure}
 
@@ -323,19 +297,9 @@ In both of the examples where locations have been collapsed, the icon locations 
 
   \includegraphics[width=0.20\linewidth]{usa-season-legend}\hspace{2in}%
   \includegraphics[width=0.20\linewidth]{usa-lin-grid-legend}
-  \caption{Glyph-maps of seasonal patterns (top left) and linear trends (top right) of USHCN stations, 1950--2010.  Station locations have been rounded to the nearest degree Each location has a glyph in the seasonal plot and color of the tiles corresponds to the average temperature of the locations. Heavy lines in the linear trend plot correspond to average trends over more than one location. (Bottom) Legends showing scale of glyphs.} %Legend in Figure~\ref{fig:irregular-legend}}
+  \caption{Glyph-maps of seasonal patterns (top left) and linear trends (top right) of USHCN stations, 1950--2010.  Station locations have been rounded to the nearest degree Each location has a glyph in the seasonal plot and color of the tiles corresponds to the average temperature of the locations. Heavy lines in the linear trend plot correspond to average trends over more than one location. (Bottom) Legends showing scale of glyphs.} 
   \label{fig:irregular-grid}
 \end{figure}
-
-%\begin{figure}[htbp]
-%  \centering
-%  \includegraphics[width=0.33\linewidth]{usa-season-legend}%
-%  \hspace{0.18 \linewidth}%
-%  \includegraphics[width=0.33\linewidth]{usa-lin-legend}
-  
-%  \caption{Legend for Figures~\ref{fig:irregular-collapsed} aad \ref{fig:irregular-grid}.}
-%  \label{fig:irregular-legend}
-%\end{figure}
 
 Reference guides become especially important in the irregularly gridded data. Comparisons are harder because comparing icons along a common baseline, be it along a row or column of glyphs, is absent. Without reference lines or boxes it is also hard to compare line lengths, to tell if short series are missing data at the start or end. In each of the plots in Figures \ref{fig:irregular}, \ref{fig:irregular-collapsed} and \ref{fig:irregular-grid}, reference lines or boxes have been included. 
 

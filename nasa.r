@@ -26,7 +26,7 @@ temp_trend_models <- dlply(nasa, c("lat", "long"), function(df) {
 
 locs <- dlply(nasa, c("lat", "long"))
 
-resids <- mdply(cbind(d = locs, m = temp_models), function(d, m) {
+resids <- mdply(cbind(d = locs, m = temp_seas_models), function(d, m) {
   d$temp_resid <- d$surftemp - predict(m, newdata = d)
   d
 })
@@ -55,7 +55,7 @@ theme_nothing <- function (base_size = 12) {
 }
 
 qplot(long, lat, data=resids, geom="tile", fill=temp_resid, facets=year~month) + scale_fill_gradient2(midpoint=0, mid="white", high="red", low="blue") + map + theme_nothing() + coord_map()
-ggsave("nasa-colored-map.png", height=10, width=18)
+ggsave("../images/nasa-colored-map.png", height=10, width=18)
        
 resids <- glyphs(resids, "long", "day", "lat", "temp_resid") 
 qplot(gx, gy, data = resids, geom = "line", group = gid) + map
